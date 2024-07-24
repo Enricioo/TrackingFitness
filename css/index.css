@@ -1,0 +1,13 @@
+body {
+    background-color: #587291;
+}
+
+#sidebar-nav a {
+    background-color: #587291;
+    color: #0B3954;
+}
+
+.char {
+    transform: translateY(-115px);
+    transition: transform .5s;
+}
