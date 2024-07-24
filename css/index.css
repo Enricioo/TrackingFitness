@@ -7,6 +7,11 @@ body {
     color: #0B3954;
 }
 
+h2 {
+    clip-path: polygon(0 0, 100% 0, 100% 100%, 0% 100%);
+    line-height: 5.9rem;
+}
+
 .char {
     transform: translateY(-115px);
     transition: transform .5s;
