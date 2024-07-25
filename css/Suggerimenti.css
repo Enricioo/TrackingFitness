@@ -1,0 +1,13 @@
+body {
+    background-color: aliceblue;
+}
+
+  h1 {
+      height: 100%;
+      margin: 30;
+      display: grid;
+      place-items: center;
+      text-align: center;
+      border:10px;
+    
+    }
