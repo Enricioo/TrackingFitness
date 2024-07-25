@@ -9,6 +9,15 @@
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link href="bootstrap-icons-1.11.3/font/bootstrap-icons.css" rel="stylesheet">
     <style>
+        body {
+            background-color: #587291;
+        }
+
+        #sidebar-nav a {
+            background-color: #587291;
+            color: #0B3954;
+        }
+
         .table-wrapper {
             width: 700px;
             margin: 30px auto;
@@ -97,21 +106,24 @@
     <div class="container-fluid sidebar">
         <div class="row flex-nowrap">
             <div class="col-auto px-0">
-                <div id="sidebar" class="collapse collapse-horizontal show border-end">
+                <div id="sidebar" class="collapse collapse-horizontal show border-end border-dark">
                     <div id="sidebar-nav" class="list-group border-0 rounded-0 text-sm-start min-vh-100">
-                        <a href="#" class="list-group-item border-end-0 d-inline-block text-truncate"
+                        <a href="#" class="list-group-item border-end-0 d-inline-block text-truncate border-dark"
                             data-bs-parent="admin.html"><i class="bi bi-house"></i> <span>Home</span> </a>
-                        <a href="#" class="list-group-item border-end-0 d-inline-block text-truncate"
+                        <a href="#" class="list-group-item border-end-0 d-inline-block text-truncate border-dark"
                             data-bs-parent="report.html"><i class="bi bi-award"></i> <span>Report</span></a>
-                        <a href="#" class="list-group-item border-end-0 d-inline-block text-truncate"
-                            data-bs-parent="admin-profile.html"><i class="bi bi-person-raised-hand"></i> <span>Profilo</span></a>
+                        <a href="#" class="list-group-item border-end-0 d-inline-block text-truncate border-dark"
+                            data-bs-parent="admin-profile.html"><i class="bi bi-person-raised-hand border-dark"></i>
+                            <span>Profilo</span></a>
                     </div>
                 </div>
             </div>
 
             <main class="col ps-md-2 pt-2">
                 <a href="#" data-bs-target="#sidebar" data-bs-toggle="collapse"
-                    class="border rounded-3 p-1 text-decoration-none"><i class="bi bi-list bi-lg py-2 p-1"></i></a>
+                    class="border rounded-3 p-1 text-decoration-none text-muted border-dark"><i
+                        class="bi bi-list bi-lg py-2 p-1"></i>
+                    Menu</a>
                 <div class="page-header pt-3">
                     <h2>Admin Tool</h2>
                 </div>
@@ -137,7 +149,8 @@
                                         </div>
                                         <div class="form-group">
                                             <label for="cognome">Cognome</label>
-                                            <input type="text" class="form-control" id="cognome" name="cognome" required>
+                                            <input type="text" class="form-control" id="cognome" name="cognome"
+                                                required>
                                         </div>
                                         <div class="form-group">
                                             <label for="email">Email</label>
@@ -145,7 +158,8 @@
                                         </div>
                                         <div class="form-group">
                                             <label for="password">Password</label>
-                                            <input type="password" class="form-control" id="password" name="password" required>
+                                            <input type="password" class="form-control" id="password" name="password"
+                                                required>
                                         </div>
                                         <div class="form-group">
                                             <label for="eta">Età</label>
@@ -157,7 +171,8 @@
                                         </div>
                                         <div class="form-group">
                                             <label for="altezza">Altezza</label>
-                                            <input type="number" class="form-control" id="altezza" name="altezza" required>
+                                            <input type="number" class="form-control" id="altezza" name="altezza"
+                                                required>
                                         </div>
                                         <button type="button" class="btn btn-primary" id="saveUserBtn">Salva</button>
                                     </form>
@@ -201,9 +216,12 @@
                                         <td>72</td>
                                         <td>175</td>
                                         <td>
-                                            <a class="add" title="Visualizza" data-toggle="tooltip"><i class="material-icons">&#xE03B;</i></a>
-                                            <a class="edit" title="Modifica" data-toggle="tooltip"><i class="material-icons">&#xE254;</i></a>
-                                            <a class="delete" title="Elimina" data-toggle="tooltip"><i class="material-icons">&#xE872;</i></a>
+                                            <a class="add" title="Visualizza" data-toggle="tooltip"><i
+                                                    class="material-icons">&#xE03B;</i></a>
+                                            <a class="edit" title="Modifica" data-toggle="tooltip"><i
+                                                    class="material-icons">&#xE254;</i></a>
+                                            <a class="delete" title="Elimina" data-toggle="tooltip"><i
+                                                    class="material-icons">&#xE872;</i></a>
                                         </td>
                                     </tr>
                                 </tbody>
