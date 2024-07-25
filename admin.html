@@ -6,8 +6,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Home - Admin</title>
     <link rel="stylesheet" href="css/bootstrap.min.css">
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link href="bootstrap-icons-1.11.3/font/bootstrap-icons.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <style>
         body {
             background-color: #587291;
@@ -99,6 +99,14 @@
         table.table .form-control.error {
             border-color: #f50000;
         }
+
+        .bi-check {
+        color: green;
+    }
+
+    .bi-x {
+        color: red;
+    }
     </style>
 </head>
 
@@ -122,17 +130,16 @@
             <main class="col ps-md-2 pt-2">
                 <a href="#" data-bs-target="#sidebar" data-bs-toggle="collapse"
                     class="border rounded-3 p-1 text-decoration-none text-muted border-dark"><i
-                        class="bi bi-list bi-lg py-2 p-1"></i>
-                    Menu</a>
+                        class="bi bi-list bi-lg py-2 p-1"></i></a>
                 <div class="page-header pt-3">
                     <h2>Admin Tool</h2>
                 </div>
-                <p class="lead">Visualizza, modifica ed elimina utenti in questa pagina.</p>
+                <p class="lead">Aggiungi, visualizza, modifica ed elimina utenti in questa pagina.</p>
 
                 <div class="card shadow mb-4">
                     <div class="card-header py-3">
                         <h6 class="m-0 font-weight-bold text-primary">Tabella Utenti</h6>
-                        <button type="button" class="btn btn-info add-new"><i class="fa fa-plus"></i> Aggiungi</button>
+                        <button type="button" class="btn btn-info add-new"><i class="fa bi-plus"></i>Aggiungi</button>
                     </div>
 
                     <div class="card-body">
@@ -171,10 +178,14 @@
                                         </div>
                                         <div class="form-group">
                                             <label for="altezza">Altezza</label>
-                                            <input type="number" class="form-control" id="altezza" name="altezza"
-                                                required>
+                                            <input type="number" class="form-control" id="altezza" name="altezza" required>
                                         </div>
-                                        <button type="button" class="btn btn-primary" id="saveUserBtn">Salva</button>
+                                        <div class="form-group">
+                                            <label for="ruolo">Ruolo</label>
+                                            <input type="text" class="form-control" id="ruolo" name="ruolo" required>
+                                        </div>
+                                        <button type="button" class="btn btn-primary mt-2" id="saveUserBtn">Salva</button>
+                                        <button type="button" class="btn btn-secondary mt-2" id="cancelUserBtn">Cancella</button>
                                     </form>
                                 </div>
                             </div>
@@ -191,6 +202,7 @@
                                         <th>Età</th>
                                         <th>Peso</th>
                                         <th>Altezza</th>
+                                        <th>Ruolo</th>
                                         <th>Azioni</th>
                                     </tr>
                                 </thead>
@@ -203,6 +215,7 @@
                                         <th>Età</th>
                                         <th>Peso</th>
                                         <th>Altezza</th>
+                                        <th>Ruolo</th>
                                         <th>Azioni</th>
                                     </tr>
                                 </tfoot>
@@ -215,6 +228,25 @@
                                         <td>22</td>
                                         <td>72</td>
                                         <td>175</td>
+                                        <td>USER</td>
+                                        <td>
+                                            <a class="add" title="Visualizza" data-toggle="tooltip"><i
+                                                    class="material-icons">&#xE03B;</i></a>
+                                            <a class="edit" title="Modifica" data-toggle="tooltip"><i
+                                                    class="material-icons">&#xE254;</i></a>
+                                            <a class="delete" title="Elimina" data-toggle="tooltip"><i
+                                                    class="material-icons">&#xE872;</i></a>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>Clark</td>
+                                        <td>Kent</td>
+                                        <td>c.kent@gmail.com</td>
+                                        <td>sup3rm4n</td>
+                                        <td>40</td>
+                                        <td>82</td>
+                                        <td>185</td>
+                                        <td>ADMIN</td>
                                         <td>
                                             <a class="add" title="Visualizza" data-toggle="tooltip"><i
                                                     class="material-icons">&#xE03B;</i></a>
@@ -256,6 +288,7 @@
                         eta: $("#eta").val(),
                         peso: $("#peso").val(),
                         altezza: $("#altezza").val(),
+                        ruolo: $("#ruolo").val(),
                     };
 
                     var newRow = '<tr>' +
@@ -266,6 +299,7 @@
                         '<td>' + user.eta + '</td>' +
                         '<td>' + user.peso + '</td>' +
                         '<td>' + user.altezza + '</td>' +
+                        '<td>' + user.ruolo + '</td>' +
                         '<td>' +
                         '<a class="add" title="Visualizza" data-toggle="tooltip"><i class="material-icons">&#xE03B;</i></a>' +
                         '<a class="edit" title="Modifica" data-toggle="tooltip"><i class="material-icons">&#xE254;</i></a>' +
@@ -288,17 +322,43 @@
 
             // Edit row on edit button click
             $(document).on("click", ".edit", function () {
-                $(this).parents("tr").find("td:not(:last-child)").each(function () {
-                    $(this).html('<input type="text" class="form-control" value="' + $(this).text() + '">');
+                var $row = $(this).closest("tr");
+                var $tds = $row.find("td").not(":last");
+                $tds.each(function () {
+                    var html = $(this).html();
+                    $(this).html('<input type="text" class="form-control" value="' + html + '">');
                 });
-                $(this).parents("tr").find(".add, .edit").toggle();
-                $(".add-new").attr("disabled", "disabled");
+                $(this).toggleClass("edit confirm").html('<i class="bi bi-check"></i>');
+                $(this).siblings(".delete").toggleClass("delete edit-cancel").html('<i class="bi bi-x"></i>');
+            });
+
+            // Confirm edit on confirm button click
+            $(document).on("click", ".confirm", function () {
+                var $row = $(this).closest("tr");
+                $row.find("input").each(function () {
+                    var val = $(this).val();
+                    $(this).parent().text(val);
+                });
+                $(this).toggleClass("confirm edit").html('<i class="material-icons">&#xE254;</i>');
+                $(this).siblings(".edit-cancel").toggleClass("edit-cancel delete").html('<i class="material-icons">&#xE872;</i>');
+            });
+
+            // Cancel edit on cancel button click
+            $(document).on("click", ".edit-cancel", function () {
+                var $row = $(this).closest("tr");
+                $row.find("input").each(function () {
+                    var val = $(this).val();
+                    $(this).parent().text(val);
+                });
+                $(this).toggleClass("edit-cancel delete").html('<i class="material-icons">&#xE872;</i>');
+                $(this).siblings(".confirm").toggleClass("edit confirm").html('<i class="material-icons">&#xE254;</i>');
             });
 
             // Delete row on delete button click
             $(document).on("click", ".delete", function () {
-                $(this).parents("tr").remove();
-                $(".add-new").removeAttr("disabled");
+                if (confirm("Sei sicuro di voler eliminare questo utente?")) {
+                    $(this).closest("tr").remove();
+                }
             });
         });
     </script>
