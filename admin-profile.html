@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Profilo - Admin</title>
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link href="assets/bootstrap-icons-1.11.3/font/bootstrap-icons.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <style>
+        body {
+            background-color: #587291;
+        }
+
+        #sidebar-nav a {
+            background-color: #587291;
+            color: #0B3954;
+        }
+
+        .pfp {
+            width: 100%;
+            border-radius: 50%;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container-fluid sidebar">
+        <div class="row flex-nowrap">
+            <div class="col-auto px-0">
+                <div id="sidebar" class="collapse collapse-horizontal border-end border-dark">
+                    <div id="sidebar-nav" class="list-group border-0 rounded-0 text-sm-start min-vh-100">
+                        <a href="#" class="list-group-item border-end-0 d-inline-block text-truncate border-dark"
+                            data-bs-parent="admin.html"><i class="bi bi-house"></i> <span>Home</span> </a>
+                        <a href="#" class="list-group-item border-end-0 d-inline-block text-truncate border-dark"
+                            data-bs-parent="report.html"><i class="bi bi-award"></i> <span>Report</span></a>
+                        <a href="#" class="list-group-item border-end-0 d-inline-block text-truncate border-dark"
+                            data-bs-parent="admin-profile.html"><i class="bi bi-person-raised-hand border-dark"></i>
+                            <span>Profilo</span></a>
+                    </div>
+                </div>
+            </div>
+
+            <main class="col ps-md-2 pt-2">
+
+                <a href="#" data-bs-target="#sidebar" data-bs-toggle="collapse"
+                    class="border rounded-3 p-1 text-decoration-none text-muted border-dark"><i
+                        class="bi bi-list bi-lg py-2 p-1"></i></a>
+                <div class="page-header pt-3">
+                    <h2>Admin Tool</h2>
+                </div>
+
+                <div class="container profile mt-5">
+                    <div class="row">
+                        <div class="col-md-4 text-center">
+                            <div class="card">
+                                <div class="card-body">
+                                    <img src="https://placehold.co/400" alt="Profile Image" class="pfp mb-3">
+                                    <h3>Clark Kent</h3>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6 text-center mt-2">
+                            <div class="card">
+                                <div class="card-body">
+                                    <p>Email: c.kent@gmail.com</p>
+                                    <p>Peso: 82kg</p>
+                                    <p>Altezza: 185cm</p>
+                                    <button type="button" class="btn btn-outline-warning  mt-1"><i class="fa bi-pencil"></i> Modifica Credenziali</button>
+                                    <button type="button" class="btn btn-outline-danger mt-1"><i class="fa bi-box-arrow-right"></i> Logout</button>
+                                    <button type="button" class="btn btn-danger mt-1"><i class="fa bi-trash"></i> Elimina Profilo</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </main>
+        </div>
+    </div>
+
+    <script src="js/jquery-3.7.1.min.js"></script>
+    <script src="js/bootstrap.bundle.min.js"></script>
+</body>
+
+</html>
