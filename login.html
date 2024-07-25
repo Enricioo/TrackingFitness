@@ -8,9 +8,24 @@
     <link rel="stylesheet" href="css/bootstrap.min.css">
     <!--CSS-->
     <style>
+        /*SIDEBAR*/
         #sidebar-nav {
             width: 100px;
         }
+
+        #sidebar-nav a {
+            background-color: #587291;
+            color: #0B3954;
+        }
+
+        #sidebar-btn {
+            background-color: #FBAF00;
+            border-style: solid;
+            border-radius: 3px;
+            border-color: #2F97C1;
+        }
+
+        /*FORM E ANIMAZIONE*/
 
         * {
             box-sizing: border-box;
@@ -21,7 +36,7 @@
             background-color: #0B3954;
         }
 
-        .form-section {
+        .forms-section {
             display: flex;
             flex-direction: column;
             justify-content: center;
@@ -73,6 +88,7 @@
             margin-right: auto;
             margin-left: auto;
             background-color: transparent;
+            color: white;
             border: none;
             outline: none;
             transform: translateX(0);
@@ -80,12 +96,14 @@
         }
 
         .form-wrapper.is-active .switcher-login {
-            background-color: yellow;
+            color: black;
+            background-color: #FBAF00;
             transform: translateX(90px);
         }
 
         .form-wrapper.is-active .switcher-signup {
-            background-color: yellow;
+            background-color: #FBAF00;
+            color: black;
             transform: translateX(-90px);
         }
 
@@ -114,28 +132,28 @@
 
         @keyframes showLogin {
             0% {
-                background-color: #d7e7f1;
+                background-color: #587291;
 		        transform: translate(40%, 10px);
             }
             50% {
                 transform: translate(0, 0);
             }
             100% {
-                background-color: white;
+                background-color: #2F97C1;
                 transform: translate(35%, -20px);
             }
         }
 
         @keyframes hideLogin {
             0% {
-                background-color: white;
+                background-color: #2F97C1;
                 transform: translate(35%, -20px);
             }
             50% {
                 transform: translate(0, 0);
             }
             100% {
-                background-color: #d7e7f1;
+                background-color: #587291;
 		        transform: translate(40%, 10px);
             }
         }
@@ -147,7 +165,7 @@
             animation-fill-mode:  forwards;
         }
 
-        .form-signup.is-active .form-signup {
+        .form-wrapper.is-active .form-signup {
             animation-name: showSignup;
             animation-duration: .3s;
             animation-timing-function: ease-in;
@@ -156,28 +174,28 @@
 
         @keyframes showSignup {
             0% {
-                background-color: #d7e7f1;
+                background-color: #587291;
                 transform: translate(-40%, 10px) scaleY(.8);
             }
             50% {
                 transform: translate(0, 0) scaleY(.8);
             }
             100% {
-                background-color: white;
+                background-color: #2F97C1;
                 transform: translate(-35%, -20px) scaleY(1);
             }
         }
 
         @keyframes hideSignup {
             0% {
-                background-color: white;
+                background-color: #2F97C1;
                 transform: translate(-35%, -20px) scaleY(1);
             }
             50% {
                 transform: translate(0, 0) scaleY(0.8);
             }
             100% {
-                background-color: #d7e7f1;
+                background-color: #587291;
                 transform: translate(-40%, 10px) scaleY(0.8);
             }
         }
@@ -229,9 +247,9 @@
             border-radius: 2px;
         }
 
-        .form [type='submit'] {
+        .form [type='submit'], .form .cambio {
             opacity: 0;
-            display: block;
+            display: inline-block;
             min-width: 120px;
             margin: 30px auto 10px;
             font-size: 18px;
@@ -241,7 +259,7 @@
             transition: all .3s ease-out;
         }
 
-        .form-wrapper.is-active .form [type='submit'] {
+        .form-wrapper.is-active .form [type='submit'], .form-wrapper.is-active .form .cambio {
             opacity: 1;
             transform: translateX(0);
             transition: all .4s ease-in;
@@ -267,41 +285,28 @@
             <div class="col-auto px-0"> <!--SIDEBAR-->
                 <div id="sidebar" class="collapse collapse-horizontal show border-end">
                     <div id="sidebar-nav" class="list-group border-0 rounded-0 text-sm-start min-vh-100">
-                        <a href="#" class="list-group-item border-end-0 d-inline-block text-truncate" data-bs-parent="#sidebar"><i class="bi bi-bootstrap"></i> <span>Item</span> </a>
-                        <a href="#" class="list-group-item border-end-0 d-inline-block text-truncate" data-bs-parent="#sidebar"><i class="bi bi-film"></i> <span>Item</span></a>
-                        <a href="#" class="list-group-item border-end-0 d-inline-block text-truncate" data-bs-parent="#sidebar"><i class="bi bi-heart"></i> <span>Item</span></a>
-                        <a href="#" class="list-group-item border-end-0 d-inline-block text-truncate" data-bs-parent="#sidebar"><i class="bi bi-bricks"></i> <span>Item</span></a>
-                        <a href="#" class="list-group-item border-end-0 d-inline-block text-truncate" data-bs-parent="#sidebar"><i class="bi bi-clock"></i> <span>Item</span></a>
-                        <a href="#" class="list-group-item border-end-0 d-inline-block text-truncate" data-bs-parent="#sidebar"><i class="bi bi-archive"></i> <span>Item</span></a>
-                        <a href="#" class="list-group-item border-end-0 d-inline-block text-truncate" data-bs-parent="#sidebar"><i class="bi bi-gear"></i> <span>Item</span></a>
-                        <a href="#" class="list-group-item border-end-0 d-inline-block text-truncate" data-bs-parent="#sidebar"><i class="bi bi-calendar"></i> <span>Item</span></a>
-                        <a href="#" class="list-group-item border-end-0 d-inline-block text-truncate" data-bs-parent="#sidebar"><i class="bi bi-envelope"></i> <span>Item</span></a>
-                    </div>
-                    <div class="dropdown pb-4 user">
-                        <a href="#" class="d-flex align-items-center text-white text-decoration-none dropdown-toggle" id="dropdownUser1" data-bs-toggle="dropdown" aria-expanded="false">
-                            <img src="https://github.com/mdo.png" alt="hugenerd" width="30" height="30" class="rounded-circle">
-                            <span class="d-none d-sm-inline mx-1">loser</span>
-                        </a>
-                        <ul class="dropdown-menu dropdown-menu-dark text-small shadow" aria-labelledby="dropdownUser1">
-                            <li><a class="dropdown-item" href="#">New project...</a></li>
-                            <li><a class="dropdown-item" href="#">Settings</a></li>
-                            <li><a class="dropdown-item" href="#">Profile</a></li>
-                            <li>
-                                <hr class="dropdown-divider">
-                            </li>
-                            <li><a class="dropdown-item" href="#">Sign out</a></li>
-                        </ul>
+                        <a href="#" class="list-group-item border-end-0 d-inline-block text-truncate"
+                            data-bs-parent="index.html"><i class="bi bi-house-fill"></i> <span>Home</span> </a>
+                        <a href="#" class="list-group-item border-end-0 d-inline-block text-truncate"
+                            data-bs-parent="stats.html"><i class="bi bi-trophy-fill"></i> <span>Statistiche</span></a>
+                        <a href="#" class="list-group-item border-end-0 d-inline-block text-truncate"
+                            data-bs-parent="consigli.html"><i class="bi bi-journal-bookmark-fill"></i>
+                            <span>Consigli</span></a>
+                        <a href="#" class="list-group-item border-end-0 d-inline-block text-truncate"
+                            data-bs-parent="profile.html"><i class="bi bi-person-arms-up"></i> <span>Profilo</span></a>
+                        <a href="#" class="list-group-item border-end-0 d-inline-block text-truncate"
+                            data-bs-parent="settings.html"><i class="bi bi-gear-fill"></i> <span>Impostazioni</span></a>
                     </div>
                 </div>
             </div>
             <main class="col ps-md-2 pt-2">
-                <a href="#" data-bs-target="#sidebar" data-bs-toggle="collapse"
+                <a id="sidebar-btn" href="#" data-bs-target="#sidebar" data-bs-toggle="collapse"
                     class="border rounded-3 p-1 text-decoration-none"><i class="bi bi-list bi-lg py-2 p-1"></i>☰</a>
                 <!--FORM ACCESSO E REGISTRATI-->
                 <section class="forms-section">
                     <div class="forms">
                         <div class="form-wrapper is-active"> <!--FORM LOGIN-->
-                            <button type="button" class="switcher switcher-login">
+                            <button type="button" class="switcher switcher-login rounded">
                                 Log In
                             </button>
                             <form class="form form-login">
@@ -321,11 +326,11 @@
                         </div>
 
                         <div class="form-wrapper"> <!--FORM SIGNUP-->
-                            <button type="button" class="switcher switcher-signup">
+                            <button type="button" class="switcher switcher-signup rounded">
                                 Sign Up
                             </button>
                             <form class="form form-signup">
-                                <fieldset class="field field-anagrafica">
+                                <fieldset id="field-anagrafica" class="field">
                                     <legend>Inserisci nome e cognome per creare il tuo account</legend>
                                     <div class="input-block"> <!--INPUT NOME-->
                                         <label for="signup-nome">Nome</label>
@@ -335,8 +340,9 @@
                                         <label for="signup-cognome">Cognome</label>
                                         <input type="text" id="signup-cognome" required>
                                     </div>
+                                    <button type="button" class="btn-signup cambio" data-target="field-account">CONTINUA</button>
                                 </fieldset>
-                                <fieldset class="field field-account hidden">
+                                <fieldset id="field-account" class="field hidden">
                                     <legend>Inserisci email e password per creare l'account</legend>
                                     <div class="input-block"> <!--INPUT EMAIL-->
                                         <label for="signup-email">E-mail</label>
@@ -346,8 +352,14 @@
                                         <label class="signup-password">Password</label>
                                         <input type="password" id="signup-password" required>
                                     </div>
+                                    <div class="input-block"> <!--INPUT PASSWORD CONFERMA-->
+                                        <label class="signup-conferma">Conferma password</label>
+                                        <input type="password" id="signup-conferma" required>
+                                    </div>
+                                    <button type="button" class="btn-signup cambio" data-target="field-anagrafica">INDIETRO</button>
+                                    <button type="button" class="btn-signup cambio" data-target="field-dati">CONTINUA</button>
                                 </fieldset>
-                                <fieldset class="field field-dati hidden">
+                                <fieldset id="field-dati" class="field hidden">
                                     <legend>Inserisci i tuoi dati personali</legend>
                                     <div class="input-block"> <!--INPUT ETA-->
                                         <label for="signup-eta">Età</label>
@@ -355,14 +367,15 @@
                                     </div>
                                     <div class="input-block"> <!--INPUT PESO-->
                                         <label for="signup-peso">Peso: <span id="showPeso"></span></label>
-                                        <input type="range" id="signup-peso" min="30" max="150" step="0.1" required>
+                                        <input type="range" id="signup-peso" min="30" max="150" step="0.1" oninput="mostraPeso(this.value)" required>
                                     </div>
                                     <div class="input-block"> <!--INPUT ALTEZZA-->
                                         <label for="signup-altezza">Altezza</label>
                                         <input type="number" id="signup-altezza" required>
                                     </div>
+                                    <button type="button" class="btn-signup cambio" data-target="field-account">INDIETRO</button>
+                                    <button type="submit" class="btn-signup">REGISTRATI</button>
                                 </fieldset>
-                                <button type="submit" class="btn-signup">REGISTRATI</button>
                             </form>
                         </div>
                     </div>
@@ -374,48 +387,7 @@
     <script src="js/bootstrap.bundle.min.js"></script>
     <!--JS-->
     <script>
-        const login = document.getElementById('login');
-        const signup = document.getElementById('signup');
-        const logout = document.getElementById('logout');
-        const buttonLogin = document.getElementById('btnLogin');
-        const buttonSignup = document.getElementById('btnSignup');
-        function showLogin() {
-            //controllo che non sia già stato selezionato il login
-            if (login.classList.contains('hidden')) {
-                //nascondo il form mostrato a schermo
-                let mostrato = document.getElementsByClassName('shown').item(0);
-                mostrato.classList.add('hidden');
-                mostrato.classList.remove('shown');
-                //controllo se il pulsante di signup è attivo
-                if (buttonSignup.classList.contains('active-btn')) {
-                    buttonSignup.classList.remove('active-btn');
-                }
-                //mostro il form del login ed evidenzio il pulsante
-                login.classList.remove('hidden');
-                login.classList.add('shown')
-                buttonLogin.classList.add('active-btn');
-            }
-        }
-        function showSignup() {
-            //controllo che il form signup sia nascosto
-            if (signup.classList.contains('hidden')) {
-                //nascondo il form mostrato a schermo
-                let mostrato = document.getElementsByClassName('shown').item(0);
-                mostrato.classList.add('hidden');
-                mostrato.classList.remove('shown');
-                //controllo se il pulsante di login è attivo
-                if (buttonLogin.classList.contains('active-btn')){
-                    buttonLogin.classList.remove('active-btn');
-                }
-                //mostro il form di signup ed evidenzio il pulsante
-                signup.classList.remove('hidden');
-                signup.classList.add('shown');
-                buttonSignup.classList.add('active-btn');
-            }
-        }
-
         const switchers = document.getElementsByClassName('switcher');
-        console.log(switchers);
         //creo un eventListener per ogni pulsante
         for (let pulsante of switchers) {
             pulsante.addEventListener('click', function() {
@@ -427,7 +399,19 @@
                 this.parentElement.classList.add('is-active');
             })
         }
-
+        const btnCambio = document.getElementsByClassName('cambio');
+        //creo un eventListener per tutti i pulsanti cambio
+        for (let btn of btnCambio) {
+            btn.addEventListener('click', function() {
+                //la funzione al click nasconde il fieldset del pulsante
+                this.parentElement.classList.add('hidden');
+                const target = this.getAttribute('data-target');
+                document.getElementById(target).classList.remove('hidden');
+            })
+        }
+        function mostraPeso(peso) {
+            document.getElementById('showPeso').innerText = peso + 'Kg';
+        }
     </script>
 </body>
 </html>
