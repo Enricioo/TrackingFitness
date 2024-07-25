@@ -13,24 +13,37 @@ document.addEventListener('DOMContentLoaded', () => {
     gsap.from("#mainImage", { opacity: 0, y: 50, duration: 0.2, delay: 0.5 });
 
     // Animazioni per le card
-    const cards = document.querySelectorAll('.card');
+    const cards = document.querySelectorAll('#card');
     cards.forEach((card, index) => {
         gsap.from(card, { opacity: 0, y: 50, duration: 0.5, delay: 2.7 + (index * 0.1) });
     });
 });
 
-document.getElementById('menuToggle').addEventListener('click', function() {
-    var sidebar = document.querySelector('.sidebar');
-    var overlay = document.querySelector('.overlay');
-    sidebar.classList.toggle('show');
-    overlay.classList.toggle('show');
+const sidebar = document.getElementById('sidebar');
+const content = document.getElementById('content');
+const toggleButton = document.getElementById('toggleButton');
+
+toggleButton.addEventListener('click', () => {
+    sidebar.classList.toggle('open');
+    content.classList.toggle('sidebar-open');
+
+    if (sidebar.classList.contains('open')) {
+        gsap.to(sidebar, { duration: 0.3, left: 0 });
+        if (window.innerWidth > 768) {
+            gsap.to(content, { duration: 0.3, marginLeft: '250px' });
+        }
+    } else {
+        gsap.to(sidebar, { duration: 0.3, left: '-250px' });
+        if (window.innerWidth > 768) {
+            gsap.to(content, { duration: 0.3, marginLeft: '0' });
+        }
+    }
 });
 
-document.querySelector('.overlay').addEventListener('click', function() {
-    var sidebar = document.querySelector('.sidebar');
-    var overlay = document.querySelector('.overlay');
-    sidebar.classList.remove('show');
-    overlay.classList.remove('show');
+window.addEventListener('resize', () => {
+    if (window.innerWidth <= 768 && sidebar.classList.contains('open')) {
+        gsap.set(content, { marginLeft: 0 });
+    }
 });
 
 gsap.registerPlugin(ScrollTrigger);
@@ -42,7 +55,7 @@ gsap.from("#details", {
     ease: "power1.out",
     scrollTrigger: {
         trigger: "#details",
-        start: "top 90%", 
+        start: "top 90%",
         end: "bottom 20%",
         toggleActions: "play none none none",
         markers: false
@@ -57,7 +70,7 @@ gsap.from("#info1", {
     ease: "power1.out",
     scrollTrigger: {
         trigger: "#info1",
-        start: "top 95%", 
+        start: "top 95%",
         end: "bottom 20%",
         toggleActions: "play none none none",
         markers: false
@@ -72,7 +85,7 @@ gsap.from("#info2", {
     ease: "power1.out",
     scrollTrigger: {
         trigger: "#info2",
-        start: "top 95%", 
+        start: "top 95%",
         end: "bottom 20%",
         toggleActions: "play none none none",
         markers: false
@@ -87,7 +100,7 @@ gsap.from("#info3", {
     ease: "power1.out",
     scrollTrigger: {
         trigger: "#info3",
-        start: "top 95%", 
+        start: "top 95%",
         end: "bottom 20%",
         toggleActions: "play none none none",
         markers: false
