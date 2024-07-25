@@ -8,6 +8,11 @@ body {
     color: #0B3954;
 }
 
+#mainImage {
+    width: 100%;
+    background-size: cover;
+}
+
 h2 {
     clip-path: polygon(0 0, 100% 0, 100% 100%, 0% 100%);
     line-height: 5.9rem;

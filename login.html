@@ -1,0 +1,433 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Accedi</title>
+    <!--CSS BOOTSTRAP-->
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <!--CSS-->
+    <style>
+        #sidebar-nav {
+            width: 100px;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            background-color: #0B3954;
+        }
+
+        .form-section {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .forms {
+            display: flex;
+            align-items: flex-start;
+            margin-top: 30px;
+        }
+
+        .form-wrapper {
+            animation-name: hideSection;
+            animation-duration: .3s;
+            animation-timing-function: ease-out;
+            animation-fill-mode: forwards;
+        }
+
+        .form-wrapper.is-active {
+            animation-name: showSection;
+            animation-duration: .3s;
+            animation-timing-function: ease-in;
+            animation-fill-mode: forwards;
+        }
+
+        @keyframes showSection {
+            50% {
+                z-index: 1;
+            }
+            100% {
+                z-index: 1;
+            }
+        }
+
+        @keyframes hideSection {
+            0% {
+                z-index: 1;
+            }
+            49.999% {
+                z-index:1;
+            }
+        }
+
+        .switcher {
+            position: relative;
+            cursor: pointer;
+            display: block;
+            margin-right: auto;
+            margin-left: auto;
+            background-color: transparent;
+            border: none;
+            outline: none;
+            transform: translateX(0);
+	        transition: all .3s ease-out;
+        }
+
+        .form-wrapper.is-active .switcher-login {
+            background-color: yellow;
+            transform: translateX(90px);
+        }
+
+        .form-wrapper.is-active .switcher-signup {
+            background-color: yellow;
+            transform: translateX(-90px);
+        }
+
+        .form {
+            overflow: hidden;
+            min-width: 260px;
+            margin-top: 50px;
+            padding: 30px 25px;
+            border-radius: 5px;
+            transform-origin: top;
+        }
+
+        .form-login {
+            animation-name: hideLogin;
+            animation-duration: .3s;
+            animation-timing-function: ease-out;
+            animation-fill-mode: forwards;
+        }
+
+        .form-wrapper.is-active .form-login {
+            animation-name: showLogin;
+            animation-duration: .3s;
+            animation-timing-function: ease-in;
+            animation-fill-mode: forwards;
+        }
+
+        @keyframes showLogin {
+            0% {
+                background-color: #d7e7f1;
+		        transform: translate(40%, 10px);
+            }
+            50% {
+                transform: translate(0, 0);
+            }
+            100% {
+                background-color: white;
+                transform: translate(35%, -20px);
+            }
+        }
+
+        @keyframes hideLogin {
+            0% {
+                background-color: white;
+                transform: translate(35%, -20px);
+            }
+            50% {
+                transform: translate(0, 0);
+            }
+            100% {
+                background-color: #d7e7f1;
+		        transform: translate(40%, 10px);
+            }
+        }
+
+        .form-signup {
+            animation-name: hideSignup; 
+            animation-duration: .3s;
+            animation-timing-function:  ease-out;
+            animation-fill-mode:  forwards;
+        }
+
+        .form-signup.is-active .form-signup {
+            animation-name: showSignup;
+            animation-duration: .3s;
+            animation-timing-function: ease-in;
+            animation-fill-mode: forwards;
+        }
+
+        @keyframes showSignup {
+            0% {
+                background-color: #d7e7f1;
+                transform: translate(-40%, 10px) scaleY(.8);
+            }
+            50% {
+                transform: translate(0, 0) scaleY(.8);
+            }
+            100% {
+                background-color: white;
+                transform: translate(-35%, -20px) scaleY(1);
+            }
+        }
+
+        @keyframes hideSignup {
+            0% {
+                background-color: white;
+                transform: translate(-35%, -20px) scaleY(1);
+            }
+            50% {
+                transform: translate(0, 0) scaleY(0.8);
+            }
+            100% {
+                background-color: #d7e7f1;
+                transform: translate(-40%, 10px) scaleY(0.8);
+            }
+        }
+
+        .form fieldset {
+            position: relative;
+            opacity: 0;
+            margin: 0;
+            padding: 0;
+            border: 0;
+            transition: all .3s ease-out;
+        }
+
+        .form-login fieldset {
+            transform: translateX(-50%);
+        }
+
+        .form-signup fieldset {
+            transform: translateX(50%);
+        }
+
+        .form-wrapper.is-active fieldset {
+            opacity: 1;
+            transform: translateX(0);
+            transition: opacity .4s ease-in, transform .35s ease-in;
+        }
+
+        .form legend {
+            position: absolute;
+            overflow: hidden;
+            width: 1px;
+            height: 1px;
+        }
+
+        .input-block {
+            font-size: 14px;
+            margin-bottom: 20px;
+        }
+
+        .input-block input {
+            display: block;
+            width: 100%;
+            margin-top: 8px;
+            padding-right: 15px;
+            padding-left: 15px;
+            font-size: 16px;
+            line-height: 40px;
+            border: 1px solid #cddbef;
+            border-radius: 2px;
+        }
+
+        .form [type='submit'] {
+            opacity: 0;
+            display: block;
+            min-width: 120px;
+            margin: 30px auto 10px;
+            font-size: 18px;
+            line-height: 40px;
+            border-radius: 25px;
+            border: none;
+            transition: all .3s ease-out;
+        }
+
+        .form-wrapper.is-active .form [type='submit'] {
+            opacity: 1;
+            transform: translateX(0);
+            transition: all .4s ease-in;
+        }
+
+        .btn-login {
+            transform: translateX(-30%);
+        }
+
+        .btn-signup {
+            transform: translateX(30%);
+        }
+
+        /*classe nascosta per ultima*/
+        .hidden {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="container-fluid sidebar">
+        <div class="row flex-nowrap">
+            <div class="col-auto px-0"> <!--SIDEBAR-->
+                <div id="sidebar" class="collapse collapse-horizontal show border-end">
+                    <div id="sidebar-nav" class="list-group border-0 rounded-0 text-sm-start min-vh-100">
+                        <a href="#" class="list-group-item border-end-0 d-inline-block text-truncate" data-bs-parent="#sidebar"><i class="bi bi-bootstrap"></i> <span>Item</span> </a>
+                        <a href="#" class="list-group-item border-end-0 d-inline-block text-truncate" data-bs-parent="#sidebar"><i class="bi bi-film"></i> <span>Item</span></a>
+                        <a href="#" class="list-group-item border-end-0 d-inline-block text-truncate" data-bs-parent="#sidebar"><i class="bi bi-heart"></i> <span>Item</span></a>
+                        <a href="#" class="list-group-item border-end-0 d-inline-block text-truncate" data-bs-parent="#sidebar"><i class="bi bi-bricks"></i> <span>Item</span></a>
+                        <a href="#" class="list-group-item border-end-0 d-inline-block text-truncate" data-bs-parent="#sidebar"><i class="bi bi-clock"></i> <span>Item</span></a>
+                        <a href="#" class="list-group-item border-end-0 d-inline-block text-truncate" data-bs-parent="#sidebar"><i class="bi bi-archive"></i> <span>Item</span></a>
+                        <a href="#" class="list-group-item border-end-0 d-inline-block text-truncate" data-bs-parent="#sidebar"><i class="bi bi-gear"></i> <span>Item</span></a>
+                        <a href="#" class="list-group-item border-end-0 d-inline-block text-truncate" data-bs-parent="#sidebar"><i class="bi bi-calendar"></i> <span>Item</span></a>
+                        <a href="#" class="list-group-item border-end-0 d-inline-block text-truncate" data-bs-parent="#sidebar"><i class="bi bi-envelope"></i> <span>Item</span></a>
+                    </div>
+                    <div class="dropdown pb-4 user">
+                        <a href="#" class="d-flex align-items-center text-white text-decoration-none dropdown-toggle" id="dropdownUser1" data-bs-toggle="dropdown" aria-expanded="false">
+                            <img src="https://github.com/mdo.png" alt="hugenerd" width="30" height="30" class="rounded-circle">
+                            <span class="d-none d-sm-inline mx-1">loser</span>
+                        </a>
+                        <ul class="dropdown-menu dropdown-menu-dark text-small shadow" aria-labelledby="dropdownUser1">
+                            <li><a class="dropdown-item" href="#">New project...</a></li>
+                            <li><a class="dropdown-item" href="#">Settings</a></li>
+                            <li><a class="dropdown-item" href="#">Profile</a></li>
+                            <li>
+                                <hr class="dropdown-divider">
+                            </li>
+                            <li><a class="dropdown-item" href="#">Sign out</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <main class="col ps-md-2 pt-2">
+                <a href="#" data-bs-target="#sidebar" data-bs-toggle="collapse"
+                    class="border rounded-3 p-1 text-decoration-none"><i class="bi bi-list bi-lg py-2 p-1"></i>☰</a>
+                <!--FORM ACCESSO E REGISTRATI-->
+                <section class="forms-section">
+                    <div class="forms">
+                        <div class="form-wrapper is-active"> <!--FORM LOGIN-->
+                            <button type="button" class="switcher switcher-login">
+                                Log In
+                            </button>
+                            <form class="form form-login">
+                                <fieldset>
+                                    <legend>Inserisci email e password per accedere</legend>
+                                    <div class="input-block"> <!--INPUT EMAIL-->
+                                        <label for="login-email">E-mail</label>
+                                        <input type="email" id="login-email" required>
+                                    </div>
+                                    <div class="input-block"> <!--INPUT PASSWORD-->
+                                        <label for="login-password">Password</label>
+                                        <input type="password" id="login-password" required>
+                                    </div>
+                                </fieldset>
+                                <button type="submit" class="btn-login">ACCEDI</button>
+                            </form>
+                        </div>
+
+                        <div class="form-wrapper"> <!--FORM SIGNUP-->
+                            <button type="button" class="switcher switcher-signup">
+                                Sign Up
+                            </button>
+                            <form class="form form-signup">
+                                <fieldset class="field field-anagrafica">
+                                    <legend>Inserisci nome e cognome per creare il tuo account</legend>
+                                    <div class="input-block"> <!--INPUT NOME-->
+                                        <label for="signup-nome">Nome</label>
+                                        <input type="text" id="signup-nome" required>
+                                    </div>
+                                    <div class="input-block"> <!--INPUT COGNOME-->
+                                        <label for="signup-cognome">Cognome</label>
+                                        <input type="text" id="signup-cognome" required>
+                                    </div>
+                                </fieldset>
+                                <fieldset class="field field-account hidden">
+                                    <legend>Inserisci email e password per creare l'account</legend>
+                                    <div class="input-block"> <!--INPUT EMAIL-->
+                                        <label for="signup-email">E-mail</label>
+                                        <input type="email" id="signup-email" required>
+                                    </div>
+                                    <div class="input-block"> <!--INPUT PASSWORD-->
+                                        <label class="signup-password">Password</label>
+                                        <input type="password" id="signup-password" required>
+                                    </div>
+                                </fieldset>
+                                <fieldset class="field field-dati hidden">
+                                    <legend>Inserisci i tuoi dati personali</legend>
+                                    <div class="input-block"> <!--INPUT ETA-->
+                                        <label for="signup-eta">Età</label>
+                                        <input type="number" id="signup-eta" required>
+                                    </div>
+                                    <div class="input-block"> <!--INPUT PESO-->
+                                        <label for="signup-peso">Peso: <span id="showPeso"></span></label>
+                                        <input type="range" id="signup-peso" min="30" max="150" step="0.1" required>
+                                    </div>
+                                    <div class="input-block"> <!--INPUT ALTEZZA-->
+                                        <label for="signup-altezza">Altezza</label>
+                                        <input type="number" id="signup-altezza" required>
+                                    </div>
+                                </fieldset>
+                                <button type="submit" class="btn-signup">REGISTRATI</button>
+                            </form>
+                        </div>
+                    </div>
+                </section>
+            </main>
+        </div>
+    </div>
+    <!--JS BOOTSTRAP-->
+    <script src="js/bootstrap.bundle.min.js"></script>
+    <!--JS-->
+    <script>
+        const login = document.getElementById('login');
+        const signup = document.getElementById('signup');
+        const logout = document.getElementById('logout');
+        const buttonLogin = document.getElementById('btnLogin');
+        const buttonSignup = document.getElementById('btnSignup');
+        function showLogin() {
+            //controllo che non sia già stato selezionato il login
+            if (login.classList.contains('hidden')) {
+                //nascondo il form mostrato a schermo
+                let mostrato = document.getElementsByClassName('shown').item(0);
+                mostrato.classList.add('hidden');
+                mostrato.classList.remove('shown');
+                //controllo se il pulsante di signup è attivo
+                if (buttonSignup.classList.contains('active-btn')) {
+                    buttonSignup.classList.remove('active-btn');
+                }
+                //mostro il form del login ed evidenzio il pulsante
+                login.classList.remove('hidden');
+                login.classList.add('shown')
+                buttonLogin.classList.add('active-btn');
+            }
+        }
+        function showSignup() {
+            //controllo che il form signup sia nascosto
+            if (signup.classList.contains('hidden')) {
+                //nascondo il form mostrato a schermo
+                let mostrato = document.getElementsByClassName('shown').item(0);
+                mostrato.classList.add('hidden');
+                mostrato.classList.remove('shown');
+                //controllo se il pulsante di login è attivo
+                if (buttonLogin.classList.contains('active-btn')){
+                    buttonLogin.classList.remove('active-btn');
+                }
+                //mostro il form di signup ed evidenzio il pulsante
+                signup.classList.remove('hidden');
+                signup.classList.add('shown');
+                buttonSignup.classList.add('active-btn');
+            }
+        }
+
+        const switchers = document.getElementsByClassName('switcher');
+        console.log(switchers);
+        //creo un eventListener per ogni pulsante
+        for (let pulsante of switchers) {
+            pulsante.addEventListener('click', function() {
+                //la funzione al click toglie la classe is-active a entrambi i container dei pulsanti
+                for (let button of switchers) {
+                    button.parentElement.classList.remove('is-active');
+                }
+                //dopodiché aggiunge la classe is-active al container del pulsante premuto
+                this.parentElement.classList.add('is-active');
+            })
+        }
+
+    </script>
+</body>
+</html>
