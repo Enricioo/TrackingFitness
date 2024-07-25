@@ -1,0 +1,371 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home - Admin</title>
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link href="bootstrap-icons-1.11.3/font/bootstrap-icons.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <style>
+        body {
+            background-color: #587291;
+        }
+
+        #sidebar-nav a {
+            background-color: #587291;
+            color: #0B3954;
+        }
+
+        .table-wrapper {
+            width: 700px;
+            margin: 30px auto;
+            background: #fff;
+            padding: 20px;
+            box-shadow: 0 1px 1px rgba(0, 0, 0, .05);
+        }
+
+        .table-title {
+            padding-bottom: 10px;
+            margin: 0 0 10px;
+        }
+
+        .table-title h2 {
+            margin: 6px 0 0;
+            font-size: 22px;
+        }
+
+        .add-new {
+            float: right;
+            height: 30px;
+            font-weight: bold;
+            font-size: 12px;
+            text-shadow: none;
+            min-width: 100px;
+            border-radius: 50px;
+            line-height: 13px;
+        }
+
+        .table-title .add-new i {
+            margin-right: 4px;
+        }
+
+        table.table tr th,
+        table.table tr td {
+            border-color: #e9e9e9;
+        }
+
+        table.table th i {
+            font-size: 13px;
+            margin: 0 5px;
+            cursor: pointer;
+        }
+
+        table.table th:last-child {
+            width: 100px;
+        }
+
+        table.table td a {
+            cursor: pointer;
+            display: inline-block;
+            margin: 0 5px;
+            min-width: 24px;
+        }
+
+        table.table td a.add {
+            color: #27C46B;
+        }
+
+        table.table td a.edit {
+            color: #FFC107;
+        }
+
+        table.table td a.delete {
+            color: #E34724;
+        }
+
+        table.table td i {
+            font-size: 19px;
+        }
+
+        table.table td a.add i {
+            font-size: 24px;
+            margin-right: -1px;
+            position: relative;
+            top: 3px;
+        }
+
+        table.table .form-control.error {
+            border-color: #f50000;
+        }
+
+        .bi-check {
+            color: green;
+        }
+
+        .bi-x {
+            color: red;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container-fluid sidebar">
+        <div class="row flex-nowrap">
+            <div class="col-auto px-0">
+                <div id="sidebar" class="collapse collapse-horizontal border-end border-dark">
+                    <div id="sidebar-nav" class="list-group border-0 rounded-0 text-sm-start min-vh-100">
+                        <a href="#" class="list-group-item border-end-0 d-inline-block text-truncate border-dark"
+                            data-bs-parent="admin.html"><i class="bi bi-house"></i> <span>Home</span> </a>
+                        <a href="#" class="list-group-item border-end-0 d-inline-block text-truncate border-dark"
+                            data-bs-parent="report.html"><i class="bi bi-award"></i> <span>Report</span></a>
+                        <a href="#" class="list-group-item border-end-0 d-inline-block text-truncate border-dark"
+                            data-bs-parent="admin-profile.html"><i class="bi bi-person-raised-hand border-dark"></i>
+                            <span>Profilo</span></a>
+                    </div>
+                </div>
+            </div>
+
+            <main class="col ps-md-2 pt-2">
+                <a href="#" data-bs-target="#sidebar" data-bs-toggle="collapse"
+                    class="border rounded-3 p-1 text-decoration-none text-muted border-dark"><i
+                        class="bi bi-list bi-lg py-2 p-1"></i></a>
+                <div class="page-header pt-3">
+                    <h2>Admin Tool</h2>
+                </div>
+                <p class="lead">Aggiungi, visualizza, modifica ed elimina utenti in questa pagina.</p>
+
+                <div class="card shadow mb-4">
+                    <div class="card-header py-3">
+                        <h6 class="m-0 font-weight-bold text-primary">Tabella Utenti</h6>
+                        <button type="button" class="btn btn-info add-new"><i class="fa bi-plus"></i>Aggiungi</button>
+                    </div>
+
+                    <div class="card-body">
+                        <div id="add-user-form" style="display:none;">
+                            <div class="card shadow mb-4">
+                                <div class="card-header py-3">
+                                    <h6 class="m-0 font-weight-bold text-primary">Aggiungi Nuovo Utente</h6>
+                                </div>
+                                <div class="card-body">
+                                    <form id="userForm">
+                                        <div class="form-group">
+                                            <label for="nome">Nome</label>
+                                            <input type="text" class="form-control" id="nome" name="nome" required>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="cognome">Cognome</label>
+                                            <input type="text" class="form-control" id="cognome" name="cognome"
+                                                required>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="email">Email</label>
+                                            <input type="email" class="form-control" id="email" name="email" required>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="password">Password</label>
+                                            <input type="password" class="form-control" id="password" name="password"
+                                                required>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="eta">Età</label>
+                                            <input type="number" class="form-control" id="eta" name="eta" required>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="peso">Peso</label>
+                                            <input type="number" class="form-control" id="peso" name="peso" required>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="altezza">Altezza</label>
+                                            <input type="number" class="form-control" id="altezza" name="altezza"
+                                                required>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="ruolo">Ruolo</label>
+                                            <input type="text" class="form-control" id="ruolo" name="ruolo" required>
+                                        </div>
+                                        <button type="button" class="btn btn-primary mt-2"
+                                            id="saveUserBtn">Salva</button>
+                                        <button type="button" class="btn btn-secondary mt-2"
+                                            id="cancelUserBtn">Cancella</button>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="table-responsive">
+                            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                                <thead class="table-secondary">
+                                    <tr>
+                                        <th>Nome</th>
+                                        <th>Cognome</th>
+                                        <th>Email</th>
+                                        <th>Password</th>
+                                        <th>Età</th>
+                                        <th>Peso</th>
+                                        <th>Altezza</th>
+                                        <th>Ruolo</th>
+                                        <th>Azioni</th>
+                                    </tr>
+                                </thead>
+                                <tfoot class="table-secondary">
+                                    <tr>
+                                        <th>Nome</th>
+                                        <th>Cognome</th>
+                                        <th>Email</th>
+                                        <th>Password</th>
+                                        <th>Età</th>
+                                        <th>Peso</th>
+                                        <th>Altezza</th>
+                                        <th>Ruolo</th>
+                                        <th>Azioni</th>
+                                    </tr>
+                                </tfoot>
+                                <tbody>
+                                    <tr>
+                                        <td>Peter</td>
+                                        <td>Parker</td>
+                                        <td>p.parker@gmail.com</td>
+                                        <td>sp1d3r</td>
+                                        <td>22</td>
+                                        <td>72</td>
+                                        <td>175</td>
+                                        <td>USER</td>
+                                        <td>
+                                            <a class="add" title="Visualizza" data-toggle="tooltip"><i
+                                                    class="material-icons">&#xE03B;</i></a>
+                                            <a class="edit" title="Modifica" data-toggle="tooltip"><i
+                                                    class="material-icons">&#xE254;</i></a>
+                                            <a class="delete" title="Elimina" data-toggle="tooltip"><i
+                                                    class="material-icons">&#xE872;</i></a>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>Clark</td>
+                                        <td>Kent</td>
+                                        <td>c.kent@gmail.com</td>
+                                        <td>sup3rm4n</td>
+                                        <td>40</td>
+                                        <td>82</td>
+                                        <td>185</td>
+                                        <td>ADMIN</td>
+                                        <td>
+                                            <a class="add" title="Visualizza" data-toggle="tooltip"><i
+                                                    class="material-icons">&#xE03B;</i></a>
+                                            <a class="edit" title="Modifica" data-toggle="tooltip"><i
+                                                    class="material-icons">&#xE254;</i></a>
+                                            <a class="delete" title="Elimina" data-toggle="tooltip"><i
+                                                    class="material-icons">&#xE872;</i></a>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </main>
+        </div>
+    </div>
+
+    <script src="js/jquery-3.7.1.min.js"></script>
+    <script src="js/bootstrap.bundle.min.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('[data-toggle="tooltip"]').tooltip();
+
+            // Show the form with fade-in effect on add new button click
+            $(".add-new").click(function () {
+                $("#add-user-form").fadeIn();
+            });
+
+            // Save user on save button click
+            $("#saveUserBtn").click(function () {
+                var form = $("#userForm");
+                if (form[0].checkValidity()) {
+                    var user = {
+                        nome: $("#nome").val(),
+                        cognome: $("#cognome").val(),
+                        email: $("#email").val(),
+                        password: $("#password").val(),
+                        eta: $("#eta").val(),
+                        peso: $("#peso").val(),
+                        altezza: $("#altezza").val(),
+                        ruolo: $("#ruolo").val(),
+                    };
+
+                    var newRow = '<tr>' +
+                        '<td>' + user.nome + '</td>' +
+                        '<td>' + user.cognome + '</td>' +
+                        '<td>' + user.email + '</td>' +
+                        '<td>' + user.password + '</td>' +
+                        '<td>' + user.eta + '</td>' +
+                        '<td>' + user.peso + '</td>' +
+                        '<td>' + user.altezza + '</td>' +
+                        '<td>' + user.ruolo + '</td>' +
+                        '<td>' +
+                        '<a class="add" title="Visualizza" data-toggle="tooltip"><i class="material-icons">&#xE03B;</i></a>' +
+                        '<a class="edit" title="Modifica" data-toggle="tooltip"><i class="material-icons">&#xE254;</i></a>' +
+                        '<a class="delete" title="Elimina" data-toggle="tooltip"><i class="material-icons">&#xE872;"></i></a>' +
+                        '</td>' +
+                        '</tr>';
+
+                    $("table tbody").append(newRow);
+                    $("#add-user-form").fadeOut();
+                    form[0].reset();
+                } else {
+                    form.addClass('was-validated');
+                }
+            });
+
+            // Hide the form on cancel button click
+            $(document).on("click", "#cancelUserBtn", function () {
+                $("#add-user-form").fadeOut();
+            });
+
+            // Edit row on edit button click
+            $(document).on("click", ".edit", function () {
+                var $row = $(this).closest("tr");
+                var $tds = $row.find("td").not(":last");
+                $tds.each(function () {
+                    var html = $(this).html();
+                    $(this).html('<input type="text" class="form-control" value="' + html + '">');
+                });
+                $(this).toggleClass("edit confirm").html('<i class="bi bi-check"></i>');
+                $(this).siblings(".delete").toggleClass("delete edit-cancel").html('<i class="bi bi-x"></i>');
+            });
+
+            // Confirm edit on confirm button click
+            $(document).on("click", ".confirm", function () {
+                var $row = $(this).closest("tr");
+                $row.find("input").each(function () {
+                    var val = $(this).val();
+                    $(this).parent().text(val);
+                });
+                $(this).toggleClass("confirm edit").html('<i class="material-icons">&#xE254;</i>');
+                $(this).siblings(".edit-cancel").toggleClass("edit-cancel delete").html('<i class="material-icons">&#xE872;</i>');
+            });
+
+            // Cancel edit on cancel button click
+            $(document).on("click", ".edit-cancel", function () {
+                var $row = $(this).closest("tr");
+                $row.find("input").each(function () {
+                    var val = $(this).val();
+                    $(this).parent().text(val);
+                });
+                $(this).toggleClass("edit-cancel delete").html('<i class="material-icons">&#xE872;</i>');
+                $(this).siblings(".confirm").toggleClass("edit confirm").html('<i class="material-icons">&#xE254;</i>');
+            });
+
+            // Delete row on delete button click
+            $(document).on("click", ".delete", function () {
+                if (confirm("Sei sicuro di voler eliminare questo utente?")) {
+                    $(this).closest("tr").remove();
+                }
+            });
+        });
+    </script>
+</body>
+
+
+</html>

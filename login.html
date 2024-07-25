@@ -1,0 +1,418 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Accedi</title>
+    <!--CSS BOOTSTRAP-->
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link href="bootstrap-icons-1.11.3/font/bootstrap-icons.css" rel="stylesheet">
+    <!--CSS-->
+    <style>
+        /*SIDEBAR*/
+        #sidebar-nav {
+            width: 100px;
+        }
+
+        #sidebar-nav a {
+            background-color: #587291;
+            color: #0B3954;
+        }
+
+        #sidebar-btn {
+            background-color: #FBAF00;
+            border-style: solid;
+            border-radius: 3px;
+            border-color: #2F97C1;
+        }
+
+        /*FORM E ANIMAZIONE*/
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            background-color: #0B3954;
+        }
+
+        .forms-section {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .forms {
+            display: flex;
+            align-items: flex-start;
+            margin-top: 30px;
+        }
+
+        .form-wrapper {
+            animation-name: hideSection;
+            animation-duration: .3s;
+            animation-timing-function: ease-out;
+            animation-fill-mode: forwards;
+        }
+
+        .form-wrapper.is-active {
+            animation-name: showSection;
+            animation-duration: .3s;
+            animation-timing-function: ease-in;
+            animation-fill-mode: forwards;
+        }
+
+        @keyframes showSection {
+            50% {
+                z-index: 1;
+            }
+            100% {
+                z-index: 1;
+            }
+        }
+
+        @keyframes hideSection {
+            0% {
+                z-index: 1;
+            }
+            49.999% {
+                z-index:1;
+            }
+        }
+
+        .switcher {
+            position: relative;
+            cursor: pointer;
+            display: block;
+            margin-right: auto;
+            margin-left: auto;
+            background-color: transparent;
+            color: white;
+            border: none;
+            outline: none;
+            transform: translateX(0);
+	        transition: all .3s ease-out;
+        }
+
+        .form-wrapper.is-active .switcher-login {
+            color: black;
+            background-color: #FBAF00;
+            transform: translateX(90px);
+        }
+
+        .form-wrapper.is-active .switcher-signup {
+            background-color: #FBAF00;
+            color: black;
+            transform: translateX(-90px);
+        }
+
+        .form {
+            overflow: hidden;
+            min-width: 260px;
+            margin-top: 50px;
+            padding: 30px 25px;
+            border-radius: 5px;
+            transform-origin: top;
+        }
+
+        .form-login {
+            animation-name: hideLogin;
+            animation-duration: .3s;
+            animation-timing-function: ease-out;
+            animation-fill-mode: forwards;
+        }
+
+        .form-wrapper.is-active .form-login {
+            animation-name: showLogin;
+            animation-duration: .3s;
+            animation-timing-function: ease-in;
+            animation-fill-mode: forwards;
+        }
+
+        @keyframes showLogin {
+            0% {
+                background-color: #587291;
+		        transform: translate(40%, 10px);
+            }
+            50% {
+                transform: translate(0, 0);
+            }
+            100% {
+                background-color: #2F97C1;
+                transform: translate(35%, -20px);
+            }
+        }
+
+        @keyframes hideLogin {
+            0% {
+                background-color: #2F97C1;
+                transform: translate(35%, -20px);
+            }
+            50% {
+                transform: translate(0, 0);
+            }
+            100% {
+                background-color: #587291;
+		        transform: translate(40%, 10px);
+            }
+        }
+
+        .form-signup {
+            animation-name: hideSignup; 
+            animation-duration: .3s;
+            animation-timing-function:  ease-out;
+            animation-fill-mode:  forwards;
+        }
+
+        .form-wrapper.is-active .form-signup {
+            animation-name: showSignup;
+            animation-duration: .3s;
+            animation-timing-function: ease-in;
+            animation-fill-mode: forwards;
+        }
+
+        @keyframes showSignup {
+            0% {
+                background-color: #587291;
+                transform: translate(-40%, 10px) scaleY(.8);
+            }
+            50% {
+                transform: translate(0, 0) scaleY(.8);
+            }
+            100% {
+                background-color: #2F97C1;
+                transform: translate(-35%, -20px) scaleY(1);
+            }
+        }
+
+        @keyframes hideSignup {
+            0% {
+                background-color: #2F97C1;
+                transform: translate(-35%, -20px) scaleY(1);
+            }
+            50% {
+                transform: translate(0, 0) scaleY(0.8);
+            }
+            100% {
+                background-color: #587291;
+                transform: translate(-40%, 10px) scaleY(0.8);
+            }
+        }
+
+        .form fieldset {
+            position: relative;
+            opacity: 0;
+            margin: 0;
+            padding: 0;
+            border: 0;
+            transition: all .3s ease-out;
+        }
+
+        .form-login fieldset {
+            transform: translateX(-50%);
+        }
+
+        .form-signup fieldset {
+            transform: translateX(50%);
+        }
+
+        .form-wrapper.is-active fieldset {
+            opacity: 1;
+            transform: translateX(0);
+            transition: opacity .4s ease-in, transform .35s ease-in;
+        }
+
+        .form legend {
+            position: absolute;
+            overflow: hidden;
+            width: 1px;
+            height: 1px;
+        }
+
+        .input-block {
+            font-size: 14px;
+            margin-bottom: 20px;
+        }
+
+        .input-block input {
+            display: block;
+            width: 100%;
+            margin-top: 8px;
+            padding-right: 15px;
+            padding-left: 15px;
+            font-size: 16px;
+            line-height: 40px;
+            border: 1px solid #cddbef;
+            border-radius: 2px;
+        }
+
+        .form [type='submit'], .form .cambio {
+            opacity: 0;
+            display: inline-block;
+            min-width: 120px;
+            margin: 30px auto 10px;
+            font-size: 18px;
+            line-height: 40px;
+            border-radius: 25px;
+            border: none;
+            transition: all .3s ease-out;
+        }
+
+        .form-wrapper.is-active .form [type='submit'], .form-wrapper.is-active .form .cambio {
+            opacity: 1;
+            transform: translateX(0);
+            transition: all .4s ease-in;
+        }
+
+        .btn-login {
+            transform: translateX(-30%);
+        }
+
+        .btn-signup {
+            transform: translateX(30%);
+        }
+
+        /*classe nascosta per ultima*/
+        .hidden {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="container-fluid sidebar">
+        <div class="row flex-nowrap">
+            <div class="col-auto px-0"> <!--SIDEBAR-->
+                <div id="sidebar" class="collapse collapse-horizontal show border-end">
+                    <div id="sidebar-nav" class="list-group border-0 rounded-0 text-sm-start min-vh-100">
+                        <a href="#" class="list-group-item border-end-0 d-inline-block text-truncate"
+                            data-bs-parent="index.html"><i class="bi bi-house-fill"></i> <span>Home</span> </a>
+                        <a href="#" class="list-group-item border-end-0 d-inline-block text-truncate"
+                            data-bs-parent="stats.html"><i class="bi bi-trophy-fill"></i> <span>Statistiche</span></a>
+                        <a href="#" class="list-group-item border-end-0 d-inline-block text-truncate"
+                            data-bs-parent="consigli.html"><i class="bi bi-journal-bookmark-fill"></i>
+                            <span>Consigli</span></a>
+                        <a href="#" class="list-group-item border-end-0 d-inline-block text-truncate"
+                            data-bs-parent="profile.html"><i class="bi bi-person-arms-up"></i> <span>Profilo</span></a>
+                        <a href="#" class="list-group-item border-end-0 d-inline-block text-truncate"
+                            data-bs-parent="settings.html"><i class="bi bi-gear-fill"></i> <span>Impostazioni</span></a>
+                    </div>
+                </div>
+            </div>
+            <main class="col ps-md-2 pt-2">
+                <a id="sidebar-btn" href="#" data-bs-target="#sidebar" data-bs-toggle="collapse"
+                    class="border rounded-3 p-1 text-decoration-none"><i class="bi bi-list bi-lg py-2 p-1"></i>☰</a>
+                <!--FORM ACCESSO E REGISTRATI-->
+                <section class="forms-section">
+                    <div class="forms">
+                        <div class="form-wrapper is-active"> <!--FORM LOGIN-->
+                            <button type="button" class="switcher switcher-login rounded">
+                                Log In
+                            </button>
+                            <form class="form form-login">
+                                <fieldset>
+                                    <legend>Inserisci email e password per accedere</legend>
+                                    <div class="input-block"> <!--INPUT EMAIL-->
+                                        <label for="login-email">E-mail</label>
+                                        <input type="email" id="login-email" required>
+                                    </div>
+                                    <div class="input-block"> <!--INPUT PASSWORD-->
+                                        <label for="login-password">Password</label>
+                                        <input type="password" id="login-password" required>
+                                    </div>
+                                </fieldset>
+                                <button type="submit" class="btn-login">ACCEDI</button>
+                            </form>
+                        </div>
+
+                        <div class="form-wrapper"> <!--FORM SIGNUP-->
+                            <button type="button" class="switcher switcher-signup rounded">
+                                Sign Up
+                            </button>
+                            <form class="form form-signup">
+                                <fieldset id="field-anagrafica" class="field">
+                                    <legend>Inserisci nome e cognome per creare il tuo account</legend>
+                                    <div class="input-block"> <!--INPUT NOME-->
+                                        <label for="signup-nome">Nome</label>
+                                        <input type="text" id="signup-nome" required>
+                                    </div>
+                                    <div class="input-block"> <!--INPUT COGNOME-->
+                                        <label for="signup-cognome">Cognome</label>
+                                        <input type="text" id="signup-cognome" required>
+                                    </div>
+                                    <button type="button" class="btn-signup cambio" data-target="field-account">CONTINUA</button>
+                                </fieldset>
+                                <fieldset id="field-account" class="field hidden">
+                                    <legend>Inserisci email e password per creare l'account</legend>
+                                    <div class="input-block"> <!--INPUT EMAIL-->
+                                        <label for="signup-email">E-mail</label>
+                                        <input type="email" id="signup-email" required>
+                                    </div>
+                                    <div class="input-block"> <!--INPUT PASSWORD-->
+                                        <label class="signup-password">Password</label>
+                                        <input type="password" id="signup-password" required>
+                                    </div>
+                                    <div class="input-block"> <!--INPUT PASSWORD CONFERMA-->
+                                        <label class="signup-conferma">Conferma password</label>
+                                        <input type="password" id="signup-conferma" required>
+                                    </div>
+                                    <button type="button" class="btn-signup cambio" data-target="field-anagrafica">INDIETRO</button>
+                                    <button type="button" class="btn-signup cambio" data-target="field-dati">CONTINUA</button>
+                                </fieldset>
+                                <fieldset id="field-dati" class="field hidden">
+                                    <legend>Inserisci i tuoi dati personali</legend>
+                                    <div class="input-block"> <!--INPUT ETA-->
+                                        <label for="signup-eta">Età</label>
+                                        <input type="number" id="signup-eta" required>
+                                    </div>
+                                    <div class="input-block"> <!--INPUT PESO-->
+                                        <label for="signup-peso">Peso: <span id="showPeso"></span></label>
+                                        <input type="range" id="signup-peso" min="30" max="150" step="0.1" oninput="mostraPeso(this.value)" required>
+                                    </div>
+                                    <div class="input-block"> <!--INPUT ALTEZZA-->
+                                        <label for="signup-altezza">Altezza</label>
+                                        <input type="number" id="signup-altezza" required>
+                                    </div>
+                                    <button type="button" class="btn-signup cambio" data-target="field-account">INDIETRO</button>
+                                    <button type="submit" class="btn-signup">REGISTRATI</button>
+                                </fieldset>
+                            </form>
+                        </div>
+                    </div>
+                </section>
+            </main>
+        </div>
+    </div>
+    <!--JS BOOTSTRAP-->
+    <script src="js/bootstrap.bundle.min.js"></script>
+    <!--JS-->
+    <script>
+        const switchers = document.getElementsByClassName('switcher');
+        //creo un eventListener per ogni pulsante
+        for (let pulsante of switchers) {
+            pulsante.addEventListener('click', function() {
+                //la funzione al click toglie la classe is-active a entrambi i container dei pulsanti
+                for (let button of switchers) {
+                    button.parentElement.classList.remove('is-active');
+                }
+                //dopodiché aggiunge la classe is-active al container del pulsante premuto
+                this.parentElement.classList.add('is-active');
+            })
+        }
+        const btnCambio = document.getElementsByClassName('cambio');
+        //creo un eventListener per tutti i pulsanti cambio
+        for (let btn of btnCambio) {
+            btn.addEventListener('click', function() {
+                //la funzione al click nasconde il fieldset del pulsante
+                this.parentElement.classList.add('hidden');
+                const target = this.getAttribute('data-target');
+                document.getElementById(target).classList.remove('hidden');
+            })
+        }
+        function mostraPeso(peso) {
+            document.getElementById('showPeso').innerText = peso + 'Kg';
+        }
+    </script>
+</body>
+</html>
