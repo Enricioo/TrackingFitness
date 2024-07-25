@@ -19,33 +19,77 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 });
 
+document.getElementById('menuToggle').addEventListener('click', function() {
+    var sidebar = document.querySelector('.sidebar');
+    var overlay = document.querySelector('.overlay');
+    sidebar.classList.toggle('show');
+    overlay.classList.toggle('show');
+});
+
+document.querySelector('.overlay').addEventListener('click', function() {
+    var sidebar = document.querySelector('.sidebar');
+    var overlay = document.querySelector('.overlay');
+    sidebar.classList.remove('show');
+    overlay.classList.remove('show');
+});
+
 gsap.registerPlugin(ScrollTrigger);
 gsap.from("#details", {
     opacity: 0,
-    x: -100, // Imposta la posizione iniziale a sinistra
+    x: -100,
     delay: .1,
     duration: 2,
     ease: "power1.out",
     scrollTrigger: {
         trigger: "#details",
-        start: "top 80%", 
+        start: "top 90%", 
         end: "bottom 20%",
         toggleActions: "play none none none",
-        markers: true
+        markers: false
     }
 });
 
-gsap.from("#info", {
+gsap.from("#info1", {
     opacity: 0,
-    x: -100, // Imposta la posizione iniziale a sinistra
+    x: -100,
     delay: .1,
     duration: 2,
     ease: "power1.out",
     scrollTrigger: {
-        trigger: "#info",
-        start: "top 80%", 
+        trigger: "#info1",
+        start: "top 95%", 
         end: "bottom 20%",
         toggleActions: "play none none none",
-        markers: true
+        markers: false
+    }
+});
+
+gsap.from("#info2", {
+    opacity: 0,
+    x: -100,
+    delay: .1,
+    duration: 2,
+    ease: "power1.out",
+    scrollTrigger: {
+        trigger: "#info2",
+        start: "top 95%", 
+        end: "bottom 20%",
+        toggleActions: "play none none none",
+        markers: false
+    }
+});
+
+gsap.from("#info3", {
+    opacity: 0,
+    x: -100,
+    delay: .1,
+    duration: 2,
+    ease: "power1.out",
+    scrollTrigger: {
+        trigger: "#info3",
+        start: "top 95%", 
+        end: "bottom 20%",
+        toggleActions: "play none none none",
+        markers: false
     }
 });
