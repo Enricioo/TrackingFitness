@@ -4,40 +4,36 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Home</title>
     <link rel="stylesheet" href="css/bootstrap.min.css">
-    <style>
-        #sidebar-nav {
-            width: 100px;
-        }
-    </style>
+    <link href="bootstrap-icons-1.11.3/font/bootstrap-icons.css" rel="stylesheet">
+    <link rel="stylesheet" href="css/index.css">
+
 </head>
 
 <body>
+    <!-- Sidebar -->
     <div class="container-fluid sidebar">
         <div class="row flex-nowrap">
             <div class="col-auto px-0">
-                <div id="sidebar" class="collapse collapse-horizontal show border-end">
+                <div id="sidebar" class="collapse collapse-horizontal border-end">
                     <div id="sidebar-nav" class="list-group border-0 rounded-0 text-sm-start min-vh-100">
                         <a href="#" class="list-group-item border-end-0 d-inline-block text-truncate"
-                            data-bs-parent="#sidebar"><i class="bi bi-bootstrap"></i> <span>Item</span> </a>
+                            data-bs-parent="index.html"><i class="bi bi-house-fill"></i> <span>Home</span> </a>
                         <a href="#" class="list-group-item border-end-0 d-inline-block text-truncate"
-                            data-bs-parent="#sidebar"><i class="bi bi-film"></i> <span>Item</span></a>
+                            data-bs-parent="stats.html"><i class="bi bi-trophy-fill"></i> <span>Statistiche</span></a>
                         <a href="#" class="list-group-item border-end-0 d-inline-block text-truncate"
-                            data-bs-parent="#sidebar"><i class="bi bi-heart"></i> <span>Item</span></a>
+                            data-bs-parent="consigli.html"><i class="bi bi-journal-bookmark-fill"></i>
+                            <span>Consigli</span></a>
                         <a href="#" class="list-group-item border-end-0 d-inline-block text-truncate"
-                            data-bs-parent="#sidebar"><i class="bi bi-bricks"></i> <span>Item</span></a>
+                            data-bs-parent="profile.html"><i class="bi bi-person-arms-up"></i> <span>Profilo</span></a>
                         <a href="#" class="list-group-item border-end-0 d-inline-block text-truncate"
-                            data-bs-parent="#sidebar"><i class="bi bi-clock"></i> <span>Item</span></a>
-                        <a href="#" class="list-group-item border-end-0 d-inline-block text-truncate"
-                            data-bs-parent="#sidebar"><i class="bi bi-archive"></i> <span>Item</span></a>
-                        <a href="#" class="list-group-item border-end-0 d-inline-block text-truncate"
-                            data-bs-parent="#sidebar"><i class="bi bi-gear"></i> <span>Item</span></a>
-                        <a href="#" class="list-group-item border-end-0 d-inline-block text-truncate"
-                            data-bs-parent="#sidebar"><i class="bi bi-calendar"></i> <span>Item</span></a>
-                        <a href="#" class="list-group-item border-end-0 d-inline-block text-truncate"
-                            data-bs-parent="#sidebar"><i class="bi bi-envelope"></i> <span>Item</span></a>
+                            data-bs-parent="settings.html"><i class="bi bi-gear-fill"></i> <span>Impostazioni</span></a>
                     </div>
+
+                    <!-- Non credo sia utile quando abbiamo la sezione profilo già nella sidebar,eliminate le
+                    righe 25-26 e togliete il comnmento da questa sezione se volete il profilo con l'icona.
+
                     <div class="dropdown pb-4 user">
                         <a href="#" class="d-flex align-items-center text-white text-decoration-none dropdown-toggle"
                             id="dropdownUser1" data-bs-toggle="dropdown" aria-expanded="false">
@@ -55,41 +51,69 @@
                             <li><a class="dropdown-item" href="#">Sign out</a></li>
                         </ul>
                     </div>
+                    -->
+
                 </div>
             </div>
+
             <main class="col ps-md-2 pt-2">
+                <!-- Tasto menù -->
                 <a href="#" data-bs-target="#sidebar" data-bs-toggle="collapse"
-                    class="border rounded-3 p-1 text-decoration-none"><i class="bi bi-list bi-lg py-2 p-1"></i>☰
-                    Menu</a>
-                <div class="page-header pt-3">
-                    <h2>Bootstrap 5 Sidebar Menu - Simple</h2>
+                    class="border rounded-3 p-1 text-decoration-none bg-warning-emphasis border-dark"><i
+                        class="bi bi-list bi-lg py-2 p-1"></i>
+                        <!-- Da modificare colore bottone -->
+                    </a>
+                <div class="container text-center">
+                    <h1 id="mainText">TrackingFitness</h1>
                 </div>
-                <p class="lead">A offcanvas "push" vertical nav menu example.</p>
-                <hr>
-                <div class="row">
-                    <div class="col-12">
-                        <p>This is a simple collapsing sidebar menu for Bootstrap 5. Unlike the Offcanvas component that
-                            overlays the content, this sidebar will "push" the content. Sriracha biodiesel taxidermy
-                            organic post-ironic, Intelligentsia salvia mustache 90's code editing brunch. Butcher
-                            polaroid VHS art party, hashtag Brooklyn deep v PBR narwhal sustainable mixtape swag wolf
-                            squid tote bag. Tote bag cronut semiotics, raw denim deep v taxidermy messenger bag. Tofu
-                            YOLO Etsy, direct trade ethical Odd Future jean shorts paleo. Forage Shoreditch tousled
-                            aesthetic irony, street art organic Bushwick artisan cliche semiotics ugh synth chillwave
-                            meditation. Shabby chic lomo plaid vinyl chambray Vice. Vice sustainable cardigan,
-                            Williamsburg master cleanse hella DIY 90's blog.</p>
-                        <p>Ethical Kickstarter PBR asymmetrical lo-fi. Dreamcatcher street art Carles, stumptown
-                            gluten-free Kickstarter artisan Wes Anderson wolf pug. Godard sustainable you probably
-                            haven't heard of them, vegan farm-to-table Williamsburg slow-carb readymade disrupt deep v.
-                            Meggings seitan Wes Anderson semiotics, cliche American Apparel whatever. Helvetica cray
-                            plaid, vegan brunch Banksy leggings +1 direct trade. Wayfarers codeply PBR selfies. Banh mi
-                            McSweeney's Shoreditch selfies, forage fingerstache food truck occupy YOLO Pitchfork fixie
-                            iPhone fanny pack art party Portland.</p>
+                <div class="container mt-4">
+                    <img src="https://placehold.co/1280x480" alt="" id="mainImage" class="img-fluid">
+                </div>
+                <div class="container mt-4">
+                    <div class="row">
+                        <h2 class="text-center" id="bodyText">Come funziona la nostra app</h2>
+                        <div class="col-12 col-md-4 d-flex justify-content-center">
+                            <div class="card text-center" style="width: 18rem;" id="card1">
+                                <img src="https://placehold.co/400x200" class="card-img-top" alt="...">
+                                <div class="card-body">
+                                    <h5 class="card-title">Card title</h5>
+                                    <p class="card-text">Some quick example text to build on the card title and make up
+                                        the bulk of the card's content.</p>
+                                    <a href="#" class="btn btn-primary">Go somewhere</a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-12 col-md-4 d-flex justify-content-center">
+                            <div class="card text-center" style="width: 18rem;" id="card2">
+                                <img src="https://placehold.co/400x200" class="card-img-top" alt="...">
+                                <div class="card-body">
+                                    <h5 class="card-title">Card title</h5>
+                                    <p class="card-text">Some quick example text to build on the card title and make up
+                                        the bulk of the card's content.</p>
+                                    <a href="#" class="btn btn-primary">Go somewhere</a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-12 col-md-4 d-flex justify-content-center">
+                            <div class="card text-center" style="width: 18rem;" id="card3">
+                                <img src="https://placehold.co/400x200" class="card-img-top" alt="...">
+                                <div class="card-body">
+                                    <h5 class="card-title">Card title</h5>
+                                    <p class="card-text">Some quick example text to build on the card title and make up
+                                        the bulk of the card's content.</p>
+                                    <a href="#" class="btn btn-primary">Go somewhere</a>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </main>
         </div>
     </div>
     <script src="js/bootstrap.bundle.min.js"></script>
+    <script src="js/gsap.min.js"></script>
+    <script src="https://unpkg.com/split-type"></script>
+    <script src="js/indexgsap.js"></script>
 </body>
 
 </html>
