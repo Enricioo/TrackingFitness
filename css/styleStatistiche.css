@@ -1,0 +1,50 @@
+html, body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 20px;
+    text-align: center;
+    color: goldenrod;
+  }
+
+  .container {
+    width: 50%;
+    margin: 30px auto;
+  }
+
+/* grafico */
+.chart-container {
+  position: relative;
+  width: 100%;
+  height: 450px;
+}
+
+canvas {
+  width: 100%;
+  height: 100%;
+}
+
+h2 {
+    text-align: center;
+    font-family: "Verdana", Arial, Helvetica, sans-serif;
+    font-size: 30px;
+}
+
+#myChart {
+  width: 90% !important;
+  height: 100% !important;
+  padding-left: 10% !important;
+}
+
+@media (max-width: 500px) {
+  #myChart {
+    width: 100% !important;
+    height: 100% !important;
+    padding-left: 0% !important;
+}}
