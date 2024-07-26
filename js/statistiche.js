@@ -11,7 +11,7 @@ document.addEventListener('DOMContentLoaded', function() {
         backgroundColor: "rgba(0,191,255,0.4)",
         borderColor: "rgba(0, 191, 255, 1)",
         borderWidth: 2,
-        fill: true,
+        fill: true, //l'area sottostante la linea del grafico viene colorata
       },
     ],
   };
@@ -50,15 +50,23 @@ document.addEventListener('DOMContentLoaded', function() {
     data: dailyData,
     options: {
       responsive: true,
-      maintainAspectRatio: false,
+      maintainAspectRatio: false, //il grafico si adatta alle dimensioni del contenitore
       scales: {
         x: {
           title: {
             display: true,
             text: 'Giorni della settimana',
+            font: {
+              size: 16 // Imposta la dimensione del font
+            },
             padding: {
               top: 20,
               bottom: 20
+            }
+          },
+          ticks: {
+            font: {
+              size: 14 // Imposta la dimensione del font per i tick (etichette lugngo gli assi)
             }
           }
         },
@@ -66,20 +74,28 @@ document.addEventListener('DOMContentLoaded', function() {
           title: {
             display: true,
             text: 'Distanza percorsa (km)',
+            font: {
+              size: 16
+            },
             padding: {
               top: 20,
               bottom: 20
+            }
+          },
+          ticks: {
+            font: {
+              size: 14
             }
           }
         }
       }
     }
   });
-
+  
 // Grafico 2
 let xValues = ["Lun", "Mar", "Mer", "Gio", "Ven", "Sab", "Dom"];
-let yValues = [1600, 1800, 2000, 2500, 2800, 3000, 3300];
-let barColors = ["yellow", "orange", "red", "brown", "green", "blue", "purple"];
+let yValues = [2000, 2500, 1600, 2800, 1800, 3300, 3000];
+let barColors = ["yellow", "orange", "red", "brown", "lightgreen", "skyblue", "blue"];
 
 let chart2 = new Chart(ctx2, {
   type: "bar",
@@ -87,41 +103,62 @@ let chart2 = new Chart(ctx2, {
     labels: xValues,
     datasets: [{
       backgroundColor: barColors,
-      borderColor: barColors.map(color => color),
-      borderWidth: 1,
       data: yValues
-    }]
+    }] //associazione valori tra asse X e asse Y
   },
   options: {
-    legend: { display: false },
-    title: {
-      display: true,
-      text: "Calorie bruciate"
-    },
-    tooltips: {
-      callbacks: {
-        labelColor: function(tooltipItem, chart) {
-          return {
-            backgroundColor: chart.data.datasets[0].backgroundColor[tooltipItem.index],
-            borderColor: chart.data.datasets[0].borderColor[tooltipItem.index]
-          };
+    responsive: true,
+    maintainAspectRatio: false,
+    scales: {
+      x: {
+        title: {
+          display: true,
+          text: 'Giorni della settimana',
+          font: {
+            size: 16
+          },
+          padding: {
+            top: 20,
+            bottom: 20
+          }
+        },
+        ticks: {
+          font: {
+            size: 14
+          }
+        }
+      },
+      y: {
+        title: {
+          display: true,
+          text: 'Calorie bruciate',
+          font: {
+            size: 16
+          },
+          padding: {
+            top: 20,
+            bottom: 20
+          }
+        },
+        ticks: {
+          font: {
+            size: 14
+          }
         }
       }
     }
   }
 });
+// Fine Grafico 2
 
-
-window.changeChart = function(type) {
+window.changeChart = function(type) { //cambia dinamicamente i dati e le opzioni di visualizzazione dei due grafici, in base a ciò che viene selezionato
   if (type === 'daily') {
     chart1.data = dailyData;
-    chart1.options.scales.x.title.text = 'Giorni della settimana';
+    chart1.options.scales.x.title.text = 'Giorni della settimana'; //configura e aggiorna il titolo dell'asse X
     chart1.update();
 
     chart2.data.labels = ["Lun", "Mar", "Mer", "Gio", "Ven", "Sab", "Dom"];
-    chart2.data.datasets[0].data = [1600, 1800, 2000, 2500, 2800, 3000, 3300];
-    chart2.data.datasets[0].backgroundColor = ["yellow", "orange", "red", "brown", "green", "blue", "purple"];
-    chart2.data.datasets[0].borderColor = ["yellow", "orange", "red", "brown", "green", "blue", "purple"];
+    chart2.data.datasets[0].data = [2000, 2500, 1600, 2800, 1800, 3300, 3000]; //accede e modifica i dati del primo dataset
     chart2.update();
 
   } else if (type === 'weekly') {
@@ -131,10 +168,8 @@ window.changeChart = function(type) {
 
     chart2.data.labels = ["Settimana 1", "Settimana 2", "Settimana 3", "Settimana 4"];
     chart2.data.datasets[0].data = [11000, 13000, 12500, 14000];
-    chart2.data.datasets[0].backgroundColor = ["yellow", "orange", "red", "brown"];
-    chart2.data.datasets[0].borderColor = ["yellow", "orange", "red", "brown"];
     chart2.update();
-
+    
   } else if (type === 'monthly') {
     chart1.data = monthlyData;
     chart1.options.scales.x.title.text = 'Mesi';
@@ -142,8 +177,6 @@ window.changeChart = function(type) {
 
     chart2.data.labels = ["Gen", "Feb", "Mar", "Apr", "Mag", "Giu", "Lug", "Ago", "Set", "Ott", "Nov", "Dic"];
     chart2.data.datasets[0].data = [60000, 68000, 62000, 75000, 80000, 72000, 77000, 81000, 83000, 86000, 90000, 88000];
-    chart2.data.datasets[0].backgroundColor = ["yellow", "orange", "red", "brown", "green", "blue", "purple", "cyan", "magenta", "lime", "navy", "teal"];
-    chart2.data.datasets[0].borderColor = ["yellow", "orange", "red", "brown", "green", "blue", "purple", "cyan", "magenta", "lime", "navy", "teal"];
     chart2.update();
   }
 };
