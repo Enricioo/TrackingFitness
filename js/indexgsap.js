@@ -19,6 +19,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 });
 
+// Animazioni per sidebar e contenuto in open
 const sidebar = document.getElementById('sidebar');
 const content = document.getElementById('content');
 const toggleButton = document.getElementById('toggleButton');
@@ -47,14 +48,29 @@ window.addEventListener('resize', () => {
 });
 
 gsap.registerPlugin(ScrollTrigger);
-gsap.from("#details", {
+gsap.from("#desc1", {
     opacity: 0,
     x: -100,
     delay: .1,
     duration: 2,
     ease: "power1.out",
     scrollTrigger: {
-        trigger: "#details",
+        trigger: "#desc1",
+        start: "top 90%",
+        end: "bottom 20%",
+        toggleActions: "play none none none",
+        markers: false
+    }
+});
+
+gsap.from("#desc2", {
+    opacity: 0,
+    x: 100,
+    delay: .1,
+    duration: 2,
+    ease: "power1.out",
+    scrollTrigger: {
+        trigger: "#desc2",
         start: "top 90%",
         end: "bottom 20%",
         toggleActions: "play none none none",
@@ -100,6 +116,51 @@ gsap.from("#info3", {
     ease: "power1.out",
     scrollTrigger: {
         trigger: "#info3",
+        start: "top 95%",
+        end: "bottom 20%",
+        toggleActions: "play none none none",
+        markers: false
+    }
+});
+
+gsap.from("#info4", {
+    opacity: 0,
+    x: 100,
+    delay: .1,
+    duration: 2,
+    ease: "power1.out",
+    scrollTrigger: {
+        trigger: "#info4",
+        start: "top 95%",
+        end: "bottom 20%",
+        toggleActions: "play none none none",
+        markers: false
+    }
+});
+
+gsap.from("#info5", {
+    opacity: 0,
+    x: 100,
+    delay: .1,
+    duration: 2,
+    ease: "power1.out",
+    scrollTrigger: {
+        trigger: "#info5",
+        start: "top 95%",
+        end: "bottom 20%",
+        toggleActions: "play none none none",
+        markers: false
+    }
+});
+
+gsap.from("#info6", {
+    opacity: 0,
+    x: 100,
+    delay: .1,
+    duration: 2,
+    ease: "power1.out",
+    scrollTrigger: {
+        trigger: "#info6",
         start: "top 95%",
         end: "bottom 20%",
         toggleActions: "play none none none",
