@@ -102,6 +102,9 @@ let chart2 = new Chart(ctx2, {
   data: {
     labels: xValues,
     datasets: [{
+      label: "Calorie bruciate (kcal)",
+      borderWidth: 2,
+      borderColor: "black",
       backgroundColor: barColors,
       data: yValues
     }] //associazione valori tra asse X e asse Y
@@ -131,7 +134,7 @@ let chart2 = new Chart(ctx2, {
       y: {
         title: {
           display: true,
-          text: 'Calorie bruciate',
+          text: 'Calorie bruciate (kcal)',
           font: {
             size: 16
           },
