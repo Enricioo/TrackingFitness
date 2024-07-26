@@ -6,7 +6,7 @@
     <title>Accedi</title>
     <!--CSS BOOTSTRAP-->
     <link rel="stylesheet" href="css/bootstrap.min.css">
-    <link href="bootstrap-icons-1.11.3/font/bootstrap-icons.css" rel="stylesheet">
+    <link href="./assets/bootstrap-icons-1.11.3/font/bootstrap-icons.css" rel="stylesheet">
     <!--CSS-->
     <link rel="stylesheet" href="./css/loginStyle.css">
 </head>
@@ -40,19 +40,20 @@
                             <button type="button" class="switcher switcher-login rounded">
                                 Log In
                             </button>
-                            <form class="form form-login shadow-lg" onsubmit="login(event)">
+                            <form class="form form-login shadow-lg">
                                 <fieldset>
                                     <legend>Inserisci email e password per accedere</legend>
+                                    <p id="errore-login" class="hidden" class="rounded text-center"><b>Campo mancante!</b></p>
                                     <div class="input-block"> <!--INPUT EMAIL-->
                                         <label for="login-email">E-mail</label>
-                                        <input type="email" id="login-email" required>
+                                        <input type="email" id="login-email" class="" onclick="resetta(this, 'login')" required>
                                     </div>
                                     <div class="input-block"> <!--INPUT PASSWORD-->
                                         <label for="login-password">Password</label>
-                                        <input type="password" id="login-password" required>
+                                        <input type="password" id="login-password" class="" onclick="resetta(this, 'login')" required>
                                     </div>
                                 </fieldset>
-                                <button type="submit" class="btn-login">ACCEDI</button>
+                                <button type="button" class="btn-login" onclick="login(event)">ACCEDI</button>
                             </form>
                         </div>
 
@@ -60,52 +61,59 @@
                             <button type="button" class="switcher switcher-signup rounded">
                                 Sign Up
                             </button>
-                            <form class="form form-signup shadow" onsubmit="signup(event)">
+                            <form class="form form-signup shadow">
                                 <fieldset id="field-anagrafica" class="field">
                                     <legend>Inserisci nome e cognome per creare il tuo account</legend>
+                                    <p id="errore-signup1" class="hidden" class="rounded text-center"><b>Campo mancante!</b></p>
                                     <div class="input-block"> <!--INPUT NOME-->
                                         <label for="signup-nome">Nome</label>
-                                        <input type="text" id="signup-nome" required>
+                                        <input type="text" id="signup-nome" onclick="resetta(this, 'signup')" required>
                                     </div>
                                     <div class="input-block"> <!--INPUT COGNOME-->
                                         <label for="signup-cognome">Cognome</label>
-                                        <input type="text" id="signup-cognome" required>
+                                        <input type="text" id="signup-cognome" onclick="resetta(this, 'signup')" required>
                                     </div>
                                     <button type="button" class="btn-signup cambio" data-target="field-account">CONTINUA</button>
                                 </fieldset>
                                 <fieldset id="field-account" class="field hidden">
                                     <legend>Inserisci email e password per creare l'account</legend>
+                                    <p id="errore-signup2" class="hidden" class="rounded text-center"><b>Campo mancante!</b></p>
                                     <div class="input-block"> <!--INPUT EMAIL-->
                                         <label for="signup-email">E-mail</label>
-                                        <input type="email" id="signup-email" required>
+                                        <input type="email" id="signup-email" onclick="resetta(this, 'signup')" required>
                                     </div>
                                     <div class="input-block"> <!--INPUT PASSWORD-->
                                         <label class="signup-password">Password</label>
-                                        <input type="password" id="signup-password" required>
+                                        <input type="password" id="signup-password" onclick="resetta(this, 'signup')" required>
                                     </div>
                                     <div class="input-block"> <!--INPUT PASSWORD CONFERMA-->
                                         <label class="signup-conferma">Conferma password</label>
-                                        <input type="password" id="signup-conferma" required>
+                                        <input type="password" id="signup-conferma" onclick="resetta(this, 'signup')" required>
                                     </div>
                                     <button type="button" class="btn-signup cambio" data-target="field-anagrafica">INDIETRO</button>
                                     <button type="button" class="btn-signup cambio" data-target="field-dati">CONTINUA</button>
                                 </fieldset>
                                 <fieldset id="field-dati" class="field hidden">
                                     <legend>Inserisci i tuoi dati personali</legend>
+                                    <p id="errore-signup3" class="hidden" class="rounded text-center"><b>Campo mancante!</b></p>
                                     <div class="input-block"> <!--INPUT ETA-->
                                         <label for="signup-eta">Età</label>
-                                        <input type="number" id="signup-eta" required>
+                                        <input type="number" id="signup-eta" min="13" max="80" onclick="resetta(this, 'signup')" required>
                                     </div>
                                     <div class="input-block"> <!--INPUT PESO-->
                                         <label for="signup-peso">Peso: <span id="showPeso"></span></label>
-                                        <input type="range" id="signup-peso" min="30" max="150" step="0.1" oninput="mostraPeso(this.value)" required>
+                                        <input type="range" id="signup-peso" min="30" max="150" step="0.1" onclick="resetta(this, 'signup')" oninput="mostraPeso(this.value)" required>
                                     </div>
                                     <div class="input-block"> <!--INPUT ALTEZZA-->
                                         <label for="signup-altezza">Altezza (cm)</label>
-                                        <input type="number" id="signup-altezza" min="80" max="220" required>
+                                        <input type="number" id="signup-altezza" min="80" max="220" onclick="resetta(this, 'signup')" required>
+                                    </div>
+                                    <div class="input-block mb-0 rounded" style="background-color: #FBAF00;"> <!--INPUT PRIVACY-->
+                                        <input type="checkbox" id="signup-privacy" onclick="resetta(this, 'signup')" required style="display: inline; width: 10%; margin-bottom: 5px !important;">
+                                        <label class="mb-2" for="signup-privacy" style="font-size: smaller;">Accetto la <a href="#">privacy policy</a></label>
                                     </div>
                                     <button type="button" class="btn-signup cambio" data-target="field-account">INDIETRO</button>
-                                    <button type="submit" class="btn-signup">REGISTRATI</button>
+                                    <button type="button" class="btn-signup" onclick="signup(event)">REGISTRATI</button>
                                 </fieldset>
                             </form>
                         </div>
