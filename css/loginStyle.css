@@ -253,7 +253,7 @@ body {
     opacity: 0;
     display: inline-block;
     min-width: 100px;
-    margin: 30px auto 10px;
+    margin: 20px auto 10px;
     font-size: 18px;
     line-height: 40px;
     border-radius: 25px;
@@ -282,7 +282,7 @@ body {
     border-color: red !important;
 }
 
-#errore-login, #errore-signup1, #errore-signup2, #errore-signup3 {
+#errore-login, #errore-signup, #errore-pw {
     color: red;
     background-color: rgba(0, 0, 0, 0.5);
 }

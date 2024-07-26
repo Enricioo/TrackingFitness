@@ -44,16 +44,16 @@ async function login(event) {
         err_msg.classList.remove('hidden');
     } else {
         //login.
-        console.log('ok login');
+        alert('ok accesso');
     }
 }
 
 async function signup(event) {
     const formSignup = document.forms.item(1);
     let errore = false;
-    const err_msg1 = document.getElementById('errore-signup1');
-    const err_msg2 = document.getElementById('errore-signup2');
-    const err_msg3 = document.getElementById('errore-signup3');
+    let errorePw = false;
+    const err_msg = document.getElementById('errore-signup');
+    const err_pw = document.getElementById('errore-pw');
     //controllo il corretto inserimento di tutti i dati
     for (let campo of formSignup) {
         if (campo.type!='button') {
@@ -84,40 +84,45 @@ async function signup(event) {
         }
     }
     //controllo le password se sono uguali
-    if (errore) {
-        err_msg1.classList.remove('hidden');
-        err_msg2.classList.remove('hidden');
-        err_msg3.classList.remove('hidden');
-    } else {
+    if (formSignup['signup-password'].value!=formSignup['signup-conferma'].value) {
+        if (!formSignup['signup-password'].classList.contains('errore')) {
+            formSignup['signup-password'].classList.add('errore');
+        }
+        if (!formSignup['signup-conferma'].classList.contains('errore')) {
+            formSignup['signup-conferma'].classList.add('errore');
+        }
+        errorePw = true;
+    }
+    if (!(errore)&&!(errorePw)) {
         //signup
-        console.log('ok signup');
+        alert('ok registrazione');
+    } else {
+        if (errore) {
+            err_msg.classList.remove('hidden');
+        }
+        if (errorePw) {
+            err_pw.classList.remove('hidden');
+        }
     }
 }
 
 function resetta(input, tipo) {
     let errore1 = null;
     let errore2 = null;
-    let errore3 = null;
     if (tipo == 'login') {
         errore1 = document.getElementById('errore-login');
     } else {
-        errore1 = document.getElementById('errore-signup1');
-        errore2 = document.getElementById('errore-signup2');
-        errore3 = document.getElementById('errore-signup3');
+        errore1 = document.getElementById('errore-signup');
+        errore2 = document.getElementById('errore-pw');
     }
     //tolgo i messaggi di errore se ci sono
     if(!(errore1.classList.contains('hidden'))) {
         errore1.classList.add('hidden');
     }
-    //ripeto il procedimento per errore2 ed errore3 se non sono nulli
+    //ripeto il procedimento per l'errore2 se non è nullo
     if(errore2!=null) {
         if(!(errore2.classList.contains('hidden'))) {
             errore2.classList.add('hidden');
-        }
-    }
-    if(errore3!=null) {
-        if(!(errore3.classList.contains('hidden'))) {
-            errore3.classList.add('hidden');
         }
     }
     //tolgo la segnalazione di errore dall'input
