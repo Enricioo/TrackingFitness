@@ -13,12 +13,24 @@
 
 <body>
     <!-- Sidebar -->
-    <div class="container-fluid sidebar">
+    <div class="sidebar" id="sidebar">
+        <a href="index.html" class="list-group-item border-end-0 text-truncate border-dark"
+            data-bs-parent="index.html"><i class="bi bi-house-fill"></i> <span>Home</span></a>
+        <a href="#" class="list-group-item border-end-0 text-truncate border-dark" data-bs-parent="stats.html"><i
+                class="bi bi-trophy-fill"></i> <span>Statistiche</span></a>
+        <a href="#" class="list-group-item border-end-0 text-truncate border-dark" data-bs-parent="consigli.html"><i
+                class="bi bi-journal-bookmark-fill"></i> <span>Consigli</span></a>
+        <a href="#" class="list-group-item border-end-0 text-truncate border-dark" data-bs-parent="profile.html"><i
+                class="bi bi-person-arms-up"></i> <span>Profilo</span></a>
+        <a href="#" class="list-group-item border-end-0 text-truncate border-dark" data-bs-parent="settings.html"><i
+                class="bi bi-gear-fill"></i> <span>Impostazioni</span></a>
+    </div>
+    <!-- <div class="container-fluid sidebar">
         <div class="row flex-nowrap">
             <div class="col-auto px-0">
                 <div id="sidebar" class="collapse collapse-horizontal border-end border-dark">
                     <div id="sidebar-nav" class="list-group border-0 rounded-0 text-sm-start min-vh-100">
-                        <a href="#" data-bs-target="#sidebar" data-bs-toggle="collapse"
+                        <a href="#" id="toggleButton" class="toggle-button" data-bs-target="#sidebar" data-bs-toggle="collapse"
                             class="list-group-item border-end-0 p-1 d-inline-block text-truncate border-dark">
                             <i class="bi bi-list bi-lg py-2 p-1"><span>Menu</span></i>
                         </a>
@@ -39,7 +51,7 @@
                             <span>Impostazioni</span></a>
                     </div>
 
-                    <!-- Non credo sia utile quando abbiamo la sezione profilo già nella sidebar,eliminate le
+                 Non credo sia utile quando abbiamo la sezione profilo già nella sidebar,eliminate le
                     righe 25-26 e togliete il comnmento da questa sezione se volete il profilo con l'icona.
 
                     <div class="dropdown pb-4 user">
@@ -61,134 +73,170 @@
                     </div>
                     -->
 
-                </div>
+    <div class="content" id="content">
+        <main class="col ps-md-2 pt-2">
+            <!-- Tasto menù -->
+            <a href="#" id="toggleButton" data-bs-target="#sidebar" data-bs-toggle="collapse"
+                class="toggle-button border rounded-3 p-1 text-decoration-none bg-warning-emphasis border-dark"><i
+                    class="bi bi-list bi-lg py-2 p-1"></i>
+                <!-- Da modificare colore bottone -->
+            </a>
+            <!-- Titolo pagina -->
+            <div class="container text-center">
+                <h1 id="mainText">TrackingFitness</h1>
             </div>
-        </div>
-    </div>
+            <!-- Immagine home principale -->
+            <div class="container my-4">
+                <img src="https://placehold.co/1280x480" alt="" id="mainImage" class="img-fluid">
+            </div>
+        </main>
 
-    <main class="col ps-md-2 pt-2">
-        <!-- Tasto menù -->
-        <a href="#" data-bs-target="#sidebar" data-bs-toggle="collapse"
-            class="border rounded-3 p-1 text-decoration-none bg-warning-emphasis border-dark"><i
-                class="bi bi-list bi-lg py-2 p-1"></i>
-            <!-- Da modificare colore bottone -->
-        </a>
-        <div data-speed=""></div>
-        <!-- Titolo pagina -->
-        <div class="container text-center">
-            <h1 id="mainText">TrackingFitness</h1>
-        </div>
-        <!-- Immagine home principale -->
+        <!-- Descrizione funzionalità -->
         <div class="container my-4">
-            <img src="https://placehold.co/1280x480" alt="" id="mainImage" class="img-fluid">
-        </div>
-    </main>
-    <!-- Descrizione funzionalità -->
-    <div class="container my-4">
-        <div class="row">
-            <h2 class="text-center" id="bodyText">Come funziona la nostra app</h2>
-            <div class="col-12 col-md-4 d-flex justify-content-center mt-2">
-                <a href="" class="text-muted text-decoration-none">
-                    <div class="card text-center" style="width: 18rem;" id="card1">
-                        <img src="assets/img/corsa.webp" class="card-img-top" alt="Immagine corsa">
+            <div class="row">
+                <h2 class="text-center" id="bodyText">Come funziona la nostra app</h2>
+                <div class="col-12 col-lg-4 d-flex justify-content-center mt-4">
+                    <a href="" class="text-muted text-decoration-none">
+                        <div class="card text-center" style="width: 18rem;" id="card">
+                            <img src="assets/img/corsa.webp" class="card-img-top" alt="Immagine corsa">
+                            <div class="card-body">
+                                <h5 class="card-title">Corsa</h5>
+                                <p class="card-text">Traccia le tue corse quotidiane e monitora i tuoi progressi.</p>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+                <div class="col-12 col-lg-4 d-flex justify-content-center mt-4">
+                    <a href="" class="text-muted text-decoration-none">
+                        <div class="card text-center" style="width: 18rem;" id="card">
+                            <img src="assets/img/nuoto.jpg" class="card-img-top" alt="Immagine nuoto">
+                            <div class="card-body">
+                                <h5 class="card-title">Nuoto</h5>
+                                <p class="card-text">Tieni traccia delle tue sessioni di nuoto e dei miglioramenti.</p>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+                <div class="col-12 col-lg-4 d-flex justify-content-center mt-4">
+                    <div class="card text-center" style="width: 18rem;" id="card">
+                        <img src="assets/img/ciclismo.avif" class="card-img-top" alt="Immagine ciclicsmo">
                         <div class="card-body">
-                            <h5 class="card-title">Corsa</h5>
-                            <p class="card-text">Traccia le tue corse quotidiane e monitora i tuoi progressi.</p>
+                            <h5 class="card-title">Ciclismo</h5>
+                            <p class="card-text">Monitora le tue uscite in bicicletta e analizza le tue prestazioni.</p>
                         </div>
                     </div>
-                </a>
-            </div>
-            <div class="col-12 col-md-4 d-flex justify-content-center mt-2">
-                <div class="card text-center" style="width: 18rem;" id="card2">
-                    <img src="assets/img/nuoto.jpg" class="card-img-top" alt="Immagine nuoto">
-                    <div class="card-body">
-                        <h5 class="card-title">Nuoto</h5>
-                        <p class="card-text">Tieni traccia delle tue sessioni di nuoto e dei miglioramenti.</p>
-                    </div>
-                </div>
-            </div>
-            <div class="col-12 col-md-4 d-flex justify-content-center mt-2">
-                <div class="card text-center" style="width: 18rem;" id="card3">
-                    <img src="assets/img/ciclismo.avif" class="card-img-top" alt="Immagine ciclicsmo">
-                    <div class="card-body">
-                        <h5 class="card-title">Ciclismo</h5>
-                        <p class="card-text">Monitora le tue uscite in bicicletta e analizza le tue prestazioni.</p>
-                    </div>
                 </div>
             </div>
         </div>
-    </div>
-    <!-- Descrizione più dettagliata -->
-    <div class="container my-4" id="desc">
-        <h2 id="details">Perchè TrackingFitness</h2>
-        <div class="row align-items-start my-4" id="info1">
-            <div class="col-auto">
-                <div id="iconW">
-                    <img src="assets/bootstrap-icons-1.11.3/clipboard-check.svg" alt="" id="listIcon">
-                </div>
-            </div>
-            <div class="col-12 col-md-9">
-                <h3>Monitoraggio Completo</h3>
-                <p>Traccia ogni attività fisica e ottieni statistiche dettagliate sui tuoi allenamenti.</p>
-            </div>
-        </div>
-        <div class="row align-items-start my-4" id="info2">
-            <div class="col-auto">
-                <div id="iconW">
-                    <img src="assets/bootstrap-icons-1.11.3/calendar-week.svg" alt="" id="listIcon">
-                </div>
-            </div>
-            <div class="col-12 col-md-9">
-                <h3>Calendario degli Allenamenti</h3>
-                <div>
-                    Some quick example text to build on the card title and make up
-                    the bulk of the card's content.
-                </div>
-            </div>
-        </div>
-        <div class="row align-items-start my-4" id="info3">
-            <div class="col-auto">
-                <div id="iconW">
-                    <img src="assets/bootstrap-icons-1.11.3/speedometer.svg" alt="" id="listIcon">
-                </div>
-            </div>
-            <div class="col-12 col-md-9">
-                <h3>Analisi delle Prestazioni</h3>
-                <p>Ottieni report dettagliati sulle tue performance e scopri come migliorare.</p>
-            </div>
-        </div>
-    </div>
-    <section class="container my-4">
-        <h2 class="text-center">Cosa dicono i nostri utenti</h2>
-        <div class="row">
-            <div class="col-12 col-md-4 d-flex justify-content-center mt-2">
-                <div class="card text-center" style="width: 18rem;">
-                    <div class="card-body">
-                        <p class="card-text">"TrackingFitness mi ha aiutato a migliorare le mie prestazioni in modo
-                            significativo!"</p>
-                        <h5 class="card-title">Mario Rossi</h5>
+        <!-- Descrizione più dettagliata -->
+        <div class="container rounded-4" id="desc1">
+            <h2 id="details">Perchè TrackingFitness</h2>
+            <div class="row align-items-start my-4" id="info1">
+                <div class="col-auto">
+                    <div id="iconW">
+                        <img src="assets/bootstrap-icons-1.11.3/clipboard-check.svg" alt="" id="listIcon">
                     </div>
                 </div>
-            </div>
-            <div class="col-12 col-md-4 d-flex justify-content-center mt-2">
-                <div class="card text-center" style="width: 18rem;">
-                    <div class="card-body">
-                        <p class="card-text">"Grazie a questa app ho raggiunto i miei obiettivi di fitness."</p>
-                        <h5 class="card-title">Luca Bianchi</h5>
-                    </div>
+                <div class="col-12 col-md-9">
+                    <h3>Monitoraggio Completo</h3>
+                    <p>Traccia ogni attività fisica e ottieni statistiche dettagliate sui tuoi allenamenti.</p>
                 </div>
             </div>
-            <div class="col-12 col-md-4 d-flex justify-content-center mt-2">
-                <div class="card text-center" style="width: 18rem;">
-                    <div class="card-body">
-                        <p class="card-text">"Un'app indispensabile per chi ama tenersi in forma!"</p>
-                        <h5 class="card-title">Giulia Verdi</h5>
+            <div class="row align-items-start my-4" id="info2">
+                <div class="col-auto">
+                    <div id="iconW">
+                        <img src="assets/bootstrap-icons-1.11.3/calendar-week.svg" alt="" id="listIcon">
                     </div>
+                </div>
+                <div class="col-12 col-md-9">
+                    <h3>Calendario degli Allenamenti</h3>
+                    <p>Pianifica i tuoi allenamenti settimanali e ricevi promemoria per rimanere attivo.</p>
+                </div>
+            </div>
+            <div class="row align-items-start my-4" id="info3">
+                <div class="col-auto">
+                    <div id="iconW">
+                        <img src="assets/bootstrap-icons-1.11.3/graph-up-arrow.svg" alt="" id="listIcon">
+                    </div>
+                </div>
+                <div class="col-12 col-md-9">
+                    <h3>Analisi delle Prestazioni</h3>
+                    <p>Ottieni report dettagliati sulle tue performance e scopri come migliorare.</p>
                 </div>
             </div>
         </div>
-    </section>
 
+        <!-- Descrizione più dettagliata 2 -->
+        <div class="container rounded-4" id="desc2">
+            <h2 id="details">Cosa puoi fare</h2>
+            <div class="row align-items-start my-4" id="info4">
+                <div class="col-auto">
+                    <div id="iconW">
+                        <img src="assets/bootstrap-icons-1.11.3/heart-pulse.svg" alt="" id="listIcon">
+                    </div>
+                </div>
+                <div class="col-12 col-md-9">
+                    <h3>Monitoraggio della salute</h3>
+                    <p>Tieni traccia dei parametri vitali come il battito cardiaco, la qualità del sonno e il livello di stress per avere una visione completa della tua salute.</p>
+                </div>
+            </div>
+            <div class="row align-items-start my-4" id="info5">
+                <div class="col-auto">
+                    <div id="iconW">
+                        <img src="assets/bootstrap-icons-1.11.3/comment-dots-solid.svg" alt="" id="listIcon">
+                    </div>
+                </div>
+                <div class="col-12 col-md-9">
+                    <h3>Feedback in Tempo Reale</h3>
+                    <p>Ricevi feedback immediato durante gli allenamenti per correggere la forma e ottimizzare la performance.</p>
+                </div>
+            </div>
+            <div class="row align-items-start my-4" id="info6">
+                <div class="col-auto">
+                    <div id="iconW">
+                        <img src="assets/bootstrap-icons-1.11.3/speedometer.svg" alt="" id="listIcon">
+                    </div>
+                </div>
+                <div class="col-12 col-md-9">
+                    <h3>Programmi di allenamento guidati</h3>
+                    <p>Segui programmi di allenamento guidati creati da esperti per obiettivi specifici e ottimizzare i tuoi allenamenti, come perdere peso, aumentare la massa muscolare o migliorare la resistenza.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Recensioni utenti -->
+        <section class="container my-4">
+            <h2 class="text-center">Cosa dicono i nostri utenti</h2>
+            <div class="row">
+                <div class="col-12 col-md-4 d-flex justify-content-center mt-4">
+                    <div class="card text-center" style="width: 18rem;">
+                        <div class="card-body">
+                            <p class="card-text">"TrackingFitness mi ha aiutato a migliorare le mie prestazioni in modo
+                                significativo!"</p>
+                            <h5 class="card-title">Mario Rossi</h5>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-12 col-md-4 d-flex justify-content-center mt-4">
+                    <div class="card text-center" style="width: 18rem;">
+                        <div class="card-body">
+                            <p class="card-text">"Grazie a questa app ho raggiunto i miei obiettivi di fitness."</p>
+                            <h5 class="card-title">Luca Bianchi</h5>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-12 col-md-4 d-flex justify-content-center mt-4">
+                    <div class="card text-center" style="width: 18rem;">
+                        <div class="card-body">
+                            <p class="card-text">"Un'app indispensabile per chi ama tenersi in forma!"</p>
+                            <h5 class="card-title">Giulia Verdi</h5>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </div>
 
 
     <script src="js/bootstrap.bundle.min.js"></script>

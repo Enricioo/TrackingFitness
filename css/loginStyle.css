@@ -1,0 +1,292 @@
+/*SIDEBAR*/
+#sidebar-nav {
+    width: 100px;
+}
+
+#sidebar-nav a {
+    background-color: #587291;
+    color: #0B3954;
+}
+
+#sidebar-btn {
+    background-color: #FBAF00;
+    border-style: solid;
+    border-radius: 3px;
+    border-color: #2F97C1;
+}
+
+/*FORM E ANIMAZIONE*/
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    background-color: #0B3954;
+}
+
+.forms-section {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    min-width: 520px;
+}
+
+.forms {
+    display: flex;
+    align-items: flex-start;
+    margin-top: 30px;
+}
+
+.form-wrapper {
+    animation-name: hideSection;
+    animation-duration: .3s;
+    animation-timing-function: ease-out;
+    animation-fill-mode: forwards;
+}
+
+.form-wrapper.is-active {
+    animation-name: showSection;
+    animation-duration: .3s;
+    animation-timing-function: ease-in;
+    animation-fill-mode: forwards;
+}
+
+@keyframes showSection {
+    50% {
+        z-index: 1;
+    }
+    100% {
+        z-index: 1;
+    }
+}
+
+@keyframes hideSection {
+    0% {
+        z-index: 1;
+    }
+    49.999% {
+        z-index:1;
+    }
+}
+
+.switcher {
+    position: relative;
+    cursor: pointer;
+    display: block;
+    margin-right: auto;
+    margin-left: auto;
+    background-color: #587291;
+    color: white;
+    border: none;
+    outline: none;
+    transition: all .3s ease-out;
+}
+
+.switcher-login {
+    transform: translateX(10px);
+}
+
+.switcher-signup {
+    transform: translateX(-10px);
+}
+
+.form-wrapper.is-active .switcher-login {
+    font-size: larger;
+    color: black;
+    background-color: #FBAF00;
+    transform: translateX(90px);
+}
+
+.form-wrapper.is-active .switcher-signup {
+    font-size: larger;
+    background-color: #FBAF00;
+    color: black;
+    transform: translateX(-90px);
+}
+
+.form {
+    overflow: hidden;
+    min-width: 260px;
+    margin-top: 50px;
+    padding: 30px 25px;
+    border-radius: 5px;
+    transform-origin: top;
+}
+
+.form-login {
+    animation-name: hideLogin;
+    animation-duration: .3s;
+    animation-timing-function: ease-out;
+    animation-fill-mode: forwards;
+}
+
+.form-wrapper.is-active .form-login {
+    animation-name: showLogin;
+    animation-duration: .3s;
+    animation-timing-function: ease-in;
+    animation-fill-mode: forwards;
+}
+
+@keyframes showLogin {
+    0% {
+        background-color: #587291;
+        transform: translate(35%, 10px);
+    }
+    50% {
+        transform: translate(-15%, 0) scaleX(0.1);
+    }
+    100% {
+        background-color: #2F97C1;
+        transform: translate(30%, -20px) scaleX(1);
+    }
+}
+
+@keyframes hideLogin {
+    0% {
+        background-color: #2F97C1;
+        transform: translate(30%, -20px);
+    }
+    50% {
+        background-color: #587291;
+        transform: translate(-15%, 0) scaleX(0.1);
+    }
+    100% {
+        background-color: #587291;
+        transform: translate(35%, 10px) scaleX(1);
+    }
+}
+
+.form-signup {
+    animation-name: hideSignup; 
+    animation-duration: .3s;
+    animation-timing-function:  ease-out;
+    animation-fill-mode:  forwards;
+}
+
+.form-wrapper.is-active .form-signup {
+    animation-name: showSignup;
+    animation-duration: .3s;
+    animation-timing-function: ease-in;
+    animation-fill-mode: forwards;
+}
+
+@keyframes showSignup {
+    0% {
+        background-color: #587291;
+        transform: translate(-35%, 10px) scaleY(.8)
+    }
+    50% {
+        transform: translate(15%, 0) scaleY(.8) scaleX(0.1);
+    }
+    100% {
+        background-color: #2F97C1;
+        transform: translate(-30%, -20px) scaleY(1) scaleX(1);
+    }
+}
+
+@keyframes hideSignup {
+    0% {
+        background-color: #2F97C1;
+        transform: translate(-30%, -20px) scaleY(1);
+    }
+    50% {
+        background-color: #587291;
+        transform: translate(15%, 0) scaleY(0.8) scaleX(0.1);
+    }
+    100% {
+        background-color: #587291;
+        transform: translate(-35%, 10px) scaleY(0.8) scaleX(1);
+    }
+}
+
+.form fieldset {
+    position: relative;
+    opacity: 0;
+    margin: 0;
+    padding: 0;
+    border: 0;
+    transition: all .3s ease-out;
+}
+
+.form-login fieldset {
+    transform: translateX(-50%);
+}
+
+.form-signup fieldset {
+    transform: translateX(50%);
+}
+
+.form-wrapper.is-active fieldset {
+    opacity: 1;
+    transform: translateX(0);
+    transition: opacity .2s ease-in, transform .15s ease-in;
+}
+
+.form legend {
+    position: absolute;
+    overflow: hidden;
+    width: 1px;
+    height: 1px;
+}
+
+.input-block {
+    font-size: 14px;
+    margin-bottom: 20px;
+}
+
+.input-block input {
+    display: block;
+    width: 100%;
+    margin-top: 8px;
+    padding-right: 15px;
+    padding-left: 15px;
+    font-size: 16px;
+    line-height: 40px;
+    border: 1px solid #cddbef;
+    border-radius: 2px;
+}
+
+.form [type='submit'], .form .cambio {
+    opacity: 0;
+    display: inline-block;
+    min-width: 100px;
+    margin: 30px auto 10px;
+    font-size: 18px;
+    line-height: 40px;
+    border-radius: 25px;
+    border: none;
+    transition: all .3s ease-out;
+}
+
+.form-wrapper.is-active .form [type='submit'], .form-wrapper.is-active .form .cambio {
+    opacity: 1;
+    transform: translateX(0);
+    transition: all .2s ease-in;
+}
+
+.btn-login {
+    transform: translateX(-30%);
+}
+
+.btn-signup {
+    transform: translateX(30%);
+}
+
+/*stile per l'errore*/
+.mancante {
+    border-style: solid;
+    border-width: 2px;
+    border-color: red;
+}
+
+#errore, #errore_pw {
+    color: red;
+}
+
+/*classe nascosta per ultima*/
+.hidden {
+    display: none;
+}

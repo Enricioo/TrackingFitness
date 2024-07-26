@@ -139,60 +139,10 @@
                 <div class="card shadow mb-4">
                     <div class="card-header py-3">
                         <h6 class="m-0 font-weight-bold text-primary">Tabella Utenti</h6>
-                        <button type="button" class="btn btn-info add-new"><i class="fa bi-plus"></i>Aggiungi</button>
+                        <button type="button" class="btn btn-info add-new" data-bs-toggle="modal" data-bs-target="#addUserModal"><i class="fa bi-plus"></i> Aggiungi</button>
                     </div>
 
                     <div class="card-body">
-                        <div id="add-user-form" style="display:none;">
-                            <div class="card shadow mb-4">
-                                <div class="card-header py-3">
-                                    <h6 class="m-0 font-weight-bold text-primary">Aggiungi Nuovo Utente</h6>
-                                </div>
-                                <div class="card-body">
-                                    <form id="userForm">
-                                        <div class="form-group">
-                                            <label for="nome">Nome</label>
-                                            <input type="text" class="form-control" id="nome" name="nome" required>
-                                        </div>
-                                        <div class="form-group">
-                                            <label for="cognome">Cognome</label>
-                                            <input type="text" class="form-control" id="cognome" name="cognome"
-                                                required>
-                                        </div>
-                                        <div class="form-group">
-                                            <label for="email">Email</label>
-                                            <input type="email" class="form-control" id="email" name="email" required>
-                                        </div>
-                                        <div class="form-group">
-                                            <label for="password">Password</label>
-                                            <input type="password" class="form-control" id="password" name="password"
-                                                required>
-                                        </div>
-                                        <div class="form-group">
-                                            <label for="eta">Età</label>
-                                            <input type="number" class="form-control" id="eta" name="eta" required>
-                                        </div>
-                                        <div class="form-group">
-                                            <label for="peso">Peso</label>
-                                            <input type="number" class="form-control" id="peso" name="peso" required>
-                                        </div>
-                                        <div class="form-group">
-                                            <label for="altezza">Altezza</label>
-                                            <input type="number" class="form-control" id="altezza" name="altezza"
-                                                required>
-                                        </div>
-                                        <div class="form-group">
-                                            <label for="ruolo">Ruolo</label>
-                                            <input type="text" class="form-control" id="ruolo" name="ruolo"
-                                                required>
-                                        </div>
-                                        <button type="button" class="btn btn-primary mt-2" id="saveUserBtn">Salva</button>
-                                        <button type="button" class="btn btn-secondary mt-2" id="cancelUserBtn">Cancella</button>
-                                    </form>
-                                </div>
-                            </div>
-                        </div>
-
                         <div class="table-responsive">
                             <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                                 <thead class="table-secondary">
@@ -267,15 +217,65 @@
         </div>
     </div>
 
+    <!-- Modal for adding new user -->
+    <div class="modal fade" id="addUserModal" tabindex="-1" data-bs-backdrop="static" aria-labelledby="addUserModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="addUserModalLabel">Aggiungi Nuovo Utente</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="userForm">
+                        <div class="form-group">
+                            <label for="nome">Nome</label>
+                            <input type="text" class="form-control" id="nome" name="nome" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="cognome">Cognome</label>
+                            <input type="text" class="form-control" id="cognome" name="cognome" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="email">Email</label>
+                            <input type="email" class="form-control" id="email" name="email" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="password">Password</label>
+                            <input type="password" class="form-control" id="password" name="password" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="eta">Età</label>
+                            <input type="number" class="form-control" id="eta" name="eta" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="peso">Peso</label>
+                            <input type="number" class="form-control" id="peso" name="peso" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="altezza">Altezza</label>
+                            <input type="number" class="form-control" id="altezza" name="altezza" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="ruolo">Ruolo</label>
+                            <input type="text" class="form-control" id="ruolo" name="ruolo" required>
+                        </div>
+                        <button type="button" class="btn btn-primary mt-2" id="saveUserBtn">Salva</button>
+                        <button type="button" class="btn btn-secondary mt-2" data-bs-dismiss="modal">Cancella</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <script src="js/jquery-3.7.1.min.js"></script>
     <script src="js/bootstrap.bundle.min.js"></script>
     <script type="text/javascript">
         $(document).ready(function () {
             $('[data-toggle="tooltip"]').tooltip();
 
-            // Show the form with fade-in effect on add new button click
+            // Show the modal with fade-in effect on add new button click
             $(".add-new").click(function () {
-                $("#add-user-form").fadeIn();
+                $("#addUserModal").modal('show');
             });
 
             // Save user on save button click
@@ -310,16 +310,11 @@
                         '</tr>';
 
                     $("table tbody").append(newRow);
-                    $("#add-user-form").fadeOut();
+                    $("#addUserModal").modal('hide');
                     form[0].reset();
                 } else {
                     form.addClass('was-validated');
                 }
-            });
-
-            // Hide the form on cancel button click
-            $(document).on("click", "#cancelUserBtn", function () {
-                $("#add-user-form").fadeOut();
             });
 
             // Edit row on edit button click
@@ -365,6 +360,5 @@
         });
     </script>
 </body>
-
 
 </html>
