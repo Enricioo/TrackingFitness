@@ -4,60 +4,62 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Suggerimenti & Consigli</title>
+    <title>Suggerimenti&Consigli</title>
     <link href="css/bootstrap.min.css" rel="stylesheet">
     <link href="css/Suggerimenti.css" rel="stylesheet">
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script> <!--fisso-->
 </head>
 
+    <h1 class="titolo">Suggerimenti & Consigli </h1>
+
 <body <div class="container mt-5">
-
-    <h1>Suggerimenti & Consigli</h1>
-
+    <!--consigli iniziali-->
     <strong>1:</strong> Prima di iniziare un'attività fisica, assicurati di aver esaminato la tua condizione fisica,
     pensando al peso, al grasso e al metabolismo.<br>
     <strong>2:</strong> Ricordati di riempire tutti i campi richiesti e di controllare giornalmente le notifiche per
     seguire i tuoi risultati.
 
+    <!--notifiche che veranno collegate a js in base al raggiungimento degli obiettivi prefissati dal app-->
     <h2 style="padding: 12px;">Massa Muscolare</h2>
 
-    <div class="alert alert-success" role="alert">
+    <div class="alert alert-success" role="alert" id="muscolitop">
         <strong>Complimenti!</strong> Hai raggiunto il tuo obiettivo di aumento di massa muscolare per questo mese.
         Continua così!
     </div>
-    <div class="alert alert-info" role="alert">
+    <div class="alert alert-info" role="alert" id="muscoliquasitop">
         <strong>Ottimo lavoro!</strong> Sei al 75% del tuo obiettivo di aumento di massa muscolare. Manca poco per
         raggiungerlo!
     </div>
 
-    <div class="alert alert-danger" role="alert">
+    <div class="alert alert-danger" role="alert" id="muscoliperdita">
         <strong>Attenzione!</strong> Hai perso massa muscolare nell'ultima settimana. Assicurati di seguire una
         dieta adeguata e un programma di allenamento appropriato.
     </div>
-
+    <!--notifche che rimmarrano sempre visibili per aiutarsi -->
     <h4 style="padding: 15px;">Come migliorare?</h4>
 
-    <div class="alert alert-warning" role="alert">
+    <div class="alert alert-warning" role="alert" id="muscolicons">
         <strong>Consiglio:</strong> Prova ad aumentare l'apporto calorico e includi più proteine nella tua dieta per
         prevenire ulteriori perdite.
     </div>
-    <div class="alert alert-warning" role="alert">
+    <div class="alert alert-warning" role="alert" id="muscolicons">
         <strong>Consiglio:</strong> Ricorda di aumentare gradualmente i pesi durante gli allenamenti per stimolare
         la crescita muscolare.
     </div>
-
+    <!--quando non ci sono aumenti nè perdite veranno comunque inviate delle notifiche-->
     <h3>Stato Stabile</h3>
-    <div class="alert alert-info" role="alert">
+    <div class="alert alert-info" role="alert" id="muscolistabile">
         <strong>Buon lavoro!</strong> Stai mantenendo la tua massa muscolare. Continua con il tuo attuale regime di
         allenamento e nutrizione.
     </div>
-    <div class="alert alert-success" role="alert">
+    <div class="alert alert-success" role="alert" id="muscolistabile">
         <strong>Ottimo!</strong> La tua massa muscolare è stabile. Continua a monitorare i tuoi progressi e ad
         adattare il tuo programma secondo necessità.
     </div>
 
     <div class="container mt-5">
+        <!--consigli iniziali-->
+
         <h2>Cardio</h2>
         <p>
             <strong>1:</strong> Se non hai un'attività cardiaca attiva, considera il tuo tempo libero per la
@@ -71,36 +73,39 @@
             <strong>3:</strong> Puoi aggiungere un'attività a tua cardio attività aggiuntiva per mantenere la
             tensione e la concentrazione.
         </p>
-        <div class="alert alert-success" role="alert" id="cardiofantastico">
+        <div class="alert alert-success" role="alert" id="cardiotop">
             <strong>Fantastico!</strong> Hai completato il tuo obiettivo cardio settimanale. Continua così e mantieni
             l'energia alta!
         </div>
-        <div class="alert alert-info" role="alert" id="cardiottimo">
+        <div class="alert alert-info" role="alert" id="cardioquasitop">
             <strong>Ottimo lavoro!</strong> Sei al 90% del tuo obiettivo cardio mensile. Fai un piccolo sforzo per
             raggiungerlo!
         </div>
-        <div class="alert alert-warning" role="alert">
+        <div class="alert alert-warning" role="alert" id="cardiocons">
             <strong>Consiglio:</strong> Per migliorare la tua resistenza cardiovascolare, prova a variare l'intensità e
             il tipo di esercizi cardio.
         </div>
 
-        <div class="alert alert-danger" role="alert">
+        <div class="alert alert-danger" role="alert" id="cardioperdita">
             <strong>Avviso!</strong> Non hai raggiunto il tuo obiettivo cardio questa settimana. Prova ad aumentare la
             durata o l'intensità dei tuoi allenamenti.
         </div>
+        <!--notifche che rimmarrano sempre visibili per aiutarsi -->
         <h4 style="padding: 15px;">Come migliorare?</h4>
 
-        <div class="alert alert-warning" role="alert">
+        <div class="alert alert-warning" role="alert" id="cardiocons">
             <strong>Consiglio:</strong> Aggiungi una sessione cardio extra o aumenta l'intensità per rimanere in linea
             con i
             tuoi obiettivi settimanali.
         </div>
+        <!--quando non ci sono aumenti nè perdite veranno comunque inviate delle notifiche-->
+
         <H3> Stato stabile</H3>
-        <div class="alert alert-info" role="alert">
+        <div class="alert alert-info" role="alert" id="cardiostabile">
             <strong>Ben fatto!</strong> Stai mantenendo una buona resistenza cardiovascolare. Continua a seguire il tuo
             piano per restare in forma!
         </div>
-        <div class="alert alert-success" role="alert">
+        <div class="alert alert-success" role="alert" id="cardiostabile">
             <strong>Ottimo!</strong> La tua resistenza cardiovascolare è stabile. Continua a monitorare i tuoi progressi
             e ad adattare il tuo programma di allenamento se necessario.
         </div>
@@ -111,7 +116,7 @@
     <p>Consigli nutrizionali mirati per supportare il vostro allenamento, garantendo una corretta alimentazione che
         consente
         di ottenere risultati ottimali nel minor tempo possibile. </p>
-                    <h4> Accrescimento muscolare</h4>
+    <h4> Accrescimento muscolare</h4>
 
     <!--nutrizione per persone che stanno facendo massa-->
     <div class="accordion accordion-flush" id="accordionFlushExample" <div class="accordion-item">
@@ -207,7 +212,7 @@
                                 </div>
                             </div>
                         </div>
-
+                        <!--consigli per chi fa cardio-->
                         <H4>Cardio</H4>
 
                         <div class="accordion accordion-flush" id="accordionFlushExample">
@@ -273,9 +278,7 @@
                                                     data-bs-parent="#accordionFlushExample">
                                                     <div class="accordion-body">Bere molta acqua prima, durante e dopo
                                                         l'attività cardio per mantenere una buona idratazione e
-                                                        prevenire crampi
-                                                        e
-                                                        affaticamento.
+                                                        prevenire crampi e affaticamento.
                                                     </div>
                                                 </div>
                                                 <div class="accordion-item">
@@ -284,7 +287,7 @@
                                                             data-bs-toggle="collapse"
                                                             data-bs-target="#flush-collapseten" aria-expanded="false"
                                                             aria-controls="flush-collapseten">
-                                                            Snack pre-allenamento:
+                                                            Snack pre-allenamento
                                                         </button>
                                                     </h2>
                                                     <div id="flush-collapseten" class="accordion-collapse collapse"
@@ -334,101 +337,229 @@
                 </div>
             </div>
             <div class="container text-center">
-                <div class="row">
+                <div class="row align-items-start">
                     <div class="col">
-                        <br>
-                        <h2> OBIETTIVI SETTIMANALI</h2>
-                        <p>
-                            Sette giorni di impegno, forza e crescita: spingiti oltre, ogni giorno più forte!</p>
-
-                        <div class="progress" role="progressbar" aria-label="Basic example" aria-valuenow="0"
-                            aria-valuemin="0" aria-valuemax="100">
-                            <div class="progress-bar" style="width: 20%">Lunedi</div>
-                        </div><br>
-                        <div class="progress" role="progressbar" aria-label="Basic example" aria-valuenow="25"
-                            aria-valuemin="0" aria-valuemax="100">
-                            <div class="progress-bar" style="width: 35%">Martedì</div>
-                        </div><br>
-                        <div class="progress" role="progressbar" aria-label="Basic example" aria-valuenow="50"
-                            aria-valuemin="0" aria-valuemax="100">
-                            <div class="progress-bar" style="width: 50%">Mercoledi</div>
-                        </div><br>
-                        <div class="progress" role="progressbar" aria-label="Basic example" aria-valuenow="75"
-                            aria-valuemin="0" aria-valuemax="100">
-                            <div class="progress-bar" style="width: 55%">Giovedi</div>
-                        </div><br>
-                        <div class="progress" role="progressbar" aria-label="Basic example" aria-valuenow="100"
-                            aria-valuemin="0" aria-valuemax="100">
-                            <div class="progress-bar" style="width: 60%">Venerdì</div>
-                        </div><br>
-                        <div class="progress" role="progressbar" aria-label="Basic example" aria-valuenow="50"
-                            aria-valuemin="0" aria-valuemax="100">
-                            <div class="progress-bar" style="width: 75%">Sabato</div>
-                        </div><br>
-                        <div class="progress" role="progressbar" aria-label="Basic example" aria-valuenow="50"
-                            aria-valuemin="0" aria-valuemax="100">
-                            <div class="progress-bar" style="width: 100%">Domenica</div>
-                        </div><br>
-
-                    </div>
-                    <div class="col">
-                        <br>
-                        <H2> OBIETTIVI MENSILI</H2>
-                        <p>
-                            Sei mesi di spinta, disciplina e superamento dei limiti: trasformati, conquista, ripeti!</p>
-                        <div style="width: 50%; margin: auto; padding-top: 50px;">
-                            <canvas id="myDoughnutChart"></canvas>
+                    <div class="row">
+                        <h3 style="padding: 15px;">Diminuire di peso</h3>
+                        <div class="row">
+                            <div class="list-group" id="list-tab" role="tablist">
+                                <a class="list-group-item list-group-item-action active" id="list-dieta-list" data-toggle="list"
+                                    href="#list-dieta" role="tab" aria-controls="dieta">Dieta Equilibrata</a>
+                                <a class="list-group-item list-group-item-action" id="list-attivita-list" data-toggle="list"
+                                    href="#list-attivita" role="tab" aria-controls="attivita">Attività Fisica</a>
+                                <a class="list-group-item list-group-item-action" id="list-acqua-list" data-toggle="list" href="#list-acqua"
+                                    role="tab" aria-controls="acqua">Bevi Acqua</a>
+                                <a class="list-group-item list-group-item-action" id="list-sonno-list" data-toggle="list" href="#list-sonno"
+                                    role="tab" aria-controls="sonno">Sonno Sufficiente</a>
+                            </div>
                         </div>
-
-                        <script>
-                            var ctx = document.getElementById('myDoughnutChart').getContext('2d');
-                            var myDoughnutChart = new Chart(ctx, {
-                                type: 'doughnut',
-                                data: {
-                                    labels: ['Gennaio', 'Febbraio', 'Marzo', 'Aprile', 'Maggio', 'Giugno',],
-                                    datasets: [{
-                                        data: [10, 20, 30, 15, 25],
-                                        backgroundColor: [
-                                            'rgba(255, 99, 132, 0.6)',
-                                            'rgba(54, 162, 235, 0.6)',
-                                            'rgba(255, 206, 86, 0.6)',
-                                            'rgba(75, 192, 192, 0.6)',
-                                            'rgba(55, 250, 120, 1.9)',
-                                            'rgba(153, 102, 255, 0.6)'
-                                        ],
-                                        borderColor: [
-                                            'rgba(255, 99, 132, 1)',
-                                            'rgba(54, 162, 235, 1)',
-                                            'rgba(255, 206, 86, 1)',
-                                            'rgba(75, 192, 192, 1)',
-                                            'rgba(55, 250, 120, 1.9)',
-                                            'rgba(153, 102, 255, 1)'
-                                        ],
-                                        borderWidth: 1
-                                    }]
-                                },
-                                options: {
-                                    plugins: {
-                                        legend: {
-                                            display: true,
-                                            position: 'bottom'
-                                        }
-                                    },
-                                    maintainAspectRatio: false,
-                                    responsive: true
-                                }
-                            });
-                        </script>
-
+                        <!--diminuisci-->
+                    
+                        <div class="tab-content" id="nav-tabContent">
+                            <div class="tab-pane fade show active" id="list-dieta" role="tabpanel" aria-labelledby="list-dieta-list">
+                                <h4>Dieta Equilibrata</h4>
+                                <p>Concentrati su un'alimentazione ricca di frutta, verdura, proteine magre, cereali integrali e
+                                    grassi
+                                    sani. Evita cibi trasformati e ricchi di zuccheri aggiunti. Una dieta bilanciata fornisce
+                                    nutrienti
+                                    essenziali e aiuta a mantenere un apporto calorico adeguato.</p>
+                            </div>
+                            <div class="tab-pane fade" id="list-attivita" role="tabpanel" aria-labelledby="list-attivita-list">
+                                <h4>Attività Fisica</h4>
+                                <p>Combina esercizi cardiovascolari (come camminare, correre o andare in bicicletta) con
+                                    esercizi di
+                                    forza (come sollevamento pesi o yoga). L'attività fisica aiuta a bruciare calorie,
+                                    migliorare il
+                                    metabolismo e mantenere la massa muscolare.</p>
+                            </div>
+                            <div class="tab-pane fade" id="list-acqua" role="tabpanel" aria-labelledby="list-acqua-list">
+                                <h4>Bevi Acqua</h4>
+                                <p>L'acqua è essenziale per il metabolismo e può aiutare a controllare l'appetito. Bere un
+                                    bicchiere
+                                    d'acqua prima dei pasti può contribuire a ridurre l'apporto calorico complessivo.
+                                    Sostituisci
+                                    bevande zuccherate e alcoliche con acqua per evitare calorie vuote.</p>
+                            </div>
+                            <div class="tab-pane fade" id="list-sonno" role="tabpanel" aria-labelledby="list-sonno-list">
+                                <h4>Sonno Sufficiente</h4>
+                                <p>Il sonno è fondamentale per la regolazione degli ormoni che controllano l'appetito. La
+                                    mancanza di
+                                    sonno può portare a un aumento della fame e a scelte alimentari poco salutari. Cerca di
+                                    dormire
+                                    almeno 7-8 ore a notte per favorire la perdita di peso e il benessere generale.</p>
+                            </div>
+                        </div>
+                    
                     </div>
+                    </div>
+                <div class="col">
+                    <div class="row">
+                        <h3 style="padding: 15px;">Aumentare di Peso</h3>
+                        <div class="row">
+                            <div class="list-group" id="list-tab" role="tablist">
+                                <a class="list-group-item list-group-item-action active" id="list-dieta-list" data-bs-toggle="list"
+                                    href="#list-dieta1" role="tab" aria-controls="dieta">Aumento Rapporto Calorico</a>
+                                <a class="list-group-item list-group-item-action" id="list-attivita-list" data-bs-toggle="list"
+                                    href="#list-attivita2" role="tab" aria-controls="attivita">Attività Fisica</a>
+                                <a class="list-group-item list-group-item-action" id="list-acqua-list" data-bs-toggle="list"
+                                    href="#list-acqua3" role="tab" aria-controls="acqua">Cibi Ricchi di Proteine</a>
+                                <a class="list-group-item list-group-item-action" id="list-sonno-list" data-bs-toggle="list"
+                                    href="#list-sonno4" role="tab" aria-controls="sonno">Sonno Sufficiente</a>
+                            </div>
+                        </div>
+                
+                        <div class="tab-content mt-3" id="nav-tabContent">
+                            <div class="tab-pane fade show active" id="list-dieta1" role="tabpanel" aria-labelledby="list-dieta-list">
+                                <h3>Aumenta l’Apporto Calorico</h3>
+                                <p>Consuma più calorie di quelle che il tuo corpo utilizza quotidianamente. Opta per cibi ad alta
+                                    densità calorica come frutta secca, semi, avocado e proteine magre.</p>
+                            </div>
+                            <div class="tab-pane fade" id="list-attivita2" role="tabpanel" aria-labelledby="list-attivita-list">
+                                <h4>Concentra l’Allenamento sulla Forza</h4>
+                                <p>Focalizzati su esercizi di sollevamento pesi e allenamenti di resistenza per stimolare la crescita
+                                    muscolare. Esercizi come squat, stacchi, e distensioni su panca sono particolarmente efficaci.</p>
+                            </div>
+                            <div class="tab-pane fade" id="list-acqua3" role="tabpanel" aria-labelledby="list-acqua-list">
+                                <h4>Cibi Ricchi di Proteine</h4>
+                                <p>Include proteine magre nella tua dieta, come pollo, pesce, carne rossa magra, legumi e latticini. Le
+                                    proteine sono essenziali per la costruzione muscolare.</p>
+                            </div>
+                            <div class="tab-pane fade" id="list-sonno4" role="tabpanel" aria-labelledby="list-sonno-list">
+                                <h4>Sonno Sufficiente</h4>
+                                <p>Il sonno di qualità è fondamentale per il recupero muscolare e la crescita. Cerca di dormire almeno
+                                    7-8 ore per notte per permettere al corpo di riparare e costruire i muscoli.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
 
+                        
+                        </div>
+                    </div>
                 </div>
             </div>
+            
+    </div>
+    <hr>
+    <div class="container text-center">
+        <div class="row">
+            <div class="col">
+                <br>
+                <h2> OBIETTIVI SETTIMANALI</h2>
+                <p>
+                    Sette giorni di impegno, forza e crescita: spingiti oltre, ogni giorno più forte!</p>
+
+                <div class="progress" role="progressbar" aria-label="Basic example" aria-valuenow="0" aria-valuemin="0"
+                    aria-valuemax="100" id="settlun">
+                    <div class="progress-bar" style="width: 20%">Lunedi</div>
+                </div><br>
+                <div class="progress" role="progressbar" aria-label="Basic example" aria-valuenow="25" aria-valuemin="0"
+                    aria-valuemax="100" id="setmar">
+                    <div class="progress-bar" style="width: 35%">Martedì</div>
+                </div><br>
+                <div class="progress" role="progressbar" aria-label="Basic example" aria-valuenow="50" aria-valuemin="0"
+                    aria-valuemax="100" id="setmer">
+                    <div class="progress-bar" style="width: 50%">Mercoledi</div>
+                </div><br>
+                <div class="progress" role="progressbar" aria-label="Basic example" aria-valuenow="75" aria-valuemin="0"
+                    aria-valuemax="100" id="setgio">
+                    <div class="progress-bar" style="width: 55%">Giovedi</div>
+                </div><br>
+                <div class="progress" role="progressbar" aria-label="Basic example" aria-valuenow="100"
+                    aria-valuemin="0" aria-valuemax="100" id="setven">
+                    <div class="progress-bar" style="width: 60%">Venerdì</div>
+                </div><br>
+                <div class="progress" role="progressbar" aria-label="Basic example" aria-valuenow="50" aria-valuemin="0"
+                    aria-valuemax="100" id="setsab">
+                    <div class="progress-bar" style="width: 75%">Sabato</div>
+                </div><br>
+                <div class="progress" role="progressbar" aria-label="Basic example" aria-valuenow="50" aria-valuemin="0"
+                    aria-valuemax="100" id="setdom">
+                    <div class="progress-bar" style="width: 100%">Domenica</div>
+                </div><br>
+
+            </div>
+            <div class="col">
+                <br>
+                <H2> OBIETTIVI MENSILI</H2>
+                <p>
+                    Sei mesi di spinta, disciplina e superamento dei limiti: trasformati, conquista, ripeti!</p>
+                <div style="width: 50%; margin: auto; padding-top: 50px;">
+                    <canvas id="repmensile"></canvas>
+                </div>
+
+                <script>
+                    var ctx = document.getElementById('repmensile').getContext('2d');
+                    var myDoughnutChart = new Chart(ctx, {
+                        type: 'doughnut',
+                        data: {
+                     labels: ['Gennaio', 'Febbraio', 'Marzo', 'Aprile', 'Maggio', 'Giugno'],
+                            datasets: [{
+                                data: [10, 20, 30, 15, 25, 18],
+                                backgroundColor: [
+                                    'rgba(0, 255, 0, 0.6)',   
+                                    'rgba(54, 162, 235, 0.6)', 
+                                    'rgba(153, 102, 255, 0.6)', 
+                                    'rgba(255, 99, 132, 0.6)',  
+                                    'rgba(255, 206, 86, 0.6)',
+                                    'rgba(255, 159, 64, 0.6)'  
+                                ],
+                                borderColor: [
+                                    'rgba(0, 255, 0, 1)',       
+                                    'rgba(54, 162, 235, 1)',     
+                                    'rgba(153, 102, 255, 1)',    
+                                    'rgba(255, 99, 132, 1)',     
+                                    'rgba(255, 206, 86, 1)',     
+                                    'rgba(255, 159, 64, 1)'      
+                                ],
+                                borderWidth: 1
+                            }]
+
+                        },
+                        options: {
+                            plugins: {
+                                legend: {
+                                    display: true,
+                                    position: 'bottom'
+                                }
+                            },
+                            maintainAspectRatio: false,
+                            responsive: true
+                        }
+                    });
+                </script>
+
+            </div>
+
+        </div>
+    </div>
+    <H3>Attività svolte durante la settimana</H3>
+    <div class="progress-stacked">
+        <div class="progress" role="progressbar" aria-label="Segment one" aria-valuenow="15" aria-valuemin="0"
+            aria-valuemax="100" style="width: 15%">
+            <div class="progress-bar">Corsa</div>
+        </div>
+        <div class="progress" role="progressbar" aria-label="Segment two" aria-valuenow="30" aria-valuemin="0"
+            aria-valuemax="100" style="width: 30%">
+            <div class="progress-bar bg-success">Ciclismo</div>
+        </div>
+        <div class="progress" role="progressbar" aria-label="Segment three" aria-valuenow="20" aria-valuemin="0"
+            aria-valuemax="100" style="width: 20%">
+            <div class="progress-bar bg-info">Pesi</div>
+        </div>
+    </div>
+    <br>
 
 
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 
-            <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"></script>
-            <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.min.js"></script>
+
+    <script src="js/suggerimenti."></script>
+
+
 
 </body>
 

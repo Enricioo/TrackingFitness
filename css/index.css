@@ -161,6 +161,12 @@ a:hover p {
     height: 60px;
 }
 
+#blog {
+    background-color: #0B3954;
+    width: 80%;
+    height: 40%;
+}
+
 @media (max-width: 768px) {
 
     #bodyText {
