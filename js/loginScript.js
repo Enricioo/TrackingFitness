@@ -142,3 +142,17 @@ function resetta(input, tipo) {
         }
     }
 }
+
+function showHidePW(inputID, iconaID) {
+    //prendo le icone da cambiare
+    let icona = document.getElementsByClassName(iconaID);
+    let password = document.getElementById(inputID);;
+    if (password.type =='password') {
+        password.type='text';
+    } else {
+        password.type='password';
+    }
+    for (let img of icona) {
+        img.classList.toggle('hidden');
+    }
+}
