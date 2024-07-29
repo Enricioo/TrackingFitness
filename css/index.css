@@ -7,7 +7,7 @@ body {
     background-image: url("../assets/img/fitness4.jpg");
     background-size: cover;
     background-position: center;
-    backdrop-filter: blur(3px);
+    backdrop-filter: saturate(50%);
 }
 
 #sidebar-nav a {
@@ -79,7 +79,7 @@ h2 {
 }
 
 .toggle-button {
-    position: fixed;
+    position: sticky;
     top: 20px;
     left: 20px;
     background-color: #007bff;
@@ -170,7 +170,7 @@ a:hover p {
 @media (max-width: 768px) {
 
     #bodyText {
-        font-size: 20px;
+        font-size: 18px;
     }
 
     .sidebar {
@@ -187,6 +187,11 @@ a:hover p {
     }
 
     #desc1 {
+        width: 100%;
         margin-left: 0;
+    }
+
+    #desc2 {
+        width: 100%;
     }
 }
