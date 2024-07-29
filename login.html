@@ -55,11 +55,11 @@
                                     </div>
                                     <div class="input-block" style="position: relative;"> <!--INPUT PASSWORD-->
                                         <label for="login-password">Password</label>
-                                        <input type="password" id="login-password" class="" onclick="resetta(this, 'login')" required>
+                                        <input type="password" id="login-password" class="" onclick="resetta(this, 'login')" minlength="8" maxlength="16" required>
                                         <button class="btn btn-outline-secondary m-0 p-0" type="button" id="button-addon1" onclick="showHidePW('login-password', 'accesso')" style="position: absolute; bottom: 0px; right:3px; border-style: none;"><img src="./img/eye.png" class="opacity-50 accesso" height="45px"><img src="./img/hide.png" class="opacity-50 accesso hidden" height="45px"></button>
                                     </div>
                                 </fieldset>
-                                <button type="button" class="btn-login cambio" onclick="login(event)">ACCEDI</button>
+                                <button type="button" class="btn-login" onclick="login(event)">ACCEDI</button>
                             </form>
                         </div>
 
@@ -87,13 +87,13 @@
                                         <input type="email" id="signup-email" onclick="resetta(this, 'signup')" required>
                                     </div>
                                     <div class="input-block" style="position: relative;"> <!--INPUT PASSWORD-->
-                                        <label class="signup-password">Password</label>
-                                        <input type="password" id="signup-password" onclick="resetta(this, 'signup')" required>
+                                        <label class="signup-password">Password <span id="forza" class="hidden rounded px-1"></span></label>
+                                        <input type="password" id="signup-password" onclick="resetta(this, 'signup')" minlength="8" maxlength="16" onchange="checkPwStrength(this)" required>
                                         <button class="btn btn-outline-secondary m-0 p-0" type="button" id="button-addon1" onclick="showHidePW('signup-password', 'registrare')" style="position: absolute; bottom: 0px; right:3px; border-style: none;"><img src="./img/eye.png" class="opacity-50 registrare" height="45px"><img src="./img/hide.png" class="opacity-50 registrare hidden" height="45px"></button>
                                     </div>
                                     <div class="input-block" style="position: relative;"> <!--INPUT PASSWORD CONFERMA-->
                                         <label class="signup-conferma">Conferma password</label>
-                                        <input type="password" id="signup-conferma" onclick="resetta(this, 'signup')" required>
+                                        <input type="password" id="signup-conferma" onclick="resetta(this, 'signup')" minlength="8" maxlength="16" required>
                                         <button class="btn btn-outline-secondary m-0 p-0" type="button" id="button-addon1" onclick="showHidePW('signup-conferma', 'conferma')" style="position: absolute; bottom: 0px; right:3px; border-style: none;"><img src="./img/eye.png" class="opacity-50 conferma" height="45px"><img src="./img/hide.png" class="opacity-50 conferma hidden" height="45px"></button>
                                     </div>
                                     <button type="button" class="btn-signup cambio" data-target="field-anagrafica">INDIETRO</button>
@@ -120,7 +120,7 @@
                                     </div>
                                     <p id="errore-pw" class="hidden mt-2" class="rounded text-center"><b>Le password non coincidono!</b></p>
                                     <button type="button" class="btn-signup cambio" data-target="field-account">INDIETRO</button>
-                                    <button type="button" class="btn-signup  cambio" onclick="signup(event)">REGISTRATI</button>
+                                    <button type="button" id="bottoneRegistrati" class="btn-signup" onclick="signup(event)">REGISTRATI</button>
                                 </fieldset>
                             </form>
                         </div>

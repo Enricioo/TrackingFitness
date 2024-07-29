@@ -249,7 +249,7 @@ body {
     border-radius: 2px;
 }
 
-.form [type='submit'], .form .cambio {
+/*.form [type='submit'],*/ .form .btn-signup, .form .btn-login {
     opacity: 0;
     display: inline-block;
     min-width: 100px;
@@ -261,7 +261,7 @@ body {
     transition: all .3s ease-out;
 }
 
-.form-wrapper.is-active .form [type='submit'], .form-wrapper.is-active .form .cambio {
+/*.form-wrapper.is-active .form [type='submit'],*/ .form-wrapper.is-active .form .btn-signup, .form-wrapper.is-active .form .btn-login {
     opacity: 1;
     transform: translateX(0);
     transition: all .2s ease-in;
@@ -273,6 +273,11 @@ body {
 
 .btn-signup {
     transform: translateX(30%);
+}
+
+#forza {
+    font-size: smaller;
+    background-color: white;
 }
 
 /*stile per l'errore*/

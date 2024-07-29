@@ -143,9 +143,9 @@ function resetta(input, tipo) {
     }
 }
 
-function showHidePW(inputID, iconaID) {
+function showHidePW(inputID, iconaClass) {
     //prendo le icone da cambiare
-    let icona = document.getElementsByClassName(iconaID);
+    let icona = document.getElementsByClassName(iconaClass);
     let password = document.getElementById(inputID);;
     if (password.type =='password') {
         password.type='text';
@@ -154,5 +154,53 @@ function showHidePW(inputID, iconaID) {
     }
     for (let img of icona) {
         img.classList.toggle('hidden');
+    }
+}
+
+function checkPwStrength(password) {
+    const pw = password.value;
+    const msgStrength = document.getElementById('forza');
+    const registratiBtn = document.getElementById('bottoneRegistrati');
+    //faccio il controllo della forza solo se una password è stata inserita
+    //e comprende tra gli 8 e i 16 caratteri
+    if (pw != '') {
+        if(pw.length>=8&&pw.length<=16) {
+            //la password deve avere una lunghezza compresa tra 8 e 16 caratteri
+            //dichiaro gli array con messaggio e colore da mostrare all'utente
+            const msg = ['molto debole', 'debole', 'ok', 'forte', 'molto forte'];
+            const color = ['#ff0000', '#ffa500', '#ffd966', '#8fce00', '#008000'];
+            //rimuovo la disabilitazione al pulsante se ce l'ha
+            if (registratiBtn.hasAttribute('disabled')) {
+                registratiBtn.removeAttribute('disabled');
+            }
+            //calcolo la forza della password
+            let forza = 0;
+            if(pw.length > 12) {
+                forza+=1;
+            }
+            arrayTest = [/[a-z]/, /[A-Z]/, /[0-9]/, /[^0-9a-zA-Z]/ ];
+            arrayTest.forEach(controllo => {
+                if (controllo.test(pw)) {
+                    forza+=1;
+                }
+            })
+            //formatto il messaggio sulla forza in base al risultato
+            msgStrength.innerText = msg[(forza-1)];
+            msgStrength.style.color = color[(forza-1)];
+            //mostro il messaggio all'utente
+            msgStrength.classList.remove('hidden');
+        } else {
+            alert ('La lunghezza della password non va bene!');
+            registratiBtn.setAttribute('disabled', '');
+            //nascondo il messaggio sulla forza se è stato già mostrato
+            if (!msgStrength.classList.contains('hidden')) {
+                msgStrength.classList.add('hidden');
+            }
+        }
+    } else {
+        //nascondo il messaggio sulla forza se è stato già mostrato
+        if (!msgStrength.classList.contains('hidden')) {
+            msgStrength.classList.add('hidden');
+        }
     }
 }
