@@ -13,19 +13,29 @@
 
 <body>
 
+      <!-- Menù a tendina per selezionare lo sport -->
+      <div class="container containerSport">
+        <label class="chart-label">Seleziona lo sport:</label>
+        <select id="sportSelector" class="form-select">
+            <option value="running">Corsa</option>
+            <option value="cycling">Ciclismo</option>
+            <option value="swimming">Nuoto</option>
+        </select>
+      </div>
       <!-- Bottoni per selezionare il tipo di grafico -->
       <div class="container">
-        <label>Seleziona il tipo di grafico:</label>
-        <button onclick="changeChart('daily')" class="btn btn-primary">Giornaliero</button>
-        <button onclick="changeChart('weekly')" class="btn btn-primary">Settimanale</button>
-        <button onclick="changeChart('monthly')" class="btn btn-primary">Mensile</button>
-    </div>
-
-      <!-- grafici -->
+        <label class="chart-label">Seleziona il tipo di grafico:</label>
+      </div>
+      <div class="container2">
+        <button id="daily-button" class="btn btn-primary chart-type-button" onclick="changeChart('daily')">Giornaliero</button>
+        <button id="weekly-button" class="btn btn-primary chart-type-button" onclick="changeChart('weekly')">Settimanale</button>
+        <button id="monthly-button" class="btn btn-primary chart-type-button" onclick="changeChart('monthly')">Mensile</button>
+      </div>
+      <!-- Grafici -->
       <div class="chart-container">
-        <h2><b>Grafico statistiche</b></h2>
+        <h2><b>Grafici statistiche</b></h2>
         <canvas id="myChart"></canvas> <!-- grafico 1 -->
-        <canvas id="myChart2" style="width:100%;max-width:600px"></canvas> <!-- grafico 2 -->
+        <canvas id="myChart2" style="width:100%"></canvas> <!-- grafico 2 -->
       </div>
 
     <script src="js/bootstrap.bundle.min.js"></script>
