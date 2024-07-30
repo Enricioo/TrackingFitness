@@ -25,7 +25,7 @@ function UpdateComponent() {
       document.getElementById("cardioSettimana").style.display = "block";
       document.getElementById("cardioAttivita").style.display = "block";
 
-      // Nascondi gli elementi relativi alla massa muscolare
+   
       document.getElementById("massaOptioni").style.display = "none";
       document.getElementById("massaAttivita").style.display = "none";
       document.getElementById("massaSettimana").style.display = "none"; // non dovrebbe comparire
@@ -33,17 +33,19 @@ function UpdateComponent() {
     });
 }
 
-// Chiama UpdateComponent quando il DOM è completamente carico
+
 document.addEventListener("DOMContentLoaded", UpdateComponent);
 
 
 
 //NOTIFICHE
+
+// Soglie per la massa muscolare
 const sogliaMuscoliTop = 100;
 const sogliaMuscoliQuasiTop = 90;
 const sogliaMuscoliPerdita = 50;
 
-// Soglie cardio
+// Soglie per il cardio
 const sogliaCardioTop = 100; 
 const sogliaCardioQuasiTop = 90; 
 const sogliaCardioPerdita = 50; 
@@ -51,10 +53,10 @@ const sogliaCardioStabile1 = 70;
 const sogliaCardioStabile2 = 60;
 
 function updateNotifications() {
-  const massaAtt = 60; 
+  const massaAtt = 40; 
   const massaObb = 100; 
 
-  const cardioAtt = 70; // 
+  const cardioAtt = 65; // 
   const cardiObb = 100; // 
 
   // Notifiche per la massa muscolare
@@ -84,7 +86,7 @@ function updateNotifications() {
     document.getElementById("muscolistabile2").style.display = "none";
   }
 
-  // Notifiche cardio
+  // Notifiche per il cardio
   if (cardioAtt >= sogliaCardioTop) {
     document.getElementById("cardiotop").style.display = "block";
     document.getElementById("cardioquasitop").style.display = "none";
@@ -118,5 +120,8 @@ function updateNotifications() {
   }
 }
 
-// Chiama la funzione per aggiornare le notifiche
+//aggiornare le notifiche
 updateNotifications();
+
+//GESTIONE TOKEN
+
