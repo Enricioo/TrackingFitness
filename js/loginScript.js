@@ -43,8 +43,32 @@ async function login(event) {
     if (errore) {
         err_msg.classList.remove('hidden');
     } else {
-        //login.
-        alert('ok accesso');
+        const username = formLogin['login-username'];
+        const password = formLogin['login-password'];
+        const utente = {
+            username: username.value,
+            password: password.value
+        }
+
+        try {
+            const response = await fetch('http://localhost:8080/utenti/login', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(utente)
+            });
+            if(response.status==200) {
+                const data = await response.json();
+                const token = data.token;
+                localStorage.setItem('authToken', token);
+                redirect(token);
+            } else {
+                console.error('login 1 errore');
+            }
+        }catch (error) {
+            console.error('login 2 errore');
+        }
     }
 }
 
@@ -106,14 +130,57 @@ async function signup(event) {
     }
 }
 
+async function modificaPw() {
+    const formNuovaPw = document.forms.item(2);
+    const error_msg = document.getElementById('errore-nuova');
+    const error_pw = document.getElementById('errore-pw-nuova');
+    let errore = false;
+    let errorePw = false;
+    //controllo che siano stati inseriti tutti i campi
+    for (let campo of formNuovaPw) {
+        if (campo.type!='button') {
+            if (campo.value=='') {
+                if(!campo.classList.contains('errore')) {
+                    campo.classList.add('errore');
+                }
+                errore = true;
+            }
+        }
+    }
+    //controllo che i due campi password coincidano
+    if (formNuovaPw['nuova-password'].value!=formNuovaPw['nuova-conferma'].value) {
+        if(!(formNuovaPw['nuova-password'].classList.contains('errore'))) {
+            formNuovaPw['nuova-password'].classList.add('errore');
+        }
+        if(!(formNuovaPw['nuova-conferma'].classList.contains('errore'))) {
+            formNuovaPw['nuova-conferma'].classList.add('errore');
+        }
+        errorePw = true;
+    }
+    if (!(errore)&&!(errorePw)) {
+        //cambio password
+        alert('ok cambio password');
+    } else {
+        if (errore) {
+            error_msg.classList.remove('hidden');
+        }
+        if (errorePw) {
+            error_pw.classList.remove('hidden');
+        }
+    }
+}
+
 function resetta(input, tipo) {
     let errore1 = null;
     let errore2 = null;
     if (tipo == 'login') {
         errore1 = document.getElementById('errore-login');
-    } else {
+    } else if (tipo=='signup') {
         errore1 = document.getElementById('errore-signup');
         errore2 = document.getElementById('errore-pw');
+    } else {
+        errore1 = document.getElementById('errore-nuova');
+        errore2 = document.getElementById('errore-pw-nuova');
     }
     //tolgo i messaggi di errore se ci sono
     if(!(errore1.classList.contains('hidden'))) {
@@ -157,9 +224,9 @@ function showHidePW(inputID, iconaClass) {
     }
 }
 
-function checkPwStrength(password) {
+function checkPwStrength(password, etichetta) {
     const pw = password.value;
-    const msgStrength = document.getElementById('forza');
+    const msgStrength = document.getElementById(etichetta);
     const registratiBtn = document.getElementById('bottoneRegistrati');
     //faccio il controllo della forza solo se una password è stata inserita
     //e comprende tra gli 8 e i 16 caratteri
@@ -203,4 +270,30 @@ function checkPwStrength(password) {
             msgStrength.classList.add('hidden');
         }
     }
+}
+
+function pwDimenticata() {
+    const sezioni = document.getElementsByClassName('forms-section');
+    for (let section of sezioni) {
+        section.classList.toggle('hidden');
+    }
+}
+
+async function redirect(token) {
+    try {
+        const response = await fetch(`http://localhost:8080/utenti/me`, {
+            method: 'GET',
+            headers: {
+                'Authorization': `${token}`
+            }
+        }).then(res => res.json()).then(data => {
+            if(data.ruolo=='USER') {
+                window.location.href="./index.html";
+            } else {
+                window.location.href="./admin-profile.html";
+            }
+        })
+    } catch (error) {
+        console.error("Errore nel trovare l'utente");
+    } 
 }
