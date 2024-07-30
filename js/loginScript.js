@@ -118,8 +118,53 @@ async function signup(event) {
         errorePw = true;
     }
     if (!(errore)&&!(errorePw)) {
-        //signup
-        alert('ok registrazione');
+        const nuovoUtente = {
+            nome: formSignup['signup-nome'].value,
+            cognome: formSignup['signup-cognome'].value,
+            username: formSignup['signup-username'].value,
+            email: formSignup['signup-email'].value,
+            password: formSignup['signup-password'].value,
+            peso: formSignup['signup-peso'].value,
+            altezza: formSignup['signup-altezza'].value,
+            ruolo: 'USER'
+        }
+        try {
+            const response = await fetch('http://localhost:8080/utenti/register', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(nuovoUtente)
+            });
+            if (response.status==201) {
+                const utente = {
+                    username: formSignup['signup-username'].value,
+                    password: formSignup['signup-password'].value
+                }
+                console.log(utente);
+                try {
+                    const risposta = await fetch('http://localhost:8080/utenti/login', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify(utente)
+                    });
+                    if(risposta.status==200) {
+                        const data = await risposta.json();
+                        const token = data.token;
+                        localStorage.setItem('authToken', token);
+                        redirect(token);
+                    } else {
+                        console.error('login 1 errore');
+                    }
+                } catch(error) {
+                    consol.error('errore accesso utente')
+                }
+            }
+        }catch (error) {
+            console.error('errore creazione utente');
+        }
     } else {
         if (errore) {
             err_msg.classList.remove('hidden');
