@@ -11,10 +11,13 @@
     <link rel="stylesheet" href="./css/loginStyle.css">
 </head>
 <body>
-    <!--DA AGGIUNGERE: 
-        - possibilità di cambiare password;
+    <!--DA FARE: 
+        - sistemare il messaggio sulla forza della password;
+        - aggiungere la possibilità di cambiare password;
         - comunicazione API per Log-In;
-        - comunicazione API per Sign-Up.
+        - comunicazione API per Sign-Up;
+        - migliorare il range;
+        - animazioni migliori.
     -->
     <div class="container-fluid sidebar">
         <div class="row flex-nowrap">
@@ -47,16 +50,17 @@
                             </button>
                             <form class="form form-login shadow-lg">
                                 <fieldset>
-                                    <legend>Inserisci email e password per accedere</legend>
-                                    <p id="errore-login" class="hidden" class="rounded text-center"><b>Campo mancante!</b></p>
+                                    <legend>Inserisci username e password per accedere</legend>
+                                    <p id="errore-login" class="hidden error-msg" class="rounded text-center"><b>Campo mancante!</b></p>
                                     <div class="input-block"> <!--INPUT EMAIL-->
-                                        <label for="login-email">E-mail</label>
-                                        <input type="email" id="login-email" class="" onclick="resetta(this, 'login')" required>
+                                        <label for="login-username">Username</label>
+                                        <input type="text" id="login-username" class="" onclick="resetta(this, 'login')" required>
                                     </div>
                                     <div class="input-block" style="position: relative;"> <!--INPUT PASSWORD-->
                                         <label for="login-password">Password</label>
                                         <input type="password" id="login-password" class="" onclick="resetta(this, 'login')" minlength="8" maxlength="16" required>
                                         <button class="btn btn-outline-secondary m-0 p-0" type="button" id="button-addon1" onclick="showHidePW('login-password', 'accesso')" style="position: absolute; bottom: 0px; right:3px; border-style: none;"><img src="./img/eye.png" class="opacity-50 accesso" height="45px"><img src="./img/hide.png" class="opacity-50 accesso hidden" height="45px"></button>
+                                        <p id="pw-dimenticata" onclick="pwDimenticata()">Password dimenticata?</p>
                                     </div>
                                 </fieldset>
                                 <button type="button" class="btn-login" onclick="login(event)">ACCEDI</button>
@@ -78,6 +82,10 @@
                                         <label for="signup-cognome">Cognome</label>
                                         <input type="text" id="signup-cognome" onclick="resetta(this, 'signup')" required>
                                     </div>
+                                    <div class="input-block">
+                                        <label for="signup-username">Username</label>
+                                        <input type="text" id="signup-username" onclick="resetta(this, 'signup')" required>
+                                    </div>
                                     <button type="button" class="btn-signup cambio" data-target="field-account">CONTINUA</button>
                                 </fieldset>
                                 <fieldset id="field-account" class="field hidden">
@@ -88,7 +96,7 @@
                                     </div>
                                     <div class="input-block" style="position: relative;"> <!--INPUT PASSWORD-->
                                         <label class="signup-password">Password <span id="forza" class="hidden rounded px-1"></span></label>
-                                        <input type="password" id="signup-password" onclick="resetta(this, 'signup')" minlength="8" maxlength="16" onchange="checkPwStrength(this)" required>
+                                        <input type="password" id="signup-password" onclick="resetta(this, 'signup')" minlength="8" maxlength="16" onchange="checkPwStrength(this, 'forza')" required>
                                         <button class="btn btn-outline-secondary m-0 p-0" type="button" id="button-addon1" onclick="showHidePW('signup-password', 'registrare')" style="position: absolute; bottom: 0px; right:3px; border-style: none;"><img src="./img/eye.png" class="opacity-50 registrare" height="45px"><img src="./img/hide.png" class="opacity-50 registrare hidden" height="45px"></button>
                                     </div>
                                     <div class="input-block" style="position: relative;"> <!--INPUT PASSWORD CONFERMA-->
@@ -101,7 +109,7 @@
                                 </fieldset>
                                 <fieldset id="field-dati" class="field hidden">
                                     <legend>Inserisci i tuoi dati personali</legend>
-                                    <p id="errore-signup" class="hidden" class="rounded text-center"><b>Campo mancante!</b></p>
+                                    <p id="errore-signup" class="hidden error-msg" class="rounded text-center"><b>Campo mancante!</b></p>
                                     <div class="input-block"> <!--INPUT ETA-->
                                         <label for="signup-eta">Età</label>
                                         <input type="number" id="signup-eta" min="13" max="80" onclick="resetta(this, 'signup')" required>
@@ -118,9 +126,39 @@
                                         <input type="checkbox" id="signup-privacy" onclick="resetta(this, 'signup')" required style="display: inline; width: 10%; margin-bottom: 5px !important;">
                                         <label class="mb-2" for="signup-privacy" style="font-size: smaller;">Accetto la <a href="#">privacy policy</a></label>
                                     </div>
-                                    <p id="errore-pw" class="hidden mt-2" class="rounded text-center"><b>Le password non coincidono!</b></p>
+                                    <p id="errore-pw" class="error-msg hidden mt-2" class="rounded text-center"><b>Le password non coincidono!</b></p>
                                     <button type="button" class="btn-signup cambio" data-target="field-account">INDIETRO</button>
                                     <button type="button" id="bottoneRegistrati" class="btn-signup" onclick="signup(event)">REGISTRATI</button>
+                                </fieldset>
+                            </form>
+                        </div>
+                    </div>
+                </section>
+                <!--PASSWORD DIMENTICATA-->
+                <section class="forms-section hidden">
+                    <div class="forms">
+                        <div class="form-wrapper is-active">
+                            <form class="form form-password shadow-lg">
+                                <fieldset>
+                                    <legend>Password dimenticata</legend>
+                                    <p id="errore-nuova" class="hidden error-msg" class="rounded text-center"><b>Campo mancante!</b></p>
+                                    <div class="input-block"> <!--INPUT EMAIL-->
+                                        <label for="pw-email">Inserisci l'e-mail</label>
+                                        <input type="email" id="pw-email" class="" onclick="resetta(this, 'nuova')" required>
+                                    </div>
+                                    <div class="input-block" style="position: relative;"> <!--INPUT PASSWORD-->
+                                        <label class="signup-password">Nuova password <span id="nuova-forza" class="hidden rounded px-1"></span></label>
+                                        <input type="password" id="nuova-password" onclick="resetta(this, 'nuova')" minlength="8" maxlength="16" onchange="checkPwStrength(this, 'nuova-forza')" required>
+                                        <button class="btn btn-outline-secondary m-0 p-0" type="button" id="button-addon1" onclick="showHidePW('nuova-password', 'nuova')" style="position: absolute; bottom: 0px; right:3px; border-style: none;"><img src="./img/eye.png" class="opacity-50 nuova" height="45px"><img src="./img/hide.png" class="opacity-50 nuova hidden" height="45px"></button>
+                                    </div>
+                                    <div class="input-block" style="position: relative;"> <!--INPUT PASSWORD CONFERMA-->
+                                        <label class="signup-conferma">Conferma nuova password</label>
+                                        <input type="password" id="nuova-conferma" onclick="resetta(this, 'nuova')" minlength="8" maxlength="16" required>
+                                        <button class="btn btn-outline-secondary m-0 p-0" type="button" id="button-addon1" onclick="showHidePW('nuova-conferma', 'nuova-conferma')" style="position: absolute; bottom: 0px; right:3px; border-style: none;"><img src="./img/eye.png" class="opacity-50 nuova-conferma" height="45px"><img src="./img/hide.png" class="opacity-50 nuova-conferma hidden" height="45px"></button>
+                                    </div>
+                                    <p id="errore-pw-nuova" class="hidden mt-2 error-msg" class="rounded text-center"><b>Le password non coincidono!</b></p>
+                                    <button type="button" class="btn-password" onclick="pwDimenticata()">INDIETRO</button>
+                                    <button type="button" class="btn-password" onclick="modificaPw()">MODIFICA</button>
                                 </fieldset>
                             </form>
                         </div>

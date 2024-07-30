@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Profilo - Admin</title>
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link href="assets/bootstrap-icons-1.11.3/font/bootstrap-icons.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <style>
+        body {
+            background-color: #587291;
+        }
+
+        #sidebar-nav a {
+            background-color: #587291;
+            color: #0B3954;
+        }
+
+        .pfp {
+            width: 100%;
+            border-radius: 50%;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container-fluid sidebar">
+        <div class="row flex-nowrap">
+            <div class="col-auto px-0">
+                <div id="sidebar" class="collapse collapse-horizontal border-end border-dark">
+                    <div id="sidebar-nav" class="list-group border-0 rounded-0 text-sm-start min-vh-100">
+                        <a href="#" class="list-group-item border-end-0 d-inline-block text-truncate border-dark"
+                            data-bs-parent="index.html"><i class="bi bi-house"></i> <span>Home</span> </a>
+                        <a href="#" class="list-group-item border-end-0 d-inline-block text-truncate border-dark"
+                            data-bs-parent="stats.html"><i class="bi bi-trophy-fill"></i> <span>Statistiche</span> </a>
+                        <a href="#" class="list-group-item border-end-0 d-inline-block text-truncate border-dark"
+                            data-bs-parent="consigli.html"><i class="bi bi-journal-bookmark-fill"></i> <span>Consigli</span> </a>
+                        <a href="#" class="list-group-item border-end-0 d-inline-block text-truncate border-dark"
+                            data-bs-parent="profile.html"><i class="bi bi-person-arms-up"></i> <span>Profilo</span></a>
+                        <a href="#" class="list-group-item border-end-0 d-inline-block text-truncate border-dark"
+                            data-bs-parent="settings.html"><i class="bi bi-gear-fill border-dark"></i>
+                            <span>Impostazioni</span></a>
+                    </div>
+                </div>
+            </div>
+
+            <main class="col ps-md-2 pt-2">
+
+                <a href="#" data-bs-target="#sidebar" data-bs-toggle="collapse"
+                    class="border rounded-3 p-1 text-decoration-none text-muted border-dark">
+                    <i class="bi bi-list bi-lg py-2 p-1"></i>
+                </a>
+
+                <div class="container profile mt-5">
+                    <div class="row">
+                        <div class="col-md-4 text-center">
+                            <div class="card">
+                                <div class="card-body">
+                                    <img src="https://placehold.co/400" alt="Profile Image" class="pfp mb-3">
+                                    <h3 id="name-display">Clark Kent</h3>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6 text-center mt-2">
+                            <div class="card">
+                                <div class="card-body">
+                                    <p id="email-display">Email: c.kent@gmail.com</p>
+                                    <p id="peso-display">Peso: 82kg</p>
+                                    <p id="altezza-display">Altezza: 185cm</p>
+                                    <button type="button" class="btn btn-outline-warning mt-1" data-bs-toggle="modal"
+                                        data-bs-target="#editModal"><i class="fa bi-pencil"></i> Modifica
+                                        Credenziali</button>
+                                    <button type="button" class="btn btn-outline-danger mt-1"><i
+                                            class="fa bi-box-arrow-right"></i> Logout</button>
+                                    <button type="button" class="btn btn-danger mt-1"><i class="fa bi-trash"></i>
+                                        Elimina Profilo</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Modal -->
+                <div class="modal fade" id="editModal" tabindex="-1" data-bs-backdrop="static"
+                    aria-labelledby="editModalLabel" aria-hidden="true">
+                    <div class="modal-dialog modal-dialog-centered">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="editModalLabel">Modifica Credenziali</h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                    aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body">
+                                <form id="edit-form">
+                                    <div class="mb-3">
+                                        <label for="nome" class="form-label">Nome</label>
+                                        <input type="text" class="form-control" id="nome" value="Clark">
+                                    </div>
+                                    <div class="mb-3">
+                                        <label for="cognome" class="form-label">Cognome</label>
+                                        <input type="text" class="form-control" id="cognome" value="Kent">
+                                    </div>
+                                    <div class="mb-3">
+                                        <label for="email" class="form-label">Email</label>
+                                        <input type="email" class="form-control" id="email" value="c.kent@gmail.com">
+                                    </div>
+                                    <div class="mb-3">
+                                        <label for="peso" class="form-label">Peso</label>
+                                        <input type="text" class="form-control" id="peso" value="82kg">
+                                    </div>
+                                    <div class="mb-3">
+                                        <label for="altezza" class="form-label">Altezza</label>
+                                        <input type="text" class="form-control" id="altezza" value="185cm">
+                                    </div>
+                                </form>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary"
+                                    data-bs-dismiss="modal">Cancella</button>
+                                <button type="button" class="btn btn-primary" id="save-changes">Salva</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- End Modal -->
+
+            </main>
+        </div>
+    </div>
+
+    <script src="js/jquery-3.7.1.min.js"></script>
+    <script src="js/bootstrap.bundle.min.js"></script>
+    <script>
+        document.getElementById('save-changes').addEventListener('click', function () {
+            // Get the form values
+            const nome = document.getElementById('nome').value;
+            const cognome = document.getElementById('cognome').value;
+            const email = document.getElementById('email').value;
+            const peso = document.getElementById('peso').value;
+            const altezza = document.getElementById('altezza').value;
+
+            // Update the profile display
+            document.getElementById('name-display').innerText = nome + ' ' + cognome;
+            document.getElementById('email-display').innerText = 'Email: ' + email;
+            document.getElementById('peso-display').innerText = 'Peso: ' + peso;
+            document.getElementById('altezza-display').innerText = 'Altezza: ' + altezza;
+
+            // Hide the modal
+            $('#editModal').modal('hide');
+        });
+    </script>
+</body>
+
+</html>
