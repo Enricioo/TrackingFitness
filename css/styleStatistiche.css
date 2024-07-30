@@ -1,22 +1,20 @@
-html, body {
-  height: 100%;
-  margin: 0;
-  padding: 0;
+body {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 20px;
+  text-align: center;
+  color: goldenrod;
 }
 
-body {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    margin: 20px;
-    text-align: center;
-    color: goldenrod;
-  }
+.container {
+  width: 50%;
+  margin: 30px auto;
+}
 
-  .container {
-    width: 50%;
-    margin: 30px auto;
-  }
+.main {
+  height: 130vh;
+}
 
 /* grafici */
 .chart-container {
@@ -31,10 +29,10 @@ canvas {
 }
 
 h2 {
-    text-align: center;
-    font-family: "Verdana", Arial, Helvetica, sans-serif;
-    font-size: 30px;
-    padding-bottom: 30px;
+  text-align: center;
+  font-family: "Verdana", Arial, Helvetica, sans-serif;
+  font-size: 30px;
+  padding-bottom: 30px;
 }
 
 #myChart {
@@ -48,7 +46,14 @@ h2 {
     width: 100% !important;
     height: 100% !important;
     padding-left: 0% !important;
-}}
+  }
+}
+
+@media (max-width: 527px) {
+  .main {
+    height: 150vh;
+  }
+}
 
 #myChart2 {
   margin-top: 40px;
@@ -73,7 +78,10 @@ button {
 }
 
 .active-button {
-  background-color: #0B3954; /* Colore di sfondo del bottone attivo */
-  color: white; /* Colore del testo del bottone attivo */
-  border-color: #2F97C1; /* Colore del bordo del bottone attivo */
+  background-color: #0B3954;
+  /* Colore di sfondo del bottone attivo */
+  color: white;
+  /* Colore del testo del bottone attivo */
+  border-color: #2F97C1;
+  /* Colore del bordo del bottone attivo */
 }

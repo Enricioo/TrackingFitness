@@ -1,0 +1,76 @@
+  a {
+    color: inherit;
+    text-decoration: none;
+    transition: all 0.3s;
+  }
+  
+  a:hover {
+    text-decoration: none;
+  }
+  
+  footer {
+    background: #587291;
+  }
+
+    body, html {
+      height: 100%;
+    }
+
+    .list-unstyled {
+        padding-left: 0;
+    }
+
+    .list-unstyled li {
+        margin-bottom: 15px; /* Spazio tra le voci della lista */
+    }
+
+    .list-unstyled a {
+        display: flex;
+        align-items: center;
+        color: inherit;
+        text-decoration: none; /* Rimuove la sottolineatura dai link */
+        transition: color 0.3s;
+    }
+
+    .list-unstyled a:hover {
+        text-decoration: none; /* Mantiene la decorazione del testo al passaggio del mouse */
+    }
+
+  .list-unstyled i {
+        font-size: 1.5rem; /* Dimensione delle icone */
+        margin-right: 10px; /* Spazio tra icona e testo */
+        color: goldenrod; /* Colore delle icone */
+    }
+
+    /* Colori dei social media al passaggio del mouse */
+    .list-unstyled a:hover .fab-instagram {
+        color: #C13584; /* Colore Instagram al passaggio del mouse */
+    }
+
+    .list-unstyled a:hover .fab-facebook {
+        color: #3b5998; /* Colore Facebook al passaggio del mouse */
+    }
+
+    .list-unstyled a:hover .fab-tiktok {
+        color: #000000; /* Colore TikTok al passaggio del mouse */
+    }
+
+    .list-unstyled a:hover .fab-twitter {
+        color: #1DA1F2; /* Colore Twitter al passaggio del mouse */
+    }
+
+    h5 {
+        color: goldenrod !important; /* Colore dorato per i titoli */
+    }
+
+    .text-white, .text-muted {
+        color: #FFFFFF !important; /* Colore bianco per tutte le scritte */
+    }
+
+    a {
+        color: #FFFFFF; /* Colore bianco per i link */
+    }
+
+    a:hover {
+        color: #FFFFFF; /* Mantiene il colore bianco al passaggio del mouse */
+    }
