@@ -45,7 +45,7 @@
                     <div class="forms">
                         <div class="form-wrapper is-active"> <!--FORM LOGIN-->
                             <button type="button" class="switcher switcher-login rounded">
-                                Log In
+                                Accedi
                             </button>
                             <form class="form form-login shadow-lg">
                                 <fieldset>
@@ -76,7 +76,7 @@
 
                         <div class="form-wrapper"> <!--FORM SIGNUP-->
                             <button type="button" class="switcher switcher-signup rounded">
-                                Sign Up
+                                Registrati
                             </button>
                             <form class="form form-signup shadow">
                                 <fieldset id="field-anagrafica" class="field">
@@ -94,7 +94,7 @@
                                         <label for="signup-username">Username <span id="username-ok" class="hidden rounded px-1" style="color: green"><b>username valido</b></span><span id="username-error" class="hidden rounded px-1" style="color: red;"><b>username già preso!</b></span></label>
                                         <input type="text" id="signup-username" onclick="resetta(this, 'signup')" onchange="controlloUsername(this.value)" required>
                                     </div>
-                                    <button type="button" class="btn-signup cambio"
+                                    <button type="button" id="primo-continua" class="btn-signup cambio"
                                         data-target="field-account">CONTINUA</button>
                                 </fieldset>
                                 <fieldset id="field-account" class="field hidden">

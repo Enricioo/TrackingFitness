@@ -334,6 +334,10 @@ function controlloUsername(username) {
                 if (controllo) {
                     //mostro il messaggio che lo username è già stato preso
                     document.getElementById('username-error').classList.remove('hidden');
+                    //impedisco all'utente di andare avanti
+                    if (!document.getElementById('primo-continua').hasAttribute('disabled')) {
+                        document.getElementById('primo-continua').setAttribute('disabled', '');
+                    }
                     //mi assicuro che l'altro messaggio sia nascosto
                     if (!document.getElementById('username-ok').classList.contains('hidden')) {
                         document.getElementById('username-ok').classList.add('hidden');
@@ -341,6 +345,7 @@ function controlloUsername(username) {
                 } else {
                     //mostro il messaggio che lo username va bene
                     document.getElementById('username-ok').classList.remove('hidden');
+                    document.getElementById('primo-continua').removeAttribute('disabled');
                     //mi assicuro che l'altro messaggio sia nascosto
                     if (!document.getElementById('username-error').classList.contains('hidden')) {
                         document.getElementById('username-error').classList.add('hidden');
@@ -355,6 +360,7 @@ function controlloUsername(username) {
         if (!document.getElementById('username-ok').classList.contains('hidden')) {
             document.getElementById('username-ok').classList.add('hidden');
         }
+        document.getElementById('primo-continua').removeAttribute('disabled');
     }
 }
 
