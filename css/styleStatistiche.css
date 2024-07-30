@@ -64,3 +64,16 @@ button {
   font-size: 1.5rem;
   font-weight: bold;
 }
+
+.form-select {
+  margin-top: 10px;
+  margin-bottom: 10px;
+  padding: 0.5rem;
+  font-size: 1rem;
+}
+
+.active-button {
+  background-color: #0B3954; /* Colore di sfondo del bottone attivo */
+  color: white; /* Colore del testo del bottone attivo */
+  border-color: #2F97C1; /* Colore del bordo del bottone attivo */
+}
