@@ -280,7 +280,7 @@ function checkPwStrength(password, etichetta) {
             //la password deve avere una lunghezza compresa tra 8 e 16 caratteri
             //dichiaro gli array con messaggio e colore da mostrare all'utente
             const msg = ['molto debole', 'debole', 'ok', 'forte', 'molto forte'];
-            const color = ['#ff0000', '#ffa500', '#ffd966', '#8fce00', '#008000'];
+            const color = ['#ff0000', '#F06E39', '#FFC300', '#8fce00', '#008000'];
             //rimuovo la disabilitazione al pulsante se ce l'ha
             if (registratiBtn.hasAttribute('disabled')) {
                 registratiBtn.removeAttribute('disabled');
@@ -297,7 +297,7 @@ function checkPwStrength(password, etichetta) {
                 }
             })
             //formatto il messaggio sulla forza in base al risultato
-            msgStrength.innerText = msg[(forza-1)];
+            msgStrength.innerHTML = '<b>'+msg[(forza-1)]+'</b>';
             msgStrength.style.color = color[(forza-1)];
             //mostro il messaggio all'utente
             msgStrength.classList.remove('hidden');
@@ -313,6 +313,47 @@ function checkPwStrength(password, etichetta) {
         //nascondo il messaggio sulla forza se è stato già mostrato
         if (!msgStrength.classList.contains('hidden')) {
             msgStrength.classList.add('hidden');
+        }
+    }
+}
+
+function controlloUsername(username) {
+    username = username.trim();
+    if (username!="") {
+        let controllo = false;
+        fetch('http://localhost:8080/utenti')
+            .then(res => res.json())
+            .then(data => {
+                for (let dato of data) {
+                    let name = dato.username;
+                    if (name==username) {
+                        //lo username scelto è già presente nel DB
+                        controllo = true;
+                    }
+                }
+                if (controllo) {
+                    //mostro il messaggio che lo username è già stato preso
+                    document.getElementById('username-error').classList.remove('hidden');
+                    //mi assicuro che l'altro messaggio sia nascosto
+                    if (!document.getElementById('username-ok').classList.contains('hidden')) {
+                        document.getElementById('username-ok').classList.add('hidden');
+                    }
+                } else {
+                    //mostro il messaggio che lo username va bene
+                    document.getElementById('username-ok').classList.remove('hidden');
+                    //mi assicuro che l'altro messaggio sia nascosto
+                    if (!document.getElementById('username-error').classList.contains('hidden')) {
+                        document.getElementById('username-error').classList.add('hidden');
+                    }
+                }
+            });
+    } else {
+        //mi assicuro di nascondere enstrambi i messaggi
+        if (!document.getElementById('username-error').classList.contains('hidden')) {
+            document.getElementById('username-error').classList.add('hidden');
+        }
+        if (!document.getElementById('username-ok').classList.contains('hidden')) {
+            document.getElementById('username-ok').classList.add('hidden');
         }
     }
 }

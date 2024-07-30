@@ -12,9 +12,7 @@
 </head>
 <body>
     <!--DA FARE: 
-        - sistemare il messaggio sulla forza della password;
         - aggiungere la possibilità di cambiare password;
-        - controllo se username è stato già preso;
         - migliorare il range;
         - animazioni migliori.
     -->
@@ -82,8 +80,8 @@
                                         <input type="text" id="signup-cognome" onclick="resetta(this, 'signup')" required>
                                     </div>
                                     <div class="input-block">
-                                        <label for="signup-username">Username</label>
-                                        <input type="text" id="signup-username" onclick="resetta(this, 'signup')" required>
+                                        <label for="signup-username">Username <span id="username-ok" class="hidden rounded px-1" style="color: green"><b>username valido</b></span><span id="username-error" class="hidden rounded px-1" style="color: red;"><b>username già preso!</b></span></label>
+                                        <input type="text" id="signup-username" onclick="resetta(this, 'signup')" onchange="controlloUsername(this.value)" required>
                                     </div>
                                     <button type="button" class="btn-signup cambio" data-target="field-account">CONTINUA</button>
                                 </fieldset>

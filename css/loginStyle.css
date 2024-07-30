@@ -280,6 +280,11 @@ body {
     background-color: white;
 }
 
+#username-ok, #username-error {
+    font-size: smaller;
+    background-color: white;
+}
+
 #pw-dimenticata {
     float: right; 
     font-size: smaller;
