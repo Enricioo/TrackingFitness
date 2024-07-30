@@ -2,47 +2,103 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <link rel="stylesheet" href="css/bootstrap.min.css">
-    <link rel="stylesheet" href="css/styleStatistiche.css">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.min.js"></script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <link rel="stylesheet" href="css/bootstrap.min.css">
+  <link rel="stylesheet" href="css/styleStatistiche.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.min.js"></script>
+  <link href="assets/bootstrap-icons-1.11.3/font/bootstrap-icons.css" rel="stylesheet">
+  <style>
+    main {
+      height: 1000000px;
+    }
+  </style>
 </head>
 
 <body>
-
-      <!-- Menù a tendina per selezionare lo sport -->
-      <div class="container containerSport">
-        <label class="chart-label">Seleziona lo sport:</label>
-        <select id="sportSelector" class="form-select">
-            <option value="running">Corsa</option>
-            <option value="cycling">Ciclismo</option>
-            <option value="swimming">Nuoto</option>
-        </select>
-      </div>
-      <!-- Bottoni per selezionare il tipo di grafico -->
-      <div class="container">
-        <label class="chart-label">Seleziona il tipo di grafico:</label>
-      </div>
-      <div class="container2">
-        <button id="daily-button" class="btn btn-primary chart-type-button" onclick="changeChart('daily')">Giornaliero</button>
-        <button id="weekly-button" class="btn btn-primary chart-type-button" onclick="changeChart('weekly')">Settimanale</button>
-        <button id="monthly-button" class="btn btn-primary chart-type-button" onclick="changeChart('monthly')">Mensile</button>
-      </div>
-      <!-- Grafici -->
-      <div class="chart-container">
-        <h2><b>Grafici statistiche</b></h2>
-        <canvas id="myChart"></canvas> <!-- grafico 1 -->
-        <canvas id="myChart2" style="width:100%"></canvas> <!-- grafico 2 -->
-      </div>
+  <div class="container-fluid main">
+    <!-- Menù a tendina per selezionare lo sport -->
+    <div class="container containerSport">
+      <label class="chart-label">Seleziona lo sport:</label>
+      <select id="sportSelector" class="form-select">
+        <option value="running">Corsa</option>
+        <option value="cycling">Ciclismo</option>
+        <option value="swimming">Nuoto</option>
+      </select>
+    </div>
+    <!-- Bottoni per selezionare il tipo di grafico -->
+    <div class="container">
+      <label class="chart-label">Seleziona il tipo di grafico:</label>
+    </div>
+    <div class="container2">
+      <button id="daily-button" class="btn btn-primary chart-type-button"
+        onclick="changeChart('daily')">Giornaliero</button>
+      <button id="weekly-button" class="btn btn-primary chart-type-button"
+        onclick="changeChart('weekly')">Settimanale</button>
+      <button id="monthly-button" class="btn btn-primary chart-type-button"
+        onclick="changeChart('monthly')">Mensile</button>
+    </div>
+    <!-- Grafici -->
+    <div class="chart-container">
+      <h2><b>Grafici statistiche</b></h2>
+      <canvas id="myChart"></canvas> <!-- grafico 1 -->
+      <canvas id="myChart2" style="width:100%"></canvas> <!-- grafico 2 -->
+    </div>
+  </div>
 
     <script src="js/footer.js"></script>
     <script src="js/bootstrap.bundle.min.js"></script>
     <script src="js/statistiche.js"></script>
     <script src="js/jquery-3.7.1.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-
+    
+    <!-- JavaScript to add the footer -->
+    <script>
+      // JavaScript code to create and append the footer
+      const footerTemplate = `
+          <footer>
+            <div class="container">
+              <div class="row">
+                <div class="col-lg-4 col-md-6 mb-4 mb-md-0">
+                          <h5 class="text-uppercase">TrackingFitness</h5>
+                          <ul class="list-unstyled mb-0">
+                            <li><a href="#" class="text-decoration-none text-light">About Us</a></li>
+                            <li><a href="#" class="text-decoration-none text-light">Contact</a></li>
+                            <li><a href="#" class="text-decoration-none text-light">Privacy Policy</a></li>
+                            </ul>
+                            </div>
+                            <div class="col-lg-4 col-md-6 mb-4 mb-md-0">
+                              <h5 class="text-uppercase">Quick Links</h5>
+                              <ul class="list-unstyled">
+                                <li><a href="#" class="text-decoration-none text-light">Home</a></li>
+                                <li><a href="#" class="text-decoration-none text-light">Features</a></li>
+                                <li><a href="#" class="text-decoration-none text-light">Pricing</a></li>
+                                <li><a href="#" class="text-decoration-none text-light">FAQs</a></li>
+                                </ul>
+                                </div>
+                                <div class="col-lg-4 col-md-12 mb-4 mb-md-0">
+                                  <h5 class="text-uppercase">Follow Us</h5>
+                                  <ul class="list-unstyled">
+                                    <li><a href="#" class="text-decoration-none text-light"><i class="bi bi-facebook"></i> Facebook</a></li>
+                                    <li><a href="#" class="text-decoration-none text-light"><i class="bi bi-twitter"></i> Twitter</a></li>
+                                    <li><a href="#" class="text-decoration-none text-light"><i class="bi bi-instagram"></i> Instagram</a></li>
+                                    <li><a href="#" class="text-decoration-none text-light"><i class="bi bi-linkedin"></i> LinkedIn</a></li>
+                                    </ul>
+                                    </div>
+                                    </div>
+                                    <div class="text-center p-3">
+                                      <p>&copy; 2023 TrackingFitness. All rights reserved.</p>
+                  </div>
+                  </div>
+          </footer>
+      `;
+      
+      const footerElement = document.createElement('div');
+      footerElement.innerHTML = footerTemplate;
+      document.body.appendChild(footerElement);
+      </script>
 </body>
+
 </html>

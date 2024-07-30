@@ -20,10 +20,10 @@ template.innerHTML =`
                 <div class="col-lg-4 col-md-4">
                     <h5 class="text-gold mb-3">Link Social</h5>
                     <ul class="list-unstyled text-muted">
-                        <li><a href="https://www.instagram.com" target="_blank"><i class="fab fa-instagram fab-instagram"></i>Instagram</a></li>
-                        <li><a href="https://www.facebook.com" target="_blank"><i class="fab fa-facebook fab-facebook"></i>Facebook</a></li>
-                        <li><a href="https://www.tiktok.com" target="_blank"><i class="fab fa-tiktok fab-tiktok"></i>TikTok</a></li>
-                        <li><a href="https://twitter.com" target="_blank"><i class="fab fa-twitter fab-twitter"></i>Twitter</a></li>
+                        <li><a href="https://www.instagram.com" target="_blank"><i class="bi-icon bi-instagram"></i>Instagram</a></li>
+                        <li><a href="https://www.facebook.com" target="_blank"><i class="bi-icon bi-facebook"></i>Facebook</a></li>
+                        <li><a href="https://www.tiktok.com" target="_blank"><i class="bi-icon bi-tiktok"></i>TikTok</a></li>
+                        <li><a href="https://twitter.com" target="_blank"><i class="bi-icon bi-twitter"></i>Twitter</a></li>
                     </ul>
                 </div>
             </div>
