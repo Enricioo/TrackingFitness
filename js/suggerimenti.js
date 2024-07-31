@@ -3,8 +3,7 @@ function UpdateComponent() {
   document
     .getElementById("MassaOptioni")
     .addEventListener("click", function () {
-      console.log("Massa Muscolare selezionato"); // Debug
-      // Mostra gli elementi relativi alla massa muscolare
+      console.log("Massa Muscolare selezionato"); 
       document.getElementById("massaOptioni").style.display = "block";
       document.getElementById("massaSettimana").style.display = "block";
       document.getElementById("massaAttivita").style.display = "block";
@@ -19,45 +18,49 @@ function UpdateComponent() {
   document
     .getElementById("CardioOptioni")
     .addEventListener("click", function () {
-      console.log("Cardio selezionato"); 
+      console.log("Cardio selezionato");
 
       document.getElementById("cardioOptioni").style.display = "block";
       document.getElementById("cardioSettimana").style.display = "block";
       document.getElementById("cardioAttivita").style.display = "block";
 
-   
       document.getElementById("massaOptioni").style.display = "none";
       document.getElementById("massaAttivita").style.display = "none";
-      document.getElementById("massaSettimana").style.display = "none"; // non dovrebbe comparire
-
+      document.getElementById("massaSettimana").style.display = "none";
     });
 }
 
-
 document.addEventListener("DOMContentLoaded", UpdateComponent);
-
-
-
 //NOTIFICHE
 
+//CALORIE DA BRUCIARE
+//Top = 2000;
+//QuasiTop = 1800;
+//Perdita = 1000;
+//Stabile1 = 1600
+//Stabile2 = 1700
+
+
 // Soglie per la massa muscolare
-const sogliaMuscoliTop = 100;
-const sogliaMuscoliQuasiTop = 90;
-const sogliaMuscoliPerdita = 50;
+const sogliaMuscoliTop = 2000;
+const sogliaMuscoliQuasiTop = 1800;
+const sogliaMuscoliPerdita = 1000;
+const sogliaMuscoliStabile1 = 1600;
+const sogliaMuscoliStabile2 = 1700;
 
 // Soglie per il cardio
-const sogliaCardioTop = 100; 
-const sogliaCardioQuasiTop = 90; 
-const sogliaCardioPerdita = 50; 
-const sogliaCardioStabile1 = 70;
-const sogliaCardioStabile2 = 60;
+const sogliaCardioTop = 2000;
+const sogliaCardioQuasiTop = 1800;
+const sogliaCardioPerdita = 1000;
+const sogliaCardioStabile1 = 1600;
+const sogliaCardioStabile2 = 1700;
 
 function updateNotifications() {
-  const massaAtt = 40; 
-  const massaObb = 100; 
+  const massaAtt = 1800;
+  const massaObb = 20000;
 
-  const cardioAtt = 65; // 
-  const cardiObb = 100; // 
+  const cardioAtt = 1900; //
+  const cardiObb = 2000; //
 
   // Notifiche per la massa muscolare
   if (massaAtt >= sogliaMuscoliTop) {
@@ -120,8 +123,98 @@ function updateNotifications() {
   }
 }
 
-//aggiornare le notifiche
 updateNotifications();
 
-//GESTIONE TOKEN
 
+//AGGIORNAMENTO DATI SETTIMANA
+ function updateProgress(calorieData) {
+   const calorieThreshold = 2000; // Soglia massima di calorie nella giornata
+
+   const days = {
+     lunedi: "settlunMassa",
+     martedi: "setmarMassa",
+     mercoledi: "setmerMassa",
+     giovedi: "setgioMassa",
+     venerdi: "setvenMassa",
+     sabato: "setsabMassa",
+     domenica: "setdomMassa",
+   };
+
+   for (let day in calorieData) {
+     const progressBarId = days[day];
+     if (progressBarId) {
+       const progressBar = document
+         .getElementById(progressBarId)
+         .querySelector(".progress-bar");
+       const calorieIntake = calorieData[day];
+       const percentage = (calorieIntake / calorieThreshold) * 100;
+       progressBar.style.width = `${Math.min(percentage, 100)}%`; 
+       progressBar.textContent = `${capitalizeFirstLetter(day)}: ${Math.round(
+         percentage
+       )}%`;
+     }
+   }
+ }
+
+ function capitalizeFirstLetter(string) {
+   return string.charAt(0).toUpperCase() + string.slice(1);
+ }
+
+ updateProgress({
+   lunedi: 2000,
+   martedi: 1400,
+   mercoledi: 1600,
+   giovedi: 1800,
+   venerdi: 2000,
+   sabato: 1700,
+   domenica: 1500,
+ });
+//FINE MASSA SETTIMANA
+
+ //CARDIO SETTIMANA
+    function updateCardioProgress(cardioData) {
+      const cardioThreshold = 2000;
+
+      const days = {
+        lunedi: "settlunCardio",
+        martedi: "setmarCardio",
+        mercoledi: "setmerCardio",
+        giovedi: "setgioCardio",
+        venerdi: "setvenCardio",
+        sabato: "setsabCardio",
+        domenica: "setdomCardio",
+      };
+
+      //AGGIORNAMENTO PER OGNI GIORNO
+      for (let day in cardioData) {
+        const progressBarId = days[day];
+        if (progressBarId) {
+          const progressBar = document
+            .getElementById(progressBarId)
+            .querySelector(".progress-bar");
+          const cardioIntake = cardioData[day];
+          const percentage = (cardioIntake / cardioThreshold) * 100;
+          progressBar.style.width = `${Math.min(percentage, 100)}%`; 
+          progressBar.textContent = `${capitalizeFirstLetter(
+            day
+          )}: ${Math.round(percentage)}%`;
+        }
+      }
+    }
+
+    function capitalizeFirstLetter(string) {
+      return string.charAt(0).toUpperCase() + string.slice(1);
+    }
+
+    updateCardioProgress({
+      lunedi: 1230,
+      martedi: 1440,
+      mercoledi: 1850,
+      giovedi: 2000,
+      venerdi: 1080,
+      sabato: 600,
+      domenica: 1990,
+    });
+//FINE 
+
+//DA AGGIUNGERE ATTIVITA SETTIMINALE
