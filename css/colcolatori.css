@@ -1,0 +1,39 @@
+body {
+    background-color: #0B3954;
+    color: antiquewhite;
+}
+
+.calculator {
+    display: none;
+}
+
+.calculator.active {
+    display: block;
+}
+
+.btn {
+    border-color: #FBAF00!important;
+    background-color: #0B3954!important;
+
+}
+
+.btn:hover {
+    background-color: #FBAF00!important;
+    color: black!important;
+}
+
+.btn.active {
+    background-color: #FBAF00!important;
+    color: black!important;
+}
+
+.result {
+    color: #FBAF00;
+    font-weight: bold;
+}
+
+.form-control {
+    background-color: #587291;
+    color: #dddddd;
+    border: #FBAF00;
+}

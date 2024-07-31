@@ -6,14 +6,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Calcolatori di Calorie per Sport</title>
     <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/colcolatori.css">
     <link href="assets/bootstrap-icons-1.11.3/font/bootstrap-icons.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <style>
-        body {
-            background-color: #F5F5F5;
-            color: #0B3954;
-        }
-
         .calculator {
             display: none;
         }
@@ -41,10 +37,10 @@
 <body>
 
     <div class="container mt-5">
-        <div class="toggle-buttons d-flex justify-content-center mb-4">
-            <button class="btn btn-primary mx-2" onclick="showCalculator('running')">Corsa</button>
-            <button class="btn btn-primary mx-2" onclick="showCalculator('biking')">Bici</button>
-            <button class="btn btn-primary mx-2" onclick="showCalculator('swimming')">Nuoto</button>
+        <div class="btn-group toggle-buttons d-flex justify-content-center mb-4">
+            <button class="btn active" id="corsaBtn" onclick="showCalculator('running')">Corsa</button>
+            <button class="btn" id="ciclismoBtn" onclick="showCalculator('biking')">Ciclismo</button>
+            <button class="btn" id="nuotoBtn" onclick="showCalculator('swimming')">Nuoto</button>
         </div>
 
         <div id="running" class="calculator active">
@@ -64,7 +60,7 @@
         </div>
 
         <div id="biking" class="calculator">
-            <h2>Calcolatore di Calorie per la Bici</h2>
+            <h2>Calcolatore di Calorie per il Ciclismo</h2>
             <form id="biking-calculator" class="form-group">
                 <label for="biking-weight">Peso (kg):</label>
                 <input type="number" id="biking-weight" name="biking-weight" class="form-control mb-3">
@@ -99,6 +95,10 @@
     <script src="js/jquery-3.7.1.min.js"></script>
     <script src="js/bootstrap.bundle.min.js"></script>
     <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            document.getElementById('running').classList.add('active');
+        });
+
         function showCalculator(calculator) {
             const calculators = document.querySelectorAll('.calculator');
             calculators.forEach(function (calc) {
