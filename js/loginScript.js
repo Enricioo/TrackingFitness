@@ -311,7 +311,7 @@ function checkPwStrength(password, etichetta) {
                 }
             })
             //formatto il messaggio sulla forza in base al risultato
-            msgStrength.innerHTML = '<b>'+msg[(forza-1)]+' <span data-bs-toggle="tooltip" data-bs-title="Consigli password?" style="color: black;">?</span></b>';
+            msgStrength.innerHTML = '<b>'+msg[(forza-1)]+'</b>';
             msgStrength.style.color = color[(forza-1)];
             //mostro il messaggio all'utente
             msgStrength.classList.remove('hidden');
