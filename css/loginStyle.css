@@ -15,6 +15,10 @@
     border-color: #2F97C1;
 }
 
+#privacy:hover {
+    font-size: medium;
+}
+
 /*FORM E ANIMAZIONE*/
 
 * {

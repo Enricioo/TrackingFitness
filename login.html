@@ -10,11 +10,15 @@
     <link href="./assets/bootstrap-icons-1.11.3/font/bootstrap-icons.css" rel="stylesheet">
     <!--CSS-->
     <link rel="stylesheet" href="./css/loginStyle.css">
+    <!--FOOTER-->
+    <link rel="stylesheet" href="./css/footer.css">
 </head>
 
 <body>
     <!--DA FARE: 
+        - messaggi di errore! (IMPORTANTE);
         - aggiungere la possibilità di cambiare password;
+        - aggiungere consigli password;
         - migliorare il range;
         - animazioni migliori.
     -->
@@ -50,8 +54,7 @@
                             <form class="form form-login shadow-lg">
                                 <fieldset>
                                     <legend>Inserisci username e password per accedere</legend>
-                                    <p id="errore-login" class="hidden error-msg" class="rounded text-center"><b>Campo
-                                            mancante!</b></p>
+                                    <p id="errore-login" class="hidden error-msg text-center" class="rounded text-center"><!--dinamico--></p>
                                     <div class="input-block"> <!--INPUT EMAIL-->
                                         <label for="login-username">Username</label>
                                         <input type="text" id="login-username" class="" onclick="resetta(this, 'login')"
@@ -135,8 +138,7 @@
                                 </fieldset>
                                 <fieldset id="field-dati" class="field hidden">
                                     <legend>Inserisci i tuoi dati personali</legend>
-                                    <p id="errore-signup" class="hidden error-msg" class="rounded text-center"><b>Campo
-                                            mancante!</b></p>
+                                    <p id="errore-signup" class="hidden error-msg text-center" class="rounded text-center"><!--dinamico--></p>
                                     <div class="input-block"> <!--INPUT ETA-->
                                         <label for="signup-eta">Età</label>
                                         <input type="number" id="signup-eta" min="13" max="80"
@@ -144,7 +146,7 @@
                                     </div>
                                     <div class="input-block"> <!--INPUT PESO-->
                                         <label for="signup-peso">Peso: <span id="showPeso"></span></label>
-                                        <input type="range" id="signup-peso" min="30" max="150" step="0.1"
+                                        <input type="range" id="signup-peso" min="30" max="150" step="1"
                                             onclick="resetta(this, 'signup')" oninput="mostraPeso(this.value)" required>
                                     </div>
                                     <div class="input-block"> <!--INPUT ALTEZZA-->
@@ -154,12 +156,12 @@
                                     <div class="input-block mb-0 rounded" style="background-color: #FBAF00;">
                                         <!--INPUT PRIVACY-->
                                         <input type="checkbox" id="signup-privacy" onclick="resetta(this, 'signup')"
-                                            required
+                                            required disabled
                                             style="display: inline; width: 10%; margin-bottom: 5px !important;">
                                         <label class="mb-2" for="signup-privacy" style="font-size: smaller;">Accetto la
-                                            <a href="#">privacy policy</a></label>
+                                            <a href="#" id="privacy" style="color:black; text-decoration: underline;" onclick="document.getElementById('signup-privacy').removeAttribute('disabled')">privacy policy</a></label>
                                     </div>
-                                    <p id="errore-pw" class="error-msg hidden mt-2" class="rounded text-center"><b>Le
+                                    <p id="errore-pw" class="error-msg text-center hidden mt-2" class="rounded text-center"><b>Le
                                             password non coincidono!</b></p>
                                     <button type="button" class="btn-signup cambio"
                                         data-target="field-account">INDIETRO</button>
@@ -225,6 +227,8 @@
     <script src="js/bootstrap.bundle.min.js"></script>
     <!--JS-->
     <script src="./js/loginScript.js"></script>
+    <!--FOOTER-->
+    <script src="./js/footer.js"></script>
 </body>
 
 </html>
