@@ -1,4 +1,4 @@
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', function () {
   let ctx1 = document.getElementById("myChart").getContext("2d");
   let ctx2 = document.getElementById("myChart2").getContext("2d");
 
@@ -151,8 +151,8 @@ document.addEventListener('DOMContentLoaded', function() {
     },
   });
 
-  window.changeChart = function(type) {    // Funzione "changeChart" che cambia il tipo di dati visualizzati nei grafici in base all'input dell'utente.
-    
+  window.changeChart = function (type) {    // Funzione "changeChart" che cambia il tipo di dati visualizzati nei grafici in base all'input dell'utente.
+
     // Rimuovo la classe active-button da tutti i bottoni
     document.querySelectorAll('.chart-type-button').forEach(button => {
       button.classList.remove('active-button');
@@ -160,7 +160,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // Aggiungi la classe active-button al bottone cliccato
     document.getElementById(type + '-button').classList.add('active-button');
-    
+
     let sport = document.getElementById("sportSelector").value;    // Scelta dello sport
 
     if (type === 'daily') {
