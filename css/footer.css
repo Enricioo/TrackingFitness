@@ -9,7 +9,7 @@
   }
   
   footer {
-    background: #587291;
+    background: #0B3954;
   }
 
     body, html {
@@ -36,26 +36,67 @@
         text-decoration: none; /* Mantiene la decorazione del testo al passaggio del mouse */
     }
 
-  .list-unstyled i {
+    .list-unstyled i {
         font-size: 1.5rem; /* Dimensione delle icone */
         margin-right: 10px; /* Spazio tra icona e testo */
         color: goldenrod; /* Colore delle icone */
     }
 
+    /* Colore per testo social */
+    #instagram {
+        color: white;
+        font-style: normal;
+        font-size: 1rem;
+    }
+
+    #instagram:hover {
+        color: white;
+    }
+
+    #facebook {
+        color: white;
+        font-style: normal;
+        font-size: 1rem;
+    }
+
+    #facebook:hover {
+        color: white;
+    }
+
+    #tiktok {
+        color: white;
+        font-style: normal;
+        font-size: 1rem;
+    }
+
+    #tiktok:hover {
+        color: white;
+    }
+
+    #twitter {
+        color: white;
+        font-style: normal;
+        font-size: 1rem;
+    }
+
+    #twitter:hover {
+        color: white;
+    }
+
     /* Colori dei social media al passaggio del mouse */
-    .list-unstyled a:hover .fab-instagram {
+    .bi-instagram:hover {
         color: #C13584; /* Colore Instagram al passaggio del mouse */
     }
 
-    .list-unstyled a:hover .fab-facebook {
+    .bi-facebook:hover {
         color: #3b5998; /* Colore Facebook al passaggio del mouse */
     }
 
-    .list-unstyled a:hover .fab-tiktok {
+    .bi-tiktok:hover {
         color: #000000; /* Colore TikTok al passaggio del mouse */
     }
 
-    .list-unstyled a:hover .fab-twitter {
+    .bi-twitter:hover {
         color: #1DA1F2; /* Colore Twitter al passaggio del mouse */
     }
 

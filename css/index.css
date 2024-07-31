@@ -5,10 +5,10 @@ body {
     min-height: 100vh;
     margin: 0;
     background-image: url("../assets/img/fitness4.jpg");
-    background-size: cover;
+    background-size: contain;
     background-position: center;
-    backdrop-filter: saturate(50%);
 }
+
 
 #sidebar-nav a {
     background-color: #587291;
@@ -161,10 +161,23 @@ a:hover p {
     height: 60px;
 }
 
-#blog {
+.pricing-header {
+    color: #FBAF00;
+}
+
+#plan-card {
+    background-color: #2F97C1;
+}
+
+#plan-btn {
     background-color: #0B3954;
-    width: 80%;
-    height: 40%;
+    color: #FBAF00;
+    transition: all .2s ease;
+}
+
+#plan-btn:hover {
+    background-color: #194b68;
+    transform: scale(1.05);
 }
 
 @media (max-width: 768px) {
