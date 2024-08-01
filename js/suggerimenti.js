@@ -31,6 +31,8 @@ function UpdateComponent() {
 }
 
 document.addEventListener("DOMContentLoaded", UpdateComponent);
+//FINE
+
 //NOTIFICHE
 
 //CALORIE DA BRUCIARE
@@ -124,7 +126,7 @@ function updateNotifications() {
 }
 
 updateNotifications();
-
+//FINE
 
 //AGGIORNAMENTO DATI SETTIMANA
  function updateProgress(calorieData) {
@@ -217,4 +219,68 @@ updateNotifications();
     });
 //FINE 
 
-//DA AGGIUNGERE ATTIVITA SETTIMINALE
+//ATTIVITA SETTIMINALE
+
+// Funzione per aggiornare il testo delle barre di progresso
+function aggiornaTestoBarre(tipoAttivita, dati) {
+    // Seleziona il contenitore delle barre di progresso
+    const contenitore = document.querySelector(`#${tipoAttivita} .progress-stacked`);
+
+    contenitore.querySelectorAll('.progress').forEach((barra, index) => {
+        const attivita = dati[index];
+        const larghezza = `${attivita.percentuale}%`;
+        const testoBarra = `${attivita.nome} (${attivita.percentuale}%)`;
+
+        barra.style.width = larghezza;
+
+        const barraInterna = barra.querySelector('.progress-bar');
+        barraInterna.textContent = testoBarra;
+    });
+}
+
+const datiMassa = [
+    { nome: 'Corsa', percentuale: 25 },
+    { nome: 'Ciclismo', percentuale: 25 },
+    { nome: 'Pesi', percentuale: 25 },
+    { nome: 'Nuoto', percentuale: 25 }
+];
+
+const datiCardio = [
+    { nome: 'Corsa', percentuale: 25 },
+    { nome: 'Ciclismo', percentuale: 25 },
+    { nome: 'Pesi', percentuale: 25 },
+    { nome: 'Nuoto', percentuale: 25 }
+];
+
+document.addEventListener('DOMContentLoaded', () => {
+    aggiornaTestoBarre('massaAttivita', datiMassa);
+    aggiornaTestoBarre('cardioAttivita', datiCardio);
+});
+
+//gestione collegamento DB TESTARE
+
+ async function fetchActivities() {
+   try {
+     const response = await fetch("jdbc:mysql://localhost:3306/tracker");
+     if (!response.ok) throw new Error("Network response was not ok");
+     const activities = await response.json();
+     displayActivities(activities);
+   } catch (error) {
+     console.error("Error fetching activities:", error);
+   }
+ }
+
+ // Funzione per visualizzare le attività nella pagina
+ function displayActivities(activities) {
+   const activityList = document.getElementById("activity-list");
+   activities.forEach((activity) => {
+     const listItem = document.createElement("li");
+     listItem.textContent = `${activity.name} (${activity.type}): ${activity.duration} minutes`;
+     activityList.appendChild(listItem);
+   });
+ }
+
+ // Recupera le attività al caricamento della pagina
+ fetchActivities();
+
+ 
