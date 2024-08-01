@@ -9,6 +9,7 @@
     <link href="css/Suggerimenti.css" rel="stylesheet">
     <link href="css/footer.css" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script> <!--fisso-->
+    
     <link href="assets/bootstrap-icons-1.11.3/font/bootstrap-icons.css" rel="stylesheet">
 
 </head>
@@ -16,6 +17,7 @@
 <h1>Suggerimenti & Consigli </h1>
 
 <body>
+
 
     <body>
         <!--SCELTA-->
@@ -84,8 +86,8 @@
                     dieta per
                     prevenire ulteriori perdite.
                 </div>
-                <div class="alert alert-success" role="alert" id="muscolistabile2">
-                    <strong>Ottimo!</strong> La tua massa muscolare è stabile. Continua a monitorare i tuoi progressi e
+                <div class="alert alert-warning" role="alert" id="muscolicons2">
+                    <strong>Consiglio</strong> Continua a monitorare i tuoi progressi e
                     ad
                     adattare il tuo programma secondo necessità.
                 </div>
@@ -674,26 +676,30 @@
         <div class="container mt-4 text-center">
             <div class="col">
             </div>
-
+<style>
+    .progress-bar-text {
+    color: black; 
+}
+</style>
             <!--MASSA MUSCOLARE ATTIVITA-->
             <div id="massaAttivita" class="" class="mt-4">
                 <h3>Attività svolte durante la settimana</h3>
                 <div class="progress-stacked">
                     <div class="progress" role="progressbar" aria-label="Segment one" aria-valuenow="20"
-                        id="attivitaMassa1" aria-valuemin="0" aria-valuemax="100" style="width: 10%;">
-                        <div class="progress-bar bg-primary">Corsa</div>
+                        id="attivitaMassaCorsa" aria-valuemin="0" aria-valuemax="100" style="width: 25%;">
+                        <div class="progress-bar bg-primary" style="background-color: #2f00ff; color: black;">Corsa</div>
                     </div>
                     <div class="progress" role="progressbar" aria-label="Segment two" aria-valuenow="30"
-                        id="attivitaMassa2" aria-valuemin="0" aria-valuemax="100" style="width: 50%;">
-                        <div class="progress-bar bg-success">Ciclismo</div>
+                        id="attivitaMassaCiclismo" aria-valuemin="0" aria-valuemax="100" style="width: 25%;">
+                        <div class="progress-bar bg-success"style="background-color: #2f00ff; color: black;">Ciclismo</div>
                     </div>
                     <div class="progress" role="progressbar" aria-label="Segment three" aria-valuenow="20"
-                        id="attivitaMassa3" aria-valuemin="0" aria-valuemax="100" style="width: 40%;">
-                        <div class="progress-bar" style="background-color: #ff5733;">Pesi</div>
+                        id="attivitaMassaPesi" aria-valuemin="0" aria-valuemax="100" style="width: 25%;">
+                        <div class="progress-bar" style="background-color: #ff5733;" style="background-color: #2f00ff; color: black;">Pesi</div>
                     </div>
                     <div class="progress" role="progressbar" aria-label="Segment four" aria-valuenow="30"
-                        id="attivitaMassa4" aria-valuemin="0" aria-valuemax="100" style="width: 10%;">
-                        <div class="progress-bar" style="background-color: #2f00ff;">Nuoto</div>
+                        id="attivitaMassaNuoto" aria-valuemin="0" aria-valuemax="100" style="width: 25%;">
+                        <div class="progress-bar" style="background-color: #2f00ff;" style="background-color: #2f00ff; color: black;">Nuoto</div>
                     </div>
                 </div>
             </div><br>
@@ -703,19 +709,19 @@
                 <h3>Attività svolte durante la settimana</h3>
                 <div class="progress-stacked">
                     <div class="progress" role="progressbar" aria-label="Segment one" aria-valuenow="20"
-                        id="attivitaCardio1" aria-valuemin="0" aria-valuemax="100" style="width: 50%;">
-                        <div class="progress-bar bg-primary">Corsa</div>
+                        id="attivitaCardioCorsa" aria-valuemin="0" aria-valuemax="100" style="width: 25%;">
+                        <div class="progress-bar bg-primary" style="background-color: #2f00ff; color: black;">Corsa</div>
                     </div>
                     <div class="progress" role="progressbar" aria-label="Segment two" aria-valuenow="30"
-                        id="attivitaCardio2" aria-valuemin="0" aria-valuemax="100" style="width: 15%;">
+                        id="attivitaCardioCiclismo" aria-valuemin="0" aria-valuemax="100" style="width: 20%;">
                         <div class="progress-bar bg-success">Ciclismo</div>
                     </div>
                     <div class="progress" role="progressbar" aria-label="Segment three" aria-valuenow="20"
-                        id="attivitaCardio3" aria-valuemin="0" aria-valuemax="100" style="width: 10%;">
+                        id="attivitaCardioPesi" aria-valuemin="0" aria-valuemax="100" style="width: 25%;">
                         <div class="progress-bar" style="background-color: #ff5733;">Pesi</div>
                     </div>
-                    <div class="progress" role="progressbar" aria-label="Segment four" aria-valuenow="30"
-                        id="attivitaCardio4" aria-valuemin="0" aria-valuemax="100" style="width: 50%;">
+                    <div class="progress" role="progressbar" aria-label="Segment four" aria-valuenow="20"
+                        id="attivitaCardioNuoto" aria-valuemin="0" aria-valuemax="100" style="width: 25%;">
                         <div class="progress-bar" style="background-color: #2f00ff;">Nuoto</div>
                     </div>
                 </div>

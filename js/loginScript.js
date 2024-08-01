@@ -41,15 +41,17 @@ async function login(event) {
         }
     }
     if (errore) {
+        err_msg.innerHTML='<b>Campo mancante!</b>';
         err_msg.classList.remove('hidden');
     } else {
+        //i campi sono inseriti correttamente
         const username = formLogin['login-username'];
         const password = formLogin['login-password'];
         const utente = {
             username: username.value,
             password: password.value
         }
-
+        //provo a fare il login
         try {
             const response = await fetch('http://localhost:8080/utenti/login', {
                 method: 'POST',
@@ -64,10 +66,12 @@ async function login(event) {
                 localStorage.setItem('authToken', token);
                 redirect(token);
             } else {
-                console.error('login 1 errore');
+                err_msg.innerHTML='<b>Utente non riconosciuto!</b>'
+                err_msg.classList.remove('hidden');
             }
         }catch (error) {
-            console.error('login 2 errore');
+            err_msg.innerHTML='<b>Errore di comunicazione con il server!<br> Controlla la tua connessione.</b>'
+            err_msg.classList.remove('hidden');
         }
     }
 }
@@ -124,10 +128,12 @@ async function signup(event) {
             username: formSignup['signup-username'].value,
             email: formSignup['signup-email'].value,
             password: formSignup['signup-password'].value,
+            eta: formSignup['signup-eta'],
             peso: formSignup['signup-peso'].value,
             altezza: formSignup['signup-altezza'].value,
             ruolo: 'USER'
         }
+        //provo a creare il nuovo utente
         try {
             const response = await fetch('http://localhost:8080/utenti/register', {
                 method: 'POST',
@@ -137,6 +143,7 @@ async function signup(event) {
                 body: JSON.stringify(nuovoUtente)
             });
             if (response.status==201) {
+                //utente creato
                 const utente = {
                     username: formSignup['signup-username'].value,
                     password: formSignup['signup-password'].value
@@ -156,17 +163,24 @@ async function signup(event) {
                         localStorage.setItem('authToken', token);
                         redirect(token);
                     } else {
-                        console.error('login 1 errore');
+                        err_msg.innerHTML='<b>Errore di comunicazione con il server!<br> Controlla la tua connessione.</b>';
+                        err_msg.classList.remove('hidden');
                     }
                 } catch(error) {
-                    consol.error('errore accesso utente')
+                    err_msg.innerHTML='<b>Errore di comunicazione con il server!<br> Controlla la tua connessione.</b>';
+                    err_msg.classList.remove('hidden');
                 }
+            }else {
+                err_msg.innerHTML='<b>Errore durante la registrazione.<br> Riprova più tardi.</b>';
+                err_msg.classList.remove('hidden');
             }
         }catch (error) {
-            console.error('errore creazione utente');
+            err_msg.innerHTML='<b>Errore di comunicazione con il server!<br> Controlla la tua connessione.</b>';
+            err_msg.classList.remove('hidden');
         }
     } else {
         if (errore) {
+            err_msg.innerHTML='<b>Campo mancante!</b>';
             err_msg.classList.remove('hidden');
         }
         if (errorePw) {
@@ -315,6 +329,9 @@ function checkPwStrength(password, etichetta) {
             msgStrength.classList.add('hidden');
         }
     }
+    //dichiaro i tooltip
+    const tooltipTriggerList = document.querySelectorAll('[data-bs-toggle="tooltip"]');
+    const tooltipList = [...tooltipTriggerList].map(tooltipTriggerEl => new bootstrap.Tooltip(tooltipTriggerEl));
 }
 
 function controlloUsername(username) {
