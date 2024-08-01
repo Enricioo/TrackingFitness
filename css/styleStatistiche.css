@@ -11,7 +11,7 @@
   margin: 20px;
   text-align: center;
   color: goldenrod;
-  height: 130vh;
+  height: 220vh;
 }
 
 /* grafici */
@@ -78,8 +78,8 @@ button {
 .active-button {
   background-color: #0B3954;
   /* Colore di sfondo del bottone attivo */
-  color: white;
+  color: #FBAF00;
   /* Colore del testo del bottone attivo */
-  border-color: #2F97C1;
+  border-color: #FBAF00;
   /* Colore del bordo del bottone attivo */
 }

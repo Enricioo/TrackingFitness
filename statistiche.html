@@ -7,7 +7,6 @@
   <title>Document</title>
   <link rel="stylesheet" href="css/bootstrap.min.css">
   <link rel="stylesheet" href="css/styleStatistiche.css">
-  <link rel="stylesheet" href="css/footer.css">
   <link href="assets/bootstrap-icons-1.11.3/font/bootstrap-icons.css" rel="stylesheet">
 </head>
 
@@ -27,12 +26,9 @@
       <label class="chart-label">Seleziona il tipo di grafico:</label>
     </div>
     <div class="container2">
-      <button id="daily-button" class="btn btn-primary chart-type-button"
-        onclick="changeChart('daily')">Giornaliero</button>
-      <button id="weekly-button" class="btn btn-primary chart-type-button"
-        onclick="changeChart('weekly')">Settimanale</button>
-      <button id="monthly-button" class="btn btn-primary chart-type-button"
-        onclick="changeChart('monthly')">Mensile</button>
+      <button id="weekly-button" class="btn btn-primary chart-type-button" onclick="changeChart('weekly')">Settimanale</button>
+      <button id="monthly-button" class="btn btn-primary chart-type-button" onclick="changeChart('monthly')">Mensile</button>
+      <button id="annual-button" class="btn btn-primary chart-type-button" onclick="changeChart('annual')">Annuale</button>
     </div>
     <!-- Grafici -->
     <div class="chart-container">
@@ -42,13 +38,10 @@
     </div>
   </div>
 
-    <script src="js/footer.js"></script>
     <script src="js/bootstrap.bundle.min.js"></script>
     <script src="js/statistiche.js"></script>
     <script src="js/jquery-3.7.1.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.min.js"></script>
 </body>
 
 </html>
