@@ -15,6 +15,7 @@ template.innerHTML =`
                         <li><a href="login.html" class="text-decoration-none">Accedi/Registrati</a></li>
                         <li><a href="statistiche.html" class="text-decoration-none">Statistiche</a></li>
                         <li><a href="consigli.html" class="text-decoration-none">Consigli</a></li>
+                        <li><a href="calcolatori.html" class="text-decoration-none">Calcolatore</a></li>
                     </ul>
                 </div>
                 <div class="col-lg-4 col-md-4">
