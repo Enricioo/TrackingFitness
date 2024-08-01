@@ -51,13 +51,14 @@
                 <input type="number" id="running-weight" name="running-weight" class="form-control mb-3">
                 <label for="running-distance">Distanza (km):</label>
                 <input type="number" id="running-distance" name="running-distance" class="form-control mb-3">
-                <label for="running-speed">Velocità (km/h):</label>
-                <input type="number" id="running-speed" name="running-speed" class="form-control mb-3">
+                <label for="running-duration">Durata (minuti):</label>
+                <input type="number" id="running-duration" name="running-duration" class="form-control mb-3">
                 <label for="running-grade">Pendenza (%):</label>
                 <input type="number" id="running-grade" name="running-grade" class="form-control mb-3">
                 <button type="button" class="btn btn-primary" onclick="calculateRunningCalories()">Calcola</button>
             </form>
             <p class="mt-3">Calorie Bruciate: <span id="running-result" class="result">0</span></p>
+            <button type="button" class="btn btn-primary" onclick="saveActivity('running')">Salva Attività</button>
         </div>
 
         <div id="biking" class="calculator">
@@ -67,11 +68,12 @@
                 <input type="number" id="biking-weight" name="biking-weight" class="form-control mb-3">
                 <label for="biking-distance">Distanza (km):</label>
                 <input type="number" id="biking-distance" name="biking-distance" class="form-control mb-3">
-                <label for="biking-speed">Velocità (km/h):</label>
-                <input type="number" id="biking-speed" name="biking-speed" class="form-control mb-3">
+                <label for="biking-duration">Durata (minuti):</label>
+                <input type="number" id="biking-duration" name="biking-duration" class="form-control mb-3">
                 <button type="button" class="btn btn-primary" onclick="calculateBikingCalories()">Calcola</button>
             </form>
             <p class="mt-3">Calorie Bruciate: <span id="biking-result" class="result">0</span></p>
+            <button type="button" class="btn btn-primary" onclick="saveActivity('biking')">Salva Attività</button>
         </div>
 
         <div id="swimming" class="calculator">
@@ -81,6 +83,8 @@
                 <input type="number" id="swimming-weight" name="swimming-weight" class="form-control mb-3">
                 <label for="swimming-distance">Distanza (m):</label>
                 <input type="number" id="swimming-distance" name="swimming-distance" class="form-control mb-3">
+                <label for="swimming-duration">Durata (minuti):</label>
+                <input type="number" id="swimming-duration" name="swimming-duration" class="form-control mb-3">
                 <label for="swimming-style">Stile di Nuoto:</label>
                 <select id="swimming-style" name="swimming-style" class="form-control mb-3">
                     <option value="freestyle">Stile Libero</option>
@@ -90,6 +94,7 @@
                 <button type="button" class="btn btn-primary" onclick="calculateSwimmingCalories()">Calcola</button>
             </form>
             <p class="mt-3">Calorie Bruciate: <span id="swimming-result" class="result">0</span></p>
+            <button type="button" class="btn btn-primary" onclick="saveActivity('swimming')">Salva Attività</button>
         </div>
     </div>
 
@@ -115,67 +120,71 @@
         }
 
         function calculateRunningCalories() {
-            const weight = parseFloat(document.getElementById('running-weight').value);
-            const distance = parseFloat(document.getElementById('running-distance').value);
-            const speed = parseFloat(document.getElementById('running-speed').value);
-            const grade = parseFloat(document.getElementById('running-grade').value);
+            const weight = parseInt(document.getElementById('running-weight').value);
+            const distance = parseInt(document.getElementById('running-distance').value);
+            const duration = parseInt(document.getElementById('running-duration').value);
+            const grade = parseInt(document.getElementById('running-grade').value);
 
-            if (isNaN(weight) || isNaN(distance) || isNaN(speed) || isNaN(grade)) {
+            if (isNaN(weight) || isNaN(distance) || isNaN(duration) || isNaN(grade)) {
                 document.getElementById('running-result').innerText = "Inserisci valori validi.";
                 return;
             }
 
+            const speed = distance / (duration / 60); // Convert duration from minutes to hours
+
             // Valori MET per diverse velocità e pendenze
             let met = 0;
             if (speed <= 8) {
-                met = 8.3;
+                met = 8;
             } else if (speed <= 9.7) {
-                met = 9.8;
+                met = 10;
             } else if (speed <= 10.8) {
-                met = 10.5;
-            } else if (speed <= 12.1) {
                 met = 11;
+            } else if (speed <= 12.1) {
+                met = 12;
             } else if (speed <= 14.5) {
-                met = 11.5;
+                met = 12;
             } else if (speed <= 16.1) {
-                met = 12.8;
+                met = 13;
             } else if (speed <= 17.5) {
-                met = 13.5;
+                met = 13;
             } else {
-                met = 14.5;
+                met = 15;
             }
 
             // Adjust MET for grade
             if (grade > 0) {
-                met *= (1 + grade / 100);
+                met = Math.round(met * (1 + grade / 100));
             } else if (grade < 0) {
-                met *= (1 + grade / 200);
+                met = Math.round(met * (1 + grade / 200));
             }
 
-            const time = distance / speed; // tempo in ore
+            const time = Math.round(duration / 60); // Convert duration to hours
             const calories = met * weight * time;
-            document.getElementById('running-result').innerText = calories.toFixed(2);
+            document.getElementById('running-result').innerText = calories;
         }
 
         function calculateBikingCalories() {
-            const weight = parseFloat(document.getElementById('biking-weight').value);
-            const distance = parseFloat(document.getElementById('biking-distance').value);
-            const speed = parseFloat(document.getElementById('biking-speed').value);
+            const weight = parseInt(document.getElementById('biking-weight').value);
+            const distance = parseInt(document.getElementById('biking-distance').value);
+            const duration = parseInt(document.getElementById('biking-duration').value);
 
-            if (isNaN(weight) || isNaN(distance) || isNaN(speed)) {
+            if (isNaN(weight) || isNaN(distance) || isNaN(duration)) {
                 document.getElementById('biking-result').innerText = "Inserisci valori validi.";
                 return;
             }
 
+            const speed = distance / (duration / 60); // Convert duration from minutes to hours
+
             // Valori MET per diverse velocità
             const metValues = {
-                10: 4.0, // 10 km/h
-                12: 6.8, // 12 km/h
-                16: 8.0, // 16 km/h
-                19: 10.0, // 19 km/h
-                22: 12.0, // 22 km/h
-                25: 15.8, // 25 km/h
-                30: 19.0  // 30 km/h
+                10: 4, // 10 km/h
+                12: 7, // 12 km/h
+                16: 8, // 16 km/h
+                19: 10, // 19 km/h
+                22: 12, // 22 km/h
+                25: 16, // 25 km/h
+                30: 19  // 30 km/h
             };
 
             let met = 4; // Valore MET predefinito
@@ -186,32 +195,79 @@
                 }
             }
 
-            const time = distance / speed; // tempo in ore
+            const time = Math.round(duration / 60); // Convert duration to hours
             const calories = met * weight * time;
-            document.getElementById('biking-result').innerText = calories.toFixed(2);
+            document.getElementById('biking-result').innerText = calories;
         }
 
         function calculateSwimmingCalories() {
-            const weight = parseFloat(document.getElementById('swimming-weight').value);
-            const distance = parseFloat(document.getElementById('swimming-distance').value);
+            const weight = parseInt(document.getElementById('swimming-weight').value);
+            const distance = parseInt(document.getElementById('swimming-distance').value);
+            const duration = parseInt(document.getElementById('swimming-duration').value);
             const style = document.getElementById('swimming-style').value;
 
-            if (isNaN(weight) || isNaN(distance)) {
+            if (isNaN(weight) || isNaN(distance) || isNaN(duration)) {
                 document.getElementById('swimming-result').innerText = "Inserisci valori validi.";
                 return;
             }
 
             // Valori MET per diversi stili di nuoto
             const metValues = {
-                freestyle: 8.3,
-                breaststroke: 10.3,
-                butterfly: 13.8
+                freestyle: 8,
+                breaststroke: 10,
+                butterfly: 14
             };
 
             const met = metValues[style];
-            const time = distance / 1000; // assumendo una velocità media di nuoto di 1 km/h
+            const time = Math.round(duration / 60); // Convert duration to hours
             const calories = met * weight * time;
-            document.getElementById('swimming-result').innerText = calories.toFixed(2);
+            document.getElementById('swimming-result').innerText = calories;
+        }
+
+        function saveActivity(activityType) {
+            const weight = parseInt(document.getElementById(`${activityType}-weight`).value);
+            const distance = parseInt(document.getElementById(`${activityType}-distance`).value);
+            const duration = parseInt(document.getElementById(`${activityType}-duration`).value);
+            let calories = 0;
+            if (activityType === 'running') {
+                calories = parseInt(document.getElementById('running-result').innerText);
+            } else if (activityType === 'biking') {
+                calories = parseInt(document.getElementById('biking-result').innerText);
+            } else if (activityType === 'swimming') {
+                calories = parseInt(document.getElementById('swimming-result').innerText);
+            }
+            const sportDate = new Date().toISOString().split('T')[0]; // Current date
+            const utente = 1; // Assuming a hardcoded user ID for demonstration; replace with actual user ID
+
+            const activityData = {
+                tipo: activityType,
+                durata: duration,
+                distanza: distance,
+                calorie: calories,
+                sportDate: sportDate,
+                utente: utente
+            };
+
+            // Send the data to the server
+            fetch('/saveActivity', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(activityData)
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    alert('Attività salvata con successo.');
+                } else {
+                    alert('Errore nel salvataggio dell\'attività.');
+                }
+            })
+            .catch(error => {
+                console.error('Errore:', error);
+                alert('Errore nel salvataggio dell\'attività.');
+            });
         }
     </script>
     <script src="js/footer.js"></script>
