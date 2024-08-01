@@ -282,5 +282,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
  // Recupera le attività al caricamento della pagina
  fetchActivities();
+//fine
 
- 
+//TOKEN 2 PARTE
