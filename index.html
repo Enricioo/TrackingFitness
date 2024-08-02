@@ -37,19 +37,21 @@
                     <!-- Da modificare colore bottone -->
                 </a>
                 <!-- Titolo pagina -->
-                <div class="container text-center">
+                <div class="container text-center" id="mainBlurs">
                     <h1 id="mainText">TrackingFitness</h1>
                 </div>
                 <!-- Immagine home principale -->
                 <div class="container my-4">
-                    <img src="https://placehold.co/1280x480" alt="" id="mainImage" class="img-fluid">
+                    <img src="assets/img/logo.png" alt="" id="mainImage" class="img-fluid">
                 </div>
             </main>
 
             <!-- Descrizione funzionalità -->
-            <div class="container my-4">
+            <div class="container my-4" id="blurs">
                 <div class="row">
-                    <h2 class="text-center" id="bodyText">Come funziona la nostra app</h2>
+                    <div class="rounded">
+                        <h2 class="text-center" id="bodyText">Come funziona la nostra app</h2>
+                    </div>
                     <div class="col-12 col-lg-4 d-flex justify-content-center mt-4">
                         <a href="" class="text-muted text-decoration-none">
                             <div class="card text-center" style="width: 18rem;" id="card">
@@ -171,11 +173,11 @@
             </div>
 
             <!-- Recensioni utenti -->
-            <section class="container my-4">
-                <h2 class="text-center">Cosa dicono i nostri utenti</h2>
+            <div class="container my-4" id="blurs">
+                <h2 class="text-center" id="userrev">Cosa dicono i nostri utenti</h2>
                 <div class="row">
                     <div class="col-12 col-md-4 d-flex justify-content-center mt-4">
-                        <div class="card text-center" style="width: 18rem;">
+                        <div class="card text-center" id="review" style="width: 18rem;">
                             <div class="card-body">
                                 <p class="card-text">"TrackingFitness mi ha aiutato a migliorare le mie prestazioni in
                                     modo
@@ -185,7 +187,7 @@
                         </div>
                     </div>
                     <div class="col-12 col-md-4 d-flex justify-content-center mt-4">
-                        <div class="card text-center" style="width: 18rem;">
+                        <div class="card text-center" id="review" style="width: 18rem;">
                             <div class="card-body">
                                 <p class="card-text">"Grazie a questa app ho raggiunto i miei obiettivi di fitness."</p>
                                 <h5 class="card-title">Luca Bianchi</h5>
@@ -193,7 +195,7 @@
                         </div>
                     </div>
                     <div class="col-12 col-md-4 d-flex justify-content-center mt-4">
-                        <div class="card text-center" style="width: 18rem;">
+                        <div class="card text-center" id="review" style="width: 18rem;">
                             <div class="card-body">
                                 <p class="card-text">"Un'app indispensabile per chi ama tenersi in forma!"</p>
                                 <h5 class="card-title">Giulia Verdi</h5>
@@ -201,16 +203,16 @@
                         </div>
                     </div>
                 </div>
-            </section>
+            </div>
 
             <!-- Sezione pricing -->
-            <div class="container">
-                <div class="pricing-header px-3 py-3 pt-md-5 pb-md-4 mx-auto text-center">
+            <div class="container p-3">
+                <div class="pricing-header p-3 text-center" id="blurs">
                     <h1 class="display-4"><strong>Abbonamenti</strong></h1>
                     <p class="lead">Scegli il piano che meglio si adatta alle tue esigenze e inizia a monitorare la tua
                         forma fisica con il nostro avanzato fitness tracker.</p>
                 </div>
-                <div class="row">
+                <div class="row rounded" id="blurs">
                     <div class="col-12 col-md-4 text-center">
                         <div class="card mb-4" id="plan-card">
                             <div class="card-header">
@@ -275,6 +277,7 @@
         </div>
     </div>
 
+    <!-- <script src="js/controllo.js"></script> -->
     <script src="js/footer.js"></script>
     <script src="js/bootstrap.bundle.min.js"></script>
     <script src="js/gsap.min.js"></script>

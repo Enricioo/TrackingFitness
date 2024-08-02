@@ -7,14 +7,14 @@
   <title>Document</title>
   <link rel="stylesheet" href="css/bootstrap.min.css">
   <link rel="stylesheet" href="css/styleStatistiche.css">
-  <link rel="stylesheet" href="css/footer.css">
   <link href="assets/bootstrap-icons-1.11.3/font/bootstrap-icons.css" rel="stylesheet">
+  <link rel="stylesheet" href="css/footer.css">
 </head>
 
 <body>
-  <div class="container-fluid main">
+  <div class="main">
     <!-- Menù a tendina per selezionare lo sport -->
-    <div class="container containerSport">
+    <div class="container-fluid container1">
       <label class="chart-label">Seleziona lo sport:</label>
       <select id="sportSelector" class="form-select">
         <option value="running">Corsa</option>
@@ -23,20 +23,17 @@
       </select>
     </div>
     <!-- Bottoni per selezionare il tipo di grafico -->
-    <div class="container">
+    <div class="container-fluid container2">
       <label class="chart-label">Seleziona il tipo di grafico:</label>
     </div>
-    <div class="container2">
-      <button id="daily-button" class="btn btn-primary chart-type-button"
-        onclick="changeChart('daily')">Giornaliero</button>
-      <button id="weekly-button" class="btn btn-primary chart-type-button"
-        onclick="changeChart('weekly')">Settimanale</button>
-      <button id="monthly-button" class="btn btn-primary chart-type-button"
-        onclick="changeChart('monthly')">Mensile</button>
+    <div class="container-fluid container3">
+      <button id="weekly-button" class="btn btn-primary chart-type-button" onclick="changeChart('weekly')">Settimanale</button>
+      <button id="monthly-button" class="btn btn-primary chart-type-button" onclick="changeChart('monthly')">Mensile</button>
+      <button id="annual-button" class="btn btn-primary chart-type-button" onclick="changeChart('annual')">Annuale</button>
     </div>
     <!-- Grafici -->
     <div class="chart-container">
-      <h2><b>Grafici statistiche</b></h2>
+      <h2><b>Visualizza i grafici delle tue statistiche</b></h2>
       <canvas id="myChart"></canvas> <!-- grafico 1 -->
       <canvas id="myChart2" style="width:100%"></canvas> <!-- grafico 2 -->
     </div>
@@ -47,8 +44,6 @@
     <script src="js/statistiche.js"></script>
     <script src="js/jquery-3.7.1.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.min.js"></script>
 </body>
 
 </html>

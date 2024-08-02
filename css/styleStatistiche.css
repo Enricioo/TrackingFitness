@@ -1,45 +1,54 @@
+body::before {
+  content: "";
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: url('../img/graficiStats.jpg') no-repeat center center fixed;
+  background-size: cover;
+  opacity: 0.1; /* Imposta il livello di trasparenza */
+  z-index: -1; /* Manda l'immagine sullo sfondo */
+  filter: brightness(80%);
+}
 
-.container {
+.container-fluid {
   width: 50%;
-  margin: 30px auto;
+}
+.container2 {
+  margin-top: 50px;
 }
 
 .main {
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin: 20px;
   text-align: center;
   color: goldenrod;
-  height: 130vh;
 }
 
 /* grafici */
 .chart-container {
   position: relative;
   width: 100%;
-  height: 450px;
-}
-
-canvas {
-  width: 100%;
-  height: 100%;
+  height: 470px;
+  margin-bottom: 40rem;
 }
 
 h2 {
-  text-align: center;
   font-family: "Verdana", Arial, Helvetica, sans-serif;
   font-size: 30px;
-  padding-bottom: 30px;
+  padding-bottom: 35px;
 }
 
-#myChart {
+#myChart, #myChart2 {
   width: 90% !important;
   height: 100% !important;
   padding-left: 10% !important;
+  margin-bottom: 40px;
 }
 
-@media (max-width: 400px) {
+@media (max-width: 300px) {
   #myChart {
     width: 100% !important;
     height: 100% !important;
@@ -47,39 +56,51 @@ h2 {
   }
 }
 
-@media (max-width: 527px) {
-  .main {
-    height: 150vh;
+@media (max-width: 300px) {
+  #myChart2 {
+    width: 100% !important;
+    height: 100% !important;
+    padding-left: 0% !important;
   }
 }
 
-#myChart2 {
-  margin-top: 40px;
-  margin: 30px;
+@media (max-width: 240px) {
+  .chart-container {
+    padding-bottom: 30px;
+  }
 }
 
 button {
   margin: 10px;
-  margin-bottom: 70px;
+  margin-bottom: 20px;
+  margin-right: 1px;
+}
+
+.container3 {
+  margin-bottom: 50px;
 }
 
 .chart-label {
-  font-size: 1.5rem;
+  font-size: 1.7rem;
   font-weight: bold;
+  margin: 5px;
 }
 
 .form-select {
   margin-top: 10px;
-  margin-bottom: 10px;
-  padding: 0.5rem;
-  font-size: 1rem;
+  padding: 0.7rem;
+  font-size: 1.15rem;
+}
+
+.container1 {
+  padding-top: 20px;
 }
 
 .active-button {
   background-color: #0B3954;
   /* Colore di sfondo del bottone attivo */
-  color: white;
+  color: #FBAF00;
   /* Colore del testo del bottone attivo */
-  border-color: #2F97C1;
+  border-color: #FBAF00;
   /* Colore del bordo del bottone attivo */
 }

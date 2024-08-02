@@ -9,15 +9,31 @@ body {
     background-position: center;
 }
 
+.container {
+    margin-top: 50px;
+}
+
+#blurs {
+    padding-bottom: 45px;
+    backdrop-filter: blur(8px);
+}
 
 #sidebar-nav a {
     background-color: #587291;
     color: #0B3954;
 }
 
+#mainBlurs {
+    backdrop-filter: blur(8px);
+}
+
+#mainText {
+    clip-path: polygon(0 0, 100% 0, 100% 100%, 0% 100%);
+    line-height: 5.9rem;
+}
+
 #mainImage {
-    width: 100%;
-    background-size: cover;
+    width: 50%;
 }
 
 .card {
@@ -97,7 +113,6 @@ h2 {
 }
 
 #desc1 {
-    background-color: white;
     width: 80%;
     height: auto;
     max-width: 750px; 
@@ -109,7 +124,6 @@ h2 {
 }
 
 #desc2 {
-    background-color: white;
     width: 80%;
     height: auto;
     max-width: 750px; 
@@ -128,36 +142,61 @@ h2 {
     color: #FBAF00;
 }
 
+#info1 p {
+    color: #587291;
+}
+
 #info2 h3 {
     color: #FBAF00;
+}
+
+#info2 p {
+    color: #587291;
 }
 
 #info3 h3 {
     color: #FBAF00;
 }
 
+#info3 p {
+    color: #587291;
+}
+
 #info4 h3 {
     color: #FBAF00;
+}
+
+#info4 p {
+    color: #587291;
 }
 
 #info5 h3 {
     color: #FBAF00;
 }
 
+#info5 p {
+    color: #587291;
+}
+
 #info6 h3 {
     color: #FBAF00;
 }
 
-/* .card p {
-    display: none;
+#info6 p {
+    color: #587291;
 }
-
-a:hover p {
-    display: block;
-} */
 
 #listIcon {
     font-size: 2rem;
+}
+
+#review {
+    color: white;
+    background-color: #587291;
+}
+
+#review h5 {
+    color: #2F97C1;
 }
 
 .pricing-header {
@@ -210,5 +249,9 @@ a:hover p {
 
     #desc2 {
         width: 100%;
+    }
+
+    #userrev {
+        font-size: 20px;
     }
 }
