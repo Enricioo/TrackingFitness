@@ -115,3 +115,24 @@
     a:hover {
         color: #FFFFFF; /* Mantiene il colore bianco al passaggio del mouse */
     }
+
+    footer {
+        background-color: #0B3954;
+        color: #fff;
+        text-align: left;
+        width: 100%;
+        box-sizing: border-box;
+        padding-left: 50px;
+      }
+      
+      footer .container-fluid {
+        max-width: 100%;
+      }
+      
+      footer a {
+        color: gold;
+        text-decoration: none;
+      }
+      footer a:hover {
+        text-decoration: underline;
+      }
