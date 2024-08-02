@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Report - Admin</title>
+        <!--BOOTSTRAP-->
+        <link rel="stylesheet" href="css/bootstrap.min.css">
+        <link href="assets/bootstrap-icons-1.11.3/font/bootstrap-icons.css" rel="stylesheet">
+        <!--STILE PAGINA-->
+        <style>
+            body {
+                background-color: #0B3954;
+                color: antiquewhite;
+            }
+
+            /*SIDEBAR*/
+            #sidebar-nav a {
+                background-color: #587291;
+                color: #0B3954;
+            }
+
+            /*PAGINA*/
+
+        </style>
+        <!--FOOTER-->
+        <link rel="stylesheet" href="css/footer.css">
+    </head>
+    <body>
+        <div class="container-fluid sidebar">
+            <div class="row flex-nowrap">
+                <div class="col-auto px-0"> <!--SIDEBAR-->
+                    <div id="sidebar" class="collapse collapse-horizontal border-end border-dark">
+                        <div id="sidebar-nav" class="list-group border-0 rounded-0 text-sm-start min-vh-100">
+                            <a href="#" class="list-group-item border-end-0 d-inline-block text-truncate border-dark"
+                                data-bs-parent="admin.html"><i class="bi bi-house"></i> <span>Home</span> </a>
+                            <a href="#" class="list-group-item border-end-0 d-inline-block text-truncate border-dark"
+                                data-bs-parent="report.html"><i class="bi bi-award"></i> <span>Report</span></a>
+                            <a href="#" class="list-group-item border-end-0 d-inline-block text-truncate border-dark"
+                                data-bs-parent="admin-profile.html"><i class="bi bi-person-raised-hand border-dark"></i>
+                                <span>Profilo</span></a>
+                        </div>
+                    </div>
+                </div>
+
+                <main class="col ps-md-2 pt-2">
+                    <a href="#" data-bs-target="#sidebar" data-bs-toggle="collapse"
+                    class="border rounded-3 p-1 text-decoration-none text-muted border-dark"><img src="assets/img/logo.png" width="84px">
+                    </a>
+                    <div class="page-header pt-3">
+                        <h2>Admin Report</h2>
+                    </div>
+                    <p class="lead">Visualizza le statistiche medie degli utenti in questa pagina.</p>
+                    <div id="charts-container p-5">
+                        <div id="chart-uno" class="text-center m-5 border-bottom border-dark"> <!--PRIMO GRAFICO-->
+                            <h3>Confronto tra le medie  delle attività nel tempo</h3>
+                            <div class="button-row row">
+                                <div class="col-4 m-0 p-0">
+                                    <button type="button">Settimana</button>
+                                </div>
+                                <div class="col-4 m-0 p-0">
+                                    <button type="button">Mese</button>
+                                </div>
+                                <div class="col-4 m-0 p-0">
+                                    <button type="button">Anno</button>
+                                </div>
+                            </div>
+                            <div class="chart-container">
+                                <canvas id="attivita-tempo" data-tempo="mese"></canvas>
+                            </div>
+                        </div>
+                        <div id="chart-due" class="text-center m-5 border-end border-dark" data-tempo="mese"> <!--SECONDO GRAFICO-->
+                            <h3>Totalità delle attività nel tempo</h3>
+                            <div class="button-row row">
+                                <div class="col-4 m-0 p-0">
+                                    <button type="button">Settimana</button>
+                                </div>
+                                <div class="col-4 m-0 p-0">
+                                    <button type="button">Mese</button>
+                                </div>
+                                <div class="col-4 m-0 p-0">
+                                    <button type="button">Anno</button>
+                                </div>
+                            </div>
+                            <div class="chart-container">
+                                <canvas id="tot-attivita" data-tempo="mese"></canvas>
+                            </div>
+                        </div>
+                        <div id="chart-tre" class="text-center m-5 border-bottom border-dark"> <!--TERZO GRAFICO-->
+                            <h3>Numero totale per attività</h3>
+                            <div class="button-row row">
+                                <div class="col-4 m-0 p-0">
+                                    <button type="button">Settimana</button>
+                                </div>
+                                <div class="col-4 m-0 p-0">
+                                    <button type="button">Mese</button>
+                                </div>
+                                <div class="col-4 m-0 p-0">
+                                    <button type="button">Anno</button>
+                                </div>
+                            </div>
+                            <div class="chart-container">
+                                <canvas id="attivita-tempo" data-tempo="mese"></canvas>
+                            </div>
+                        </div>
+                    </div>
+                </main>
+            </div>
+        </div>
+        <!--CONTROLLO ADMIN-->
+        <!--DA INSERIRE-->
+
+        <!--JS QUERY-->
+        <script src="js/jquery-3.7.1.min.js"></script>
+        <!--BOOTSTRAP-->
+        <script src="js/bootstrap.bundle.min.js"></script>
+        <!--FOOTER-->
+        <script src="js/footer.js"></script>
+        <!--GRAFICI-->
+        <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.min.js"></script>
+        <!--SCRIPT PAGINA-->
+        <script>
+            //definisco le variabili che mi serviranno
+            let arrayAct1 = [];
+            let arrayAct2 = [];
+            let arrayAct3 = [];
+            document.addEventListener('DOMContentLoaded', async function() {
+                //faccio il fetch delle attività
+                async function fetchAttivita(periodo, tipo) {
+                    try {
+                        const response = await fetch('http://localhost:8080/act');
+                        const data = await response.json();
+                        let arrayAct = [];
+                        const oggi = new Date();
+                        data.forEach((act) => {
+                            const date = new Date(act.sportDate);
+                            if (periodo == 'anno') {
+                                //l'anno attuale
+                                if ((date.getFullYear() == oggi.getFullYear()) && (act.tipo == tipo)) {
+                                    //aggiungo solo le attività fatte entro un anno / mese / settimana
+                                    arrayAct.push(act);
+                                }
+                            } else if (periodo == 'mese') {
+                                //il mese attuale
+                                if ((date.getMonth() == oggi.getMonth()) && (act.tipo == tipo)) {
+                                    //aggiungo solo le attività fatte entro un anno / mese / settimana
+                                    arrayAct.push(act);
+                                }
+                            } else if (periodo == 'settimana') {
+                                //WIP
+                            }
+                        });
+                        return arrayAct;
+                    } catch (error) {
+                        alert('Problemi di comunicazione con il server. Riprova più tardi.');
+                    }
+                }
+                //creo i tre grafici
+                async function createChart1(dato, periodo) {
+                    //definisco il periodo
+                    let xValues = [];
+                    if (periodo == 'anno') {
+                        xValues = ['Gennaio', 'Febbraio', 'Marzo', 'Aprile', 'Maggio', 'Giugno', 'Luglio', 'Agosto', 'Settembre', 'Ottobre', 'Novembre', 'Dicembre']
+                    } else if (periodo == 'mese') {
+                        xValues = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31];
+                    } else {
+                        //WIP
+                    }
+                    let arrayCiclismo = [];
+                    arrayCiclismo = await fetchAttivita(periodo, 'ciclismo');
+                    let arrayCorsa = [];
+                    arrayCorsa = await fetchAttivita(periodo, 'corsa');
+                    let arrayNuoto = [];
+                    arrayNuoto = await fetchAttivita(periodo, 'nuoto');
+                    let sumCiclismo;
+                    let sumCorsa;
+                    let sumNuoto;
+                    let valueCiclismo = [];
+                    let valueCorsa = [];
+                    let valueNuoto = [];
+                    //prendo tutti i dati per le varie attività da mostrare
+                    for (let i = 0; i < xValues.length; i++) {
+                        sumCiclismo = parseInt(0);
+                        sumCorsa = parseInt(0);
+                        sumNuoto = parseInt(0);
+                        if (dato=='utenti') {
+                            //controllo l'id per ogni utente
+                            console.log('WIP');
+                        } else if (dato=='calorie') {
+                            arrayCiclismo.forEach((attivita) => {
+                                const date = new Date(attivita.sportDate);
+                                if (date.getMonth()==i){
+                                    sumCiclismo+=attivita.calorie;
+                                }
+                            })
+                            arrayCorsa.forEach((attivita) => {
+                                const date = new Date(attivita.sportDate);
+                                if (date.getMonth()==i){
+                                    sumCorsa+=attivita.calorie;
+                                }
+                            })
+                            arrayNuoto.forEach((attivita) => {
+                                const date = new Date(attivita.sportDate);
+                                if (date.getMonth()==i){
+                                    sumNuoto+=attivita.calorie;
+                                }
+                            })
+                        } else {
+                            //faccio gli altri casi
+                            console.log('WIP');
+                        }
+                        //media
+                        valueCiclismo[i] = sumCiclismo/arrayCiclismo.length;
+                        valueCorsa[i] = sumCorsa/arrayCorsa.length;
+                        valueNuoto[i] = sumNuoto/arrayNuoto.length;
+                    }
+                    console.log(valueCiclismo);
+                    console.log(valueCorsa);
+                    console.log(valueNuoto);
+                    //creo il diagramma
+                    new Chart("attivita-tempo", {
+                        type: "line",
+                        data: {
+                            labels: xValues,
+                            datasets: [{
+                                label: 'Ciclismo',
+                                data: valueCiclismo,
+                                borderColor: "red",
+                                fill: false
+                            },{
+                                label: 'Corsa',
+                                data: valueCorsa,
+                                borderColor: "blue",
+                                fill: false
+                            },{
+                                label: 'Nuoto',
+                                data: valueNuoto,
+                                borderColor: "green",
+                                fill: false
+                            }]
+                        },
+                        options: {  }
+                    });
+                }
+                createChart1('calorie', 'anno');
+            })
+        </script>
+    </body>
+</html>
