@@ -58,10 +58,10 @@ const sogliaCardioStabile1 = 1600;
 const sogliaCardioStabile2 = 1700;
 
 function updateNotifications() {
-  const massaAtt = 1800;
+  const massaAtt = 1000;
   const massaObb = 20000;
 
-  const cardioAtt = 1900; //
+  const cardioAtt = 1400; //
   const cardiObb = 2000; //
 
   // Notifiche per la massa muscolare
@@ -165,7 +165,7 @@ function capitalizeFirstLetter(string) {
 
 // Funzione per ottenere i dati tramite fetch e aggiornare le barre di progresso
 function aggiornaDati() {
-    fetch("http://localhost:8080/utenti/attivita")
+    fetch("http://localhost:8080/utenti/act")
       .then((response) => {
           if (!response.ok) {
               throw new Error('Errore nella risposta del server: ' + response.statusText);
@@ -179,8 +179,10 @@ function aggiornaDati() {
 }
 
 // Chiama la funzione per ottenere i dati e aggiornare le barre di progresso
-document.addEventListener('DOMContentLoaded', aggiornaDati);
+document.addEventListener('DOMContentLoaded', aggiornaDati);//-------------------------------------------------------------------------
 //FINE
+
+
 // Funzione per calcolare la percentuale
 function calcolaPercentuale(valore, massimo) {
     return (valore / massimo) * 100;
@@ -218,7 +220,7 @@ function capitalizeFirstLetter(string) {
 
 // Funzione per ottenere i dati tramite fetch e aggiornare le barre di progresso
 function aggiornaDati() {
-    fetch("http://localhost:8080/utenti/attivita") // Sostituisci con l'URL del tuo endpoint
+    fetch("http://localhost:8080/utenti/act") // Sostituisci con l'URL del tuo endpoint
         .then((response) => {
             if (!response.ok) {
                 throw new Error('Errore nella risposta del server: ' + response.statusText);
@@ -280,7 +282,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
 async function fetchActivities() {
   try {
-    const response = await fetch("http://localhost:8080/activities");
+    const response = await fetch("http://localhost:8080/act");
     if (!response.ok) throw new Error("Network response was not ok");
     const activities = await response.json();
     displayActivities(activities);
@@ -301,10 +303,199 @@ function displayActivities(activities) {
 
 // Recupera le attività al caricamento della pagina
 document.addEventListener("DOMContentLoaded", fetchActivities);
+//end 1
 
-//fine
+// Funzione per recuperare il token dal localStorage
+function getToken() {
+    return localStorage.getItem('authToken'); // Assumi che il token sia salvato con la chiave 'authToken'
+}
 
-//TOKEN 2 PARTE
+// Funzione per fare il fetch all'endpoint /utenti/me e ottenere l'ID dell'utente
+async function fetchUserId() {
+    const token = getToken();
+
+    if (!token) {
+        console.error('Token non trovato nel localStorage');
+        return;
+    }
+
+    try {
+        const response = await fetch('http://localhost:8080/utenti/me', {
+            method: 'GET',
+            headers: {
+                'Authorization': `Bearer ${token}`,
+                'Content-Type': 'application/json'
+            }
+        });
+
+        if (!response.ok) {
+            throw new Error('Errore nella risposta del server: ' + response.statusText);
+        }
+
+        const data = await response.json();
+        const userId = data.id; // Assumi che la risposta JSON contenga un campo 'id'
+        console.log('User ID:', userId);
+        return userId;
+    } catch (error) {
+        console.error('Errore nel fetch:', error);
+    }
+}
+
+// Chiama la funzione per ottenere l'ID dell'utente al caricamento della pagina
+document.addEventListener('DOMContentLoaded', fetchUserId);
 
 
+//fine tester
+
+//inizio collegamento
+
+// Funzione per recuperare il token dal localStorage
+function getToken() {
+    return localStorage.getItem('authToken'); // Assumi che il token sia salvato con la chiave 'authToken'
+}
+
+// Funzione per fare il fetch all'endpoint /utenti/me e ottenere l'ID dell'utente
+async function fetchUserId() {
+    const token = getToken();
+
+    if (!token) {
+        console.error('Token non trovato nel localStorage');
+        return null;
+    }
+
+    try {
+        const response = await fetch('http://localhost:8080/utenti/me', {
+            method: 'GET',
+            headers: {
+                'Authorization': `Bearer ${token}`,
+                'Content-Type': 'application/json'
+            }
+        });
+
+        if (!response.ok) {
+            throw new Error('Errore nella risposta del server: ' + response.statusText);
+        }
+
+        const data = await response.json();
+        return data.id; // Assumi che la risposta JSON contenga un campo 'id'
+    } catch (error) {
+        console.error('Errore nel fetch:', error);
+        return null;
+    }
+}
+
+// Funzione per fare il fetch di tutte le attività
+async function fetchAllActivities() {
+    try {
+        const response = await fetch('http://localhost:8080/attivita', {
+            method: 'GET',
+            headers: {
+                'Authorization': `Bearer ${getToken()}`,
+                'Content-Type': 'application/json'
+            }
+        });
+
+        if (!response.ok) {
+            throw new Error('Errore nella risposta del server: ' + response.statusText);
+        }
+
+        return await response.json(); // Ritorna tutte le attività
+    } catch (error) {
+        console.error('Errore nel fetch delle attività:', error);
+        return [];
+    }
+}
+
+// Funzione per aggiornare le barre di progresso con le attività dell'utente
+async function updateUserActivities() {
+    const userId = await fetchUserId();
+
+    if (!userId) {
+        console.error('ID utente non disponibile');
+        return;
+    }
+
+    const allActivities = await fetchAllActivities();
+
+    // Filtra le attività per ID dell'utente
+    const userActivities = allActivities.filter(activity => activity.userId === userId);
+
+    // Supponiamo che le attività siano divise tra `massa` e `cardio`
+    const massaActivities = userActivities.filter(activity => activity.type === 'massa');
+    const cardioActivities = userActivities.filter(activity => activity.type === 'cardio');
+
+    // Chiama le funzioni di aggiornamento con le attività filtrate
+    updateProgress(massaActivities);
+    updateCardioProgress(cardioActivities);
+}
+
+// Funzione di aggiornamento per massa muscolare
+function updateProgress(calorieData) {
+    const calorieThreshold = 2000; // Soglia massima di calorie nella giornata
+
+    const days = {
+        lunedi: "settlunMassa",
+        martedi: "setmarMassa",
+        mercoledi: "setmerMassa",
+        giovedi: "setgioMassa",
+        venerdi: "setvenMassa",
+        sabato: "setsabMassa",
+        domenica: "setdomMassa",
+    };
+
+    for (let day in calorieData) {
+        const progressBarId = days[day];
+        if (progressBarId) {
+            const progressBar = document
+                .getElementById(progressBarId)
+                .querySelector(".progress-bar");
+            const calorieIntake = calorieData[day];
+            const percentage = calcolaPercentuale(calorieIntake, calorieThreshold);
+            progressBar.style.width = `${Math.min(percentage, 100)}%`;
+            progressBar.textContent = `${capitalizeFirstLetter(day)}: ${Math.round(percentage)}%`;
+        }
+    }
+}
+
+// Funzione di aggiornamento per cardio
+function updateCardioProgress(cardioData) {
+    const cardioThreshold = 2000;
+
+    const days = {
+        lunedi: "settlunCardio",
+        martedi: "setmarCardio",
+        mercoledi: "setmerCardio",
+        giovedi: "setgioCardio",
+        venerdi: "setvenCardio",
+        sabato: "setsabCardio",
+        domenica: "setdomCardio",
+    };
+
+    for (let day in cardioData) {
+        const progressBarId = days[day];
+        if (progressBarId) {
+            const progressBar = document
+                .getElementById(progressBarId)
+                .querySelector(".progress-bar");
+            const cardioIntake = cardioData[day];
+            const percentage = calcolaPercentuale(cardioIntake, cardioThreshold);
+            progressBar.style.width = `${Math.min(percentage, 100)}%`;
+            progressBar.textContent = `${capitalizeFirstLetter(day)}: ${Math.round(percentage)}%`;
+        }
+    }
+}
+
+function capitalizeFirstLetter(string) {
+    return string.charAt(0).toUpperCase() + string.slice(1);
+}
+
+function calcolaPercentuale(valore, massimo) {
+    return (valore / massimo) * 100;
+}
+
+// Chiama la funzione per aggiornare le attività dell'utente al caricamento della pagina
+document.addEventListener('DOMContentLoaded', updateUserActivities);
+
+
+//TOKEN ACCESSO LOGIN - da inserire
 
