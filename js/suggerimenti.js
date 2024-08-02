@@ -128,11 +128,9 @@ function updateNotifications() {
 updateNotifications();
 //FINE
 
-
-//INIZIO CALCOLO CALORIE DATI SETTIMANA - CARDIO SETTIMANA  - Funzione per calcolare la percentuale
+// Funzione per calcolare la percentuale
 function calcolaPercentuale(valore, massimo) {
-    let percentuale = (valore / massimo) * 100;
-    return percentuale;
+    return (valore / massimo) * 100;
 }
 
 // Funzione per aggiornare la larghezza delle barre di progresso
@@ -150,13 +148,10 @@ function updateCardioProgress(cardioData) {
     };
 
     // AGGIORNAMENTO PER OGNI GIORNO
-    for (let day in cardioData) {
-        const progressBarId = days[day];
-        if (progressBarId) {
-            const progressBar = document
-                .getElementById(progressBarId)
-                .querySelector(".progress-bar");
-            const cardioIntake = cardioData[day];
+    for (const [day, progressBarId] of Object.entries(days)) {
+        const progressBar = document.getElementById(progressBarId)?.querySelector(".progress-bar");
+        if (progressBar) {
+            const cardioIntake = cardioData[day] || 0; // Gestisci i giorni senza dati
             const percentage = calcolaPercentuale(cardioIntake, cardioThreshold);
             progressBar.style.width = `${Math.min(percentage, 100)}%`; 
             progressBar.textContent = `${capitalizeFirstLetter(day)}: ${Math.round(percentage)}%`;
@@ -170,7 +165,7 @@ function capitalizeFirstLetter(string) {
 
 // Funzione per ottenere i dati tramite fetch e aggiornare le barre di progresso
 function aggiornaDati() {
-    fetch("http://localhost:8080/utenti/attivita") // Sostituisci con l'URL del tuo endpoint
+    fetch("http://localhost:8080/utenti/attivita")
       .then((response) => {
           if (!response.ok) {
               throw new Error('Errore nella risposta del server: ' + response.statusText);
@@ -178,7 +173,6 @@ function aggiornaDati() {
           return response.json();
       })
       .then((data) => {
-        // Supponiamo che `data` contenga un oggetto con i valori per i giorni
         updateCardioProgress(data);
       })
       .catch((error) => console.error("Errore nel fetch:", error));
@@ -187,11 +181,9 @@ function aggiornaDati() {
 // Chiama la funzione per ottenere i dati e aggiornare le barre di progresso
 document.addEventListener('DOMContentLoaded', aggiornaDati);
 //FINE
-
- // Funzione per calcolare la percentuale MASSA
+// Funzione per calcolare la percentuale
 function calcolaPercentuale(valore, massimo) {
-    let percentuale = (valore / massimo) * 100;
-    return percentuale;
+    return (valore / massimo) * 100;
 }
 
 // Funzione per aggiornare la larghezza delle barre di progresso
@@ -208,13 +200,11 @@ function updateProgress(calorieData) {
         domenica: "setdomMassa",
     };
 
-    for (let day in calorieData) {
+    for (const day in days) {
         const progressBarId = days[day];
-        if (progressBarId) {
-            const progressBar = document
-                .getElementById(progressBarId)
-                .querySelector(".progress-bar");
-            const calorieIntake = calorieData[day];
+        const progressBar = document.getElementById(progressBarId)?.querySelector(".progress-bar");
+        if (progressBar) {
+            const calorieIntake = calorieData[day] || 0; // Gestisci giorni senza dati
             const percentage = calcolaPercentuale(calorieIntake, calorieThreshold);
             progressBar.style.width = `${Math.min(percentage, 100)}%`;
             progressBar.textContent = `${capitalizeFirstLetter(day)}: ${Math.round(percentage)}%`;
@@ -243,9 +233,9 @@ function aggiornaDati() {
 }
 
 // Chiama la funzione per ottenere i dati e aggiornare le barre di progresso
-aggiornaDati();
-
+document.addEventListener('DOMContentLoaded', aggiornaDati);
 //FINE MASSA SETTIMANA
+
 
 //ATTIVITA SETTIMINALE
 
@@ -288,32 +278,33 @@ document.addEventListener('DOMContentLoaded', () => {
 
 //gestione collegamento DB TESTARE
 
- async function fetchActivities() {
-   try {
-     const response = await fetch("jdbc:mysql://localhost:3306/tracker");
-     if (!response.ok) throw new Error("Network response was not ok");
-     const activities = await response.json();
-     displayActivities(activities);
-   } catch (error) {
-     console.error("Error fetching activities:", error);
-   }
- }
+async function fetchActivities() {
+  try {
+    const response = await fetch("http://localhost:8080/activities");
+    if (!response.ok) throw new Error("Network response was not ok");
+    const activities = await response.json();
+    displayActivities(activities);
+  } catch (error) {
+    console.error("Error fetching activities:", error);
+  }
+}
 
- // Funzione per visualizzare le attività nella pagina
- function displayActivities(activities) {
-   const activityList = document.getElementById("activity-list");
-   activities.forEach((activity) => {
-     const listItem = document.createElement("li");
-     listItem.textContent = `${activity.name} (${activity.type}): ${activity.duration} minutes`;
-     activityList.appendChild(listItem);
-   });
- }
+// Funzione per visualizzare le attività nella pagina
+function displayActivities(activities) {
+  const activityList = document.getElementById("activity-list");
+  activities.forEach((activity) => {
+    const listItem = document.createElement("li");
+    listItem.textContent = `${activity.name} (${activity.type}): ${activity.duration} minutes`;
+    activityList.appendChild(listItem);
+  });
+}
 
- // Recupera le attività al caricamento della pagina
- fetchActivities();
+// Recupera le attività al caricamento della pagina
+document.addEventListener("DOMContentLoaded", fetchActivities);
+
 //fine
 
 //TOKEN 2 PARTE
 
-// Funzione per calcolare la percentuale
+
 
