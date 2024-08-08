@@ -56,7 +56,7 @@
                             <h3>Confronto tra le medie  delle attività nel tempo</h3>
                             <div class="button-row row">
                                 <div class="col-3 m-0 p-0">
-                                    <button class="periodoUno" type="button" data-selected="">Settimane</button>
+                                    <button class="periodoUno" type="button" data-selected="">Giorni</button>
                                 </div>
                                 <div class="col-3 m-0 p-0">
                                     <button class="periodoUno" type="button" data-selected="selected">Mesi</button>
@@ -147,18 +147,20 @@
                         data.forEach((act) => {
                             const date = new Date(act.sportDate);
                             if (periodo == 'Anni') {
-                                //aggiungo tutte le attività
-                                arrayAct.push(act);
-                            } else if (periodo == 'Mesi') {
-                                //l'anno attuale
-                                if ((date.getFullYear() == oggi.getFullYear()) && (act.tipo == tipo)) {
-                                    //aggiungo solo le attività fatte entro un anno / mese / settimana
+                                //aggiungo tutte le attività del tipo selezionato
+                                if (act.tipo == tipo) {
                                     arrayAct.push(act);
                                 }
-                            } else if (periodo == 'Settimane') {
+                            } else if (periodo == 'Mesi') {
+                                //le attività dell'anno attuale
+                                if ((date.getFullYear() == oggi.getFullYear()) && (act.tipo == tipo)) {
+                                    //aggiungo solo le attività fatte entro un anno
+                                    arrayAct.push(act);
+                                }
+                            } else if (periodo == 'Giorni') {
                                 //il mese attuale
                                 if ((date.getMonth() == oggi.getMonth()) && (act.tipo == tipo)) {
-                                    //aggiungo solo le attività fatte entro un anno / mese / settimana
+                                    //aggiungo solo le attività fatte entro un mese
                                     arrayAct.push(act);
                                 }
                             }
@@ -168,16 +170,133 @@
                         alert('Problemi di comunicazione con il server. Riprova più tardi.');
                     }
                 }
+                //organizzo i dati richiesti dal grafico
+                function organiseData(periodo, array, dato, contatore) {
+                    let totale = parseInt(0);
+                    //controllo il periodo su cui dividere i dati
+                    if (periodo == 'Mesi') {
+                        //controllo il tipo di dato da prendere
+                        if (dato=='utenti') {
+                            //controllo l'id per ogni utente?
+                            console.log('WIP');
+                        } else if (dato=='calorie') {
+                            array.forEach((attivita) => {
+                                const date = new Date(attivita.sportDate);
+                                //controllo se la data dell'attività è del mese giusto
+                                if (date.getMonth()==contatore){
+                                    totale+=attivita.calorie;
+                                }
+                            })
+                        } else if (dato=='durata'){
+                            array.forEach((attivita) => {
+                                const date = new Date(attivita.sportDate);
+                                //controllo se la data dell'attività è del mese giusto
+                                if (date.getMonth()==contatore){
+                                    totale+=attivita.durata;
+                                }
+                            })
+                        } else if (dato=='distanza'){
+                            array.forEach((attivita) => {
+                                const date = new Date(attivita.sportDate);
+                                //controllo se la data dell'attività è del mese giusto
+                                if (date.getMonth()==contatore){
+                                    totale+=attivita.distanza;
+                                }
+                            })
+                        }
+                    } else if (periodo == 'Anni') {
+                        if (dato == 'utenti') {
+                            //WIP
+                        } else if (dato == 'calorie') {
+                            array.forEach((attivita) => {
+                                const date = new Date(attivita.sportDate);
+                                //controllo se la data dell'attività è dell'anno giusto
+                                if (date.getFullYear()==(parseInt(contatore)+parseInt(2020))) {
+                                    totale+=attivita.calorie;
+                                }
+                            })
+                        } else if (dato == 'durata') {
+                            array.forEach((attivita) => {
+                                const date = new Date(attivita.sportDate);
+                                //controllo se la data dell'attività è dell'anno giusto
+                                if (date.getFullYear()==(parseInt(contatore)+parseInt(2020))) {
+                                    totale+=attivita.durata;
+                                }
+                            })
+                        } else if (dato == 'distanza') {
+                            array.forEach((attivita) => {
+                                const date = new Date(attivita.sportDate);
+                                //controllo se la data dell'attività è dell'anno giusto
+                                if (date.getFullYear()==(parseInt(contatore)+parseInt(2020))) {
+                                    totale+=attivita.distanza;
+                                }
+                            })
+                        }
+                    } else if (periodo == 'Giorni') {
+                        if (dato == 'utenti') {
+                            //WIP
+                        } else if (dato == 'calorie') {
+                            array.forEach((attivita) => {
+                                const date = new Date(attivita.sportDate);
+                                //controllo se la data dell'attività è del mese giusto
+                                if (date.getDate()==contatore) {
+                                    totale+=attivita.calorie;
+                                }
+                            })
+                        } else if (dato == 'durata') {
+                            array.forEach((attivita) => {
+                                const date = new Date(attivita.sportDate);
+                                //controllo se la data dell'attività è del mese giusto
+                                if (date.getDate()==contatore) {
+                                    totale+=attivita.durata;
+                                }
+                            })
+                        } else if (dato == 'distanza') {
+                            array.forEach((attivita) => {
+                                const date = new Date(attivita.sportDate);
+                                //controllo se la data dell'attività è del mese giusto
+                                if (date.getDate()==contatore) {
+                                    totale+=attivita.distanza;
+                                }
+                            })
+                        }
+                    }
+                    return totale;
+                }
                 //creo i tre grafici
                 async function createChart1(dato, periodo) {
                     //definisco il periodo
                     let xValues = [];
+                    const oggi = new Date();
                     if (periodo == 'Anni') {
-                        xValues = ['2020', '2021', '2022', '2023', '2024'];
+                        const anno = oggi.getFullYear();
+                        //faccio aggiungere gli anni dal 2020 all'anno attuale
+                        for (j=2020; j<=anno; j++) {
+                            xValues.push(j);
+                        }
                     } else if (periodo == 'Mesi') {
+                        
                         xValues = ['Gennaio', 'Febbraio', 'Marzo', 'Aprile', 'Maggio', 'Giugno', 'Luglio', 'Agosto', 'Settembre', 'Ottobre', 'Novembre', 'Dicembre'];
                     } else {
-                        xValues = ['Settimana 1', 'Settimana 2', 'Settimana 3', 'Settimana 4']
+                        //costruisco l'array dei giorni del mese considerando che mese è e se l'anno è bisestile
+                        const anno = parseInt(oggi.getFullYear());
+                        const mese = parseInt(oggi.getMonth());
+                        if ((mese==0)||(mese==2)||(mese==4)||(mese==6)||(mese==7)||(mese==9)||(mese==11)) {
+                            //mese da 31 giorni
+                            xValues = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12', '13', '14', '15', '16', '17', '18', '19', '20', '21', '22', '23', '24', '25', '26', '27', '28', '29', '30', '31'];
+                        } else if (mese==1) {
+                            //febbraio
+                            if (anno%4==0) {
+                                //anno bisestile
+                                xValues = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12', '13', '14', '15', '16', '17', '18', '19', '20', '21', '22', '23', '24', '25', '26', '27', '28', '29'];
+                            } else {
+                                //anno normale
+                                xValues = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12', '13', '14', '15', '16', '17', '18', '19', '20', '21', '22', '23', '24', '25', '26', '27', '28'];
+                            }
+                        } else {
+                            //mese da 30 giorni
+                            xValues = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12', '13', '14', '15', '16', '17', '18', '19', '20', '21', '22', '23', '24', '25', '26', '27', '28', '29', '30'];
+                        }
                     }
                     let arrayCiclismo = [];
                     arrayCiclismo = await fetchAttivita(periodo, 'ciclismo');
@@ -192,71 +311,16 @@
                     let valueCorsa = [];
                     let valueNuoto = [];
                     //prendo tutti i dati per le varie attività da mostrare
+                    //li inserisco in un array lungo quanto i valori di X (anni, mesi o settimane)
                     for (let i = 0; i < xValues.length; i++) {
                         sumCiclismo = parseInt(0);
                         sumCorsa = parseInt(0);
                         sumNuoto = parseInt(0);
-                        if (dato=='utenti') {
-                            //controllo l'id per ogni utente
-                            console.log('WIP');
-                        } else if (dato=='calorie') {
-                            arrayCiclismo.forEach((attivita) => {
-                                const date = new Date(attivita.sportDate);
-                                if (date.getMonth()==i){
-                                    sumCiclismo+=attivita.calorie;
-                                }
-                            })
-                            arrayCorsa.forEach((attivita) => {
-                                const date = new Date(attivita.sportDate);
-                                if (date.getMonth()==i){
-                                    sumCorsa+=attivita.calorie;
-                                }
-                            })
-                            arrayNuoto.forEach((attivita) => {
-                                const date = new Date(attivita.sportDate);
-                                if (date.getMonth()==i){
-                                    sumNuoto+=attivita.calorie;
-                                }
-                            })
-                        } else if (dato=='durata'){
-                            arrayCiclismo.forEach((attivita) => {
-                                const date = new Date(attivita.sportDate);
-                                if (date.getMonth()==i){
-                                    sumCiclismo+=attivita.durata;
-                                }
-                            })
-                            arrayCorsa.forEach((attivita) => {
-                                const date = new Date(attivita.sportDate);
-                                if (date.getMonth()==i){
-                                    sumCorsa+=attivita.durata;
-                                }
-                            })
-                            arrayNuoto.forEach((attivita) => {
-                                const date = new Date(attivita.sportDate);
-                                if (date.getMonth()==i){
-                                    sumNuoto+=attivita.durata;
-                                }
-                            })
-                        } else if (dato=='distanza'){
-                            arrayCiclismo.forEach((attivita) => {
-                                const date = new Date(attivita.sportDate);
-                                if (date.getMonth()==i){
-                                    sumCiclismo+=attivita.distanza;
-                                }
-                            })
-                            arrayCorsa.forEach((attivita) => {
-                                const date = new Date(attivita.sportDate);
-                                if (date.getMonth()==i){
-                                    sumCorsa+=attivita.distanza;
-                                }
-                            })
-                            arrayNuoto.forEach((attivita) => {
-                                const date = new Date(attivita.sportDate);
-                                if (date.getMonth()==i){
-                                    sumNuoto+=attivita.distanza;
-                                }
-                            })
-                        }
+                        //organizzo i dati a seconda del periodo e del dato richiesto per ogni attività
+                        //richiamando un'altra funzione
+                        sumCiclismo = organiseData(periodo, arrayCiclismo, dato, i);
+                        sumCorsa = organiseData(periodo, arrayCorsa, dato, i);
+                        sumNuoto = organiseData(periodo, arrayNuoto, dato, i);
                         //media
                         valueCiclismo[i] = sumCiclismo/arrayCiclismo.length;
                         valueCorsa[i] = sumCorsa/arrayCorsa.length;
