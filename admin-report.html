@@ -56,13 +56,13 @@
                             <h3>Confronto tra le medie  delle attività nel tempo</h3>
                             <div class="button-row row">
                                 <div class="col-3 m-0 p-0">
-                                    <button class="periodoUno" type="button" data-selected="">Giorni</button>
+                                    <button class="periodoUno" type="button">Giorni</button>
                                 </div>
                                 <div class="col-3 m-0 p-0">
-                                    <button class="periodoUno" type="button" data-selected="selected">Mesi</button>
+                                    <button class="periodoUno selected" type="button">Mesi</button>
                                 </div>
                                 <div class="col-3 m-0 p-0">
-                                    <button class="periodoUno" type="button" data-selected="">Anni</button>
+                                    <button class="periodoUno" type="button">Anni</button>
                                 </div>
                                 <div class="col-3 m-0 p-0">
                                     <select id="selctChartUno">
@@ -351,19 +351,35 @@
                         options: {  }
                     });
                 }
-                //aggiungo un evento alla selzione delle opzioni
+                //aggiungo un evento alla selezione delle opzioni
                 const selettoreUno = document.getElementById('selctChartUno');
                 selettoreUno.addEventListener('change' , function() {
                     const buttonChartUno = document.getElementsByClassName('periodoUno');
                     let periodo;
                     for (let pulsante of buttonChartUno) {
-                        if (pulsante.getAttribute('data-selected')==='selected') {
+                        if (pulsante.classList.contains('selected')) {
                             //trovo il periodo selezionato
                             periodo=pulsante.innerText;
                         }
                     }
                     createChart1(this.value, periodo);
                 })
+                //aggiungo un evento ai pulsanti del periodo
+                const periodoUno = document.getElementsByClassName('periodoUno');
+                for (let button of periodoUno) {
+                    button.addEventListener('click', function() {
+                        for (let pulsante of periodoUno) {
+                            //rimuovo la classe selected da tutti i pulsanti
+                            pulsante.classList.remove('selected');
+                        }
+                        //la riaggiungo solo per questo elemento
+                        this.classList.add('selected');
+                        //adesso cerco il dato da mostrare
+                        const dato = document.getElementById('selctChartUno').value;
+                        const periodo = this.innerText;
+                        createChart1(dato, periodo);
+                    })
+                }
                 createChart1('calorie', 'Mesi');
             })
         </script>
