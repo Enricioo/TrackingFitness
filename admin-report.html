@@ -65,7 +65,7 @@
                                     <button class="periodoUno" type="button">Anni</button>
                                 </div>
                                 <div class="col-3 m-0 p-0">
-                                    <select id="selctChartUno">
+                                    <select id="selectChartUno">
                                         <option value="calorie">Calorie</option>
                                         <option value="distanza">Distanza</option>
                                         <option value="durata">Durata</option>
@@ -80,16 +80,20 @@
                             <h3>Totalità delle attività nel tempo</h3>
                             <div class="button-row row">
                                 <div class="col-3 m-0 p-0">
-                                    <button type="button">Settimana</button>
+                                    <button class="periodoDue" type="button">Giorni</button>
                                 </div>
                                 <div class="col-3 m-0 p-0">
-                                    <button type="button">Mese</button>
+                                    <button class="periodoDue selected" type="button">Mesi</button>
                                 </div>
                                 <div class="col-3 m-0 p-0">
-                                    <button type="button">Anno</button>
+                                    <button class="periodoDue" type="button">Anni</button>
                                 </div>
                                 <div class="col-3 m-0 p-0">
-                                    <!--SELECT-->
+                                    <select id="selectChartDue">
+                                        <option value="calorie">Calorie</option>
+                                        <option value="distanza">Distanza</option>
+                                        <option value="durata">Durata</option>
+                                    </select>
                                 </div>
                             </div>
                             <div class="chart-container">
@@ -263,7 +267,8 @@
                     }
                     return totale;
                 }
-                //creo i tre grafici
+
+                //creo il PRIMO dei tre grafici
                 async function createChart1(dato, periodo) {
                     //definisco il periodo
                     let xValues = [];
@@ -351,8 +356,8 @@
                         options: {  }
                     });
                 }
-                //aggiungo un evento alla selezione delle opzioni
-                const selettoreUno = document.getElementById('selctChartUno');
+                //aggiungo un evento alla selezione delle opzioni al diagramma uno
+                const selettoreUno = document.getElementById('selectChartUno');
                 selettoreUno.addEventListener('change' , function() {
                     const buttonChartUno = document.getElementsByClassName('periodoUno');
                     let periodo;
@@ -364,7 +369,7 @@
                     }
                     createChart1(this.value, periodo);
                 })
-                //aggiungo un evento ai pulsanti del periodo
+                //aggiungo un evento ai pulsanti del periodo per il diagramma uno
                 const periodoUno = document.getElementsByClassName('periodoUno');
                 for (let button of periodoUno) {
                     button.addEventListener('click', function() {
@@ -375,12 +380,120 @@
                         //la riaggiungo solo per questo elemento
                         this.classList.add('selected');
                         //adesso cerco il dato da mostrare
-                        const dato = document.getElementById('selctChartUno').value;
+                        const dato = document.getElementById('selectChartUno').value;
                         const periodo = this.innerText;
                         createChart1(dato, periodo);
                     })
                 }
+
+                //creo il SECONDO dei tre grafici
+                async function createChart2(dato, periodo) {
+                    const labelChart = dato;
+                    //definisco il periodo
+                    let xValues = [];
+                    const oggi = new Date();
+                    if (periodo == 'Anni') {
+                        const anno = oggi.getFullYear();
+                        //faccio aggiungere gli anni dal 2020 all'anno attuale
+                        for (j=2020; j<=anno; j++) {
+                            xValues.push(j);
+                        }
+                    } else if (periodo == 'Mesi') {
+                        
+                        xValues = ['Gennaio', 'Febbraio', 'Marzo', 'Aprile', 'Maggio', 'Giugno', 'Luglio', 'Agosto', 'Settembre', 'Ottobre', 'Novembre', 'Dicembre'];
+                    } else {
+                        //costruisco l'array dei giorni del mese considerando che mese è e se l'anno è bisestile
+                        const anno = parseInt(oggi.getFullYear());
+                        const mese = parseInt(oggi.getMonth());
+                        if ((mese==0)||(mese==2)||(mese==4)||(mese==6)||(mese==7)||(mese==9)||(mese==11)) {
+                            //mese da 31 giorni
+                            xValues = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12', '13', '14', '15', '16', '17', '18', '19', '20', '21', '22', '23', '24', '25', '26', '27', '28', '29', '30', '31'];
+                        } else if (mese==1) {
+                            //febbraio
+                            if (anno%4==0) {
+                                //anno bisestile
+                                xValues = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12', '13', '14', '15', '16', '17', '18', '19', '20', '21', '22', '23', '24', '25', '26', '27', '28', '29'];
+                            } else {
+                                //anno normale
+                                xValues = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12', '13', '14', '15', '16', '17', '18', '19', '20', '21', '22', '23', '24', '25', '26', '27', '28'];
+                            }
+                        } else {
+                            //mese da 30 giorni
+                            xValues = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12', '13', '14', '15', '16', '17', '18', '19', '20', '21', '22', '23', '24', '25', '26', '27', '28', '29', '30'];
+                        }
+                    }
+                    //prendo le attività per ogni singola attività
+                    let arrayCiclismo = [];
+                    arrayCiclismo = await fetchAttivita(periodo, 'ciclismo');
+                    let arrayCorsa = [];
+                    arrayCorsa = await fetchAttivita(periodo, 'corsa');
+                    let arrayNuoto = [];
+                    arrayNuoto = await fetchAttivita(periodo, 'nuoto');
+                    let sumCiclismo;
+                    let sumCorsa;
+                    let sumNuoto;
+                    let valueTot = [];
+                    //prendo tutti i dati per le varie attività da mostrare
+                    //li inserisco in un array lungo quanto i valori di X (anni, mesi o settimane) 
+                    //fondo i dati in un unico array
+                    for (let i = 0; i < xValues.length; i++) {
+                        sumCiclismo = parseInt(0);
+                        sumCorsa = parseInt(0);
+                        sumNuoto = parseInt(0);
+                        //organizzo i dati a seconda del periodo e del dato richiesto per ogni attività
+                        //richiamando un'altra funzione
+                        sumCiclismo = organiseData(periodo, arrayCiclismo, dato, i);
+                        sumCorsa = organiseData(periodo, arrayCorsa, dato, i);
+                        sumNuoto = organiseData(periodo, arrayNuoto, dato, i);
+                        //somma totale
+                        valueTot[i] = sumCiclismo + sumCorsa + sumNuoto;
+                    }
+                    //creo il secondo diagramma
+                    new Chart ('tot-attivita', {
+                        type: "line",
+                        data: {
+                            labels: xValues,
+                            datasets: [{
+                                label: labelChart,
+                                borderColor: "white",
+                                data: valueTot
+                            }]
+                        },
+                        options: {  }
+                    })
+                }
+                //aggiungo un evento alla selezione delle opzioni al diagramma due
+                const selettoreDue = document.getElementById('selectChartDue');
+                selettoreDue.addEventListener('change' , function() {
+                    const buttonChartDue = document.getElementsByClassName('periodoDue');
+                    let periodo;
+                    for (let pulsante of buttonChartDue) {
+                        if (pulsante.classList.contains('selected')) {
+                            //trovo il periodo selezionato
+                            periodo=pulsante.innerText;
+                        }
+                    }
+                    createChart2(this.value, periodo);
+                })
+                //aggiungo un evento ai pulsanti del periodo per il diagramma due
+                const periodoDue = document.getElementsByClassName('periodoDue');
+                for (let button of periodoDue) {
+                    button.addEventListener('click', function() {
+                        for (let pulsante of periodoDue) {
+                            //rimuovo la classe selected da tutti i pulsanti
+                            pulsante.classList.remove('selected');
+                        }
+                        //la riaggiungo solo per questo elemento
+                        this.classList.add('selected');
+                        //adesso cerco il dato da mostrare
+                        const dato = document.getElementById('selectChartDue').value;
+                        const periodo = this.innerText;
+                        createChart2(dato, periodo);
+                    })
+                }
+
                 createChart1('calorie', 'Mesi');
+                createChart2('calorie', 'Mesi');
             })
         </script>
     </body>
