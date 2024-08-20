@@ -27,6 +27,11 @@
         <link rel="stylesheet" href="css/footer.css">
     </head>
     <body>
+        <!--DA FARE:
+         - terzo grafico;
+         - sistemare pulsanti e select;
+         - sistemare bug grafici
+        -->
         <div class="container-fluid sidebar">
             <div class="row flex-nowrap">
                 <div class="col-auto px-0"> <!--SIDEBAR-->
@@ -271,6 +276,7 @@
                 //creo il PRIMO dei tre grafici
                 async function createChart1(dato, periodo) {
                     //definisco il periodo
+                    const titleChart = "Confronto delle attività per la media di: "+dato;
                     let xValues = [];
                     const oggi = new Date();
                     if (periodo == 'Anni') {
@@ -353,7 +359,12 @@
                                 fill: false
                             }]
                         },
-                        options: {  }
+                        options: {
+                            title: {
+                                display: true,
+                                text: titleChart
+                            }
+                        }
                     });
                 }
                 //aggiungo un evento alla selezione delle opzioni al diagramma uno
@@ -389,6 +400,7 @@
                 //creo il SECONDO dei tre grafici
                 async function createChart2(dato, periodo) {
                     const labelChart = dato;
+                    const titleChart = "Totalità di "+dato+" nelle attività svolte";
                     //definisco il periodo
                     let xValues = [];
                     const oggi = new Date();
@@ -459,7 +471,12 @@
                                 data: valueTot
                             }]
                         },
-                        options: {  }
+                        options: {
+                            title: {
+                                display: true,
+                                text: titleChart
+                            }
+                        }
                     })
                 }
                 //aggiungo un evento alla selezione delle opzioni al diagramma due
