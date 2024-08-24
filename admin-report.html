@@ -168,7 +168,7 @@
                                 }
                             } else if (periodo == 'Giorni') {
                                 //il mese attuale
-                                if ((date.getMonth() == oggi.getMonth()) && (act.tipo == tipo)) {
+                                if ((date.getFullYear() == oggi.getFullYear()) && (date.getMonth() == oggi.getMonth()) && (act.tipo == tipo)) {
                                     //aggiungo solo le attività fatte entro un mese
                                     arrayAct.push(act);
                                 }
@@ -185,10 +185,7 @@
                     //controllo il periodo su cui dividere i dati
                     if (periodo == 'Mesi') {
                         //controllo il tipo di dato da prendere
-                        if (dato=='utenti') {
-                            //controllo l'id per ogni utente?
-                            console.log('WIP');
-                        } else if (dato=='calorie') {
+                        if (dato=='calorie') {
                             array.forEach((attivita) => {
                                 const date = new Date(attivita.sportDate);
                                 //controllo se la data dell'attività è del mese giusto
@@ -214,9 +211,7 @@
                             })
                         }
                     } else if (periodo == 'Anni') {
-                        if (dato == 'utenti') {
-                            //WIP
-                        } else if (dato == 'calorie') {
+                        if (dato == 'calorie') {
                             array.forEach((attivita) => {
                                 const date = new Date(attivita.sportDate);
                                 //controllo se la data dell'attività è dell'anno giusto
@@ -242,13 +237,11 @@
                             })
                         }
                     } else if (periodo == 'Giorni') {
-                        if (dato == 'utenti') {
-                            //WIP
-                        } else if (dato == 'calorie') {
+                        if (dato == 'calorie') {
                             array.forEach((attivita) => {
                                 const date = new Date(attivita.sportDate);
                                 //controllo se la data dell'attività è del mese giusto
-                                if (date.getDate()==contatore) {
+                                if (date.getDate()==(contatore+1)) {
                                     totale+=attivita.calorie;
                                 }
                             })
@@ -256,7 +249,7 @@
                             array.forEach((attivita) => {
                                 const date = new Date(attivita.sportDate);
                                 //controllo se la data dell'attività è del mese giusto
-                                if (date.getDate()==contatore) {
+                                if (date.getDate()==(contatore+1)) {
                                     totale+=attivita.durata;
                                 }
                             })
@@ -264,7 +257,7 @@
                             array.forEach((attivita) => {
                                 const date = new Date(attivita.sportDate);
                                 //controllo se la data dell'attività è del mese giusto
-                                if (date.getDate()==contatore) {
+                                if (date.getDate()==(contatore+1)) {
                                     totale+=attivita.distanza;
                                 }
                             })
