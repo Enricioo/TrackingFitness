@@ -56,8 +56,8 @@
                         <h2>Admin Report</h2>
                     </div>
                     <p class="lead">Visualizza le statistiche medie degli utenti in questa pagina.</p>
-                    <div id="charts-container p-5">
-                        <div id="chart-uno" class="text-center m-5 border-bottom border-dark"> <!--PRIMO GRAFICO-->
+                    <div id="charts-container" class="p-5 row">
+                        <div id="chart-uno" class="col-12 text-center my-5"> <!--PRIMO GRAFICO-->
                             <h3>Confronto tra le medie  delle attività nel tempo</h3>
                             <div class="button-row row">
                                 <div class="col-3 m-0 p-0">
@@ -81,7 +81,7 @@
                                 <canvas id="attivita-tempo" data-tempo="mese"></canvas>
                             </div>
                         </div>
-                        <div id="chart-due" class="text-center m-5 border-end border-dark" data-tempo="mese"> <!--SECONDO GRAFICO-->
+                        <div id="chart-due" class="col-12 col-md-7 text-center my-5" data-tempo="mese"> <!--SECONDO GRAFICO-->
                             <h3>Totalità delle attività nel tempo</h3>
                             <div class="button-row row">
                                 <div class="col-3 m-0 p-0">
@@ -102,24 +102,24 @@
                                 </div>
                             </div>
                             <div class="chart-container">
-                                <canvas id="tot-attivita" data-tempo="mese"></canvas>
+                                <canvas id="tot-attivita" data-tempo="mese" class="pt-5 mt-5"></canvas>
                             </div>
                         </div>
-                        <div id="chart-tre" class="text-center m-5 border-bottom border-dark"> <!--TERZO GRAFICO-->
+                        <div id="chart-tre" class="col-12 col-md-5 text-center my-5"> <!--TERZO GRAFICO-->
                             <h3>Numero totale per attività</h3>
                             <div class="button-row row">
                                 <div class="col-4 m-0 p-0">
-                                    <button type="button">Settimana</button>
+                                    <button class="periodoTre" type="button">Giorni</button>
                                 </div>
                                 <div class="col-4 m-0 p-0">
-                                    <button type="button">Mese</button>
+                                    <button class="periodoTre" type="button">Mesi</button>
                                 </div>
                                 <div class="col-4 m-0 p-0">
-                                    <button type="button">Anno</button>
+                                    <button class="periodoTre" type="button">Anni</button>
                                 </div>
                             </div>
                             <div class="chart-container">
-                                <canvas id="attivita-tempo" data-tempo="mese"></canvas>
+                                <canvas id="attivita-numero" data-tempo="mese"></canvas>
                             </div>
                         </div>
                     </div>
@@ -509,8 +509,50 @@
                     })
                 }
 
+                //creo il TERZO dei tre grafici
+                async function createChart3(periodo) {
+                    const titleChart = "Numero di utenti per attività";
+                    //definisco le tre attività in esame
+                    let xValues = ["Ciclismo", "Corsa", "Nuoto"];
+                           
+                    //prendo le attività per ogni singola attività
+                    let arrayCiclismo = [];
+                    arrayCiclismo = await fetchAttivita(periodo, 'ciclismo');
+                    let arrayCorsa = [];
+                    arrayCorsa = await fetchAttivita(periodo, 'corsa');
+                    let arrayNuoto = [];
+                    arrayNuoto = await fetchAttivita(periodo, 'nuoto');
+                    let yValues = [arrayCiclismo.length, arrayCorsa.length, arrayNuoto.length];
+                    //adesso creo il terzo grafico
+                    new Chart ('attivita-numero', {
+                        type: "doughnut",
+                        data: {
+                            labels: xValues,
+                            datasets: [{
+                                backgroundColor: ["red", "blue", "green"],
+                                data: yValues
+                            }]
+                        },
+                        options: {
+                            title: {
+                                display: true,
+                                text: "Numero di attività"
+                            }
+                        }
+                    });
+                }
+                //creo un evento per i tre pulsanti
+                const periodoTre = document.getElementsByClassName('periodoTre');
+                for (let button of periodoTre) {
+                    button.addEventListener('click', function() {
+                        const periodo = this.innerText;
+                        createChart3(periodo);
+                    })
+                }
+
                 createChart1('calorie', 'Mesi');
                 createChart2('calorie', 'Mesi');
+                createChart3('Mesi');
             })
         </script>
     </body>
