@@ -28,9 +28,9 @@
     </head>
     <body>
         <!--DA FARE:
-         - terzo grafico;
          - sistemare pulsanti e select;
-         - sistemare bug grafici
+         - sistemare bug grafici;
+         - migliorare la responsività
         -->
         <div class="container-fluid sidebar">
             <div class="row flex-nowrap">
@@ -61,16 +61,16 @@
                             <h3>Confronto tra le medie  delle attività nel tempo</h3>
                             <div class="button-row row">
                                 <div class="col-3 m-0 p-0">
-                                    <button class="periodoUno" type="button">Giorni</button>
+                                    <button class="btn btn-primary periodoUno" type="button">Giorni</button>
                                 </div>
                                 <div class="col-3 m-0 p-0">
-                                    <button class="periodoUno selected" type="button">Mesi</button>
+                                    <button class="btn btn-primary periodoUno selected" type="button">Mesi</button>
                                 </div>
                                 <div class="col-3 m-0 p-0">
-                                    <button class="periodoUno" type="button">Anni</button>
+                                    <button class="btn btn-primary periodoUno" type="button">Anni</button>
                                 </div>
                                 <div class="col-3 m-0 p-0">
-                                    <select id="selectChartUno">
+                                    <select id="selectChartUno" class="form-select">
                                         <option value="calorie">Calorie</option>
                                         <option value="distanza">Distanza</option>
                                         <option value="durata">Durata</option>
@@ -85,16 +85,16 @@
                             <h3>Totalità delle attività nel tempo</h3>
                             <div class="button-row row">
                                 <div class="col-3 m-0 p-0">
-                                    <button class="periodoDue" type="button">Giorni</button>
+                                    <button class="btn btn-primary periodoDue" type="button">Giorni</button>
                                 </div>
                                 <div class="col-3 m-0 p-0">
-                                    <button class="periodoDue selected" type="button">Mesi</button>
+                                    <button class="btn btn-primary periodoDue selected" type="button">Mesi</button>
                                 </div>
                                 <div class="col-3 m-0 p-0">
-                                    <button class="periodoDue" type="button">Anni</button>
+                                    <button class="btn btn-primary periodoDue" type="button">Anni</button>
                                 </div>
                                 <div class="col-3 m-0 p-0">
-                                    <select id="selectChartDue">
+                                    <select id="selectChartDue" class="form-select">
                                         <option value="calorie">Calorie</option>
                                         <option value="distanza">Distanza</option>
                                         <option value="durata">Durata</option>
@@ -109,13 +109,13 @@
                             <h3>Numero totale per attività</h3>
                             <div class="button-row row">
                                 <div class="col-4 m-0 p-0">
-                                    <button class="periodoTre" type="button">Giorni</button>
+                                    <button class="btn btn-primary periodoTre" type="button">Giorni</button>
                                 </div>
                                 <div class="col-4 m-0 p-0">
-                                    <button class="periodoTre" type="button">Mesi</button>
+                                    <button class="btn btn-primary periodoTre" type="button">Mesi</button>
                                 </div>
                                 <div class="col-4 m-0 p-0">
-                                    <button class="periodoTre" type="button">Anni</button>
+                                    <button class="btn btn-primary periodoTre" type="button">Anni</button>
                                 </div>
                             </div>
                             <div class="chart-container">
