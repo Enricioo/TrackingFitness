@@ -20,6 +20,7 @@ body {
     display: none;
     color: #2F97C1;
     background-color: #194b68;
+    z-index: 9999;
   }
 
   #btn-back-to-top:hover {
