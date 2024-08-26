@@ -550,39 +550,73 @@
             <!-- OBBIETTVI SETTIMANALI -->
 
 <script>
-     async function fetchAttivita(periodo, tipo) {
+
+
+
+
+
+      async function getId() {
+            //prendo il token dal browser
+            const token = localStorage.getItem('authToken');
+            //provo a ottenere l'id dell'utente dal token
             try {
-                const response = await fetch('http://localhost:8080/act');
-                const data = await response.json();
-                let arrayAct = [];
-                const oggi = new Date();
-                data.forEach((act) => {
-                    const date = new Date(act.sportDate);
-                    if (periodo == 'Anni') {
-                        //aggiungo tutte le attività del tipo selezionato
-                        if (act.tipo == tipo) {
-                            arrayAct.push(act);
-                        }
-                    } else if (periodo == 'Mesi') {
-                        //le attività dell'anno attuale
-                        if ((date.getFullYear() == oggi.getFullYear()) && (act.tipo == tipo)) {
-                            //aggiungo solo le attività fatte entro un anno
-                            arrayAct.push(act);
-                        }
-                    } else if (periodo == 'Giorni') {
-                        //il mese attuale
-                        if ((date.getFullYear() == oggi.getFullYear()) && (date.getMonth() == oggi.getMonth()) && (act.tipo == tipo)) {
-                            //aggiungo solo le attività fatte entro un mese
-                            arrayAct.push(act);
-                        }
+                fetch(`http://localhost:8080/utenti/me`, {
+                    method: 'GET',
+                    headers: {
+                        'Authorization': `${token}`
                     }
-                });
-                return arrayAct;
+                })
+                    .then(response => response.json())
+                    .then(data => {
+                        //ho ottenuto l'id utente dal token
+                        const idUtente = data.id;
+                        trovaAttivita(idUtente);
+                    })
             } catch (error) {
-                alert('Problemi di comunicazione con il server. Riprova più tardi.');
+                console.err("Errore!")
             }
         }
+        async function trovaAttivita(idUtente) {
+            //cerco tutte le attività per tipologia
+            actCiclismo = await fetchAttivita('Mese', 'ciclismo');
+            actCorsa = await fetchAttivita('Mese', 'corsa');
+            actNuoto = await fetchAttivita('Mese', 'nuoto');
+            //ora seleziono solo le attività del singolo utente
+            let ciclismoUtente = [];
+            let corsaUtente = [];
+            let nuotoUtente = [];
+            for (let ciclismo of actCiclismo) {
+                let utente = ciclismo.utente;
+                if (utente.id == idUtente) {
+                    ciclismoUtente.push(ciclismo);
+                }
+            }
+            for (let corsa of actCorsa) {
+                let utente = corsa.utente;
+                if (utente.id == idUtente) {
+                    corsaUtente.push(corsa);
+                }
+            }
+            for (let nuoto of actNuoto) {
+                let utente = nuoto.utente;
+                if (utente.id == idUtente) {
+                    nuotoUtente.push(nuoto);
+                }
+            }
+            console.log(ciclismoUtente);
+            console.log(corsaUtente);
+            console.log(nuotoUtente);
+            //poi si fanno i grafici
+        }
+        getId();
+        // --- FINE TEST ---
+
+        createChart1('calorie', 'Anno');
+        createChart2('calorie', 'Anno');
+        createChart3('Anno');
 </script>
+
+
 <style>
     .progress-bar {
         text-align: center;
@@ -640,7 +674,108 @@
                                                 </div><br>
                                             </div>
                                         </div>
+                                        <!--TESTO-->
+<script>
+    async function getId() {
+            // Prendo il token dal browser
+            const token = localStorage.getItem('authToken');
 
+            // Provo a ottenere l'id dell'utente dal token
+            try {
+                const response = await fetch(`http://localhost:8080/utenti/me`, {
+                    method: 'GET',
+                    headers: {
+                        'Authorization': `${token}`
+                    }
+                });
+
+                if (!response.ok) {
+                    throw new Error('Errore nel recuperare l\'ID utente');
+                }
+
+                const data = await response.json();
+                const idUtente = data.id;
+
+                // Trovo le attività dell'utente
+                await trovaAttivita(idUtente);
+            } catch (error) {
+                console.error("Errore!", error);
+            }
+        }
+
+        async function trovaAttivita(idUtente) {
+            // Cerco tutte le attività per tipologia
+            const actCiclismo = await fetchAttivita('Mese', 'ciclismo');
+            const actCorsa = await fetchAttivita('Mese', 'corsa');
+            const actNuoto = await fetchAttivita('Mese', 'nuoto');
+
+            // Ora seleziono solo le attività del singolo utente
+            let ciclismoUtente = [];
+            let corsaUtente = [];
+            let nuotoUtente = [];
+
+            for (let ciclismo of actCiclismo) {
+                if (ciclismo.utente.id === idUtente) {
+                    ciclismoUtente.push(ciclismo);
+                }
+            }
+
+            for (let corsa of actCorsa) {
+                if (corsa.utente.id === idUtente) {
+                    corsaUtente.push(corsa);
+                }
+            }
+
+            for (let nuoto of actNuoto) {
+                if (nuoto.utente.id === idUtente) {
+                    nuotoUtente.push(nuoto);
+                }
+            }
+
+            console.log(ciclismoUtente, corsaUtente, nuotoUtente);
+
+            // Aggiorna le barre di progresso settimanali
+            aggiornaProgressBar(ciclismoUtente, corsaUtente, nuotoUtente);
+
+            // Creazione dei grafici
+            createChart1('calorie', 'Anno');
+            createChart2('calorie', 'Anno');
+            createChart3('Anno');
+        }
+
+        function aggiornaProgressBar(ciclismoUtente, corsaUtente, nuotoUtente) {
+            // Esempio di come calcolare la percentuale di completamento per ciascun giorno
+            const giorni = ['Lunedi', 'Martedì', 'Mercoledi', 'Giovedi', 'Venerdì', 'Sabato', 'Domenica'];
+            const giorniElementIds = ['settlunCardio', 'setmarCardio', 'setmerCardio', 'setgioCardio', 'setvenCardio', 'setsabCardio', 'setdomCardio'];
+
+            // Calcolo delle attività totali per giorno (semplificato)
+            const attivitaPerGiorno = {
+                'Lunedi': 2,
+                'Martedì': 1,
+                'Mercoledi': 3,
+                'Giovedi': 5,
+                'Venerdì': 4,
+                'Sabato': 8,
+                'Domenica': 6,
+            };
+
+            // Itera su ogni giorno per aggiornare le barre di progresso
+            giorni.forEach((giorno, index) => {
+                const totaleAttivita = attivitaPerGiorno[giorno] || 0;
+                const percentualeCompletamento = Math.min((totaleAttivita / 10) * 100, 100); // Normalizza a 100%
+
+                // Aggiorna la barra di progresso corrispondente
+                const progressBar = document.getElementById(giorniElementIds[index]).querySelector('.progress-bar');
+                progressBar.style.width = `${percentualeCompletamento}%`;
+                progressBar.textContent = `${giorno} - ${percentualeCompletamento.toFixed(0)}%`;
+            });
+        }
+
+        // Chiamata alla funzione principale
+        getId();
+
+</script>
+                                        
                                         <!-- CARDIO SETTIMANA -->
                                         <div id="cardioSettimana">
                                             <h2>Obiettivi settimanali </h2>
