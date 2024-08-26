@@ -114,46 +114,6 @@ button {
   /* Colore del bordo del bottone attivo */
 }
 
-@media (max-width: 500px) {
-  .container-fluid {
-    width: 70%;
-    height: 100%;
-  }
-}
-
-@media (max-width: 250px) {
-  .container-fluid {
-    width: 90% !important;
-    height: 100%;
-  }
-}
-
-@media (max-width: 332px) {
-  .chart-container {
-    padding-bottom: 20px !important;
-  }
-}
-
-@media (max-width: 240px) {
-  .chart-container {
-    padding-bottom: 35px !important;
-  }
-}
-
-#btn-back-to-top {
-  position: fixed;
-  bottom: 20px;
-  right: 20px;
-  display: none;
-  color: #2F97C1;
-  background-color: #194b68;
-  z-index: 9999;
-}
-
-#btn-back-to-top:hover {
-  color: #FBAF00;
-}
-
 #sidebar-nav a {
   background-color: #587291;
   color: #0B3954;
@@ -199,7 +159,7 @@ button {
 }
 
 .toggle-button {
-  position: sticky;
+  position: fixed;
   top: 20px;
   left: 30px;
   background-color: #007bff;
@@ -209,4 +169,30 @@ button {
   cursor: pointer;
   border-radius: 5px;
   z-index: 1001;
+}
+
+@media (max-width: 500px) {
+  .container-fluid {
+    width: 70%;
+    height: 100%;
+  }
+}
+
+@media (max-width: 250px) {
+  .container-fluid {
+    width: 90% !important;
+    height: 100%;
+  }
+}
+
+@media (max-width: 332px) {
+  .chart-container {
+    padding-bottom: 20px !important;
+  }
+}
+
+@media (max-width: 240px) {
+  .chart-container {
+    padding-bottom: 35px !important;
+  }
 }
