@@ -12,6 +12,32 @@
 </head>
 
 <body>
+  <div class="sidebar" id="sidebar">
+    <a href="index.html" class="list-group-item p-3 border-end-0 text-truncate border-dark"
+        data-bs-parent="index.html"><i class="bi bi-house-fill"></i> <span>Home</span></a>
+    <a href="#" class="list-group-item p-3 border-end-0 text-truncate border-dark"
+        data-bs-parent="stats.html"><i class="bi bi-trophy-fill"></i> <span>Statistiche</span></a>
+    <a href="#" class="list-group-item p-3 border-end-0 text-truncate border-dark"
+        data-bs-parent="consigli.html"><i class="bi bi-journal-bookmark-fill"></i> <span>Consigli</span></a>
+    <a href="#" class="list-group-item p-3 border-end-0 text-truncate border-dark"
+        data-bs-parent="profile.html"><i class="bi bi-person-arms-up"></i> <span>Profilo</span></a>
+    <a href="#" class="list-group-item p-3 border-end-0 text-truncate border-dark"
+        data-bs-parent="settings.html"><i class="bi bi-calculator"></i> <span>Calcolatore</span></a>
+</div>
+
+<button type="button" class="btn btn-floating" id="btn-back-to-top">
+  <i class="bi bi-arrow-up-circle"></i>
+</button>
+
+<div class="content">
+<main class="col ps-md-2 pt-2">
+  <!-- Tasto menù -->
+  <a href="#" id="toggleButton" data-bs-target="#sidebar" data-bs-toggle="collapse"
+      class="toggle-button border rounded-3 p-1 text-decoration-none bg-warning-emphasis border-dark"><i
+          class="bi bi-list bi-lg py-2 p-1"></i>
+      <!-- Da modificare colore bottone -->
+  </a>
+
   <div class="main">
     <!-- Menù a tendina per selezionare lo sport -->
     <div class="container-fluid container1">
@@ -38,12 +64,14 @@
       <canvas id="myChart2" style="width:100%"></canvas> <!-- grafico 2 -->
     </div>
   </div>
+</div>
 
     <script src="js/footer.js"></script>
     <script src="js/bootstrap.bundle.min.js"></script>
     <script src="js/statistiche.js"></script>
     <script src="js/jquery-3.7.1.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="js/indexgsap.js"></script>
 </body>
 
 </html>

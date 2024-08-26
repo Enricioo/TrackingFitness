@@ -1,6 +1,7 @@
 document.addEventListener('DOMContentLoaded', () => {
     // Animazioni per il testo
     const mainText = new SplitType('#mainText')
+    const pText = new SplitType('#pText')
     const bodyText = new SplitType('#bodyText')
     gsap.to('.char', {
         y: 0,
