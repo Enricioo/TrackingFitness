@@ -128,7 +128,7 @@ function updateNotifications() {
 updateNotifications();
 //FINE
 
-// Funzione per calcolare la percentuale
+// Funzione per calcolare la percentuale- obiettivi settimanali cardio.
 function calcolaPercentuale(valore, massimo) {
     return (valore / massimo) * 100;
 }
@@ -183,7 +183,7 @@ document.addEventListener('DOMContentLoaded', aggiornaDati);//------------------
 //FINE
 
 
-// Funzione per calcolare la percentuale
+// Funzione per calcolare la percentuale obiettivi
 function calcolaPercentuale(valore, massimo) {
     return (valore / massimo) * 100;
 }
