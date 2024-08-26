@@ -188,6 +188,11 @@ function calcolaPercentuale(valore, massimo) {
     return (valore / massimo) * 100;
 }
 
+// Funzione per capitalizzare la prima lettera
+function capitalizeFirstLetter(string) {
+    return string.charAt(0).toUpperCase() + string.slice(1);
+}
+
 // Funzione per aggiornare la larghezza delle barre di progresso
 function updateProgress(calorieData) {
     const calorieThreshold = 2000; // Soglia massima di calorie nella giornata
@@ -214,13 +219,9 @@ function updateProgress(calorieData) {
     }
 }
 
-function capitalizeFirstLetter(string) {
-    return string.charAt(0).toUpperCase() + string.slice(1);
-}
-
 // Funzione per ottenere i dati tramite fetch e aggiornare le barre di progresso
 function aggiornaDati() {
-    fetch("http://localhost:8080/utenti/act") // Sostituisci con l'URL del tuo endpoint
+    fetch("http://localhost:8080/utenti/act")
         .then((response) => {
             if (!response.ok) {
                 throw new Error('Errore nella risposta del server: ' + response.statusText);
@@ -228,7 +229,6 @@ function aggiornaDati() {
             return response.json();
         })
         .then((data) => {
-            // Supponiamo che `data` contenga un oggetto con i valori per i giorni
             updateProgress(data);
         })
         .catch((error) => console.error("Errore nel fetch:", error));
@@ -236,10 +236,6 @@ function aggiornaDati() {
 
 // Chiama la funzione per ottenere i dati e aggiornare le barre di progresso
 document.addEventListener('DOMContentLoaded', aggiornaDati);
-//FINE MASSA SETTIMANA
-
-
-//ATTIVITA SETTIMINALE
 
 // Funzione per aggiornare il testo delle barre di progresso
 function aggiornaTestoBarre(tipoAttivita, dati) {
@@ -277,81 +273,9 @@ document.addEventListener('DOMContentLoaded', () => {
     aggiornaTestoBarre('cardioAttivita', datiCardio);
 });
 
-
-//gestione collegamento DB TESTARE
-
-async function fetchActivities() {
-  try {
-    const response = await fetch("http://localhost:8080/act");
-    if (!response.ok) throw new Error("Network response was not ok");
-    const activities = await response.json();
-    displayActivities(activities);
-  } catch (error) {
-    console.error("Error fetching activities:", error);
-  }
-}
-
-// Funzione per visualizzare le attività nella pagina
-function displayActivities(activities) {
-  const activityList = document.getElementById("activity-list");
-  activities.forEach((activity) => {
-    const listItem = document.createElement("li");
-    listItem.textContent = `${activity.name} (${activity.type}): ${activity.duration} minutes`;
-    activityList.appendChild(listItem);
-  });
-}
-
-// Recupera le attività al caricamento della pagina
-document.addEventListener("DOMContentLoaded", fetchActivities);
-//end 1
-
 // Funzione per recuperare il token dal localStorage
 function getToken() {
-    return localStorage.getItem('authToken'); // Assumi che il token sia salvato con la chiave 'authToken'
-}
-
-// Funzione per fare il fetch all'endpoint /utenti/me e ottenere l'ID dell'utente
-async function fetchUserId() {
-    const token = getToken();
-
-    if (!token) {
-        console.error('Token non trovato nel localStorage');
-        return;
-    }
-
-    try {
-        const response = await fetch('http://localhost:8080/utenti/me', {
-            method: 'GET',
-            headers: {
-                'Authorization': `Bearer ${token}`,
-                'Content-Type': 'application/json'
-            }
-        });
-
-        if (!response.ok) {
-            throw new Error('Errore nella risposta del server: ' + response.statusText);
-        }
-
-        const data = await response.json();
-        const userId = data.id; // Assumi che la risposta JSON contenga un campo 'id'
-        console.log('User ID:', userId);
-        return userId;
-    } catch (error) {
-        console.error('Errore nel fetch:', error);
-    }
-}
-
-// Chiama la funzione per ottenere l'ID dell'utente al caricamento della pagina
-document.addEventListener('DOMContentLoaded', fetchUserId);
-
-
-//fine tester
-
-//inizio collegamento
-
-// Funzione per recuperare il token dal localStorage
-function getToken() {
-    return localStorage.getItem('authToken'); // Assumi che il token sia salvato con la chiave 'authToken'
+    return localStorage.getItem('authToken');
 }
 
 // Funzione per fare il fetch all'endpoint /utenti/me e ottenere l'ID dell'utente
@@ -429,34 +353,6 @@ async function updateUserActivities() {
     updateCardioProgress(cardioActivities);
 }
 
-// Funzione di aggiornamento per massa muscolare
-function updateProgress(calorieData) {
-    const calorieThreshold = 2000; // Soglia massima di calorie nella giornata
-
-    const days = {
-        lunedi: "settlunMassa",
-        martedi: "setmarMassa",
-        mercoledi: "setmerMassa",
-        giovedi: "setgioMassa",
-        venerdi: "setvenMassa",
-        sabato: "setsabMassa",
-        domenica: "setdomMassa",
-    };
-
-    for (let day in calorieData) {
-        const progressBarId = days[day];
-        if (progressBarId) {
-            const progressBar = document
-                .getElementById(progressBarId)
-                .querySelector(".progress-bar");
-            const calorieIntake = calorieData[day];
-            const percentage = calcolaPercentuale(calorieIntake, calorieThreshold);
-            progressBar.style.width = `${Math.min(percentage, 100)}%`;
-            progressBar.textContent = `${capitalizeFirstLetter(day)}: ${Math.round(percentage)}%`;
-        }
-    }
-}
-
 // Funzione di aggiornamento per cardio
 function updateCardioProgress(cardioData) {
     const cardioThreshold = 2000;
@@ -485,17 +381,8 @@ function updateCardioProgress(cardioData) {
     }
 }
 
-function capitalizeFirstLetter(string) {
-    return string.charAt(0).toUpperCase() + string.slice(1);
-}
-
-function calcolaPercentuale(valore, massimo) {
-    return (valore / massimo) * 100;
-}
-
 // Chiama la funzione per aggiornare le attività dell'utente al caricamento della pagina
 document.addEventListener('DOMContentLoaded', updateUserActivities);
-
 
 //TOKEN ACCESSO LOGIN - da inserire
 
