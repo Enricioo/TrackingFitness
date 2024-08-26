@@ -30,7 +30,8 @@
         <!--DA FARE:
          - sistemare pulsanti e select;
          - sistemare bug grafici;
-         - migliorare la responsività
+         - migliorare la responsività;
+         - impostare solo due cifre decimali per la media
         -->
         <div class="container-fluid sidebar">
             <div class="row flex-nowrap">
@@ -60,16 +61,16 @@
                         <div id="chart-uno" class="col-12 text-center my-5"> <!--PRIMO GRAFICO-->
                             <h3>Confronto tra le medie  delle attività nel tempo</h3>
                             <div class="button-row row">
-                                <div class="col-3 m-0 p-0">
-                                    <button class="btn btn-primary periodoUno" type="button">Giorni</button>
+                                <div class="col-4 col-md-3 m-0 p-0">
+                                    <button class="btn btn-primary periodoUno" type="button">Mese</button>
                                 </div>
-                                <div class="col-3 m-0 p-0">
-                                    <button class="btn btn-primary periodoUno selected" type="button">Mesi</button>
+                                <div class="col-4 col-md-3 m-0 p-0">
+                                    <button class="btn btn-primary periodoUno selected" type="button">Anno</button>
                                 </div>
-                                <div class="col-3 m-0 p-0">
-                                    <button class="btn btn-primary periodoUno" type="button">Anni</button>
+                                <div class="col-4 col-md-3 m-0 p-0">
+                                    <button class="btn btn-primary periodoUno" type="button">Totale</button>
                                 </div>
-                                <div class="col-3 m-0 p-0">
+                                <div class="col-12 col-md-3 m-0 p-0">
                                     <select id="selectChartUno" class="form-select">
                                         <option value="calorie">Calorie</option>
                                         <option value="distanza">Distanza</option>
@@ -84,16 +85,16 @@
                         <div id="chart-due" class="col-12 col-md-7 text-center my-5" data-tempo="mese"> <!--SECONDO GRAFICO-->
                             <h3>Totalità delle attività nel tempo</h3>
                             <div class="button-row row">
-                                <div class="col-3 m-0 p-0">
-                                    <button class="btn btn-primary periodoDue" type="button">Giorni</button>
+                                <div class="col-4 col-md-3 m-0 p-0">
+                                    <button class="btn btn-primary periodoDue" type="button">Mese</button>
                                 </div>
-                                <div class="col-3 m-0 p-0">
-                                    <button class="btn btn-primary periodoDue selected" type="button">Mesi</button>
+                                <div class="col-4 col-md-3 m-0 p-0">
+                                    <button class="btn btn-primary periodoDue selected" type="button">Anno</button>
                                 </div>
-                                <div class="col-3 m-0 p-0">
-                                    <button class="btn btn-primary periodoDue" type="button">Anni</button>
+                                <div class="col-4 col-md-3 m-0 p-0">
+                                    <button class="btn btn-primary periodoDue" type="button">Totale</button>
                                 </div>
-                                <div class="col-3 m-0 p-0">
+                                <div class="col-12 col-md-3 m-0 p-0">
                                     <select id="selectChartDue" class="form-select">
                                         <option value="calorie">Calorie</option>
                                         <option value="distanza">Distanza</option>
@@ -109,13 +110,13 @@
                             <h3>Numero totale per attività</h3>
                             <div class="button-row row">
                                 <div class="col-4 m-0 p-0">
-                                    <button class="btn btn-primary periodoTre" type="button">Giorni</button>
+                                    <button class="btn btn-primary periodoTre" type="button">Mese</button>
                                 </div>
                                 <div class="col-4 m-0 p-0">
-                                    <button class="btn btn-primary periodoTre" type="button">Mesi</button>
+                                    <button class="btn btn-primary periodoTre" type="button">Anno</button>
                                 </div>
                                 <div class="col-4 m-0 p-0">
-                                    <button class="btn btn-primary periodoTre" type="button">Anni</button>
+                                    <button class="btn btn-primary periodoTre" type="button">Totale</button>
                                 </div>
                             </div>
                             <div class="chart-container">
@@ -155,18 +156,18 @@
                         const oggi = new Date();
                         data.forEach((act) => {
                             const date = new Date(act.sportDate);
-                            if (periodo == 'Anni') {
+                            if (periodo == 'Totale') {
                                 //aggiungo tutte le attività del tipo selezionato
                                 if (act.tipo == tipo) {
                                     arrayAct.push(act);
                                 }
-                            } else if (periodo == 'Mesi') {
+                            } else if (periodo == 'Anno') {
                                 //le attività dell'anno attuale
                                 if ((date.getFullYear() == oggi.getFullYear()) && (act.tipo == tipo)) {
                                     //aggiungo solo le attività fatte entro un anno
                                     arrayAct.push(act);
                                 }
-                            } else if (periodo == 'Giorni') {
+                            } else if (periodo == 'Mese') {
                                 //il mese attuale
                                 if ((date.getFullYear() == oggi.getFullYear()) && (date.getMonth() == oggi.getMonth()) && (act.tipo == tipo)) {
                                     //aggiungo solo le attività fatte entro un mese
@@ -182,8 +183,10 @@
                 //organizzo i dati richiesti dal grafico
                 function organiseData(periodo, array, dato, contatore) {
                     let totale = parseInt(0);
+                    //console.log(periodo);
+                    //console.log(dato);
                     //controllo il periodo su cui dividere i dati
-                    if (periodo == 'Mesi') {
+                    if (periodo == 'Anno') {
                         //controllo il tipo di dato da prendere
                         if (dato=='calorie') {
                             array.forEach((attivita) => {
@@ -210,7 +213,7 @@
                                 }
                             })
                         }
-                    } else if (periodo == 'Anni') {
+                    } else if (periodo == 'Totale') {
                         if (dato == 'calorie') {
                             array.forEach((attivita) => {
                                 const date = new Date(attivita.sportDate);
@@ -236,7 +239,7 @@
                                 }
                             })
                         }
-                    } else if (periodo == 'Giorni') {
+                    } else if (periodo == 'Mese') {
                         if (dato == 'calorie') {
                             array.forEach((attivita) => {
                                 const date = new Date(attivita.sportDate);
@@ -272,13 +275,13 @@
                     const titleChart = "Confronto delle attività per la media di: "+dato;
                     let xValues = [];
                     const oggi = new Date();
-                    if (periodo == 'Anni') {
+                    if (periodo == 'Totale') {
                         const anno = oggi.getFullYear();
                         //faccio aggiungere gli anni dal 2020 all'anno attuale
                         for (j=2020; j<=anno; j++) {
                             xValues.push(j);
                         }
-                    } else if (periodo == 'Mesi') {
+                    } else if (periodo == 'Anno') {
                         
                         xValues = ['Gennaio', 'Febbraio', 'Marzo', 'Aprile', 'Maggio', 'Giugno', 'Luglio', 'Agosto', 'Settembre', 'Ottobre', 'Novembre', 'Dicembre'];
                     } else {
@@ -397,13 +400,13 @@
                     //definisco il periodo
                     let xValues = [];
                     const oggi = new Date();
-                    if (periodo == 'Anni') {
+                    if (periodo == 'Totale') {
                         const anno = oggi.getFullYear();
                         //faccio aggiungere gli anni dal 2020 all'anno attuale
                         for (j=2020; j<=anno; j++) {
                             xValues.push(j);
                         }
-                    } else if (periodo == 'Mesi') {
+                    } else if (periodo == 'Anno') {
                         
                         xValues = ['Gennaio', 'Febbraio', 'Marzo', 'Aprile', 'Maggio', 'Giugno', 'Luglio', 'Agosto', 'Settembre', 'Ottobre', 'Novembre', 'Dicembre'];
                     } else {
@@ -543,9 +546,66 @@
                     })
                 }
 
-                createChart1('calorie', 'Mesi');
-                createChart2('calorie', 'Mesi');
-                createChart3('Mesi');
+                // --- TEST TOKEN-ID ---
+                async function getId() {
+                    //prendo il token dal browser
+                    const token=localStorage.getItem('authToken');
+                    //provo a ottenere l'id dell'utente dal token
+                    try {
+                        fetch(`http://localhost:8080/utenti/me`, {
+                            method: 'GET',
+                            headers: {
+                                'Authorization': `${token}`
+                            }
+                        })
+                        .then(response => response.json())
+                        .then(data => {
+                            //ho ottenuto l'id utente dal token
+                            const idUtente = data.id;
+                            trovaAttivita(idUtente);
+                        })
+                    } catch (error) {
+                        console.err("Errore!")
+                    }
+                }
+                async function trovaAttivita(idUtente) {
+                    //cerco tutte le attività per tipologia
+                    actCiclismo = await fetchAttivita('Mese', 'ciclismo');
+                    actCorsa = await fetchAttivita('Mese', 'corsa');
+                    actNuoto = await fetchAttivita('Mese', 'nuoto');
+                    //ora seleziono solo le attività del singolo utente
+                    let ciclismoUtente = [];
+                    let corsaUtente = [];
+                    let nuotoUtente = [];
+                    for (let ciclismo of actCiclismo) {
+                        let utente = ciclismo.utente;
+                        if (utente.id==idUtente) {
+                            ciclismoUtente.push(ciclismo);
+                        }
+                    }
+                    for (let corsa of actCorsa) {
+                        let utente = corsa.utente;
+                        if(utente.id==idUtente) {
+                            corsaUtente.push(corsa);
+                        }
+                    }
+                    for (let nuoto of actNuoto) {
+                        let utente = nuoto.utente;
+                        if (utente.id==idUtente) {
+                            nuotoUtente.push(nuoto);
+                        }
+                    }
+                    console.log(ciclismoUtente);
+                    console.log(corsaUtente);
+                    console.log(nuotoUtente);
+                    //poi si fanno i grafici
+                }
+                getId();
+                // --- FINE TEST ---
+
+                createChart1('calorie', 'Anno');
+                createChart2('calorie', 'Anno');
+                createChart3('Anno');
             })
         </script>
     </body>

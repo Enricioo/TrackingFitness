@@ -1,19 +1,10 @@
 /*SIDEBAR*/
-#sidebar-nav {
-    width: 100px;
-}
-
 #sidebar-nav a {
     background-color: #587291;
     color: #0B3954;
 }
 
-#sidebar-btn {
-    background-color: #FBAF00;
-    border-style: solid;
-    border-radius: 3px;
-    border-color: #2F97C1;
-}
+/*PAGINA*/
 
 #privacy:hover {
     font-size: medium;
