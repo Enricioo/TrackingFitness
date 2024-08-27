@@ -163,23 +163,7 @@ function capitalizeFirstLetter(string) {
     return string.charAt(0).toUpperCase() + string.slice(1);
 }
 
-// Funzione per ottenere i dati tramite fetch e aggiornare le barre di progresso
-function aggiornaDati() {
-    fetch("http://localhost:8080/utenti/act")
-      .then((response) => {
-          if (!response.ok) {
-              throw new Error('Errore nella risposta del server: ' + response.statusText);
-          }
-          return response.json();
-      })
-      .then((data) => {
-        updateCardioProgress(data);
-      })
-      .catch((error) => console.error("Errore nel fetch:", error));
-}
 
-// Chiama la funzione per ottenere i dati e aggiornare le barre di progresso
-document.addEventListener('DOMContentLoaded', aggiornaDati);//-------------------------------------------------------------------------
 //FINE
 
 //inizio Sidebar 
@@ -337,19 +321,7 @@ function updateProgress(calorieData) {
 }
 
 // Funzione per ottenere i dati tramite fetch e aggiornare le barre di progresso
-function aggiornaDati() {
-    fetch("http://localhost:8080/utenti/act")
-        .then((response) => {
-            if (!response.ok) {
-                throw new Error('Errore nella risposta del server: ' + response.statusText);
-            }
-            return response.json();
-        })
-        .then((data) => {
-            updateProgress(data);
-        })
-        .catch((error) => console.error("Errore nel fetch:", error));
-}
+
 
 // Chiama la funzione per ottenere i dati e aggiornare le barre di progresso
 document.addEventListener('DOMContentLoaded', aggiornaDati);
