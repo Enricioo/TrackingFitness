@@ -228,3 +228,95 @@ window.addEventListener('resize', () => {
     gsap.set(content, { marginLeft: 0 });
   }
 });
+
+document.addEventListener('DOMContentLoaded', async function() {
+  async function fetchAttivita(periodo, tipo) {
+    try {
+        const response = await fetch('http://localhost:8080/act');
+        const data = await response.json();
+        let arrayAct = [];
+        const oggi = new Date();
+        data.forEach((act) => {
+            const date = new Date(act.sportDate);
+            if (periodo == 'annual') {
+                //aggiungo tutte le attività del tipo selezionato
+                if (act.tipo == tipo) {
+                    arrayAct.push(act);
+                }
+            } else if (periodo == 'monthly') {
+                //le attività dell'anno attuale
+                if ((date.getFullYear() == oggi.getFullYear()) && (act.tipo == tipo)) {
+                    //aggiungo solo le attività fatte entro un anno
+                    arrayAct.push(act);
+                }
+            } else if (periodo == 'weekly') {
+                //il mese attuale
+                if ((date.getFullYear() == oggi.getFullYear()) && (date.getMonth() == oggi.getMonth()) && (act.tipo == tipo)) {
+                    //aggiungo solo le attività fatte entro un mese
+                    arrayAct.push(act);
+                }
+            }
+        });
+        return arrayAct;
+    } catch (error) {
+        alert('Problemi di comunicazione con il server. Riprova più tardi.');
+    }
+  }
+  // --- TEST TOKEN-ID ---
+  async function getId() {
+    //prendo il token dal browser
+    const token=localStorage.getItem('authToken');
+    //provo a ottenere l'id dell'utente dal token
+    try {
+        fetch(`http://localhost:8080/utenti/me`, {
+            method: 'GET',
+            headers: {
+                'Authorization': `${token}`
+            }
+        })
+        .then(response => response.json())
+        .then(data => {
+            //ho ottenuto l'id utente dal token
+            const idUtente = data.id;
+            trovaAttivita(idUtente);
+        })
+    } catch (error) {
+        console.err("Errore!")
+    }
+}
+async function trovaAttivita(idUtente) {
+    //cerco tutte le attività per tipologia
+    actCiclismo = await fetchAttivita('weekly', 'ciclismo');
+    actCorsa = await fetchAttivita('weekly', 'corsa');
+    actNuoto = await fetchAttivita('weekly', 'nuoto');
+    //ora seleziono solo le attività del singolo utente
+    let ciclismoUtente = [];
+    let corsaUtente = [];
+    let nuotoUtente = [];
+    for (let ciclismo of actCiclismo) {
+        let utente = ciclismo.utente;
+        if (utente.id==idUtente) {
+            ciclismoUtente.push(ciclismo);
+        }
+    }
+    for (let corsa of actCorsa) {
+        let utente = corsa.utente;
+        if(utente.id==idUtente) {
+            corsaUtente.push(corsa);
+        }
+    }
+    for (let nuoto of actNuoto) {
+        let utente = nuoto.utente;
+        if (utente.id==idUtente) {
+            nuotoUtente.push(nuoto);
+        }
+    }
+    console.log(ciclismoUtente);
+    console.log(corsaUtente);
+    console.log(nuotoUtente);
+    //poi si fanno i grafici
+}
+getId();
+// --- FINE TEST ---
+})
+
