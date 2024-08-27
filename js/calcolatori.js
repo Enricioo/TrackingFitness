@@ -36,27 +36,36 @@ function calculateRunningCalories() {
     const speed = distance / (duration / 60);
     let met = getRunningMet(speed, grade);
 
+    if (met === -1) {
+        document.getElementById('running-result').innerText = "La velocità supera il limite massimo consentito, fornisci dati reali.";
+        return;
+    }
+
     const calories = met * weight * (duration / 60);
     document.getElementById('running-result').innerText = calories.toFixed(2);
 }
 
 function getRunningMet(speed, grade) {
     let met = 0;
+    const maxSpeed = 40; // Maximum speed for MET values
 
-    if (speed <= 8) met = 8.3; // MET for running at 8 km/h
-    else if (speed <= 9.7) met = 9.8; // MET for running at 9.7 km/h
-    else if (speed <= 10.8) met = 10.5; // MET for running at 10.8 km/h
-    else if (speed <= 12.1) met = 11.8; // MET for running at 12.1 km/h
-    else if (speed <= 14.5) met = 12.8; // MET for running at 14.5 km/h
-    else if (speed <= 16.1) met = 14.5; // MET for running at 16.1 km/h
-    else if (speed <= 17.5) met = 16;   // MET for running at 17.5 km/h
-    else if (speed <= 20) met = 18;     // MET for running at 20 km/h
-    else if (speed <= 25) met = 20;     // MET for running at 25 km/h
-    else if (speed <= 30) met = 25;     // MET for running at 30 km/h
-    else if (speed <= 40) met = 35;     // MET for running at 40 km/h
-    else met = 45;                      // MET for running at 48 km/h (extreme sprint)
+    if (speed > maxSpeed) {
+        return -1; // Return -1 to indicate an error
+    }
 
-    // Adjust MET for grade
+    if (speed <= 8) met = 8.3; 
+    else if (speed <= 9.7) met = 9.8; 
+    else if (speed <= 10.8) met = 10.5; 
+    else if (speed <= 12.1) met = 11.8; 
+    else if (speed <= 14.5) met = 12.8; 
+    else if (speed <= 16.1) met = 14.5; 
+    else if (speed <= 17.5) met = 16;   
+    else if (speed <= 20) met = 18;     
+    else if (speed <= 25) met = 20;     
+    else if (speed <= 30) met = 25;     
+    else if (speed <= 40) met = 35;     
+    else met = 45; // MET for running at 48 km/h (extreme sprint)
+
     if (grade !== 0) {
         met += (met * grade * 0.02);
     }
@@ -77,28 +86,38 @@ function calculateBikingCalories() {
     const speed = distance / (duration / 60);
     const met = getBikingMet(speed);
 
+    if (met === -1) {
+        document.getElementById('biking-result').innerText = "La velocità supera il limite massimo consentito, fornisci dati reali.";
+        return;
+    }
+
     const calories = met * weight * (duration / 60);
     document.getElementById('biking-result').innerText = calories.toFixed(2);
 }
 
 function getBikingMet(speed) {
     let met = 0;
+    const maxSpeed = 100; // Maximum speed for MET values
 
-    if (speed <= 10) met = 4;       // Leisurely biking
-    else if (speed <= 12) met = 6.8;  // Biking at 12 km/h
-    else if (speed <= 14) met = 8;  // Biking at 14 km/h
-    else if (speed <= 16) met = 10; // Biking at 16 km/h
-    else if (speed <= 19) met = 12; // Biking at 19 km/h
-    else if (speed <= 22) met = 15.8; // Biking at 22 km/h
-    else if (speed <= 25) met = 19;   // Biking at 25 km/h
-    else if (speed <= 30) met = 23;   // Biking at 30 km/h
-    else if (speed <= 40) met = 30;   // Biking at 40 km/h
-    else if (speed <= 50) met = 40;   // Biking at 50 km/h
-    else if (speed <= 60) met = 50;   // Biking at 60 km/h
-    else if (speed <= 100) met = 75;  // Biking at 100 km/h
-    else if (speed <= 150) met = 100; // Biking at 150 km/h
-    else if (speed <= 200) met = 150; // Biking at 200 km/h
-    else met = 200;                   // Biking at 296 km/h (extreme speed)
+    if (speed > maxSpeed) {
+        return -1; // Return -1 to indicate an error
+    }
+
+    if (speed <= 10) met = 4;       
+    else if (speed <= 12) met = 6.8;  
+    else if (speed <= 14) met = 8;  
+    else if (speed <= 16) met = 10; 
+    else if (speed <= 19) met = 12; 
+    else if (speed <= 22) met = 15.8; 
+    else if (speed <= 25) met = 19;   
+    else if (speed <= 30) met = 23;   
+    else if (speed <= 40) met = 30;   
+    else if (speed <= 50) met = 40;   
+    else if (speed <= 60) met = 50;   
+    else if (speed <= 100) met = 75;  
+    else if (speed <= 150) met = 100; 
+    else if (speed <= 200) met = 150; 
+    else met = 200;                   
 
     return met;
 }
