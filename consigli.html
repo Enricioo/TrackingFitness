@@ -739,9 +739,19 @@
                                                             // Trovo le attività dell'utente
                                                             await trovaAttivita(idUtente);
                                                         } catch (error) {
-                                                            console.error("Errore!", error);
+                                                            console.err("Errore!", error);
                                                         }
                                                     }
+                                                    async function fetchAttivita(Periodo, Tipo) {
+                                                        if (Periodo == 'Settimana')
+                                                         {
+                                                            try {
+                                                                const response = await fetch(`http://localhost:8080/act/week` );
+                                                                const data = response.json();
+                                                            } catch(error){
+
+                                                            }
+                                                }}
 
                                                     async function trovaAttivita(idUtente) {
                                                         // Cerco tutte le attività per tipologia
