@@ -586,75 +586,6 @@
                     <hr>
 
                     <!-- OBBIETTVI SETTIMANALI -->
-
-                    <script>
-
-
-
-
-
-                        async function getId() {
-                            //prendo il token dal browser
-                            const token = localStorage.getItem('authToken');
-                            //provo a ottenere l'id dell'utente dal token
-                            try {
-                                fetch(`http://localhost:8080/utenti/me`, {
-                                    method: 'GET',
-                                    headers: {
-                                        'Authorization': `${token}`
-                                    }
-                                })
-                                    .then(response => response.json())
-                                    .then(data => {
-                                        //ho ottenuto l'id utente dal token
-                                        const idUtente = data.id;
-                                        trovaAttivita(idUtente);
-                                    })
-                            } catch (error) {
-                                console.err("Errore!")
-                            }
-                        }
-                        async function trovaAttivita(idUtente) {
-                            //cerco tutte le attività per tipologia
-                            actCiclismo = await fetchAttivita('Mese', 'ciclismo');
-                            actCorsa = await fetchAttivita('Mese', 'corsa');
-                            actNuoto = await fetchAttivita('Mese', 'nuoto');
-                            //ora seleziono solo le attività del singolo utente
-                            let ciclismoUtente = [];
-                            let corsaUtente = [];
-                            let nuotoUtente = [];
-                            for (let ciclismo of actCiclismo) {
-                                let utente = ciclismo.utente;
-                                if (utente.id == idUtente) {
-                                    ciclismoUtente.push(ciclismo);
-                                }
-                            }
-                            for (let corsa of actCorsa) {
-                                let utente = corsa.utente;
-                                if (utente.id == idUtente) {
-                                    corsaUtente.push(corsa);
-                                }
-                            }
-                            for (let nuoto of actNuoto) {
-                                let utente = nuoto.utente;
-                                if (utente.id == idUtente) {
-                                    nuotoUtente.push(nuoto);
-                                }
-                            }
-                            console.log(ciclismoUtente);
-                            console.log(corsaUtente);
-                            console.log(nuotoUtente);
-                            //poi si fanno i grafici
-                        }
-                        getId();
-                        // --- FINE TEST ---
-
-                        createChart1('calorie', 'Anno');
-                        createChart2('calorie', 'Anno');
-                        createChart3('Anno');
-                    </script>
-
-
                     <style>
                         .progress-bar {
                             text-align: center;
@@ -715,7 +646,7 @@
                                                     </div>
                                                 </div>
                                                 <!--TESTO-->
-                                                <script>
+                                                <script> //1 script
                                                     async function getId() {
                                                         // Prendo il token dal browser
                                                         const token = localStorage.getItem('authToken');
@@ -739,7 +670,7 @@
                                                             // Trovo le attività dell'utente
                                                             await trovaAttivita(idUtente);
                                                         } catch (error) {
-                                                            console.err("Errore!", error);
+                                                            console.log("Errore!", error);
                                                         }
                                                     }
                                                     async function fetchAttivita(Periodo, Tipo) {
@@ -748,6 +679,8 @@
                                                             try {
                                                                 const response = await fetch(`http://localhost:8080/act/week` );
                                                                 const data = response.json();
+                                                                console.log(data)
+                                                                return data;
                                                             } catch(error){
 
                                                             }
@@ -787,11 +720,8 @@
                                                         // Aggiorna le barre di progresso settimanali
                                                         aggiornaProgressBar(ciclismoUtente, corsaUtente, nuotoUtente);
 
-                                                        // Creazione dei grafici
-                                                        createChart1('calorie', 'Anno');
-                                                        createChart2('calorie', 'Anno');
-                                                        createChart3('Anno');
                                                     }
+                                                    getId();
 
                                                     function aggiornaProgressBar(ciclismoUtente, corsaUtente, nuotoUtente) {
                                                         // Esempio di come calcolare la percentuale di completamento per ciascun giorno
@@ -983,10 +913,10 @@
         </div>
     </div><br>
 
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script> 
 
     <script src="js/footer.js"></script>
     <script src="js/suggerimenti.js"></script>

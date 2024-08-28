@@ -198,7 +198,7 @@ window.addEventListener("resize", () => {
 //fine sidebar 
 
 
-Document.addEventListener("DOMContentLoaded",async function () {
+document.addEventListener("DOMContentLoaded", async function () {
     async function getId() {
       //prendo il token dal browser
       const token = localStorage.getItem("authToken");
@@ -283,7 +283,6 @@ Document.addEventListener("DOMContentLoaded",async function () {
     
 })
 
-
 // Funzione per calcolare la percentuale obiettivi
 function calcolaPercentuale(valore, massimo) {
     return (valore / massimo) * 100;
@@ -319,12 +318,6 @@ function updateProgress(calorieData) {
         }
     }
 }
-
-// Funzione per ottenere i dati tramite fetch e aggiornare le barre di progresso
-
-
-// Chiama la funzione per ottenere i dati e aggiornare le barre di progresso
-document.addEventListener('DOMContentLoaded', aggiornaDati);
 
 // Funzione per aggiornare il testo delle barre di progresso
 function aggiornaTestoBarre(tipoAttivita, dati) {
@@ -367,81 +360,6 @@ function getToken() {
     return localStorage.getItem('authToken');
 }
 
-// Funzione per fare il fetch all'endpoint /utenti/me e ottenere l'ID dell'utente
-async function fetchUserId() {
-    const token = getToken();
-
-    if (!token) {
-        console.error('Token non trovato nel localStorage');
-        return null;
-    }
-
-    try {
-        const response = await fetch('http://localhost:8080/utenti/me', {
-            method: 'GET',
-            headers: {
-                'Authorization': `Bearer ${token}`,
-                'Content-Type': 'application/json'
-            }
-        });
-
-        if (!response.ok) {
-            throw new Error('Errore nella risposta del server: ' + response.statusText);
-        }
-
-        const data = await response.json();
-        return data.id; // Assumi che la risposta JSON contenga un campo 'id'
-    } catch (error) {
-        console.error('Errore nel fetch:', error);
-        return null;
-    }
-}
-
-// Funzione per fare il fetch di tutte le attività
-async function fetchAllActivities() {
-    try {
-        const response = await fetch('http://localhost:8080/attivita', {
-            method: 'GET',
-            headers: {
-                'Authorization': `Bearer ${getToken()}`,
-                'Content-Type': 'application/json'
-            }
-        });
-
-        if (!response.ok) {
-            throw new Error('Errore nella risposta del server: ' + response.statusText);
-        }
-
-        return await response.json(); // Ritorna tutte le attività
-    } catch (error) {
-        console.error('Errore nel fetch delle attività:', error);
-        return [];
-    }
-}
-
-// Funzione per aggiornare le barre di progresso con le attività dell'utente
-async function updateUserActivities() {
-    const userId = await fetchUserId();
-
-    if (!userId) {
-        console.error('ID utente non disponibile');
-        return;
-    }
-
-    const allActivities = await fetchAllActivities();
-
-    // Filtra le attività per ID dell'utente
-    const userActivities = allActivities.filter(activity => activity.userId === userId);
-
-    // Supponiamo che le attività siano divise tra `massa` e `cardio`
-    const massaActivities = userActivities.filter(activity => activity.type === 'massa');
-    const cardioActivities = userActivities.filter(activity => activity.type === 'cardio');
-
-    // Chiama le funzioni di aggiornamento con le attività filtrate
-    updateProgress(massaActivities);
-    updateCardioProgress(cardioActivities);
-}
-
 // Funzione di aggiornamento per cardio
 function updateCardioProgress(cardioData) {
     const cardioThreshold = 2000;
@@ -469,9 +387,4 @@ function updateCardioProgress(cardioData) {
         }
     }
 }
-
-// Chiama la funzione per aggiornare le attività dell'utente al caricamento della pagina
-document.addEventListener('DOMContentLoaded', updateUserActivities);
-
-//TOKEN ACCESSO LOGIN - da inserire
 
