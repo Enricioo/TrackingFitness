@@ -290,33 +290,37 @@ async function trovaAttivita(idUtente) {
     actCorsa = await fetchAttivita('weekly', 'corsa');
     actNuoto = await fetchAttivita('weekly', 'nuoto');
     //ora seleziono solo le attività del singolo utente
-    let ciclismoUtente = [];
-    let corsaUtente = [];
-    let nuotoUtente = [];
+    let attivitaUtente = [];
     for (let ciclismo of actCiclismo) {
         let utente = ciclismo.utente;
         if (utente.id==idUtente) {
-            ciclismoUtente.push(ciclismo);
+          attivitaUtente.push(ciclismo);
         }
     }
     for (let corsa of actCorsa) {
         let utente = corsa.utente;
         if(utente.id==idUtente) {
-            corsaUtente.push(corsa);
+          attivitaUtente.push(corsa);
         }
     }
     for (let nuoto of actNuoto) {
         let utente = nuoto.utente;
         if (utente.id==idUtente) {
-            nuotoUtente.push(nuoto);
+          attivitaUtente.push(nuoto);
         }
     }
-    console.log(ciclismoUtente);
-    console.log(corsaUtente);
-    console.log(nuotoUtente);
     //poi si fanno i grafici
+    creaGrafico('weekly', attivitaUtente)
 }
+
+async function creaGrafico(periodo, array) {
+  
+}
+
+function organiseData(periodo, array) {
+
+}
+
 getId();
 // --- FINE TEST ---
 })
-
