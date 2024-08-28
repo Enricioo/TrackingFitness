@@ -163,24 +163,125 @@ function capitalizeFirstLetter(string) {
     return string.charAt(0).toUpperCase() + string.slice(1);
 }
 
-// Funzione per ottenere i dati tramite fetch e aggiornare le barre di progresso
-function aggiornaDati() {
-    fetch("http://localhost:8080/utenti/act")
-      .then((response) => {
-          if (!response.ok) {
-              throw new Error('Errore nella risposta del server: ' + response.statusText);
-          }
-          return response.json();
-      })
-      .then((data) => {
-        updateCardioProgress(data);
-      })
-      .catch((error) => console.error("Errore nel fetch:", error));
-}
 
-// Chiama la funzione per ottenere i dati e aggiornare le barre di progresso
-document.addEventListener('DOMContentLoaded', aggiornaDati);//-------------------------------------------------------------------------
 //FINE
+
+//inizio Sidebar 
+const sidebar = document.getElementById("sidebar");
+const content = document.getElementById("content");
+const toggleButton = document.getElementById("toggleButton");
+
+toggleButton.addEventListener("click", () => {
+  sidebar.classList.toggle("open");
+  content.classList.toggle("sidebar-open");
+
+  if (sidebar.classList.contains("open")) {
+    gsap.to(sidebar, { duration: 0.3, left: 0 });
+    gsap.to(toggleButton, { duration: 0.3, left: "260px" });
+    if (window.innerWidth > 768) {
+      gsap.to(content, { duration: 0.3, marginLeft: "250px" });
+    }
+  } else {
+    gsap.to(sidebar, { duration: 0.3, left: "-250px" });
+    gsap.to(toggleButton, { duration: 0.3, left: "10px" });
+    if (window.innerWidth > 768) {
+      gsap.to(content, { duration: 0.3, marginLeft: 0 });
+    }
+  }
+});
+
+window.addEventListener("resize", () => {
+  if (window.innerWidth <= 768 && sidebar.classList.contains("open")) {
+    gsap.set(content, { marginLeft: 0 });
+  }
+});
+//fine sidebar 
+
+
+Document.addEventListener("DOMContentLoaded",async function () {
+    async function getId() {
+      //prendo il token dal browser
+      const token = localStorage.getItem("authToken");
+      //provo a ottenere l'id dell'utente dal token
+      try {
+        fetch(`http://localhost:8080/utenti/me`, {
+          method: "GET",
+          headers: {
+            Authorization: `${token}`,
+          },
+        })
+          .then((response) => response.json())
+          .then((data) => {
+            //ho ottenuto l'id utente dal token
+            const idUtente = data.id;
+            trovaAttivita(idUtente);
+          });
+      } catch (error) {
+        console.err("Errore!");
+      }
+    }
+
+      async function fetchAttivita(periodo, tipo) {
+        try {
+          const response = await fetch("http://localhost:8080/act");
+          const data = await response.json();
+          let arrayAct = [];
+          const oggi = new Date();
+          data.forEach((act) => {
+            const date = new Date(act.sportDate);
+           if (periodo == "Anno") {
+              //le attività dell'anno attuale
+              if (
+                date.getFullYear() == oggi.getFullYear() &&
+                act.tipo == tipo
+              ) {
+                //aggiungo solo le attività fatte entro un anno
+                arrayAct.push(act);
+              }
+            } else if (periodo == "Settimana") {
+              //la settimana attuale
+            }
+          });
+          return arrayAct;
+        } catch (error) {
+          alert("Problemi di comunicazione con il server. Riprova più tardi.");
+        }
+      }
+    async function trovaAttivita(idUtente) {
+      //cerco tutte le attività per tipologia
+      actCiclismo = await fetchAttivita("Anno", "ciclismo");
+      actCorsa = await fetchAttivita("Anno", "corsa");
+      actNuoto = await fetchAttivita("Anno", "nuoto");
+      //ora seleziono solo le attività del singolo utente
+      let ciclismoUtente = [];
+      let corsaUtente = [];
+      let nuotoUtente = [];
+      for (let ciclismo of actCiclismo) {
+        let utente = ciclismo.utente;
+        if (utente.id == idUtente) {
+          ciclismoUtente.push(ciclismo);
+        }
+      }
+      for (let corsa of actCorsa) {
+        let utente = corsa.utente;
+        if (utente.id == idUtente) {
+          corsaUtente.push(corsa);
+        }
+      }
+      for (let nuoto of actNuoto) {
+        let utente = nuoto.utente;
+        if (utente.id == idUtente) {
+          nuotoUtente.push(nuoto);
+        }
+      }
+      console.log(ciclismoUtente);
+      console.log(corsaUtente);
+      console.log(nuotoUtente);
+      //poi si fanno i grafici
+    }
+    getId();
+    
+})
 
 
 // Funzione per calcolare la percentuale obiettivi
@@ -220,19 +321,7 @@ function updateProgress(calorieData) {
 }
 
 // Funzione per ottenere i dati tramite fetch e aggiornare le barre di progresso
-function aggiornaDati() {
-    fetch("http://localhost:8080/utenti/act")
-        .then((response) => {
-            if (!response.ok) {
-                throw new Error('Errore nella risposta del server: ' + response.statusText);
-            }
-            return response.json();
-        })
-        .then((data) => {
-            updateProgress(data);
-        })
-        .catch((error) => console.error("Errore nel fetch:", error));
-}
+
 
 // Chiama la funzione per ottenere i dati e aggiornare le barre di progresso
 document.addEventListener('DOMContentLoaded', aggiornaDati);
