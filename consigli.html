@@ -137,7 +137,7 @@
 
                     <!--MASSA MUSCOLARE-->
 
-                    <div id="massaOptioni">
+                    <div id="massaOptioni" style="display: none;">
                         <h2 style="padding: 12px;"><img src="assets/img/muscolo.png" width="25" class="me-2"
                                 id="massaMuscolare">Massa
                             Muscolare</h2>
@@ -606,7 +606,7 @@
                                             </div>
                                             <div class="row">
                                                 <div class="col">
-                                                    <div id="massaSettimana">
+                                                    <div id="massaSettimana" style="display: none;">
                                                         <h2>Obiettivi settimanali</h2>
                                                         <p>
                                                             Sette giorni di impegno, forza e crescita: spingiti oltre,
@@ -692,9 +692,9 @@
 
                                                     async function trovaAttivita(idUtente) {
                                                         // Cerco tutte le attività per tipologia
-                                                        const actCiclismo = await fetchAttivita('Mese', 'ciclismo');
-                                                        const actCorsa = await fetchAttivita('Mese', 'corsa');
-                                                        const actNuoto = await fetchAttivita('Mese', 'nuoto');
+                                                        const actCiclismo = await fetchAttivita('Settimana', 'ciclismo');
+                                                        const actCorsa = await fetchAttivita('Settimana', 'corsa');
+                                                        const actNuoto = await fetchAttivita('Settimana', 'nuoto');
 
                                                         // Ora seleziono solo le attività del singolo utente
                                                         let ciclismoUtente = [];
@@ -868,8 +868,8 @@
             }
         </style>
 
-        <!--MASSA MUSCOLARE ATTIVITA-->
-        <div id="massaAttivita" class="" class="mt-4">
+        <!--MASSA MUSCOLARE ATTIVITA-TOLTO--> 
+        <div id="massaAttivita" class="" class="mt-4" style="display: none;">
             <h3>Attività svolte durante la settimana</h3>
             <div class="progress-stacked">
                 <div class="progress" role="progressbar" aria-label="Segment one" aria-valuenow="20"
@@ -894,7 +894,7 @@
         </div><br>
 
         <!--CARDIO ATTIVITA-->
-        <div id="cardioAttivita" class="nascosto" class="mt-4" style="display:none;">
+        <div id="cardioAttivita" class="nascosto" class="mt-4" >
             <h3>Attività svolte durante la settimana</h3>
             <div class="progress-stacked">
                 <div class="progress" role="progressbar" aria-label="Segment one" aria-valuenow="20"

@@ -35,7 +35,7 @@ document.addEventListener("DOMContentLoaded", UpdateComponent);
 
 //NOTIFICHE
 
-//CALORIE DA BRUCIARE
+//CALORIE DA BRUCIARE - da rifare
 //Top = 2000;
 //QuasiTop = 1800;
 //Perdita = 1000;
@@ -44,25 +44,25 @@ document.addEventListener("DOMContentLoaded", UpdateComponent);
 
 
 // Soglie per la massa muscolare
-const sogliaMuscoliTop = 2000;
-const sogliaMuscoliQuasiTop = 1800;
-const sogliaMuscoliPerdita = 1000;
-const sogliaMuscoliStabile1 = 1600;
-const sogliaMuscoliStabile2 = 1700;
+const sogliaMuscoliTop = 1000;
+const sogliaMuscoliQuasiTop = 800;
+const sogliaMuscoliPerdita =450;
+const sogliaMuscoliStabile1 = 600;
+const sogliaMuscoliStabile2 = 700;
 
 // Soglie per il cardio
-const sogliaCardioTop = 2000;
-const sogliaCardioQuasiTop = 1800;
-const sogliaCardioPerdita = 1000;
-const sogliaCardioStabile1 = 1600;
-const sogliaCardioStabile2 = 1700;
+const sogliaCardioTop = 1000;
+const sogliaCardioQuasiTop = 800;
+const sogliaCardioPerdita = 450;
+const sogliaCardioStabile1 = 600;
+const sogliaCardioStabile2 = 700;
 
 function updateNotifications() {
-  const massaAtt = 1000;
-  const massaObb = 20000;
+  const massaAtt = 700;
+  const massaObb = 1000;
 
-  const cardioAtt = 1400; //
-  const cardiObb = 2000; //
+  const cardioAtt = 900; //
+  const cardiObb = 1000; //
 
   // Notifiche per la massa muscolare
   if (massaAtt >= sogliaMuscoliTop) {
