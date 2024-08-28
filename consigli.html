@@ -646,6 +646,7 @@
                                                     </div>
                                                 </div>
                                                 <!--TESTO-->
+                                                
                                                 <script> //1 script
                                                     async function getId() {
                                                         // Prendo il token dal browser
@@ -674,17 +675,20 @@
                                                         }
                                                     }
                                                     async function fetchAttivita(Periodo, Tipo) {
+                                                    let attivita = []; 
                                                         if (Periodo == 'Settimana')
                                                          {
                                                             try {
                                                                 const response = await fetch(`http://localhost:8080/act/week` );
                                                                 const data = response.json();
                                                                 console.log(data)
-                                                                return data;
+                                                                attivita = data;
                                                             } catch(error){
 
                                                             }
-                                                }}
+                                                        }
+                                                        return attivita;
+                                                    }
 
                                                     async function trovaAttivita(idUtente) {
                                                         // Cerco tutte le attività per tipologia
