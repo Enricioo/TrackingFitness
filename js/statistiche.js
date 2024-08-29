@@ -446,56 +446,59 @@ async function creaGrafico(arraySettimane, arrayMesi, arrayAnni) {
 }
 
 function organiseData(periodo, array, dato, tipo) {
-  let data = []
+  let data = [];
   if (periodo == 'weekly') {
+    data = [0, 0, 0, 0];
     for (let attivita of array) {
       const date = new Date(attivita.sportDate);
-      if (date.getDate < 8 && attivita.tipo == tipo) {
+      if ((date.getDate() < 8)&&(attivita.tipo == tipo)) {
         if (dato == 'calorie') {
-          data [0] += attivita.calorie
+          data[0] += attivita.calorie;
           } else {
-            data [0] += attivita.distanza
+            data[0] += attivita.distanza;
         }  
-      } else if (date.getDate < 16 && attivita.tipo == tipo) {
+      } else if ((date.getDate() < 16)&&(attivita.tipo == tipo)) {
           if (dato == 'calorie') {
-            data [1] += attivita.calorie
+            data[1] += attivita.calorie;
             } else {
-              data [1] += attivita.distanza
+              data[1] += attivita.distanza;
           } 
-      } else if (date.getDate < 24 && attivita.tipo == tipo) {
+      } else if ((date.getDate() < 24)&&(attivita.tipo == tipo)) {
         if (dato == 'calorie') {
-          data [2] += attivita.calorie
+          data[2] += attivita.calorie;
           } else {
-            data [2] += attivita.distanza
+            data[2] += attivita.distanza;
         }
       } else if (attivita.tipo == tipo) {
         if (dato == 'calorie') {
-          data [3] += attivita.calorie
+          data[3] += attivita.calorie;
           } else {
-            data [3] += attivita.distanza
+            data[3] += attivita.distanza;
         }
       }
     }
   } else if (periodo == 'monthly') {
+    data = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
     for (let attivita of array) {
       const date = new Date(attivita.sportDate);
       for (let i=0; i<12; i++) {
-        if (date.getMonth == i && attivita.tipo == tipo) {
+        if ((date.getMonth() == i)&&(attivita.tipo == tipo)) {
           if (dato == 'calorie') {
-            data [i] += attivita.calorie
+            data [i] += attivita.calorie;
             } else {
-              data [i] += attivita.distanza
+              data [i] += attivita.distanza;
           }
         }
       }
   }
 } else {
   const oggi = new Date();
-  const anno = oggi.getFullYear;
+  const anno = oggi.getFullYear();
   for (i=0; i<=(anno-2020); i++) {
+    data[i] = parseInt(0);
     for (let attivita of array) {
       const date = new Date(attivita.sportDate);
-      if (date.getFullYear == (i+2020) && attivita.tipo == tipo) {
+      if ((date.getFullYear() == (i+2020))&&(attivita.tipo == tipo)) {
         if (dato == 'calorie') {
           data [i] += attivita.calorie
           } else {
@@ -505,7 +508,8 @@ function organiseData(periodo, array, dato, tipo) {
     }
   }
 }
-  console.log(data);
+  //console.log(tipo+' '+periodo);
+  //console.log(data);
 }
 
 getId();

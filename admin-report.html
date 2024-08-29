@@ -28,10 +28,7 @@
     </head>
     <body>
         <!--DA FARE:
-         - sistemare pulsanti e select;
-         - sistemare bug grafici;
-         - migliorare la responsività;
-         - impostare solo due cifre decimali per la media
+         - migliorare la responsività!!!!
         -->
         <div class="container-fluid sidebar">
             <div class="row flex-nowrap">
@@ -329,9 +326,9 @@
                         sumCorsa = organiseData(periodo, arrayCorsa, dato, i);
                         sumNuoto = organiseData(periodo, arrayNuoto, dato, i);
                         //media
-                        valueCiclismo[i] = sumCiclismo/arrayCiclismo.length;
-                        valueCorsa[i] = sumCorsa/arrayCorsa.length;
-                        valueNuoto[i] = sumNuoto/arrayNuoto.length;
+                        valueCiclismo[i] = (sumCiclismo/arrayCiclismo.length).toFixed(2);
+                        valueCorsa[i] = (sumCorsa/arrayCorsa.length).toFixed(2);
+                        valueNuoto[i] = (sumNuoto/arrayNuoto.length).toFixed(2);
                     }
                     //creo il diagramma
                     new Chart("attivita-tempo", {
