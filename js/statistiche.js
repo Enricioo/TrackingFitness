@@ -331,7 +331,7 @@ async function creaGrafico(arraySettimane, arrayMesi, arrayAnni) {
     }
   };
 
-  let chart1 = new Chart(ctx1, {    // 1° Grafico (a linee)
+  /*let chart1 = new Chart(ctx1, {    // 1° Grafico (a linee)
     type: "line",
     data: {
       labels: ["Settimana 1", "Settimana 2", "Settimana 3", "Settimana 4"],
@@ -442,7 +442,7 @@ async function creaGrafico(arraySettimane, arrayMesi, arrayAnni) {
         },
       },
     },
-  });
+  });*/
 }
 
 function organiseData(periodo, array, dato, tipo) {
@@ -489,7 +489,23 @@ function organiseData(periodo, array, dato, tipo) {
         }
       }
   }
+} else {
+  const oggi = new Date();
+  const anno = oggi.getFullYear;
+  for (i=0; i<=(anno-2020); i++) {
+    for (let attivita of array) {
+      const date = new Date(attivita.sportDate);
+      if (date.getFullYear == (i+2020) && attivita.tipo == tipo) {
+        if (dato == 'calorie') {
+          data [i] += attivita.calorie
+          } else {
+            data [i] += attivita.distanza
+        }
+      }
+    }
+  }
 }
+  console.log(data);
 }
 
 getId();
