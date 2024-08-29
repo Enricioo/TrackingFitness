@@ -4,9 +4,9 @@ function UpdateComponent() {
     .getElementById("MassaOptioni")
     .addEventListener("click", function () {
       console.log("Massa Muscolare selezionato"); 
-      document.getElementById("massaOptioni").style.display = "block";
-      document.getElementById("massaSettimana").style.display = "block";
-      document.getElementById("massaAttivita").style.display = "block";
+      document.getElementById("massaOptioni").style.display = "none";
+      document.getElementById("massaSettimana").style.display = "none";
+      document.getElementById("massaAttivita").style.display = "none";
 
       // Nascondi gli elementi relativi al cardio
       document.getElementById("cardioOptioni").style.display = "none";
@@ -249,9 +249,9 @@ document.addEventListener("DOMContentLoaded", async function () {
       }
     async function trovaAttivita(idUtente) {
       //cerco tutte le attività per tipologia
-      actCiclismo = await fetchAttivita("Anno", "ciclismo");
-      actCorsa = await fetchAttivita("Anno", "corsa");
-      actNuoto = await fetchAttivita("Anno", "nuoto");
+      actCiclismo = await fetchAttivita("Anno", "cycling");
+      actCorsa = await fetchAttivita("Anno", "running");
+      actNuoto = await fetchAttivita("Anno", "swimmming");
       //ora seleziono solo le attività del singolo utente
       let ciclismoUtente = [];
       let corsaUtente = [];
@@ -274,9 +274,9 @@ document.addEventListener("DOMContentLoaded", async function () {
           nuotoUtente.push(nuoto);
         }
       }
-      console.log(ciclismoUtente);
-      console.log(corsaUtente);
-      console.log(nuotoUtente);
+      //console.log(ciclismoUtente);
+     // console.log(corsaUtente);
+      //console.log(nuotoUtente);
       //poi si fanno i grafici
     }
     getId();

@@ -674,7 +674,7 @@
                                                             console.log("Errore!", error);
                                                         }
                                                     }
-                                                    async function fetchAttivita(Periodo, Tipo) {
+                                                    async function fetchAttivita(Periodo, Tipo,id) {
                                                     let attivita = []; 
                                                         if (Periodo == 'Settimana')
                                                          {
@@ -686,16 +686,24 @@
                                                             } catch(error){
 
                                                             }
+                                                        } else {
+                                                            try {
+                                                                const response = await fetch(`http://localhost:8080/act/utente/${id}` );
+                                                                const data = response.json();
+                                                                attivita = data;
+
+                                                            } catch(error){
                                                         }
+                                                        console.log(attivita)
                                                         return attivita;
-                                                    }
+                                                    }}
 
                                                     async function trovaAttivita(idUtente) {
                                                         // Cerco tutte le attività per tipologia
-                                                        const actCiclismo = await fetchAttivita('Settimana', 'ciclismo');
-                                                        const actCorsa = await fetchAttivita('Settimana', 'corsa');
-                                                        const actNuoto = await fetchAttivita('Settimana', 'nuoto');
-
+                                                        const actCiclismo = await fetchAttivita('Settimana', 'cycling',idUtente);
+                                                        const actCorsa = await fetchAttivita('Settimana', 'running',idUtente);
+                                                        const actNuoto = await fetchAttivita('Settimana', 'swimming',idUtente);
+                                                        console.log(actCiclismo)
                                                         // Ora seleziono solo le attività del singolo utente
                                                         let ciclismoUtente = [];
                                                         let corsaUtente = [];
@@ -731,6 +739,34 @@
                                                         // Esempio di come calcolare la percentuale di completamento per ciascun giorno
                                                         const giorni = ['Lunedi', 'Martedì', 'Mercoledi', 'Giovedi', 'Venerdì', 'Sabato', 'Domenica'];
                                                         const giorniElementIds = ['settlunCardio', 'setmarCardio', 'setmerCardio', 'setgioCardio', 'setvenCardio', 'setsabCardio', 'setdomCardio'];
+                                                        
+                                                        let array=[];
+
+                                                        for (i=0; i<7;i++){
+                                                            let calorie=parseInt(0); // forza calorie intere
+                                                            ciclismoUtente.forEach(element => {
+                                                                const date=new Date(element.sportDate);
+                                                                if (date.getDay==(i+1)){
+                                                                    calorie+=element.calorie;
+                                                                }
+                                                            });
+                                                            corsaUtente.forEach(element => {
+                                                                const date = new Date(element.sportDate);
+                                                                if (date.getDay == (i + 1)) {
+                                                                    calorie += element.calorie;
+                                                                }
+                                                            });
+                                                            nuotoUtente.forEach(element => {
+                                                                const date = new Date(element.sportDate);
+                                                                if (date.getDay == (i + 1)) {
+                                                                    calorie += element.calorie;
+                                                                }
+                                                            });
+
+                                                            array[i]=calorie;
+                                                        }
+
+                                                        console.log(array)
 
                                                         // Calcolo delle attività totali per giorno (semplificato)
                                                         const attivitaPerGiorno = {
