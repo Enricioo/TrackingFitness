@@ -230,9 +230,9 @@ window.addEventListener('resize', () => {
 });
 
 document.addEventListener('DOMContentLoaded', async function() {
-  async function fetchAttivita(periodo, tipo) {
+  async function fetchAttivita(periodo, id) {
     try {
-        const response = await fetch('http://localhost:8080/act');
+        const response = await fetch(`http://localhost:8080/act/utente/${id}`);
         const data = await response.json();
         let arrayAct = [];
         const oggi = new Date();
@@ -240,18 +240,16 @@ document.addEventListener('DOMContentLoaded', async function() {
             const date = new Date(act.sportDate);
             if (periodo == 'annual') {
                 //aggiungo tutte le attività del tipo selezionato
-                if (act.tipo == tipo) {
-                    arrayAct.push(act);
-                }
+                arrayAct.push(act)
             } else if (periodo == 'monthly') {
                 //le attività dell'anno attuale
-                if ((date.getFullYear() == oggi.getFullYear()) && (act.tipo == tipo)) {
+                if ((date.getFullYear() == oggi.getFullYear())) {
                     //aggiungo solo le attività fatte entro un anno
                     arrayAct.push(act);
                 }
             } else if (periodo == 'weekly') {
                 //il mese attuale
-                if ((date.getFullYear() == oggi.getFullYear()) && (date.getMonth() == oggi.getMonth()) && (act.tipo == tipo)) {
+                if ((date.getFullYear() == oggi.getFullYear()) && (date.getMonth() == oggi.getMonth())) {
                     //aggiungo solo le attività fatte entro un mese
                     arrayAct.push(act);
                 }
@@ -285,30 +283,9 @@ document.addEventListener('DOMContentLoaded', async function() {
     }
 }
 async function trovaAttivita(idUtente) {
-    //cerco tutte le attività per tipologia
-    actCiclismo = await fetchAttivita('weekly', 'ciclismo');
-    actCorsa = await fetchAttivita('weekly', 'corsa');
-    actNuoto = await fetchAttivita('weekly', 'nuoto');
     //ora seleziono solo le attività del singolo utente
-    let attivitaUtente = [];
-    for (let ciclismo of actCiclismo) {
-        let utente = ciclismo.utente;
-        if (utente.id==idUtente) {
-          attivitaUtente.push(ciclismo);
-        }
-    }
-    for (let corsa of actCorsa) {
-        let utente = corsa.utente;
-        if(utente.id==idUtente) {
-          attivitaUtente.push(corsa);
-        }
-    }
-    for (let nuoto of actNuoto) {
-        let utente = nuoto.utente;
-        if (utente.id==idUtente) {
-          attivitaUtente.push(nuoto);
-        }
-    }
+    let attivitaUtente = await fetchAttivita('weekly', idUtente);
+    console.log(attivitaUtente);
     //poi si fanno i grafici
     creaGrafico('weekly', attivitaUtente)
 }
