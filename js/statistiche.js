@@ -284,18 +284,212 @@ document.addEventListener('DOMContentLoaded', async function() {
 }
 async function trovaAttivita(idUtente) {
     //ora seleziono solo le attività del singolo utente
-    let attivitaUtente = await fetchAttivita('weekly', idUtente);
-    console.log(attivitaUtente);
+    let attivitaSettimane = await fetchAttivita('weekly', idUtente);
+    let attivitaMesi = await fetchAttivita('monthly', idUtente);
+    let attivitaAnni = await fetchAttivita('annual', idUtente);
     //poi si fanno i grafici
-    creaGrafico('weekly', attivitaUtente)
+    creaGrafico(attivitaSettimane, attivitaMesi, attivitaAnni)
 }
 
-async function creaGrafico(periodo, array) {
-  
+async function creaGrafico(arraySettimane, arrayMesi, arrayAnni) {
+  let ctx1 = document.getElementById("myChart").getContext("2d");
+  let ctx2 = document.getElementById("myChart2").getContext("2d");
+
+  let sportData = {    // valori distanza percorsa
+    running: {
+      weekly: organiseData('weekly', arraySettimane, 'distanza', 'running'),
+      monthly: organiseData('monthly', arrayMesi, 'distanza', 'running'),
+      annual: organiseData('annual', arrayAnni, 'distanza', 'running'),
+    },
+    cycling: {
+      weekly: organiseData('weekly', arraySettimane, 'distanza', 'cycling'),
+      monthly: organiseData('monthly', arrayMesi, 'distanza', 'cycling'),
+      annual: organiseData('annual', arrayAnni, 'distanza', 'cycling'),
+    },
+    swimming: {
+      weekly: organiseData('weekly', arraySettimane, 'distanza', 'swimming'),
+      monthly: organiseData('monthly', arrayMesi, 'distanza', 'swimming'),
+      annual: organiseData('annual', arrayAnni, 'distanza', 'swimming'),
+    }
+  };
+
+  let sportCalorieData = {    // valori calorie bruciate
+    running: {
+      weekly: organiseData('weekly', arraySettimane, 'calorie', 'running'),
+      monthly: organiseData('monthly', arrayMesi, 'calorie', 'running'),
+      annual: organiseData('annual', arrayAnni, 'calorie', 'running'),
+    },
+    cycling: {
+      weekly: organiseData('weekly', arraySettimane, 'calorie', 'cycling'),
+      monthly: organiseData('monthly', arrayMesi, 'calorie', 'cycling'),
+      annual: organiseData('annual', arrayAnni, 'calorie', 'cycling'),
+    },
+    swimming: {
+      weekly: organiseData('weekly', arraySettimane, 'calorie', 'swimming'),
+      monthly: organiseData('monthly', arrayMesi, 'calorie', 'swimming'),
+      annual: organiseData('annual', arrayAnni, 'calorie', 'swimming'),
+    }
+  };
+
+  let chart1 = new Chart(ctx1, {    // 1° Grafico (a linee)
+    type: "line",
+    data: {
+      labels: ["Settimana 1", "Settimana 2", "Settimana 3", "Settimana 4"],
+      datasets: [{
+        label: "Distanza percorsa (km)",
+        data: sportData.running.weekly,    // dal contenitore sportData si accede ai dati della corsa (running) su base settimanale (weekly)
+        backgroundColor: "rgba(0,191,255,0.6)",
+        borderColor: "rgba(0, 191, 255, 1)",
+        borderWidth: 2,
+        fill: true,   // l'area sottostante la linea del grafico viene colorata
+      }],
+    },
+    options: {
+      responsive: true,
+      maintainAspectRatio: false,   // il grafico si adatta alle dimensioni del contenitore
+      scales: {
+        x: {
+          title: {
+            display: true,
+            text: 'Settimane',
+            font: {
+              size: 16,   // Dimensione del font
+            },
+            padding: {
+              top: 20,
+              bottom: 20,
+            },
+          },
+          ticks: {
+            font: {
+              size: 14,   // Dimensione del font per i ticks (etichette lugngo gli assi)
+            },
+          },
+        },
+        y: {
+          title: {
+            display: true,
+            text: 'Distanza percorsa (km)',
+            font: {
+              size: 16,
+            },
+            padding: {
+              top: 20,
+              bottom: 20,
+            },
+          },
+          ticks: {
+            font: {
+              size: 14,
+            },
+          },
+        },
+      },
+    },
+  });
+
+  let chart2 = new Chart(ctx2, {    // 2° Grafico (a barre)
+    type: "bar",
+    data: {
+      labels: ["Settimana 1", "Settimana 2", "Settimana 3", "Settimana 4"],
+      datasets: [{
+        label: "Calorie bruciate (kcal)",
+        data: sportCalorieData.running.weekly,
+        backgroundColor: ["yellow", "orange", "red", "brown", "lightgreen", "skyblue", "blue", "lime", "purple", "yellow", "gray", "green"],
+        borderWidth: 2,
+        borderColor: "black",
+      }],
+    },
+    options: {
+      responsive: true,
+      maintainAspectRatio: false,
+      scales: {
+        x: {
+          title: {
+            display: true,
+            text: 'Settimane',
+            font: {
+              size: 16,
+            },
+            padding: {
+              top: 20,
+              bottom: 20,
+            },
+          },
+          ticks: {
+            font: {
+              size: 14,
+            },
+          },
+        },
+        y: {
+          title: {
+            display: true,
+            text: 'Calorie bruciate (kcal)',
+            font: {
+              size: 16,
+            },
+            padding: {
+              top: 20,
+              bottom: 20,
+            },
+          },
+          ticks: {
+            font: {
+              size: 14,
+            },
+          },
+        },
+      },
+    },
+  });
 }
 
-function organiseData(periodo, array) {
-
+function organiseData(periodo, array, dato, tipo) {
+  let data = []
+  if (periodo == 'weekly') {
+    for (let attivita of array) {
+      const date = new Date(attivita.sportDate);
+      if (date.getDate < 8 && attivita.tipo == tipo) {
+        if (dato == 'calorie') {
+          data [0] += attivita.calorie
+          } else {
+            data [0] += attivita.distanza
+        }  
+      } else if (date.getDate < 16 && attivita.tipo == tipo) {
+          if (dato == 'calorie') {
+            data [1] += attivita.calorie
+            } else {
+              data [1] += attivita.distanza
+          } 
+      } else if (date.getDate < 24 && attivita.tipo == tipo) {
+        if (dato == 'calorie') {
+          data [2] += attivita.calorie
+          } else {
+            data [2] += attivita.distanza
+        }
+      } else if (attivita.tipo == tipo) {
+        if (dato == 'calorie') {
+          data [3] += attivita.calorie
+          } else {
+            data [3] += attivita.distanza
+        }
+      }
+    }
+  } else if (periodo == 'monthly') {
+    for (let attivita of array) {
+      const date = new Date(attivita.sportDate);
+      for (let i=0; i<12; i++) {
+        if (date.getMonth == i && attivita.tipo == tipo) {
+          if (dato == 'calorie') {
+            data [i] += attivita.calorie
+            } else {
+              data [i] += attivita.distanza
+          }
+        }
+      }
+  }
+}
 }
 
 getId();
