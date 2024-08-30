@@ -697,42 +697,27 @@
 
                                                 async function trovaAttivita(idUtente) {
                                                     // Cerco tutte le attività per tipologia
-                                                    const actCiclismo = await fetchAttivita('Settimana', 'ciclismo');
-                                                    const actCorsa = await fetchAttivita('Settimana', 'corsa');
-                                                    const actNuoto = await fetchAttivita('Settimana', 'nuoto');
+                                                    const act = await fetchAttivita('Settimana', 'ciclismo');
+                                                  
 
                                                     // Ora seleziono solo le attività del singolo utente
-                                                    let ciclismoUtente = [];
-                                                    let corsaUtente = [];
-                                                    let nuotoUtente = [];
+                                                    let attivitaUtente = [];
 
-                                                    for (let ciclismo of actCiclismo) {
-                                                        if (ciclismo.utente.id === idUtente) {
-                                                            ciclismoUtente.push(ciclismo);
+                                                    for (let attività of act) {
+                                                        if (attivita.utente.id === idUtente) {
+                                                            attivitaUtenteattivitationsh(attivita);
                                                         }
                                                     }
-
-                                                    for (let corsa of actCorsa) {
-                                                        if (corsa.utente.id === idUtente) {
-                                                            corsaUtente.push(corsa);
-                                                        }
-                                                    }
-
-                                                    for (let nuoto of actNuoto) {
-                                                        if (nuoto.utente.id === idUtente) {
-                                                            nuotoUtente.push(nuoto);
-                                                        }
-                                                    }
-
-                                                    console.log(ciclismoUtente, corsaUtente, nuotoUtente);
+                                            
+                                                    console.log(attivitaUtente);
 
                                                     // Aggiorna le barre di progresso settimanali
-                                                    aggiornaProgressBar(ciclismoUtente, corsaUtente, nuotoUtente);
+                                                    aggiornaProgressBar(attiviUtente);
 
                                                 }
                                                 getId();
 
-                                                function aggiornaProgressBar(ciclismoUtente, corsaUtente, nuotoUtente) {
+                                                function aggiornaProgressBar(ciclismoUtente) {
                                                     // Esempio di come calcolare la percentuale di completamento per ciascun giorno
                                                     const giorni = ['Lunedi', 'Martedì', 'Mercoledi', 'Giovedi', 'Venerdì', 'Sabato', 'Domenica'];
                                                     const giorniElementIds = ['settlunCardio', 'setmarCardio', 'setmerCardio', 'setgioCardio', 'setvenCardio', 'setsabCardio', 'setdomCardio'];
