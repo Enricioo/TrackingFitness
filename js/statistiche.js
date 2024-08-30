@@ -1,5 +1,5 @@
 document.addEventListener('DOMContentLoaded', function () {
-  let ctx1 = document.getElementById("myChart").getContext("2d");
+  /*let ctx1 = document.getElementById("myChart").getContext("2d");
   let ctx2 = document.getElementById("myChart2").getContext("2d");
 
   let sportData = {    // valori distanza percorsa
@@ -149,7 +149,7 @@ document.addEventListener('DOMContentLoaded', function () {
         },
       },
     },
-  });
+  });*/
 
   window.changeChart = function (type) {    // Funzione "changeChart" che cambia il tipo di dati visualizzati nei grafici in base all'input dell'utente.
 
@@ -331,7 +331,7 @@ async function creaGrafico(arraySettimane, arrayMesi, arrayAnni) {
     }
   };
 
-  /*let chart1 = new Chart(ctx1, {    // 1° Grafico (a linee)
+  let chart1 = new Chart(ctx1, {    // 1° Grafico (a linee)
     type: "line",
     data: {
       labels: ["Settimana 1", "Settimana 2", "Settimana 3", "Settimana 4"],
@@ -442,7 +442,7 @@ async function creaGrafico(arraySettimane, arrayMesi, arrayAnni) {
         },
       },
     },
-  });*/
+  });
 }
 
 function organiseData(periodo, array, dato, tipo) {
@@ -508,10 +508,55 @@ function organiseData(periodo, array, dato, tipo) {
     }
   }
 }
-  //console.log(tipo+' '+periodo);
-  //console.log(data);
+  return data;
 }
+window.changeChart = function (type) {    // Funzione "changeChart" che cambia il tipo di dati visualizzati nei grafici in base all'input dell'utente.
+
+  // Rimuovo la classe active-button da tutti i bottoni
+  document.querySelectorAll('.chart-type-button').forEach(button => {
+    button.classList.remove('active-button');
+  });
+
+  // Aggiungi la classe active-button al bottone cliccato
+  document.getElementById(type + '-button').classList.add('active-button');
+
+  let sport = document.getElementById("sportSelector").value;    // Scelta dello sport
+
+  if (type === 'weekly') {
+    chart1.data.labels = ["Settimana 1", "Settimana 2", "Settimana 3", "Settimana 4"];   // imposto le etichette dell'asse X
+    chart1.data.datasets[0].data = sportData[sport].weekly;    // recupero dei dati
+    chart1.options.scales.x.title.text = 'Settimane';    // imposto il titolo dell'asse x
+    chart1.update();
+
+    chart2.data.labels = ["Settimana 1", "Settimana 2", "Settimana 3", "Settimana 4"];
+    chart2.data.datasets[0].data = sportCalorieData[sport].weekly;
+    chart2.options.scales.x.title.text = 'Settimane';
+    chart2.update();
+
+  } else if (type === 'monthly') {
+    chart1.data.labels = ["Gen", "Feb", "Mar", "Apr", "Mag", "Giu", "Lug", "Ago", "Set", "Ott", "Nov", "Dic"];
+    chart1.data.datasets[0].data = sportData[sport].monthly;
+    chart1.options.scales.x.title.text = 'Mesi';
+    chart1.update();
+
+    chart2.data.labels = ["Gen", "Feb", "Mar", "Apr", "Mag", "Giu", "Lug", "Ago", "Set", "Ott", "Nov", "Dic"];
+    chart2.data.datasets[0].data = sportCalorieData[sport].monthly;
+    chart2.options.scales.x.title.text = 'Mesi';
+    chart2.update();
+
+  } else if (type === 'annual') {
+    chart1.data.labels = ["2020", "2021", "2022", "2023"];
+    chart1.data.datasets[0].data = sportData[sport].annual;
+    chart1.options.scales.x.title.text = 'Anni';
+    chart1.update();
+
+    chart2.data.labels = ["2020", "2021", "2022", "2023"];
+    chart2.data.datasets[0].data = sportCalorieData[sport].annual;
+    chart2.options.scales.x.title.text = 'Anni';
+    chart2.update();
+  }
+};
 
 getId();
 // --- FINE TEST ---
-})
+});
