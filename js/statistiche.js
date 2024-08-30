@@ -553,7 +553,7 @@ function organiseData(periodo, array, dato, tipo) {
       }
     }
   }
-}
+} 
   return data;
 }
 
