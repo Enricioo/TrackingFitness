@@ -8,10 +8,10 @@
     <link rel="stylesheet" href="css/bootstrap.min.css">
     <link rel="stylesheet" href="css/calcolatori.css">
     <link rel="stylesheet" href="css/footer.css">
+    <link rel="stylesheet" href="css/sidebar.css">
     <link href="assets/bootstrap-icons-1.11.3/font/bootstrap-icons.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <style>
-
         .toggle-buttons button {
             background-color: #2F97C1;
             color: #FFFFFF;
@@ -20,103 +20,123 @@
         .toggle-buttons button.active {
             background-color: #0B3954;
         }
-
     </style>
 </head>
 
 <body>
 
-    <div class="container mt-5">
-        <div class="btn-group toggle-buttons d-flex justify-content-center mb-4">
-            <button class="btn active" id="corsaBtn" onclick="showCalculator('running')">Corsa</button>
-            <button class="btn" id="ciclismoBtn" onclick="showCalculator('biking')">Ciclismo</button>
-            <button class="btn" id="nuotoBtn" onclick="showCalculator('swimming')">Nuoto</button>
-        </div>
+    <!-- Sidebar -->
+    <div class="sidebar" id="sidebar">
+        <a href="index.html" class="list-group-item p-3 border-end-0 text-truncate border-dark"
+            data-bs-parent="index.html"><i class="bi bi-house-fill"></i> <span>Home</span></a>
+        <a href="statistiche.html" class="list-group-item p-3 border-end-0 text-truncate border-dark"
+            data-bs-parent="stats.html"><i class="bi bi-trophy-fill"></i> <span>Statistiche</span></a>
+        <a href="consigli.html" class="list-group-item p-3 border-end-0 text-truncate border-dark"
+            data-bs-parent="consigli.html"><i class="bi bi-journal-bookmark-fill"></i> <span>Consigli</span></a>
+        <a href="profile.html" class="list-group-item p-3 border-end-0 text-truncate border-dark"
+            data-bs-parent="profile.html"><i class="bi bi-person-arms-up"></i> <span>Profilo</span></a>
+        <a href="calcolatori.html" class="list-group-item p-3 border-end-0 text-truncate border-dark"
+            data-bs-parent="settings.html"><i class="bi bi-calculator"></i> <span>Calcolatore</span></a>
+    </div>
 
-        <div id="running" class="calculator active">
-            <h2>Calcolatore di Calorie per la Corsa</h2>
-            <form id="running-calculator" class="form-group">
+
+    <div class="content" id="content">
+        <a href="#" id="toggleButton" data-bs-target="#sidebar" data-bs-toggle="collapse"
+            class="toggle-button border rounded-3 p-1 text-decoration-none bg-warning-emphasis border-dark"><i
+                class="bi bi-list bi-lg py-2 p-1"></i>
+        </a>
+        <div class="container mt-5">
+            <div class="btn-group toggle-buttons d-flex justify-content-center mb-4">
+                <button class="btn active" id="corsaBtn" onclick="showCalculator('running')">Corsa</button>
+                <button class="btn" id="ciclismoBtn" onclick="showCalculator('biking')">Ciclismo</button>
+                <button class="btn" id="nuotoBtn" onclick="showCalculator('swimming')">Nuoto</button>
+            </div>
+
+            <div id="running" class="calculator active">
+                <h2>Calcolatore di Calorie per la Corsa</h2>
+                <form id="running-calculator" class="form-group">
                 <div class="row">
                     <div class="col-md-3">
-                        <label for="running-weight">Peso (kg):</label>
-                        <input type="number" id="running-weight" name="running-weight" class="form-control mb-3">
+                            <label for="running-weight">Peso (kg):</label>
+                            <input type="number" id="running-weight" name="running-weight" class="form-control mb-3">
                     </div>
                     <div class="col-md-3">
-                        <label for="running-distance">Distanza (km):</label>
-                        <input type="number" id="running-distance" name="running-distance" class="form-control mb-3">
+                            <label for="running-distance">Distanza (km):</label>
+                            <input type="number" id="running-distance" name="running-distance" class="form-control mb-3">
                     </div>
                     <div class="col-md-3">
-                        <label for="running-duration">Durata (minuti):</label>
-                        <input type="number" id="running-duration" name="running-duration" class="form-control mb-3">
+                            <label for="running-duration">Durata (minuti):</label>
+                            <input type="number" id="running-duration" name="running-duration" class="form-control mb-3">
                     </div>
                     <div class="col-md-3">
-                        <label for="running-grade">Pendenza (%):</label>
-                        <input type="number" id="running-grade" name="running-grade" class="form-control mb-3">
+                            <label for="running-grade">Pendenza (%):</label>
+                            <input type="number" id="running-grade" name="running-grade" class="form-control mb-3">
                     </div>
                 </div>
-                <button type="button" class="btn btn-primary" onclick="calculateRunningCalories()">Calcola</button>
-            </form>
-            <p class="mt-3">Calorie Bruciate: <span id="running-result" class="result">0</span></p>
-            <button type="button" class="btn btn-primary" onclick="saveActivity('running')">Salva Attività</button>
-        </div>
+                    <button type="button" class="btn btn-primary" onclick="calculateRunningCalories()">Calcola</button>
+                </form>
+                <p class="mt-3">Calorie Bruciate: <span id="running-result" class="result">0</span></p>
+                <button type="button" class="btn btn-primary" onclick="saveActivity('running')">Salva Attività</button>
+            </div>
         
-        <div id="biking" class="calculator">
-            <h2>Calcolatore di Calorie per il Ciclismo</h2>
-            <form id="biking-calculator" class="form-group">
+            <div id="biking" class="calculator">
+                <h2>Calcolatore di Calorie per il Ciclismo</h2>
+                <form id="biking-calculator" class="form-group">
                 <div class="row">
                     <div class="col-md-4">
-                        <label for="biking-weight">Peso (kg):</label>
-                        <input type="number" id="biking-weight" name="biking-weight" class="form-control mb-3">
+                            <label for="biking-weight">Peso (kg):</label>
+                            <input type="number" id="biking-weight" name="biking-weight" class="form-control mb-3">
                     </div>
                     <div class="col-md-4">
-                        <label for="biking-distance">Distanza (km):</label>
-                        <input type="number" id="biking-distance" name="biking-distance" class="form-control mb-3">
+                            <label for="biking-distance">Distanza (km):</label>
+                            <input type="number" id="biking-distance" name="biking-distance" class="form-control mb-3">
                     </div>
                     <div class="col-md-4">
-                        <label for="biking-duration">Durata (minuti):</label>
-                        <input type="number" id="biking-duration" name="biking-duration" class="form-control mb-3">
+                            <label for="biking-duration">Durata (minuti):</label>
+                            <input type="number" id="biking-duration" name="biking-duration" class="form-control mb-3">
                     </div>
                 </div>
-                <button type="button" class="btn btn-primary" onclick="calculateBikingCalories()">Calcola</button>
-            </form>
-            <p class="mt-3">Calorie Bruciate: <span id="biking-result" class="result">0</span></p>
-            <button type="button" class="btn btn-primary" onclick="saveActivity('biking')">Salva Attività</button>
-        </div>
+                    <button type="button" class="btn btn-primary" onclick="calculateBikingCalories()">Calcola</button>
+                </form>
+                <p class="mt-3">Calorie Bruciate: <span id="biking-result" class="result">0</span></p>
+                <button type="button" class="btn btn-primary" onclick="saveActivity('biking')">Salva Attività</button>
+            </div>
         
-        <div id="swimming" class="calculator">
-            <h2>Calcolatore di Calorie per il Nuoto</h2>
-            <form id="swimming-calculator" class="form-group">
+            <div id="swimming" class="calculator">
+                <h2>Calcolatore di Calorie per il Nuoto</h2>
+                <form id="swimming-calculator" class="form-group">
                 <div class="row">
                     <div class="col-md-2">
-                        <label for="swimming-weight">Peso (kg):</label>
-                        <input type="number" id="swimming-weight" name="swimming-weight" class="form-control mb-3">
+                            <label for="swimming-weight">Peso (kg):</label>
+                            <input type="number" id="swimming-weight" name="swimming-weight" class="form-control mb-3">
                     </div>
                     <div class="col-md-3">
-                        <label for="swimming-distance">Distanza (m):</label>
-                        <input type="number" id="swimming-distance" name="swimming-distance" class="form-control mb-3">
+                            <label for="swimming-distance">Distanza (m):</label>
+                            <input type="number" id="swimming-distance" name="swimming-distance" class="form-control mb-3">
                     </div>
                     <div class="col-md-3">
-                        <label for="swimming-duration">Durata (minuti):</label>
-                        <input type="number" id="swimming-duration" name="swimming-duration" class="form-control mb-3">
+                            <label for="swimming-duration">Durata (minuti):</label>
+                            <input type="number" id="swimming-duration" name="swimming-duration" class="form-control mb-3">
                     </div>
                     <div class="col-md-4">
-                        <label for="swimming-style">Stile di Nuoto:</label>
-                        <select id="swimming-style" name="swimming-style" class="form-control mb-3">
-                            <option value="freestyle">Stile Libero</option>
-                            <option value="breaststroke">Rana</option>
-                            <option value="butterfly">Farfalla</option>
-                        </select>
+                            <label for="swimming-style">Stile di Nuoto:</label>
+                            <select id="swimming-style" name="swimming-style" class="form-control mb-3">
+                                <option value="freestyle">Stile Libero</option>
+                                <option value="breaststroke">Rana</option>
+                                <option value="butterfly">Farfalla</option>
+                            </select>
                     </div>
                 </div>
-                <button type="button" class="btn btn-primary" onclick="calculateSwimmingCalories()">Calcola</button>
-            </form>
-            <p class="mt-3">Calorie Bruciate: <span id="swimming-result" class="result">0</span></p>
-            <button type="button" class="btn btn-primary" onclick="saveActivity('swimming')">Salva Attività</button>
-        </div>
+                    <button type="button" class="btn btn-primary" onclick="calculateSwimmingCalories()">Calcola</button>
+                </form>
+                <p class="mt-3">Calorie Bruciate: <span id="swimming-result" class="result">0</span></p>
+                <button type="button" class="btn btn-primary" onclick="saveActivity('swimming')">Salva Attività</button>
+                </div>
         
-
+    </div>
     <script src="js/jquery-3.7.1.min.js"></script>
     <script src="js/bootstrap.bundle.min.js"></script>
+    <script src="js/sidebar.js"></script>
     <script src="js/footer.js"></script>
     <script src="js/calcolatori.js"></script>
 </body>

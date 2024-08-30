@@ -166,38 +166,6 @@ function capitalizeFirstLetter(string) {
 
 //FINE
 
-//inizio Sidebar 
-const sidebar = document.getElementById("sidebar");
-const content = document.getElementById("content");
-const toggleButton = document.getElementById("toggleButton");
-
-toggleButton.addEventListener("click", () => {
-  sidebar.classList.toggle("open");
-  content.classList.toggle("sidebar-open");
-
-  if (sidebar.classList.contains("open")) {
-    gsap.to(sidebar, { duration: 0.3, left: 0 });
-    gsap.to(toggleButton, { duration: 0.3, left: "260px" });
-    if (window.innerWidth > 768) {
-      gsap.to(content, { duration: 0.3, marginLeft: "250px" });
-    }
-  } else {
-    gsap.to(sidebar, { duration: 0.3, left: "-250px" });
-    gsap.to(toggleButton, { duration: 0.3, left: "10px" });
-    if (window.innerWidth > 768) {
-      gsap.to(content, { duration: 0.3, marginLeft: 0 });
-    }
-  }
-});
-
-window.addEventListener("resize", () => {
-  if (window.innerWidth <= 768 && sidebar.classList.contains("open")) {
-    gsap.set(content, { marginLeft: 0 });
-  }
-});
-//fine sidebar 
-
-
 document.addEventListener("DOMContentLoaded", async function () {
     async function getId() {
       //prendo il token dal browser

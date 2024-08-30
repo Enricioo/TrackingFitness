@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Profilo - Admin</title>
     <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/sidebar.css">
     <link rel="stylesheet" href="css/footer.css">
     <link rel="stylesheet" href="css/profile.css">
     <link href="assets/bootstrap-icons-1.11.3/font/bootstrap-icons.css" rel="stylesheet">
@@ -13,151 +14,148 @@
 </head>
 
 <body>
-    <div class="container-fluid sidebar">
-        <div class="row flex-nowrap">
-            <div class="col-auto px-0">
-                <div id="sidebar" class="collapse collapse-horizontal border-end border-dark">
-                    <div id="sidebar-nav" class="list-group border-0 rounded-0 text-sm-start min-vh-100">
-                        <a href="#" class="list-group-item border-end-0 d-inline-block text-truncate border-dark"
-                            data-bs-parent="index.html"><i class="bi bi-house"></i> <span>Home</span> </a>
-                        <a href="#" class="list-group-item border-end-0 d-inline-block text-truncate border-dark"
-                            data-bs-parent="stats.html"><i class="bi bi-trophy-fill"></i> <span>Statistiche</span> </a>
-                        <a href="#" class="list-group-item border-end-0 d-inline-block text-truncate border-dark"
-                            data-bs-parent="consigli.html"><i class="bi bi-journal-bookmark-fill"></i>
-                            <span>Consigli</span> </a>
-                        <a href="#" class="list-group-item border-end-0 d-inline-block text-truncate border-dark"
-                            data-bs-parent="profile.html"><i class="bi bi-person-arms-up"></i> <span>Profilo</span></a>
-                        <a href="#" class="list-group-item border-end-0 d-inline-block text-truncate border-dark"
-                            data-bs-parent="settings.html"><i class="bi bi-gear-fill border-dark"></i>
-                            <span>Impostazioni</span></a>
+    <div class="content" id="content">
+        <!-- Sidebar -->
+        <div class="sidebar" id="sidebar">
+            <a href="index.html" class="list-group-item p-3 border-end-0 text-truncate border-dark"
+                data-bs-parent="index.html"><i class="bi bi-house-fill"></i> <span>Home</span></a>
+            <a href="statistiche.html" class="list-group-item p-3 border-end-0 text-truncate border-dark"
+                data-bs-parent="stats.html"><i class="bi bi-trophy-fill"></i> <span>Statistiche</span></a>
+            <a href="consigli.html" class="list-group-item p-3 border-end-0 text-truncate border-dark"
+                data-bs-parent="consigli.html"><i class="bi bi-journal-bookmark-fill"></i> <span>Consigli</span></a>
+            <a href="profile.html" class="list-group-item p-3 border-end-0 text-truncate border-dark"
+                data-bs-parent="profile.html"><i class="bi bi-person-arms-up"></i> <span>Profilo</span></a>
+            <a href="calcolatori.html" class="list-group-item p-3 border-end-0 text-truncate border-dark"
+                data-bs-parent="settings.html"><i class="bi bi-calculator"></i> <span>Calcolatore</span></a>
+        </div>
+
+        <main class="col ps-md-2 pt-2">
+
+            <!-- Tasto menù -->
+            <a href="#" id="toggleButton" data-bs-target="#sidebar" data-bs-toggle="collapse"
+                class="toggle-button border rounded-3 p-1 text-decoration-none bg-warning-emphasis border-dark"><i
+                    class="bi bi-list bi-lg py-2 p-1"></i>
+            </a>
+
+            <div class="container profile mt-5">
+                <div class="row">
+                    <div class="col-md-4 text-center">
+                        <div class="card">
+                            <div class="card-body">
+                                <img src="https://placehold.co/400" alt="Profile Image" class="pfp mb-3">
+                                <h3 id="name-display">Clark Kent</h3>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6 text-center mt-2">
+                        <div class="card">
+                            <div class="card-body">
+                                <p id="email-display">Email: c.kent@gmail.com</p>
+                                <p id="peso-display">Peso: 82kg</p>
+                                <p id="altezza-display">Altezza: 185cm</p>
+                                <button type="button" class="btn btn-outline-warning mt-1" data-bs-toggle="modal"
+                                    data-bs-target="#editModal"><i class="fa bi-pencil"></i> Modifica
+                                    Credenziali</button>
+                                <button type="button" class="btn btn-outline-danger mt-1"><i
+                                        class="fa bi-box-arrow-right"></i> Logout</button>
+                                <button type="button" class="btn btn-danger mt-1"><i class="fa bi-trash"></i>
+                                    Elimina Profilo</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card shadow mt-4">
+                        <div class="card-header py-3">
+                            <h6 class="m-0 font-weight-bold text-primary">Tabella Attività</h6>
+                            <button type="button" class="btn btn-info add-new" data-bs-toggle="modal"
+                                data-bs-target="#addUserModal"><i class="fa bi-plus"></i> Aggiungi</button>
+                        </div>
+
+                        <div class="card-body">
+                            <div class="table-responsive">
+                                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                                    <thead class="table-secondary">
+                                        <tr>
+                                            <th>Tipo</th>
+                                            <th>Durata</th>
+                                            <th>Distanza</th>
+                                            <th>Calorie</th>
+                                            <th>Data</th>
+                                            <th>Azioni</th>
+                                        </tr>
+                                    </thead>
+                                    <tfoot class="table-secondary">
+                                        <tr>
+                                            <th>Tipo</th>
+                                            <th>Durata</th>
+                                            <th>Distanza</th>
+                                            <th>Calorie</th>
+                                            <th>Data</th>
+                                            <th>Azioni</th>
+                                        </tr>
+                                    </tfoot>
+                                    <tbody>
+                                        <tr>
+                                            <td>Corsa</td>
+                                            <td>52</td>
+                                            <td>25</td>
+                                            <td>990</td>
+                                            <td>2024-08-02</td>
+                                            <td>
+                                                <a class="edit" title="Modifica" data-toggle="tooltip"><i
+                                                        class="material-icons">&#xE254;</i></a>
+                                                <a class="delete" title="Elimina" data-toggle="tooltip"><i
+                                                        class="material-icons">&#xE872;</i></a>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
+        </main>
 
-            <main class="col ps-md-2 pt-2">
-
-                <a href="#" data-bs-target="#sidebar" data-bs-toggle="collapse"
-                    class="border rounded-3 p-1 text-decoration-none text-muted border-dark">
-                    <i class="bi bi-list bi-lg py-2 p-1"></i>
-                </a>
-
-                <div class="container profile mt-5">
-                    <div class="row">
-                        <div class="col-md-4 text-center">
-                            <div class="card">
-                                <div class="card-body">
-                                    <img src="https://placehold.co/400" alt="Profile Image" class="pfp mb-3">
-                                    <h3 id="name-display">Clark Kent</h3>
-                                </div>
+        <!-- Modal for adding new user -->
+        <div class="modal fade" id="addUserModal" tabindex="-1" data-bs-backdrop="static"
+            aria-labelledby="addUserModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="addUserModalLabel">Aggiungi Nuova Attività</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <form id="userForm">
+                            <div class="form-group">
+                                <label for="tipo">Tipo</label>
+                                <input type="text" class="form-control" id="tipo" name="tipo" required>
                             </div>
-                        </div>
-                        <div class="col-md-6 text-center mt-2">
-                            <div class="card">
-                                <div class="card-body">
-                                    <p id="email-display">Email: c.kent@gmail.com</p>
-                                    <p id="peso-display">Peso: 82kg</p>
-                                    <p id="altezza-display">Altezza: 185cm</p>
-                                    <button type="button" class="btn btn-outline-warning mt-1" data-bs-toggle="modal"
-                                        data-bs-target="#editModal"><i class="fa bi-pencil"></i> Modifica
-                                        Credenziali</button>
-                                    <button type="button" class="btn btn-outline-danger mt-1"><i
-                                            class="fa bi-box-arrow-right"></i> Logout</button>
-                                    <button type="button" class="btn btn-danger mt-1"><i class="fa bi-trash"></i>
-                                        Elimina Profilo</button>
-                                </div>
+                            <div class="form-group">
+                                <label for="durata">Durata</label>
+                                <input type="number" class="form-control" id="durata" name="durata" required>
                             </div>
-                        </div>
-                        <div class="card shadow mt-4">
-                            <div class="card-header py-3">
-                                <h6 class="m-0 font-weight-bold text-primary">Tabella Attività</h6>
-                                <button type="button" class="btn btn-info add-new" data-bs-toggle="modal"
-                                    data-bs-target="#addUserModal"><i class="fa bi-plus"></i> Aggiungi</button>
+                            <div class="form-group">
+                                <label for="distanza">Distanza</label>
+                                <input type="number" class="form-control" id="distanza" name="distanza" required>
                             </div>
-
-                            <div class="card-body">
-                                <div class="table-responsive">
-                                    <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
-                                        <thead class="table-secondary">
-                                            <tr>
-                                                <th>Tipo</th>
-                                                <th>Durata</th>
-                                                <th>Distanza</th>
-                                                <th>Calorie</th>
-                                                <th>Data</th>
-                                                <th>Azioni</th>
-                                            </tr>
-                                        </thead>
-                                        <tfoot class="table-secondary">
-                                            <tr>
-                                                <th>Tipo</th>
-                                                <th>Durata</th>
-                                                <th>Distanza</th>
-                                                <th>Calorie</th>
-                                                <th>Data</th>
-                                                <th>Azioni</th>
-                                            </tr>
-                                        </tfoot>
-                                        <tbody>
-                                            <tr>
-                                                <td>Corsa</td>
-                                                <td>52</td>
-                                                <td>25</td>
-                                                <td>990</td>
-                                                <td>2024-08-02</td>
-                                                <td>
-                                                    <a class="edit" title="Modifica" data-toggle="tooltip"><i
-                                                            class="material-icons">&#xE254;</i></a>
-                                                    <a class="delete" title="Elimina" data-toggle="tooltip"><i
-                                                            class="material-icons">&#xE872;</i></a>
-                                                </td>
-                                            </tr>
-                                        </tbody>
-                                    </table>
-                                </div>
+                            <div class="form-group">
+                                <label for="calorie">Calorie</label>
+                                <input type="number" class="form-control" id="calorie" name="calorie" required>
                             </div>
-                        </div>
-            </main>
-        </div>
-    </div>
-
-    <!-- Modal for adding new user -->
-    <div class="modal fade" id="addUserModal" tabindex="-1" data-bs-backdrop="static"
-        aria-labelledby="addUserModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="addUserModalLabel">Aggiungi Nuova Attività</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    <form id="userForm">
-                        <div class="form-group">
-                            <label for="tipo">Tipo</label>
-                            <input type="text" class="form-control" id="tipo" name="tipo" required>
-                        </div>
-                        <div class="form-group">
-                            <label for="durata">Durata</label>
-                            <input type="number" class="form-control" id="durata" name="durata" required>
-                        </div>
-                        <div class="form-group">
-                            <label for="distanza">Distanza</label>
-                            <input type="number" class="form-control" id="distanza" name="distanza" required>
-                        </div>
-                        <div class="form-group">
-                            <label for="calorie">Calorie</label>
-                            <input type="number" class="form-control" id="calorie" name="calorie" required>
-                        </div>
-                        <div class="form-group">
-                            <label for="sportDate">Data</label>
-                            <input type="datetime-local" class="form-control" id="sportDate" name="sportDate" required>
-                        </div>
-                        <button type="button" class="btn btn-primary mt-2" id="saveUserBtn">Salva</button>
-                        <button type="button" class="btn btn-secondary mt-2" data-bs-dismiss="modal">Cancella</button>
-                    </form>
+                            <div class="form-group">
+                                <label for="sportDate">Data</label>
+                                <input type="datetime-local" class="form-control" id="sportDate" name="sportDate"
+                                    required>
+                            </div>
+                            <button type="button" class="btn btn-primary mt-2" id="saveUserBtn">Salva</button>
+                            <button type="button" class="btn btn-secondary mt-2"
+                                data-bs-dismiss="modal">Cancella</button>
+                        </form>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
     </div>
     </div>
 
@@ -210,6 +208,7 @@
     <script src="js/footer.js"></script>
     <script src="js/jquery-3.7.1.min.js"></script>
     <script src="js/bootstrap.bundle.min.js"></script>
+    <script src="js/sidebar.js"></script>
     <script>
         document.getElementById('save-changes').addEventListener('click', function () {
             // Get the form values
