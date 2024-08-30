@@ -6,9 +6,13 @@ document.addEventListener('DOMContentLoaded', function () {
         document.getElementById('running').classList.add('active');
         document.getElementById('corsaBtn').classList.add('active');
     } else if (id === '2') {
+        document.getElementById('running').classList.remove('active');
+        document.getElementById('corsaBtn').classList.remove('active');
         document.getElementById('biking').classList.add('active');
         document.getElementById('ciclismoBtn').classList.add('active');
     } else if (id === '3') {
+        document.getElementById('running').classList.remove('active');
+        document.getElementById('corsaBtn').classList.remove('active');
         document.getElementById('swimming').classList.add('active');
         document.getElementById('nuotoBtn').classList.add('active');
     }
