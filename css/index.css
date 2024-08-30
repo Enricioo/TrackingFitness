@@ -13,6 +13,11 @@ body {
     margin-top: 50px;
 }
 
+.char {
+    transform: translateY(-115px);
+    transition: transform .5s;
+}
+
 #btn-back-to-top {
     position: fixed;
     bottom: 20px;
