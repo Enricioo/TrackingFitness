@@ -478,12 +478,12 @@ async function creaGrafico(arraySettimane, arrayMesi, arrayAnni) {
       chart2.update();
   
     } else if (type === 'annual') {
-      chart1.data.labels = ["2020", "2021", "2022", "2023"];
+      chart1.data.labels = ["2020", "2021", "2022", "2023", "2024"];
       chart1.data.datasets[0].data = sportData[sport].annual;
       chart1.options.scales.x.title.text = 'Anni';
       chart1.update();
   
-      chart2.data.labels = ["2020", "2021", "2022", "2023"];
+      chart2.data.labels = ["2020", "2021", "2022", "2023", "2024"];
       chart2.data.datasets[0].data = sportCalorieData[sport].annual;
       chart2.options.scales.x.title.text = 'Anni';
       chart2.update();
