@@ -362,7 +362,7 @@ async function creaGrafico(arraySettimane, arrayMesi, arrayAnni) {
           },
           ticks: {
             font: {
-              size: 14,   // Dimensione del font per i ticks (etichette lugngo gli assi)
+              size: 14,   // Dimensione del font per i ticks (etichette lungo gli assi)
             },
           },
         },
