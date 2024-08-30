@@ -703,16 +703,16 @@
                                                     // Ora seleziono solo le attività del singolo utente
                                                     let attivitaUtente = [];
 
-                                                    for (let attività of act) {
+                                                    for (let attivita of act) {
                                                         if (attivita.utente.id === idUtente) {
-                                                            attivitaUtenteattivitationsh(attivita);
+                                                            attivitaUtente.push(attivita);
                                                         }
                                                     }
                                             
                                                     console.log(attivitaUtente);
 
                                                     // Aggiorna le barre di progresso settimanali
-                                                    aggiornaProgressBar(attiviUtente);
+                                                    aggiornaProgressBar(attivitaUtente);
 
                                                 }
                                                 getId();
