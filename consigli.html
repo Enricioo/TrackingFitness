@@ -88,22 +88,21 @@
                         concentrazione.
                     </p>
                     <div class="alert alert-success" role="alert" id="cardiotop">
-                        <strong>Fantastico!</strong> Hai completato il tuo obiettivo cardio settimanale. Continua
+                        <strong>Fantastico!</strong> Hai completato il tuo obiettivo cardio tutti i giorni della settimana. Continua
                         così e
                         mantieni
                         l'energia alta!
                     </div>
                     <div class="alert alert-info" role="alert" id="cardioquasitop">
-                        <strong>Ottimo lavoro!</strong> Sei a metà del tuo obiettivo cardio mensile. Fai un piccolo
+                        <strong>Ottimo lavoro!</strong> Sei a buon punto del tuo obiettivo cardio settimanale. Fai un piccolo
                         sforzo
                         per
                         raggiungerlo!
                     </div>
                     <div class="alert alert-danger" role="alert" id="cardioperdita">
-                        <strong>Avviso!</strong> Non hai raggiunto il tuo obiettivo cardio questa settimana. Prova
+                        <strong>Avviso!</strong> Sei indietro con il tuo obiettivo settimanale. Prova
                         ad
-                        aumentare
-                        la durata o l'intensità dei tuoi allenamenti.
+                        aumentare la durata o l'intensità dei tuoi allenamenti.
                     </div>
                     <!-- Quando non ci sono aumenti né perdite -->
 
@@ -646,128 +645,8 @@
                                             </div>
                                             <!--TESTO-->
 
-                                            <script> //1 script
-                                                async function getId() {
-                                                    // Prendo il token dal browser
-                                                    const token = localStorage.getItem('authToken');
+                                
 
-                                                    // Provo a ottenere l'id dell'utente dal token
-                                                    try {
-                                                        const response = await fetch(`http://localhost:8080/utenti/me`, {
-                                                            method: 'GET',
-                                                            headers: {
-                                                                'Authorization': `${token}`
-                                                            }
-                                                        });
-
-                                                        if (!response.ok) {
-                                                            throw new Error('Errore nel recuperare l\'ID utente');
-                                                        }
-
-                                                        const data = await response.json();
-                                                        const idUtente = data.id;
-
-                                                        // Trovo le attività dell'utente
-                                                        await trovaAttivita(idUtente);
-                                                    } catch (error) {
-                                                        console.log("Errore!", error);
-                                                    }
-                                                }
-                                                async function fetchAttivita(Periodo, Tipo) {
-                                                    let attivita = [];
-                                                    if (Periodo == 'Settimana') {
-                                                        try {
-                                                            const response = await fetch(`http://localhost:8080/act/week`);
-                                                            attivita = await response.json();
-                                                        } catch (error) {
-
-                                                        }
-                                                    } else {
-                                                        try {
-                                                            const response = await fetch(`http://localhost:8080/act/utente/${id}`);
-                                                            attivita = await response.json();
-                                                        } catch (error) {
-
-                                                        }
-                                                    }
-                                                    return attivita;
-                                                }
-
-                                                async function trovaAttivita(idUtente) {
-                                                    // Cerco tutte le attività per tipologia
-                                                    const act = await fetchAttivita('Settimana', 'ciclismo');
-                                                  
-
-                                                    // Ora seleziono solo le attività del singolo utente
-                                                    let attivitaUtente = [];
-
-                                                    for (let attivita of act) {
-                                                        if (attivita.utente.id === idUtente) {
-                                                            attivitaUtente.push(attivita);
-                                                        }
-                                                    }
-                                            
-                                                    console.log(attivitaUtente);
-
-                                                    // Aggiorna le barre di progresso settimanali
-                                                    aggiornaProgressBar(attivitaUtente);
-
-                                                }
-                                                getId();
-
-                                                function aggiornaProgressBar(ciclismoUtente) {
-                                                    // Esempio di come calcolare la percentuale di completamento per ciascun giorno
-                                                    const giorni = ['Lunedi', 'Martedì', 'Mercoledi', 'Giovedi', 'Venerdì', 'Sabato', 'Domenica'];
-                                                    const giorniElementIds = ['settlunCardio', 'setmarCardio', 'setmerCardio', 'setgioCardio', 'setvenCardio', 'setsabCardio', 'setdomCardio'];
-                                                    
-                                                    let caloriepergiorno = [];
-                                                
-                                                    for (i=0;i<7; i++){
-
-                                                         let caloriegiorno = parseInt(0);
-
-                                                        ciclismoUtente.forEach((attivita)=>{
-                                                            const date=new Date(attivita.sportDate);
-
-                                                            if (date.getDay()==(i+1)){
-                                                                caloriegiorno+=attivita.calorie;
-                                                            }
-                                                        })
-                                                        
-                                                        
-                                                        
-                                                        caloriepergiorno[i]=caloriegiorno;
-                                                    }
-                                                    console.log(caloriepergiorno)
-
-
-                                                    // Calcolo delle attività totali per giorno (semplificato)
-                                                    const attivitaPerGiorno = {
-                                                        'Lunedi': caloriepergiorno[0],
-                                                        'Martedì':  caloriepergiorno[1],
-                                                        'Mercoledi':  caloriepergiorno[2],
-                                                        'Giovedi':  caloriepergiorno[3],
-                                                        'Venerdì':  caloriepergiorno[4],
-                                                        'Sabato':  caloriepergiorno[5],
-                                                        'Domenica':  caloriepergiorno[6],
-                                                    };
-
-                                                    // Itera su ogni giorno per aggiornare le barre di progresso
-                                                    giorni.forEach((giorno, index) => {
-                                                        const totaleAttivita = attivitaPerGiorno[giorno] || 0;
-                                                        const percentualeCompletamento = Math.min((totaleAttivita / 10) * 100, 100); // Normalizza a 100%
-
-                                                        // Aggiorna la barra di progresso corrispondente
-                                                        const progressBar = document.getElementById(giorniElementIds[index]).querySelector('.progress-bar');
-                                                        progressBar.style.width = `${percentualeCompletamento}%`;
-                                                        progressBar.textContent = `${giorno} - ${percentualeCompletamento.toFixed(0)}%`;
-                                                    });
-                                                }
-
-                                                // Chiamata alla funzione principale
-                                                //getId();
-
-                                            </script>
                                             <!-- CARDIO SETTIMANA -->
                                             <div id="cardioSettimana">
                                                 <h2>Obiettivi settimanali </h2>
@@ -821,44 +700,7 @@
                                 <canvas id="repmensile"></canvas>
                             </div>
 
-                            <script>
-                                var ctx = document.getElementById('repmensile').getContext('2d');
-                                var myDoughnutChart = new Chart(ctx, {
-                                    type: 'doughnut',
-                                    data: {
-                                        labels: ['Gennaio', 'Febbraio', 'Marzo', 'Aprile', 'Maggio', 'Giugno', 'Luglio', 'Agosto', 'Settembre', 'Ottobre', 'Novembre', 'Dicembre'],
-                                        datasets: [{
-                                            data: [40, 20, 30, 15, 25, 18, 36, 89, 60, 40, 10, 29],
-                                            backgroundColor: [
-                                                'red',
-                                                'green',
-                                                'black',
-                                                'blue',
-                                                'yellow',
-                                                'orange',
-                                                'aliceblue',
-                                                'purple',
-                                                'pink',
-                                                'brown',
-                                                'grey',
-                                                'lightgray'
-                                            ],
-                                            borderWidth: 1
-                                        }]
-
-                                    },
-                                    options: {
-                                        plugins: {
-                                            legend: {
-                                                display: true,
-                                                position: 'bottom'
-                                            }
-                                        },
-                                        maintainAspectRatio: false,
-                                        responsive: true
-                                    }
-                                });
-                            </script>
+                    
 
                         </div>
                     </div>
@@ -886,7 +728,7 @@
     <script src="js/gsap.min.js"></script>
     <script src="js/sidebar.js"></script>
     <script src="js/footer.js"></script>
-    <script src="js/suggerimenti.js"></script>
+    <script src="js/suggerimenti.js"></script> 
 
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
 
