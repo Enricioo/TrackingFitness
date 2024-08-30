@@ -5,6 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Suggerimenti&Consigli</title>
+
     <link href="css/bootstrap.min.css" rel="stylesheet">
     <link href="css/Suggerimenti.css" rel="stylesheet">
     <link href="css/footer.css" rel="stylesheet">
@@ -12,6 +13,7 @@
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script> <!--fisso-->
 
     <link href="assets/bootstrap-icons-1.11.3/font/bootstrap-icons.css" rel="stylesheet">
+    <link rel="icon" href="assets/img/logo.png" type="image/x-icon"> <!--icona pagina-->
 
 </head>
 
@@ -679,14 +681,14 @@
                                                         if (Periodo == 'Settimana') {
                                                             try {
                                                                 const response = await fetch(`http://localhost:8080/act/week` );
-                                                                const attivita = await response.json();
+                                                                attivita = await response.json();
                                                             } catch(error){
 
                                                             }
                                                         } else {
                                                             try {
                                                                 const response = await fetch(`http://localhost:8080/act/utente/${id}` );
-                                                                const attivita = await response.json();
+                                                                attivita = await response.json();
                                                             } catch(error){
 
                                                             }

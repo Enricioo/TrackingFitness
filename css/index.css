@@ -13,6 +13,11 @@ body {
     margin-top: 50px;
 }
 
+.char {
+    transform: translateY(-115px);
+    transition: transform .5s;
+}
+
 #btn-back-to-top {
     position: fixed;
     bottom: 20px;
@@ -49,7 +54,7 @@ body {
 }
 
 #mainImage {
-    width: 50%;
+    width: 40%;
 }
 
 .card {
@@ -119,7 +124,7 @@ h2 {
     position: sticky;
     top: 20px;
     left: 30px;
-    background-color: #007bff;
+    background-color: #0B3954;
     color: white;
     border: none;
     padding: 10px 20px;
