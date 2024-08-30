@@ -679,14 +679,14 @@
                                                         if (Periodo == 'Settimana') {
                                                             try {
                                                                 const response = await fetch(`http://localhost:8080/act/week` );
-                                                                const attivita = await response.json();
+                                                                attivita = await response.json();
                                                             } catch(error){
 
                                                             }
                                                         } else {
                                                             try {
                                                                 const response = await fetch(`http://localhost:8080/act/utente/${id}` );
-                                                                const attivita = await response.json();
+                                                                attivita = await response.json();
                                                             } catch(error){
 
                                                             }

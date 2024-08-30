@@ -29,6 +29,7 @@
     <body>
         <!--DA FARE:
          - migliorare la responsività!!!!
+         -> evento resize
         -->
         <div class="container-fluid sidebar">
             <div class="row flex-nowrap">
@@ -140,10 +141,11 @@
         <!--SCRIPT PAGINA-->
         <script>
             //definisco le variabili che mi serviranno
+
             let arrayAct1 = [];
             let arrayAct2 = [];
             let arrayAct3 = [];
-            document.addEventListener('DOMContentLoaded', async function() {
+            async function creazioneGrafici() {
                 //faccio il fetch delle attività
                 async function fetchAttivita(periodo, tipo) {
                     try {
@@ -542,67 +544,16 @@
                         createChart3(periodo);
                     })
                 }
-
-                // --- TEST TOKEN-ID ---
-                /*async function getId() {
-                    //prendo il token dal browser
-                    const token=localStorage.getItem('authToken');
-                    //provo a ottenere l'id dell'utente dal token
-                    try {
-                        fetch(`http://localhost:8080/utenti/me`, {
-                            method: 'GET',
-                            headers: {
-                                'Authorization': `${token}`
-                            }
-                        })
-                        .then(response => response.json())
-                        .then(data => {
-                            //ho ottenuto l'id utente dal token
-                            const idUtente = data.id;
-                            trovaAttivita(idUtente);
-                        })
-                    } catch (error) {
-                        console.err("Errore!")
-                    }
-                }
-                async function trovaAttivita(idUtente) {
-                    //cerco tutte le attività per tipologia
-                    actCiclismo = await fetchAttivita('Mese', 'ciclismo');
-                    actCorsa = await fetchAttivita('Mese', 'corsa');
-                    actNuoto = await fetchAttivita('Mese', 'nuoto');
-                    //ora seleziono solo le attività del singolo utente
-                    let ciclismoUtente = [];
-                    let corsaUtente = [];
-                    let nuotoUtente = [];
-                    for (let ciclismo of actCiclismo) {
-                        let utente = ciclismo.utente;
-                        if (utente.id==idUtente) {
-                            ciclismoUtente.push(ciclismo);
-                        }
-                    }
-                    for (let corsa of actCorsa) {
-                        let utente = corsa.utente;
-                        if(utente.id==idUtente) {
-                            corsaUtente.push(corsa);
-                        }
-                    }
-                    for (let nuoto of actNuoto) {
-                        let utente = nuoto.utente;
-                        if (utente.id==idUtente) {
-                            nuotoUtente.push(nuoto);
-                        }
-                    }
-                    console.log(ciclismoUtente);
-                    console.log(corsaUtente);
-                    console.log(nuotoUtente);
-                    //poi si fanno i grafici
-                }
-                getId();
-                // --- FINE TEST ---*/
-
                 createChart1('calorie', 'Anno');
                 createChart2('calorie', 'Anno');
                 createChart3('Anno');
+            }
+            
+            document.addEventListener('DOMContentLoaded', function() {
+                creazioneGrafici();
+            });
+            window.addEventListener('resize', function() {
+                creazioneGrafici();
             })
         </script>
     </body>
