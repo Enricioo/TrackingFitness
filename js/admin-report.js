@@ -4,6 +4,14 @@ let arrayAct1 = [];
 let arrayAct2 = [];
 let arrayAct3 = [];
 async function creazioneGrafici() {
+    //controllo le dimensioni dello schermo
+    var larghezza = $(window).width();
+    var check;
+    if (larghezza < 500) {
+        check = false;
+    } else {
+        check = true;
+    }
     //faccio il fetch delle attività
     async function fetchAttivita(periodo, tipo) {
         try {
@@ -191,15 +199,6 @@ async function creazioneGrafici() {
             valueNuoto[i] = (sumNuoto/arrayNuoto.length).toFixed(2);
         }
         //creo il diagramma
-        //controllo le dimensioni schermo
-        var larghezza = $(window).width();
-        var CHECK;
-        if (larghezza < 500) {
-            CHECK = false;
-        } else {
-            CHECK = true;
-        }
-        console.log(CHECK);
         new Chart("attivita-tempo", {
             type: "line",
             data: {
@@ -226,7 +225,9 @@ async function creazioneGrafici() {
                     display: true,
                     text: titleChart
                 },
-                maintainAspectRatio: CHECK
+                responsive: true,
+                maintainAspectRatio: false,
+                legend: {display: check}
             }
         });
     }
@@ -326,51 +327,27 @@ async function creazioneGrafici() {
             //somma totale
             valueTot[i] = sumCiclismo + sumCorsa + sumNuoto;
         }
-        //controllo le dimensioni schermo
-        var larghezza = $(window).width();
         //creo il secondo diagramma a seconda dello schermo
-        console.log(larghezza);
-        if (larghezza < 500) {
-            if (periodo != "Mese") {
-                new Chart ('tot-attivita', {
-                    type: "doughnut",
-                    data: {
-                        labels: xValues,
-                        datasets: [{
-                            backgroundColor: chartBgColor,
-                            data: valueTot
-                        }]
-                    },
-                    options: {
-                        title: {
-                            display: true,
-                            text: titleChart
-                        },
-                        legend: {display: false}
-                    }
-                });
-            } else {
-                alert('FUNZIONE NON ANCORA DISPONIBILE');
-            }
-        } else {
-            new Chart ('tot-attivita', {
-                type: "line",
-                data: {
-                    labels: xValues,
-                    datasets: [{
-                        label: labelChart,
-                        borderColor: "white",
-                        data: valueTot
-                    }]
+        new Chart ('tot-attivita', {
+            type: "line",
+            data: {
+                labels: xValues,
+                datasets: [{
+                    label: labelChart,
+                    borderColor: "white",
+                    data: valueTot
+                }]
+            },
+            options: {
+                title: {
+                    display: true,
+                    text: titleChart
                 },
-                options: {
-                    title: {
-                        display: true,
-                        text: titleChart
-                    }
-                }
-            })
-        }
+                responsive: true,
+                maintainAspectRatio: false,
+                legend: {display: check}
+            }
+        })
     }
     //aggiungo un evento alla selezione delle opzioni al diagramma due
     const selettoreDue = document.getElementById('selectChartDue');
@@ -439,7 +416,7 @@ async function creazioneGrafici() {
                     display: true,
                     text: "Numero di attività"
                 },
-                legend: {display: CHECK}
+                legend: {display: check}
             }
         });
     }
