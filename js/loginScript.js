@@ -128,11 +128,12 @@ async function signup(event) {
             username: formSignup['signup-username'].value,
             email: formSignup['signup-email'].value,
             password: formSignup['signup-password'].value,
-            eta: formSignup['signup-eta'],
+            eta: formSignup['signup-eta'].value,
             peso: formSignup['signup-peso'].value,
             altezza: formSignup['signup-altezza'].value,
             ruolo: 'USER'
         }
+        console.log(nuovoUtente);
         //provo a creare il nuovo utente
         try {
             const response = await fetch('http://localhost:8080/utenti/register', {

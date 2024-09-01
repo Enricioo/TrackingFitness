@@ -1,6 +1,6 @@
 //creare l'endpoint "/logout" nell'API
 async function logout() {
-    const token = localStorage('authToken');
+    const token = localStorage.getItem('authToken');
     try {
         const response = await fetch('http://localhost:8080/utenti/logout', {
             method: 'POST',
