@@ -223,11 +223,17 @@ async function creazioneGrafici() {
             options: {
                 title: {
                     display: true,
-                    text: titleChart
+                    text: titleChart,
+                    fontColor: "antiquewhite"
                 },
                 responsive: true,
                 maintainAspectRatio: false,
-                legend: {display: check}
+                legend: {
+                    display: check,
+                    labels: {
+                        fontColor: "antiquewhite"
+                    }
+                }
             }
         });
     }
@@ -268,17 +274,13 @@ async function creazioneGrafici() {
         //definisco il periodo
         let xValues = [];
         const oggi = new Date();
-        let chartBgColor;
         if (periodo == 'Totale') {
             const anno = oggi.getFullYear();
             //faccio aggiungere gli anni dal 2020 all'anno attuale
             for (j=2020; j<=anno; j++) {
                 xValues.push(j);
             }
-            //sistemare colori anni
-            chartBgColor = ['red', 'blue', 'green', 'yellow', 'orange'];
         } else if (periodo == 'Anno') {
-            chartBgColor = ['red', 'blue', 'green', 'yellow', 'orange', 'brown', 'black', 'violet', 'white', 'gray'];
             xValues = ['Gennaio', 'Febbraio', 'Marzo', 'Aprile', 'Maggio', 'Giugno', 'Luglio', 'Agosto', 'Settembre', 'Ottobre', 'Novembre', 'Dicembre'];
         } else {
             //costruisco l'array dei giorni del mese considerando che mese è e se l'anno è bisestile
@@ -341,11 +343,17 @@ async function creazioneGrafici() {
             options: {
                 title: {
                     display: true,
-                    text: titleChart
+                    text: titleChart,
+                    fontColor: "antiquewhite"
                 },
                 responsive: true,
                 maintainAspectRatio: false,
-                legend: {display: check}
+                legend: {
+                    display: check,
+                    labels: {
+                        fontColor: "antiquewhite"
+                    }
+                }
             }
         })
     }
@@ -414,9 +422,15 @@ async function creazioneGrafici() {
             options: {
                 title: {
                     display: true,
-                    text: "Numero di attività"
+                    text: "Numero di attività",
+                    fontColor: "antiquewhite"
                 },
-                legend: {display: check}
+                legend: {
+                    display: check,
+                    labels: {
+                        fontColor: "antiquewhite"
+                    }
+                }
             }
         });
     }
