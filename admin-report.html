@@ -16,6 +16,16 @@
             color: antiquewhite;
         }
         /*PAGINA*/
+        @media (max-width: 500px) {
+            #charts-container{
+                padding-left: 0px;
+                padding-right: 0px;
+            }
+            #attivita-tempo {
+                min-width: 300px;
+                min-height: 400px;
+            }
+        }
     </style>
     <!--FOOTER-->
     <link rel="stylesheet" href="css/footer.css">
@@ -24,7 +34,6 @@
 <body>
     <!--DA FARE:
          - migliorare la responsività!!!!
-         -> evento resize
         -->
     <!-- Sidebar -->
     <div class="sidebar" id="sidebar">
@@ -53,19 +62,19 @@
             </div>
             <p class="lead">Visualizza le statistiche medie degli utenti in questa pagina.</p>
             <div id="charts-container" class="p-5 row">
-                <div id="chart-uno" class="col-12 text-center my-5"> <!--PRIMO GRAFICO-->
+                <div id="chart-uno" class="col-12 text-center my-5 px-0"> <!--PRIMO GRAFICO-->
                     <h3>Confronto tra le medie delle attività nel tempo</h3>
                     <div class="button-row row">
-                        <div class="col-4 col-md-3 m-0 p-0">
+                        <div class="col-4 col-md-3 m-0 p-0 py-2">
                             <button class="btn btn-primary periodoUno" type="button">Mese</button>
                         </div>
-                        <div class="col-4 col-md-3 m-0 p-0">
+                        <div class="col-4 col-md-3 m-0 p-0 py-2">
                             <button class="btn btn-primary periodoUno selected" type="button">Anno</button>
                         </div>
-                        <div class="col-4 col-md-3 m-0 p-0">
+                        <div class="col-4 col-md-3 m-0 p-0 py-2">
                             <button class="btn btn-primary periodoUno" type="button">Totale</button>
                         </div>
-                        <div class="col-12 col-md-3 m-0 p-0">
+                        <div class="col-12 col-md-3 m-0 p-0 py-2">
                             <select id="selectChartUno" class="form-select">
                                 <option value="calorie">Calorie</option>
                                 <option value="distanza">Distanza</option>
@@ -73,23 +82,23 @@
                             </select>
                         </div>
                     </div>
-                    <div class="chart-container">
+                    <div class="chart-container px-0">
                         <canvas id="attivita-tempo" data-tempo="mese"></canvas>
                     </div>
                 </div>
                 <div id="chart-due" class="col-12 col-md-7 text-center my-5" data-tempo="mese"> <!--SECONDO GRAFICO-->
                     <h3>Totalità delle attività nel tempo</h3>
                     <div class="button-row row">
-                        <div class="col-4 col-md-3 m-0 p-0">
+                        <div class="col-4 col-md-3 m-0 p-0 py-2">
                             <button class="btn btn-primary periodoDue" type="button">Mese</button>
                         </div>
-                        <div class="col-4 col-md-3 m-0 p-0">
+                        <div class="col-4 col-md-3 m-0 p-0 py-2">
                             <button class="btn btn-primary periodoDue selected" type="button">Anno</button>
                         </div>
-                        <div class="col-4 col-md-3 m-0 p-0">
+                        <div class="col-4 col-md-3 m-0 p-0 py-2">
                             <button class="btn btn-primary periodoDue" type="button">Totale</button>
                         </div>
-                        <div class="col-12 col-md-3 m-0 p-0">
+                        <div class="col-12 col-md-3 m-0 p-0 py-2">
                             <select id="selectChartDue" class="form-select">
                                 <option value="calorie">Calorie</option>
                                 <option value="distanza">Distanza</option>
@@ -98,7 +107,7 @@
                         </div>
                     </div>
                     <div class="chart-container">
-                        <canvas id="tot-attivita" data-tempo="mese" class="pt-5 mt-5"></canvas>
+                        <canvas id="tot-attivita" data-tempo="mese"></canvas>
                     </div>
                 </div>
                 <div id="chart-tre" class="col-12 col-md-5 text-center my-5"> <!--TERZO GRAFICO-->

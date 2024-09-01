@@ -226,7 +226,7 @@ async function creazioneGrafici() {
                     display: true,
                     text: titleChart
                 },
-                responsive: CHECK
+                maintainAspectRatio: CHECK
             }
         });
     }
@@ -329,6 +329,7 @@ async function creazioneGrafici() {
         //controllo le dimensioni schermo
         var larghezza = $(window).width();
         //creo il secondo diagramma a seconda dello schermo
+        console.log(larghezza);
         if (larghezza < 500) {
             if (periodo != "Mese") {
                 new Chart ('tot-attivita', {
@@ -415,6 +416,14 @@ async function creazioneGrafici() {
         let arrayNuoto = [];
         arrayNuoto = await fetchAttivita(periodo, 'swimming');
         let yValues = [arrayCiclismo.length, arrayCorsa.length, arrayNuoto.length];
+        //controllo le dimensioni dello schermo
+        var larghezza = $(window).width();
+        var CHECK;
+        if (larghezza < 500) {
+            CHECK = false;
+        } else {
+            CHECK = true;
+        }
         //adesso creo il terzo grafico
         new Chart ('attivita-numero', {
             type: "doughnut",
@@ -429,7 +438,8 @@ async function creazioneGrafici() {
                 title: {
                     display: true,
                     text: "Numero di attività"
-                }
+                },
+                legend: {display: CHECK}
             }
         });
     }
@@ -449,6 +459,6 @@ async function creazioneGrafici() {
 document.addEventListener('DOMContentLoaded', function() {
     creazioneGrafici();
 });
-/*window.addEventListener('resize', function() {
+window.addEventListener('resize', function() {
     creazioneGrafici();
-})*/
+})
