@@ -20,3 +20,9 @@ async function logout() {
         console.err('Errore. Accesso non effettuato');
     }
 }
+
+// Event listener del bottone per la gestione del logout
+document.getElementById('logoutButton').addEventListener('click', async function (event) {
+    event.preventDefault();
+    await logout();
+});
