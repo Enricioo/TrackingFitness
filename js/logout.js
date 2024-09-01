@@ -10,7 +10,9 @@ async function logout() {
         });
         if(response.status === 200) {
             localStorage.removeItem('authToken');
-            console.log('logout ok')
+            console.log('logout ok');
+            //rimando alla pagina del login
+            window.location.href="./login.html";
         } else {
             console.err('Procedura di logout non valida. Riprova');
         }
@@ -18,3 +20,9 @@ async function logout() {
         console.err('Errore. Accesso non effettuato');
     }
 }
+
+// Event listener del bottone per la gestione del logout
+document.getElementById('logoutButton').addEventListener('click', async function (event) {
+    event.preventDefault();
+    await logout();
+});

@@ -1,560 +1,153 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Report - Admin</title>
-        <!--BOOTSTRAP-->
-        <link rel="stylesheet" href="css/bootstrap.min.css">
-        <link href="assets/bootstrap-icons-1.11.3/font/bootstrap-icons.css" rel="stylesheet">
-        <!--STILE PAGINA-->
-        <style>
-            body {
-                background-color: #0B3954;
-                color: antiquewhite;
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Report - Admin</title>
+    <!--BOOTSTRAP-->
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/sidebar.css">
+    <link href="assets/bootstrap-icons-1.11.3/font/bootstrap-icons.css" rel="stylesheet">
+    <!--STILE PAGINA-->
+    <style>
+        body {
+            background-color: #0B3954;
+            color: antiquewhite;
+        }
+        /*PAGINA*/
+        /*@media (max-width: 500px) {
+            #charts-container{
+                padding-left: 0px;
+                padding-right: 0px;
             }
-
-            /*SIDEBAR*/
-            #sidebar-nav a {
-                background-color: #587291;
-                color: #0B3954;
+            #attivita-tempo {
+                min-width: 300px;
+                min-height: 400px;
             }
+        }*/
+    </style>
+    <!--FOOTER-->
+    <link rel="stylesheet" href="css/footer.css">
+</head>
 
-            /*PAGINA*/
-
-        </style>
-        <!--FOOTER-->
-        <link rel="stylesheet" href="css/footer.css">
-    </head>
-    <body>
-        <!--DA FARE:
+<body>
+    <!--DA FARE:
          - migliorare la responsività!!!!
-         -> evento resize
         -->
-        <div class="container-fluid sidebar">
-            <div class="row flex-nowrap">
-                <div class="col-auto px-0"> <!--SIDEBAR-->
-                    <div id="sidebar" class="collapse collapse-horizontal border-end border-dark">
-                        <div id="sidebar-nav" class="list-group border-0 rounded-0 text-sm-start min-vh-100">
-                            <a href="#" class="list-group-item border-end-0 d-inline-block text-truncate border-dark"
-                                data-bs-parent="admin.html"><i class="bi bi-house"></i> <span>Home</span> </a>
-                            <a href="#" class="list-group-item border-end-0 d-inline-block text-truncate border-dark"
-                                data-bs-parent="report.html"><i class="bi bi-award"></i> <span>Report</span></a>
-                            <a href="#" class="list-group-item border-end-0 d-inline-block text-truncate border-dark"
-                                data-bs-parent="admin-profile.html"><i class="bi bi-person-raised-hand border-dark"></i>
-                                <span>Profilo</span></a>
+    <!-- Sidebar -->
+    <div class="sidebar" id="sidebar">
+        <a href="index.html" class="list-group-item p-3 border-end-0 text-truncate border-dark"
+            data-bs-parent="index.html"><i class="bi bi-house-fill"></i> <span>Home</span></a>
+        <a href="admin-report.html" class="list-group-item p-3 border-end-0 text-truncate border-dark"
+            data-bs-parent="admin-report.html"><i class="bi bi-trophy-fill"></i> <span>Report</span></a>
+        <a href="admin-profile.html" class="list-group-item p-3 border-end-0 text-truncate border-dark"
+            data-bs-parent="admin-profile.html"><i class="bi bi-person-arms-up"></i> <span>Profilo</span></a>
+        <div class="mt-auto">
+            <a href="#" class="list-group-item p-3 border-end-0 text-truncate border-dark" data-bs-parent="#"
+                id="logoutButton">
+                <i class="bi bi-door-open-fill"></i> <span>Logout</span></a>
+        </div>
+    </div>
+
+    <div class="content" id="content">
+        <main class="col ps-md-2 pt-2">
+            <!-- Tasto per menù sidebar -->
+            <a href="#" id="toggleButton" data-bs-target="#sidebar" data-bs-toggle="collapse"
+                class="toggle-button border rounded-3 p-1 text-decoration-none bg-warning-emphasis border-dark"><i
+                    class="bi bi-list bi-lg py-2 p-1"></i>
+            </a>
+            <div class="page-header pt-3">
+                <h2>Admin Report</h2>
+            </div>
+            <p class="lead">Visualizza le statistiche medie degli utenti in questa pagina.</p>
+            <div id="charts-container" class="p-5 row">
+                <div id="chart-uno" class="col-12 text-center my-5 px-0"> <!--PRIMO GRAFICO-->
+                    <h3>Confronto tra le medie delle attività nel tempo</h3>
+                    <div class="button-row row">
+                        <div class="col-4 col-md-3 m-0 p-0 py-2">
+                            <button class="btn btn-primary periodoUno" type="button">Mese</button>
                         </div>
+                        <div class="col-4 col-md-3 m-0 p-0 py-2">
+                            <button class="btn btn-primary periodoUno selected" type="button">Anno</button>
+                        </div>
+                        <div class="col-4 col-md-3 m-0 p-0 py-2">
+                            <button class="btn btn-primary periodoUno" type="button">Totale</button>
+                        </div>
+                        <div class="col-12 col-md-3 m-0 p-0 py-2">
+                            <select id="selectChartUno" class="form-select">
+                                <option value="calorie">Calorie</option>
+                                <option value="distanza">Distanza</option>
+                                <option value="durata">Durata</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="chart-container px-0">
+                        <canvas id="attivita-tempo" data-tempo="mese" height="500" width="800" style="max-height: 500px;"></canvas>
                     </div>
                 </div>
-
-                <main class="col ps-md-2 pt-2">
-                    <a href="#" data-bs-target="#sidebar" data-bs-toggle="collapse"
-                    class="border rounded-3 p-1 text-decoration-none text-muted border-dark"><img src="assets/img/logo.png" width="84px">
-                    </a>
-                    <div class="page-header pt-3">
-                        <h2>Admin Report</h2>
-                    </div>
-                    <p class="lead">Visualizza le statistiche medie degli utenti in questa pagina.</p>
-                    <div id="charts-container" class="p-5 row">
-                        <div id="chart-uno" class="col-12 text-center my-5"> <!--PRIMO GRAFICO-->
-                            <h3>Confronto tra le medie  delle attività nel tempo</h3>
-                            <div class="button-row row">
-                                <div class="col-4 col-md-3 m-0 p-0">
-                                    <button class="btn btn-primary periodoUno" type="button">Mese</button>
-                                </div>
-                                <div class="col-4 col-md-3 m-0 p-0">
-                                    <button class="btn btn-primary periodoUno selected" type="button">Anno</button>
-                                </div>
-                                <div class="col-4 col-md-3 m-0 p-0">
-                                    <button class="btn btn-primary periodoUno" type="button">Totale</button>
-                                </div>
-                                <div class="col-12 col-md-3 m-0 p-0">
-                                    <select id="selectChartUno" class="form-select">
-                                        <option value="calorie">Calorie</option>
-                                        <option value="distanza">Distanza</option>
-                                        <option value="durata">Durata</option>
-                                    </select>
-                                </div>
-                            </div>
-                            <div class="chart-container">
-                                <canvas id="attivita-tempo" data-tempo="mese"></canvas>
-                            </div>
+                <div id="chart-due" class="col-12 col-md-7 text-center my-5" data-tempo="mese"> <!--SECONDO GRAFICO-->
+                    <h3>Totalità delle attività nel tempo</h3>
+                    <div class="button-row row">
+                        <div class="col-4 col-md-3 m-0 p-0 py-2">
+                            <button class="btn btn-primary periodoDue" type="button">Mese</button>
                         </div>
-                        <div id="chart-due" class="col-12 col-md-7 text-center my-5" data-tempo="mese"> <!--SECONDO GRAFICO-->
-                            <h3>Totalità delle attività nel tempo</h3>
-                            <div class="button-row row">
-                                <div class="col-4 col-md-3 m-0 p-0">
-                                    <button class="btn btn-primary periodoDue" type="button">Mese</button>
-                                </div>
-                                <div class="col-4 col-md-3 m-0 p-0">
-                                    <button class="btn btn-primary periodoDue selected" type="button">Anno</button>
-                                </div>
-                                <div class="col-4 col-md-3 m-0 p-0">
-                                    <button class="btn btn-primary periodoDue" type="button">Totale</button>
-                                </div>
-                                <div class="col-12 col-md-3 m-0 p-0">
-                                    <select id="selectChartDue" class="form-select">
-                                        <option value="calorie">Calorie</option>
-                                        <option value="distanza">Distanza</option>
-                                        <option value="durata">Durata</option>
-                                    </select>
-                                </div>
-                            </div>
-                            <div class="chart-container">
-                                <canvas id="tot-attivita" data-tempo="mese" class="pt-5 mt-5"></canvas>
-                            </div>
+                        <div class="col-4 col-md-3 m-0 p-0 py-2">
+                            <button class="btn btn-primary periodoDue selected" type="button">Anno</button>
                         </div>
-                        <div id="chart-tre" class="col-12 col-md-5 text-center my-5"> <!--TERZO GRAFICO-->
-                            <h3>Numero totale per attività</h3>
-                            <div class="button-row row">
-                                <div class="col-4 m-0 p-0">
-                                    <button class="btn btn-primary periodoTre" type="button">Mese</button>
-                                </div>
-                                <div class="col-4 m-0 p-0">
-                                    <button class="btn btn-primary periodoTre" type="button">Anno</button>
-                                </div>
-                                <div class="col-4 m-0 p-0">
-                                    <button class="btn btn-primary periodoTre" type="button">Totale</button>
-                                </div>
-                            </div>
-                            <div class="chart-container">
-                                <canvas id="attivita-numero" data-tempo="mese"></canvas>
-                            </div>
+                        <div class="col-4 col-md-3 m-0 p-0 py-2">
+                            <button class="btn btn-primary periodoDue" type="button">Totale</button>
+                        </div>
+                        <div class="col-12 col-md-3 m-0 p-0 py-2">
+                            <select id="selectChartDue" class="form-select">
+                                <option value="calorie">Calorie</option>
+                                <option value="distanza">Distanza</option>
+                                <option value="durata">Durata</option>
+                            </select>
                         </div>
                     </div>
-                </main>
+                    <div class="chart-container">
+                        <canvas id="tot-attivita" data-tempo="mese" height="300" width="480" style="max-height: 300px;"></canvas>
+                    </div>
+                </div>
+                <div id="chart-tre" class="col-12 col-md-5 text-center my-5"> <!--TERZO GRAFICO-->
+                    <h3>Numero totale per attività</h3>
+                    <div class="button-row row">
+                        <div class="col-4 m-0 p-0">
+                            <button class="btn btn-primary periodoTre" type="button">Mese</button>
+                        </div>
+                        <div class="col-4 m-0 p-0">
+                            <button class="btn btn-primary periodoTre" type="button">Anno</button>
+                        </div>
+                        <div class="col-4 m-0 p-0">
+                            <button class="btn btn-primary periodoTre" type="button">Totale</button>
+                        </div>
+                    </div>
+                    <div class="chart-container">
+                        <canvas id="attivita-numero" data-tempo="mese"></canvas>
+                    </div>
+                </div>
             </div>
-        </div>
-        <!--CONTROLLO ADMIN-->
-        <!--DA INSERIRE-->
+        </main>
+    </div>
+    <!--CONTROLLO ADMIN-->
+    <!--DA INSERIRE-->
+    <script src="js/admin-report.js"></script>
+    <!-- LOGOUT -->
+    <script src="js/logout.js"></script>
+    <!-- SIDEBAR -->
+    <script src="js/gsap.min.js"></script>
+    <script src="js/sidebar.js"></script>
+    <!--JS QUERY-->
+    <script src="js/jquery-3.7.1.min.js"></script>
+    <!--BOOTSTRAP-->
+    <script src="js/bootstrap.bundle.min.js"></script>
+    <!--FOOTER-->
+    <script src="js/footer.js"></script>
+    <!--GRAFICI-->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.min.js"></script>
+</body>
 
-        <!--JS QUERY-->
-        <script src="js/jquery-3.7.1.min.js"></script>
-        <!--BOOTSTRAP-->
-        <script src="js/bootstrap.bundle.min.js"></script>
-        <!--FOOTER-->
-        <script src="js/footer.js"></script>
-        <!--GRAFICI-->
-        <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.min.js"></script>
-        <!--SCRIPT PAGINA-->
-        <script>
-            //definisco le variabili che mi serviranno
-
-            let arrayAct1 = [];
-            let arrayAct2 = [];
-            let arrayAct3 = [];
-            async function creazioneGrafici() {
-                //faccio il fetch delle attività
-                async function fetchAttivita(periodo, tipo) {
-                    try {
-                        const response = await fetch('http://localhost:8080/act');
-                        const data = await response.json();
-                        let arrayAct = [];
-                        const oggi = new Date();
-                        data.forEach((act) => {
-                            const date = new Date(act.sportDate);
-                            if (periodo == 'Totale') {
-                                //aggiungo tutte le attività del tipo selezionato
-                                if (act.tipo == tipo) {
-                                    arrayAct.push(act);
-                                }
-                            } else if (periodo == 'Anno') {
-                                //le attività dell'anno attuale
-                                if ((date.getFullYear() == oggi.getFullYear()) && (act.tipo == tipo)) {
-                                    //aggiungo solo le attività fatte entro un anno
-                                    arrayAct.push(act);
-                                }
-                            } else if (periodo == 'Mese') {
-                                //il mese attuale
-                                if ((date.getFullYear() == oggi.getFullYear()) && (date.getMonth() == oggi.getMonth()) && (act.tipo == tipo)) {
-                                    //aggiungo solo le attività fatte entro un mese
-                                    arrayAct.push(act);
-                                }
-                            }
-                        });
-                        return arrayAct;
-                    } catch (error) {
-                        alert('Problemi di comunicazione con il server. Riprova più tardi.');
-                    }
-                }
-                //organizzo i dati richiesti dal grafico
-                function organiseData(periodo, array, dato, contatore) {
-                    let totale = parseInt(0);
-                    //console.log(periodo);
-                    //console.log(dato);
-                    //controllo il periodo su cui dividere i dati
-                    if (periodo == 'Anno') {
-                        //controllo il tipo di dato da prendere
-                        if (dato=='calorie') {
-                            array.forEach((attivita) => {
-                                const date = new Date(attivita.sportDate);
-                                //controllo se la data dell'attività è del mese giusto
-                                if (date.getMonth()==contatore){
-                                    totale+=attivita.calorie;
-                                }
-                            })
-                        } else if (dato=='durata'){
-                            array.forEach((attivita) => {
-                                const date = new Date(attivita.sportDate);
-                                //controllo se la data dell'attività è del mese giusto
-                                if (date.getMonth()==contatore){
-                                    totale+=attivita.durata;
-                                }
-                            })
-                        } else if (dato=='distanza'){
-                            array.forEach((attivita) => {
-                                const date = new Date(attivita.sportDate);
-                                //controllo se la data dell'attività è del mese giusto
-                                if (date.getMonth()==contatore){
-                                    totale+=attivita.distanza;
-                                }
-                            })
-                        }
-                    } else if (periodo == 'Totale') {
-                        if (dato == 'calorie') {
-                            array.forEach((attivita) => {
-                                const date = new Date(attivita.sportDate);
-                                //controllo se la data dell'attività è dell'anno giusto
-                                if (date.getFullYear()==(parseInt(contatore)+parseInt(2020))) {
-                                    totale+=attivita.calorie;
-                                }
-                            })
-                        } else if (dato == 'durata') {
-                            array.forEach((attivita) => {
-                                const date = new Date(attivita.sportDate);
-                                //controllo se la data dell'attività è dell'anno giusto
-                                if (date.getFullYear()==(parseInt(contatore)+parseInt(2020))) {
-                                    totale+=attivita.durata;
-                                }
-                            })
-                        } else if (dato == 'distanza') {
-                            array.forEach((attivita) => {
-                                const date = new Date(attivita.sportDate);
-                                //controllo se la data dell'attività è dell'anno giusto
-                                if (date.getFullYear()==(parseInt(contatore)+parseInt(2020))) {
-                                    totale+=attivita.distanza;
-                                }
-                            })
-                        }
-                    } else if (periodo == 'Mese') {
-                        if (dato == 'calorie') {
-                            array.forEach((attivita) => {
-                                const date = new Date(attivita.sportDate);
-                                //controllo se la data dell'attività è del mese giusto
-                                if (date.getDate()==(contatore+1)) {
-                                    totale+=attivita.calorie;
-                                }
-                            })
-                        } else if (dato == 'durata') {
-                            array.forEach((attivita) => {
-                                const date = new Date(attivita.sportDate);
-                                //controllo se la data dell'attività è del mese giusto
-                                if (date.getDate()==(contatore+1)) {
-                                    totale+=attivita.durata;
-                                }
-                            })
-                        } else if (dato == 'distanza') {
-                            array.forEach((attivita) => {
-                                const date = new Date(attivita.sportDate);
-                                //controllo se la data dell'attività è del mese giusto
-                                if (date.getDate()==(contatore+1)) {
-                                    totale+=attivita.distanza;
-                                }
-                            })
-                        }
-                    }
-                    return totale;
-                }
-
-                //creo il PRIMO dei tre grafici
-                async function createChart1(dato, periodo) {
-                    //definisco il periodo
-                    const titleChart = "Confronto delle attività per la media di: "+dato;
-                    let xValues = [];
-                    const oggi = new Date();
-                    if (periodo == 'Totale') {
-                        const anno = oggi.getFullYear();
-                        //faccio aggiungere gli anni dal 2020 all'anno attuale
-                        for (j=2020; j<=anno; j++) {
-                            xValues.push(j);
-                        }
-                    } else if (periodo == 'Anno') {
-                        
-                        xValues = ['Gennaio', 'Febbraio', 'Marzo', 'Aprile', 'Maggio', 'Giugno', 'Luglio', 'Agosto', 'Settembre', 'Ottobre', 'Novembre', 'Dicembre'];
-                    } else {
-                        //costruisco l'array dei giorni del mese considerando che mese è e se l'anno è bisestile
-                        const anno = parseInt(oggi.getFullYear());
-                        const mese = parseInt(oggi.getMonth());
-                        if ((mese==0)||(mese==2)||(mese==4)||(mese==6)||(mese==7)||(mese==9)||(mese==11)) {
-                            //mese da 31 giorni
-                            xValues = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12', '13', '14', '15', '16', '17', '18', '19', '20', '21', '22', '23', '24', '25', '26', '27', '28', '29', '30', '31'];
-                        } else if (mese==1) {
-                            //febbraio
-                            if (anno%4==0) {
-                                //anno bisestile
-                                xValues = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12', '13', '14', '15', '16', '17', '18', '19', '20', '21', '22', '23', '24', '25', '26', '27', '28', '29'];
-                            } else {
-                                //anno normale
-                                xValues = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12', '13', '14', '15', '16', '17', '18', '19', '20', '21', '22', '23', '24', '25', '26', '27', '28'];
-                            }
-                        } else {
-                            //mese da 30 giorni
-                            xValues = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12', '13', '14', '15', '16', '17', '18', '19', '20', '21', '22', '23', '24', '25', '26', '27', '28', '29', '30'];
-                        }
-                    }
-                    let arrayCiclismo = [];
-                    arrayCiclismo = await fetchAttivita(periodo, 'cycling');
-                    let arrayCorsa = [];
-                    arrayCorsa = await fetchAttivita(periodo, 'running');
-                    let arrayNuoto = [];
-                    arrayNuoto = await fetchAttivita(periodo, 'swimming');
-                    let sumCiclismo;
-                    let sumCorsa;
-                    let sumNuoto;
-                    let valueCiclismo = [];
-                    let valueCorsa = [];
-                    let valueNuoto = [];
-                    //prendo tutti i dati per le varie attività da mostrare
-                    //li inserisco in un array lungo quanto i valori di X (anni, mesi o settimane)
-                    for (let i = 0; i < xValues.length; i++) {
-                        sumCiclismo = parseInt(0);
-                        sumCorsa = parseInt(0);
-                        sumNuoto = parseInt(0);
-                        //organizzo i dati a seconda del periodo e del dato richiesto per ogni attività
-                        //richiamando un'altra funzione
-                        sumCiclismo = organiseData(periodo, arrayCiclismo, dato, i);
-                        sumCorsa = organiseData(periodo, arrayCorsa, dato, i);
-                        sumNuoto = organiseData(periodo, arrayNuoto, dato, i);
-                        //media
-                        valueCiclismo[i] = (sumCiclismo/arrayCiclismo.length).toFixed(2);
-                        valueCorsa[i] = (sumCorsa/arrayCorsa.length).toFixed(2);
-                        valueNuoto[i] = (sumNuoto/arrayNuoto.length).toFixed(2);
-                    }
-                    //creo il diagramma
-                    new Chart("attivita-tempo", {
-                        type: "line",
-                        data: {
-                            labels: xValues,
-                            datasets: [{
-                                label: 'Ciclismo',
-                                data: valueCiclismo,
-                                borderColor: "red",
-                                fill: false
-                            },{
-                                label: 'Corsa',
-                                data: valueCorsa,
-                                borderColor: "blue",
-                                fill: false
-                            },{
-                                label: 'Nuoto',
-                                data: valueNuoto,
-                                borderColor: "green",
-                                fill: false
-                            }]
-                        },
-                        options: {
-                            title: {
-                                display: true,
-                                text: titleChart
-                            }
-                        }
-                    });
-                }
-                //aggiungo un evento alla selezione delle opzioni al diagramma uno
-                const selettoreUno = document.getElementById('selectChartUno');
-                selettoreUno.addEventListener('change' , function() {
-                    const buttonChartUno = document.getElementsByClassName('periodoUno');
-                    let periodo;
-                    for (let pulsante of buttonChartUno) {
-                        if (pulsante.classList.contains('selected')) {
-                            //trovo il periodo selezionato
-                            periodo=pulsante.innerText;
-                        }
-                    }
-                    createChart1(this.value, periodo);
-                })
-                //aggiungo un evento ai pulsanti del periodo per il diagramma uno
-                const periodoUno = document.getElementsByClassName('periodoUno');
-                for (let button of periodoUno) {
-                    button.addEventListener('click', function() {
-                        for (let pulsante of periodoUno) {
-                            //rimuovo la classe selected da tutti i pulsanti
-                            pulsante.classList.remove('selected');
-                        }
-                        //la riaggiungo solo per questo elemento
-                        this.classList.add('selected');
-                        //adesso cerco il dato da mostrare
-                        const dato = document.getElementById('selectChartUno').value;
-                        const periodo = this.innerText;
-                        createChart1(dato, periodo);
-                    })
-                }
-
-                //creo il SECONDO dei tre grafici
-                async function createChart2(dato, periodo) {
-                    const labelChart = dato;
-                    const titleChart = "Totalità delle attività svolte";
-                    //definisco il periodo
-                    let xValues = [];
-                    const oggi = new Date();
-                    if (periodo == 'Totale') {
-                        const anno = oggi.getFullYear();
-                        //faccio aggiungere gli anni dal 2020 all'anno attuale
-                        for (j=2020; j<=anno; j++) {
-                            xValues.push(j);
-                        }
-                    } else if (periodo == 'Anno') {
-                        
-                        xValues = ['Gennaio', 'Febbraio', 'Marzo', 'Aprile', 'Maggio', 'Giugno', 'Luglio', 'Agosto', 'Settembre', 'Ottobre', 'Novembre', 'Dicembre'];
-                    } else {
-                        //costruisco l'array dei giorni del mese considerando che mese è e se l'anno è bisestile
-                        const anno = parseInt(oggi.getFullYear());
-                        const mese = parseInt(oggi.getMonth());
-                        if ((mese==0)||(mese==2)||(mese==4)||(mese==6)||(mese==7)||(mese==9)||(mese==11)) {
-                            //mese da 31 giorni
-                            xValues = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12', '13', '14', '15', '16', '17', '18', '19', '20', '21', '22', '23', '24', '25', '26', '27', '28', '29', '30', '31'];
-                        } else if (mese==1) {
-                            //febbraio
-                            if (anno%4==0) {
-                                //anno bisestile
-                                xValues = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12', '13', '14', '15', '16', '17', '18', '19', '20', '21', '22', '23', '24', '25', '26', '27', '28', '29'];
-                            } else {
-                                //anno normale
-                                xValues = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12', '13', '14', '15', '16', '17', '18', '19', '20', '21', '22', '23', '24', '25', '26', '27', '28'];
-                            }
-                        } else {
-                            //mese da 30 giorni
-                            xValues = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12', '13', '14', '15', '16', '17', '18', '19', '20', '21', '22', '23', '24', '25', '26', '27', '28', '29', '30'];
-                        }
-                    }
-                    //prendo le attività per ogni singola attività
-                    let arrayCiclismo = [];
-                    arrayCiclismo = await fetchAttivita(periodo, 'cycling');
-                    let arrayCorsa = [];
-                    arrayCorsa = await fetchAttivita(periodo, 'running');
-                    let arrayNuoto = [];
-                    arrayNuoto = await fetchAttivita(periodo, 'swimming');
-                    let sumCiclismo;
-                    let sumCorsa;
-                    let sumNuoto;
-                    let valueTot = [];
-                    //prendo tutti i dati per le varie attività da mostrare
-                    //li inserisco in un array lungo quanto i valori di X (anni, mesi o settimane) 
-                    //fondo i dati in un unico array
-                    for (let i = 0; i < xValues.length; i++) {
-                        sumCiclismo = parseInt(0);
-                        sumCorsa = parseInt(0);
-                        sumNuoto = parseInt(0);
-                        //organizzo i dati a seconda del periodo e del dato richiesto per ogni attività
-                        //richiamando un'altra funzione
-                        sumCiclismo = organiseData(periodo, arrayCiclismo, dato, i);
-                        sumCorsa = organiseData(periodo, arrayCorsa, dato, i);
-                        sumNuoto = organiseData(periodo, arrayNuoto, dato, i);
-                        //somma totale
-                        valueTot[i] = sumCiclismo + sumCorsa + sumNuoto;
-                    }
-                    //creo il secondo diagramma
-                    new Chart ('tot-attivita', {
-                        type: "line",
-                        data: {
-                            labels: xValues,
-                            datasets: [{
-                                label: labelChart,
-                                borderColor: "white",
-                                data: valueTot
-                            }]
-                        },
-                        options: {
-                            title: {
-                                display: true,
-                                text: titleChart
-                            }
-                        }
-                    })
-                }
-                //aggiungo un evento alla selezione delle opzioni al diagramma due
-                const selettoreDue = document.getElementById('selectChartDue');
-                selettoreDue.addEventListener('change' , function() {
-                    const buttonChartDue = document.getElementsByClassName('periodoDue');
-                    let periodo;
-                    for (let pulsante of buttonChartDue) {
-                        if (pulsante.classList.contains('selected')) {
-                            //trovo il periodo selezionato
-                            periodo=pulsante.innerText;
-                        }
-                    }
-                    createChart2(this.value, periodo);
-                })
-                //aggiungo un evento ai pulsanti del periodo per il diagramma due
-                const periodoDue = document.getElementsByClassName('periodoDue');
-                for (let button of periodoDue) {
-                    button.addEventListener('click', function() {
-                        for (let pulsante of periodoDue) {
-                            //rimuovo la classe selected da tutti i pulsanti
-                            pulsante.classList.remove('selected');
-                        }
-                        //la riaggiungo solo per questo elemento
-                        this.classList.add('selected');
-                        //adesso cerco il dato da mostrare
-                        const dato = document.getElementById('selectChartDue').value;
-                        const periodo = this.innerText;
-                        createChart2(dato, periodo);
-                    })
-                }
-
-                //creo il TERZO dei tre grafici
-                async function createChart3(periodo) {
-                    const titleChart = "Numero di utenti per attività";
-                    //definisco le tre attività in esame
-                    let xValues = ["Ciclismo", "Corsa", "Nuoto"];
-                           
-                    //prendo le attività per ogni singola attività
-                    let arrayCiclismo = [];
-                    arrayCiclismo = await fetchAttivita(periodo, 'cycling');
-                    let arrayCorsa = [];
-                    arrayCorsa = await fetchAttivita(periodo, 'running');
-                    let arrayNuoto = [];
-                    arrayNuoto = await fetchAttivita(periodo, 'swimming');
-                    let yValues = [arrayCiclismo.length, arrayCorsa.length, arrayNuoto.length];
-                    //adesso creo il terzo grafico
-                    new Chart ('attivita-numero', {
-                        type: "doughnut",
-                        data: {
-                            labels: xValues,
-                            datasets: [{
-                                backgroundColor: ["red", "blue", "green"],
-                                data: yValues
-                            }]
-                        },
-                        options: {
-                            title: {
-                                display: true,
-                                text: "Numero di attività"
-                            }
-                        }
-                    });
-                }
-                //creo un evento per i tre pulsanti
-                const periodoTre = document.getElementsByClassName('periodoTre');
-                for (let button of periodoTre) {
-                    button.addEventListener('click', function() {
-                        const periodo = this.innerText;
-                        createChart3(periodo);
-                    })
-                }
-                createChart1('calorie', 'Anno');
-                createChart2('calorie', 'Anno');
-                createChart3('Anno');
-            }
-            
-            document.addEventListener('DOMContentLoaded', function() {
-                creazioneGrafici();
-            });
-            window.addEventListener('resize', function() {
-                creazioneGrafici();
-            })
-        </script>
-    </body>
 </html>
