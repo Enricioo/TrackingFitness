@@ -21,7 +21,12 @@
             }
 
             /*PAGINA*/
-
+            @media (max-width: 500px) {
+                #attivita-tempo {
+                    width: 280px;
+                    height: 300px;
+                }
+            }
         </style>
         <!--FOOTER-->
         <link rel="stylesheet" href="css/footer.css">
@@ -59,16 +64,16 @@
                         <div id="chart-uno" class="col-12 text-center my-5"> <!--PRIMO GRAFICO-->
                             <h3>Confronto tra le medie  delle attività nel tempo</h3>
                             <div class="button-row row">
-                                <div class="col-4 col-md-3 m-0 p-0">
+                                <div class="col-4 col-md-3 m-0 p-0 py-2">
                                     <button class="btn btn-primary periodoUno" type="button">Mese</button>
                                 </div>
-                                <div class="col-4 col-md-3 m-0 p-0">
+                                <div class="col-4 col-md-3 m-0 p-0 py-2">
                                     <button class="btn btn-primary periodoUno selected" type="button">Anno</button>
                                 </div>
-                                <div class="col-4 col-md-3 m-0 p-0">
+                                <div class="col-4 col-md-3 m-0 p-0 py-2">
                                     <button class="btn btn-primary periodoUno" type="button">Totale</button>
                                 </div>
-                                <div class="col-12 col-md-3 m-0 p-0">
+                                <div class="col-12 col-md-3 m-0 p-0 py-2">
                                     <select id="selectChartUno" class="form-select">
                                         <option value="calorie">Calorie</option>
                                         <option value="distanza">Distanza</option>
@@ -77,22 +82,22 @@
                                 </div>
                             </div>
                             <div class="chart-container">
-                                <canvas id="attivita-tempo" data-tempo="mese"></canvas>
+                                <canvas id="attivita-tempo" data-tempo="mese" width="1150" height="500"></canvas>
                             </div>
                         </div>
                         <div id="chart-due" class="col-12 col-md-7 text-center my-5" data-tempo="mese"> <!--SECONDO GRAFICO-->
                             <h3>Totalità delle attività nel tempo</h3>
                             <div class="button-row row">
-                                <div class="col-4 col-md-3 m-0 p-0">
+                                <div class="col-4 col-md-3 m-0 p-0 py-2">
                                     <button class="btn btn-primary periodoDue" type="button">Mese</button>
                                 </div>
-                                <div class="col-4 col-md-3 m-0 p-0">
+                                <div class="col-4 col-md-3 m-0 p-0 py-2">
                                     <button class="btn btn-primary periodoDue selected" type="button">Anno</button>
                                 </div>
-                                <div class="col-4 col-md-3 m-0 p-0">
+                                <div class="col-4 col-md-3 m-0 p-0 py-2">
                                     <button class="btn btn-primary periodoDue" type="button">Totale</button>
                                 </div>
-                                <div class="col-12 col-md-3 m-0 p-0">
+                                <div class="col-12 col-md-3 m-0 p-0 py-2">
                                     <select id="selectChartDue" class="form-select">
                                         <option value="calorie">Calorie</option>
                                         <option value="distanza">Distanza</option>
@@ -100,8 +105,8 @@
                                     </select>
                                 </div>
                             </div>
-                            <div class="chart-container">
-                                <canvas id="tot-attivita" data-tempo="mese" class="pt-5 mt-5"></canvas>
+                            <div id="" class="chart-container">
+                                <canvas id="tot-attivita" data-tempo="mese"></canvas>
                             </div>
                         </div>
                         <div id="chart-tre" class="col-12 col-md-5 text-center my-5"> <!--TERZO GRAFICO-->
@@ -126,7 +131,7 @@
             </div>
         </div>
         <!--CONTROLLO ADMIN-->
-        <!--DA INSERIRE-->
+        <!--<script src="js/controllo-admin.js"></script>-->
 
         <!--JS QUERY-->
         <script src="js/jquery-3.7.1.min.js"></script>
@@ -333,6 +338,15 @@
                         valueNuoto[i] = (sumNuoto/arrayNuoto.length).toFixed(2);
                     }
                     //creo il diagramma
+                    //controllo le dimensioni schermo
+                    var larghezza = $(window).width();
+                    var CHECK;
+                    if (larghezza < 500) {
+                        CHECK = false;
+                    } else {
+                        CHECK = true;
+                    }
+                    console.log(CHECK);
                     new Chart("attivita-tempo", {
                         type: "line",
                         data: {
@@ -358,7 +372,8 @@
                             title: {
                                 display: true,
                                 text: titleChart
-                            }
+                            },
+                            responsive: CHECK
                         }
                     });
                 }
@@ -399,14 +414,17 @@
                     //definisco il periodo
                     let xValues = [];
                     const oggi = new Date();
+                    let chartBgColor;
                     if (periodo == 'Totale') {
                         const anno = oggi.getFullYear();
                         //faccio aggiungere gli anni dal 2020 all'anno attuale
                         for (j=2020; j<=anno; j++) {
                             xValues.push(j);
                         }
+                        //sistemare colori anni
+                        chartBgColor = ['red', 'blue', 'green', 'yellow', 'orange'];
                     } else if (periodo == 'Anno') {
-                        
+                        chartBgColor = ['red', 'blue', 'green', 'yellow', 'orange', 'brown', 'black', 'violet', 'white', 'gray'];
                         xValues = ['Gennaio', 'Febbraio', 'Marzo', 'Aprile', 'Maggio', 'Giugno', 'Luglio', 'Agosto', 'Settembre', 'Ottobre', 'Novembre', 'Dicembre'];
                     } else {
                         //costruisco l'array dei giorni del mese considerando che mese è e se l'anno è bisestile
@@ -455,24 +473,50 @@
                         //somma totale
                         valueTot[i] = sumCiclismo + sumCorsa + sumNuoto;
                     }
-                    //creo il secondo diagramma
-                    new Chart ('tot-attivita', {
-                        type: "line",
-                        data: {
-                            labels: xValues,
-                            datasets: [{
-                                label: labelChart,
-                                borderColor: "white",
-                                data: valueTot
-                            }]
-                        },
-                        options: {
-                            title: {
-                                display: true,
-                                text: titleChart
-                            }
+                    //controllo le dimensioni schermo
+                    var larghezza = $(window).width();
+                    //creo il secondo diagramma a seconda dello schermo
+                    if (larghezza < 500) {
+                        if (periodo != "Mese") {
+                            new Chart ('tot-attivita', {
+                                type: "doughnut",
+                                data: {
+                                    labels: xValues,
+                                    datasets: [{
+                                        backgroundColor: chartBgColor,
+                                        data: valueTot
+                                    }]
+                                },
+                                options: {
+                                    title: {
+                                        display: true,
+                                        text: titleChart
+                                    },
+                                    legend: {display: false}
+                                }
+                            });
+                        } else {
+                            alert('FUNZIONE NON ANCORA DISPONIBILE');
                         }
-                    })
+                    } else {
+                        new Chart ('tot-attivita', {
+                            type: "line",
+                            data: {
+                                labels: xValues,
+                                datasets: [{
+                                    label: labelChart,
+                                    borderColor: "white",
+                                    data: valueTot
+                                }]
+                            },
+                            options: {
+                                title: {
+                                    display: true,
+                                    text: titleChart
+                                }
+                            }
+                        })
+                    }
                 }
                 //aggiungo un evento alla selezione delle opzioni al diagramma due
                 const selettoreDue = document.getElementById('selectChartDue');
@@ -552,9 +596,9 @@
             document.addEventListener('DOMContentLoaded', function() {
                 creazioneGrafici();
             });
-            window.addEventListener('resize', function() {
+            /*window.addEventListener('resize', function() {
                 creazioneGrafici();
-            })
+            })*/
         </script>
     </body>
 </html>
