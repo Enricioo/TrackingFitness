@@ -30,7 +30,6 @@
             </div>
 
             <main class="col ps-md-2 pt-2">
-
                 <a href="#" data-bs-target="#sidebar" data-bs-toggle="collapse"
                     class="border rounded-3 p-1 text-decoration-none text-muted border-dark"><img src="assets/img/logo.png" width="84px"></i></a>
                 <div class="page-header pt-3">
@@ -56,7 +55,7 @@
                                     <button type="button" class="btn btn-outline-warning mt-1" data-bs-toggle="modal"
                                         data-bs-target="#editModal"><i class="fa bi-pencil"></i> Modifica
                                         Credenziali</button>
-                                    <button type="button" class="btn btn-outline-danger mt-1"><i
+                                    <button type="button" class="btn btn-outline-danger mt-1" id="logoutBtn"><i
                                             class="fa bi-box-arrow-right"></i> Logout</button>
                                     <button type="button" class="btn btn-danger mt-1"><i class="fa bi-trash"></i>
                                         Elimina Profilo</button>
@@ -80,23 +79,23 @@
                                 <form id="edit-form">
                                     <div class="mb-3">
                                         <label for="nome" class="form-label">Nome</label>
-                                        <input type="text" class="form-control" id="nome" value="Clark">
+                                        <input type="text" class="form-control" id="nome">
                                     </div>
                                     <div class="mb-3">
                                         <label for="cognome" class="form-label">Cognome</label>
-                                        <input type="text" class="form-control" id="cognome" value="Kent">
+                                        <input type="text" class="form-control" id="cognome">
                                     </div>
                                     <div class="mb-3">
                                         <label for="email" class="form-label">Email</label>
-                                        <input type="email" class="form-control" id="email" value="c.kent@gmail.com">
+                                        <input type="email" class="form-control" id="email">
                                     </div>
                                     <div class="mb-3">
                                         <label for="peso" class="form-label">Peso</label>
-                                        <input type="text" class="form-control" id="peso" value="82kg">
+                                        <input type="text" class="form-control" id="peso">
                                     </div>
                                     <div class="mb-3">
                                         <label for="altezza" class="form-label">Altezza</label>
-                                        <input type="text" class="form-control" id="altezza" value="185cm">
+                                        <input type="text" class="form-control" id="altezza">
                                     </div>
                                 </form>
                             </div>
