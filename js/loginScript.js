@@ -398,7 +398,7 @@ async function redirect(token) {
             }
         }).then(res => res.json()).then(data => {
             if(data.ruolo=='USER') {
-                window.location.href="./index.html";
+                window.location.href="./profile.html";
             } else {
                 window.location.href="./admin-profile.html";
             }
