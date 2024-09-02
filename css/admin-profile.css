@@ -12,3 +12,7 @@ body {
     width: 100%;
     border-radius: 50%;
 }
+
+#editModal label {
+    color: #FBAF00
+}
