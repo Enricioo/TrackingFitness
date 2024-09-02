@@ -46,8 +46,9 @@ async function creazioneGrafici() {
         }
     }
     //organizzo i dati richiesti dal grafico
-    function organiseData(periodo, array, dato, contatore) {
+    function organiseData(periodo, array, dato, contatore, media) {
         let totale = parseInt(0);
+        let i = parseInt(0);
         //console.log(periodo);
         //console.log(dato);
         //controllo il periodo su cui dividere i dati
@@ -58,6 +59,7 @@ async function creazioneGrafici() {
                     const date = new Date(attivita.sportDate);
                     //controllo se la data dell'attività è del mese giusto
                     if (date.getMonth()==contatore){
+                        i++;
                         totale+=attivita.calorie;
                     }
                 })
@@ -66,6 +68,7 @@ async function creazioneGrafici() {
                     const date = new Date(attivita.sportDate);
                     //controllo se la data dell'attività è del mese giusto
                     if (date.getMonth()==contatore){
+                        i++;
                         totale+=attivita.durata;
                     }
                 })
@@ -74,6 +77,7 @@ async function creazioneGrafici() {
                     const date = new Date(attivita.sportDate);
                     //controllo se la data dell'attività è del mese giusto
                     if (date.getMonth()==contatore){
+                        i++;
                         totale+=attivita.distanza;
                     }
                 })
@@ -84,6 +88,7 @@ async function creazioneGrafici() {
                     const date = new Date(attivita.sportDate);
                     //controllo se la data dell'attività è dell'anno giusto
                     if (date.getFullYear()==(parseInt(contatore)+parseInt(2020))) {
+                        i++;
                         totale+=attivita.calorie;
                     }
                 })
@@ -92,6 +97,7 @@ async function creazioneGrafici() {
                     const date = new Date(attivita.sportDate);
                     //controllo se la data dell'attività è dell'anno giusto
                     if (date.getFullYear()==(parseInt(contatore)+parseInt(2020))) {
+                        i++;
                         totale+=attivita.durata;
                     }
                 })
@@ -100,6 +106,7 @@ async function creazioneGrafici() {
                     const date = new Date(attivita.sportDate);
                     //controllo se la data dell'attività è dell'anno giusto
                     if (date.getFullYear()==(parseInt(contatore)+parseInt(2020))) {
+                        i++;
                         totale+=attivita.distanza;
                     }
                 })
@@ -110,6 +117,7 @@ async function creazioneGrafici() {
                     const date = new Date(attivita.sportDate);
                     //controllo se la data dell'attività è del mese giusto
                     if (date.getDate()==(contatore+1)) {
+                        i++;
                         totale+=attivita.calorie;
                     }
                 })
@@ -118,6 +126,7 @@ async function creazioneGrafici() {
                     const date = new Date(attivita.sportDate);
                     //controllo se la data dell'attività è del mese giusto
                     if (date.getDate()==(contatore+1)) {
+                        i++;
                         totale+=attivita.durata;
                     }
                 })
@@ -126,9 +135,15 @@ async function creazioneGrafici() {
                     const date = new Date(attivita.sportDate);
                     //controllo se la data dell'attività è del mese giusto
                     if (date.getDate()==(contatore+1)) {
+                        i++;
                         totale+=attivita.distanza;
                     }
                 })
+            }
+        }
+        if (media) {
+            if (i!=0) {
+                totale = totale/i;
             }
         }
         return totale;
@@ -190,13 +205,13 @@ async function creazioneGrafici() {
             sumNuoto = parseInt(0);
             //organizzo i dati a seconda del periodo e del dato richiesto per ogni attività
             //richiamando un'altra funzione
-            sumCiclismo = organiseData(periodo, arrayCiclismo, dato, i);
-            sumCorsa = organiseData(periodo, arrayCorsa, dato, i);
-            sumNuoto = organiseData(periodo, arrayNuoto, dato, i);
+            sumCiclismo = organiseData(periodo, arrayCiclismo, dato, i, true);
+            sumCorsa = organiseData(periodo, arrayCorsa, dato, i, true);
+            sumNuoto = organiseData(periodo, arrayNuoto, dato, i, true);
             //media
-            valueCiclismo[i] = (sumCiclismo/arrayCiclismo.length).toFixed(2);
-            valueCorsa[i] = (sumCorsa/arrayCorsa.length).toFixed(2);
-            valueNuoto[i] = (sumNuoto/arrayNuoto.length).toFixed(2);
+            valueCiclismo[i] = sumCiclismo.toFixed(2);
+            valueCorsa[i] = sumCorsa.toFixed(2);
+            valueNuoto[i] = sumNuoto.toFixed(2);
         }
         //creo il diagramma
         new Chart("attivita-tempo", {
@@ -323,9 +338,9 @@ async function creazioneGrafici() {
             sumNuoto = parseInt(0);
             //organizzo i dati a seconda del periodo e del dato richiesto per ogni attività
             //richiamando un'altra funzione
-            sumCiclismo = organiseData(periodo, arrayCiclismo, dato, i);
-            sumCorsa = organiseData(periodo, arrayCorsa, dato, i);
-            sumNuoto = organiseData(periodo, arrayNuoto, dato, i);
+            sumCiclismo = organiseData(periodo, arrayCiclismo, dato, i, false);
+            sumCorsa = organiseData(periodo, arrayCorsa, dato, i, false);
+            sumNuoto = organiseData(periodo, arrayNuoto, dato, i, false);
             //somma totale
             valueTot[i] = sumCiclismo + sumCorsa + sumNuoto;
         }
