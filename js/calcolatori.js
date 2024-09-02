@@ -149,14 +149,39 @@ function getSwimmingMet(style) {
     };
     return metValues[style] || 8.3;
 }
-
-function saveActivity(activityType) {
+async function getId() {
+    // Prendo il token dal browser
+    const token = localStorage.getItem("authToken");
+  
+    // Provo a ottenere l'id dell'utente dal token
+    try {
+      const response = await fetch(`http://localhost:8080/utenti/me`, {
+        method: "GET",
+        headers: {
+          Authorization: `${token}`,
+        },
+      });
+  
+      if (!response.ok) {
+        throw new Error("Errore nel recuperare l'ID utente");
+      }
+  
+      const data = await response.json();
+      const idUtente = data.id;
+  
+      // Trovo le attività dell'utente
+      return data;
+    } catch (error) {
+      console.log("Errore!", error);
+    }
+  }
+async function saveActivity(activityType) {
     const weight = parseFloat(document.getElementById(`${activityType}-weight`).value);
     const distance = parseFloat(document.getElementById(`${activityType}-distance`).value);
     const duration = parseFloat(document.getElementById(`${activityType}-duration`).value);
     const calories = parseFloat(document.getElementById(`${activityType}-result`).innerText);
     const sportDate = new Date().toISOString().split('T')[0];
-    const utente = 1;
+    const utente = await getId();
 
     const activityData = {
         tipo: activityType,
@@ -167,7 +192,7 @@ function saveActivity(activityType) {
         utente: utente
     };
 
-    fetch('/saveActivity', {
+    fetch('http://localhost:8080/act', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'
@@ -176,10 +201,9 @@ function saveActivity(activityType) {
     })
     .then(response => response.json())
     .then(data => {
-        alert(data.success ? 'Attività salvata con successo.' : 'Errore nel salvataggio dell\'attività.');
+
     })
     .catch(error => {
-        console.error('Errore:', error);
-        alert('Errore nel salvataggio dell\'attività.');
+        
     });
 }
