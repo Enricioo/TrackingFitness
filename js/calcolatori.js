@@ -51,10 +51,10 @@ function calculateRunningCalories() {
 
 function getRunningMet(speed, grade) {
     let met = 0;
-    const maxSpeed = 40; // Maximum speed for MET values
+    const maxSpeed = 40; // Velocità massima per valori MET
 
     if (speed > maxSpeed) {
-        return -1; // Return -1 to indicate an error
+        return -1; // Ritorna -1 in caso di errore
     }
 
     if (speed <= 8) met = 8.3; 
@@ -68,7 +68,7 @@ function getRunningMet(speed, grade) {
     else if (speed <= 25) met = 20;     
     else if (speed <= 30) met = 25;     
     else if (speed <= 40) met = 35;     
-    else met = 45; // MET for running at 48 km/h (extreme sprint)
+    else met = 45; // MET per 48 km/h (sprint)
 
     if (grade !== 0) {
         met += (met * grade * 0.02);
@@ -101,10 +101,10 @@ function calculateBikingCalories() {
 
 function getBikingMet(speed) {
     let met = 0;
-    const maxSpeed = 100; // Maximum speed for MET values
+    const maxSpeed = 100; // Velocità massima per valori MET
 
     if (speed > maxSpeed) {
-        return -1; // Return -1 to indicate an error
+        return -1; // Ritorna -1 in caso di errore
     }
 
     if (speed <= 10) met = 4;       
@@ -143,9 +143,9 @@ function calculateSwimmingCalories() {
 
 function getSwimmingMet(style) {
     const metValues = {
-        freestyle: 8.3,       // Moderate effort
-        breaststroke: 10.3,   // Vigorous effort
-        butterfly: 13.8       // Vigorous effort
+        freestyle: 8.3,
+        breaststroke: 10.3,
+        butterfly: 13.8
     };
     return metValues[style] || 8.3;
 }

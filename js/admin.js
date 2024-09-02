@@ -1,12 +1,12 @@
 $(document).ready(function () {
     $('[data-toggle="tooltip"]').tooltip();
 
-    // Show the modal with fade-in effect on add new button click
+    // Mostra modal
     $(".add-new").click(function () {
         $("#addUserModal").modal('show');
     });
 
-    // Save user on save button click
+    // Salva user con tasto salva
     $("#saveUserBtn").click(function () {
         var form = $("#userForm");
         if (form[0].checkValidity()) {
@@ -45,7 +45,7 @@ $(document).ready(function () {
         }
     });
 
-    // Edit row on edit button click
+    // Edit row
     $(document).on("click", ".edit", function () {
         var $row = $(this).closest("tr");
         var $tds = $row.find("td").not(":last");
@@ -57,7 +57,7 @@ $(document).ready(function () {
         $(this).siblings(".delete").toggleClass("delete edit-cancel").html('<i class="bi bi-x"></i>');
     });
 
-    // Confirm edit on confirm button click
+    // Conferma modifica con tasto conferma
     $(document).on("click", ".confirm", function () {
         var $row = $(this).closest("tr");
         $row.find("input").each(function () {
@@ -68,7 +68,7 @@ $(document).ready(function () {
         $(this).siblings(".edit-cancel").toggleClass("edit-cancel delete").html('<i class="material-icons">&#xE872;</i>');
     });
 
-    // Cancel edit on cancel button click
+    // Annulla modifica
     $(document).on("click", ".edit-cancel", function () {
         var $row = $(this).closest("tr");
         $row.find("input").each(function () {
@@ -79,7 +79,7 @@ $(document).ready(function () {
         $(this).siblings(".confirm").toggleClass("edit confirm").html('<i class="material-icons">&#xE254;</i>');
     });
 
-    // Delete row on delete button click
+    // Elimina utente
     $(document).on("click", ".delete", function () {
         if (confirm("Sei sicuro di voler eliminare questo utente?")) {
             $(this).closest("tr").remove();

@@ -1,25 +1,24 @@
 document.addEventListener("DOMContentLoaded", function () {
-    // Function to fetch and display user data
+    // Funzione fetch e display
     function getUserProfile() {
-        // Retrieve the token from localStorage (or sessionStorage)
+        // Recupera token
         const token = localStorage.getItem("authToken");
         console.log(token);
-        // If no token is found, redirect to login or show an error
+        // Se non viene trovato un token, redireziona al login e mostra un errore
         if (!token) {
             console.error("No token found. Please login.");
-            // Optionally, redirect to login page
             // window.location.href = '/login.html';
             return;
         }
 
-        // API endpoint to fetch user data
+        // API endpoint per fetch user data
         const apiUrl = "http://localhost:8080/utenti/me";
 
-        // Make the API request with the token in the Authorization header
+        // API request con il token
         fetch(apiUrl, {
             method: "GET",
             headers: {
-                "Authorization": `${token}`, // Send the token with Bearer
+                "Authorization": `${token}`,
                 //"Content-Type": "application/json"
             }
         })
@@ -31,12 +30,12 @@ document.addEventListener("DOMContentLoaded", function () {
             return response.json();
         })
         .then(user => {
-            // Extract the relevant data from the user object
+            // Estrai dati rilevanti
             const { nome, email, peso, altezza } = user;
 
             console.log(user);
-            // Display the data in the respective HTML elements
-            document.getElementById("name-display").textContent = nome; // Match with 'name-display'
+            // Display dei dati con i corrispondenti elementi lato html
+            document.getElementById("name-display").textContent = nome;
             document.getElementById("email-display").textContent = email;
             document.getElementById("peso-display").textContent = peso;
             document.getElementById("altezza-display").textContent = altezza;
@@ -46,6 +45,6 @@ document.addEventListener("DOMContentLoaded", function () {
         });
     }
 
-    // Call the function to get and display the user profile
+    // Call funzione per mostrare i dati utente
     getUserProfile();
 });

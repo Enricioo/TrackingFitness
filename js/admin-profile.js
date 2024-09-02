@@ -1,13 +1,13 @@
 document.addEventListener('DOMContentLoaded', function () {
-    const userId = localStorage.getItem('userId'); // Get the user ID from localStorage
-    const authToken = localStorage.getItem('authToken'); // Get the auth token from localStorage
+    const userId = localStorage.getItem('userId'); 
+    const authToken = localStorage.getItem('authToken');
     
     if (!userId || !authToken) {
         alert('User ID or auth token not found.');
         return;
     }
 
-    // Function to fetch and display user data
+    // Fetch per l'user data
     function fetchUserData() {
         fetch(`/utenti/${userId}`, {
             method: 'GET',
@@ -19,13 +19,11 @@ document.addEventListener('DOMContentLoaded', function () {
         .then(response => response.json())
         .then(data => {
             if (data) {
-                // Populate profile display with user data
                 document.getElementById('name-display').innerText = data.nome + ' ' + data.cognome;
                 document.getElementById('email-display').innerText = 'Email: ' + data.email;
                 document.getElementById('peso-display').innerText = 'Peso: ' + data.peso;
                 document.getElementById('altezza-display').innerText = 'Altezza: ' + data.altezza;
 
-                // Populate edit form with current values
                 document.getElementById('nome').value = data.nome;
                 document.getElementById('cognome').value = data.cognome;
                 document.getElementById('email').value = data.email;
@@ -41,24 +39,24 @@ document.addEventListener('DOMContentLoaded', function () {
         });
     }
 
-    // Fetch and display user data when the page loads
+    // Fetch e display di user data
     fetchUserData();
 
-    // Event listener for Save Changes button
+    // Event listener per tasto di salvataggio
     document.getElementById('save-changes').addEventListener('click', function () {
-        // Get the form values
+        // Ottieni valori dei form
         const nome = document.getElementById('nome').value;
         const cognome = document.getElementById('cognome').value;
         const email = document.getElementById('email').value;
         const peso = document.getElementById('peso').value;
         const altezza = document.getElementById('altezza').value;
 
-        // Make an AJAX request to update the user's credentials
+        // AJAX request per update credenziali utenti
         fetch(`/utenti/${userId}`, {
             method: 'PUT',
             headers: {
                 'Content-Type': 'application/json',
-                'Authorization': 'Bearer ' + authToken // Include the auth token
+                'Authorization': 'Bearer ' + authToken
             },
             body: JSON.stringify({
                 nome: nome,
@@ -71,7 +69,7 @@ document.addEventListener('DOMContentLoaded', function () {
         .then(response => response.json())
         .then(data => {
             if (data && data.id) {
-                // Update the profile display with the new data
+                // Update con nuovi dati
                 document.getElementById('name-display').innerText = nome + ' ' + cognome;
                 document.getElementById('email-display').innerText = 'Email: ' + email;
                 document.getElementById('peso-display').innerText = 'Peso: ' + peso;
@@ -89,24 +87,23 @@ document.addEventListener('DOMContentLoaded', function () {
         });
     });
 
-    // Event listener for Logout button
+    // Event listener per il Logout
     document.getElementById('logoutBtn').addEventListener('click', function () {
-        // Clear the token from localStorage or sessionStorage
-        localStorage.removeItem('authToken'); // If the token is stored in localStorage
-        sessionStorage.removeItem('authToken'); // If the token is stored in sessionStorage
-
-        // Optionally, redirect to the login page or another page
-        window.location.href = 'login.html'; // Change 'login.html' to your login page path
+        // Flush token
+        localStorage.removeItem('authToken');
+        sessionStorage.removeItem('authToken');
+        // Redireziona a login
+        window.location.href = 'login.html';
     });
 });
 
 document.addEventListener("DOMContentLoaded", function () {
-    // Function to fetch and display user data
+    // Funzione di fetch user data
     function getUserProfile() {
-        // Retrieve the token from localStorage (or sessionStorage)
+        // Recupero token
         const token = localStorage.getItem("token");
 
-        // If no token is found, redirect to login or show an error
+        // se non viene trovato un token, redireziona a login/mostra errore
         if (!token) {
             console.error("No token found. Please login.");
             // Optionally, redirect to login page
@@ -114,14 +111,14 @@ document.addEventListener("DOMContentLoaded", function () {
             return;
         }
 
-        // API endpoint to fetch user data
+        // API endpoint per fetch user data
         const apiUrl = "http://localhost:8080/utenti/me";
 
-        // Make the API request with the token in the Authorization header
+        // API request con il token
         fetch(apiUrl, {
             method: "GET",
             headers: {
-                "Authorization": `Bearer ${token}`, // Send the token with Bearer
+                "Authorization": `Bearer ${token}`,
                 "Content-Type": "application/json"
             }
         })
@@ -132,11 +129,11 @@ document.addEventListener("DOMContentLoaded", function () {
             return response.json();
         })
         .then(user => {
-            // Extract the relevant data from the user object
+            // Estrae i dati rilevanti
             const { nome, email, peso, altezza } = user;
 
             // Display the data in the respective HTML elements
-            document.getElementById("name-display").textContent = nome; // Match with 'name-display'
+            document.getElementById("name-display").textContent = nome; // Match con 'name-display'
             document.getElementById("email-display").textContent = email;
             document.getElementById("peso-display").textContent = peso;
             document.getElementById("altezza-display").textContent = altezza;
@@ -146,6 +143,6 @@ document.addEventListener("DOMContentLoaded", function () {
         });
     }
 
-    // Call the function to get and display the user profile
+    // Call funzione per mostrare i dati user
     getUserProfile();
 });
