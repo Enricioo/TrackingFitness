@@ -8,114 +8,117 @@
     <link rel="stylesheet" href="css/bootstrap.min.css">
     <link rel="stylesheet" href="css/footer.css">
     <link rel="stylesheet" href="css/admin-profile.css">
+    <link rel="stylesheet" href="css/sidebar.css">
     <link href="assets/bootstrap-icons-1.11.3/font/bootstrap-icons.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 </head>
 
 <body>
-    <div class="container-fluid sidebar">
-        <div class="row flex-nowrap">
-            <div class="col-auto px-0">
-                <div id="sidebar" class="collapse collapse-horizontal border-end border-dark">
-                    <div id="sidebar-nav" class="list-group border-0 rounded-0 text-sm-start min-vh-100">
-                        <a href="#" class="list-group-item border-end-0 d-inline-block text-truncate border-dark"
-                            data-bs-parent="admin.html"><i class="bi bi-house"></i> <span>Home</span> </a>
-                        <a href="#" class="list-group-item border-end-0 d-inline-block text-truncate border-dark"
-                            data-bs-parent="report.html"><i class="bi bi-award"></i> <span>Report</span></a>
-                        <a href="#" class="list-group-item border-end-0 d-inline-block text-truncate border-dark"
-                            data-bs-parent="admin-profile.html"><i class="bi bi-person-raised-hand border-dark"></i>
-                            <span>Profilo</span></a>
+
+    <!-- Sidebar -->
+    <div class="sidebar" id="sidebar">
+        <a href="index.html" class="list-group-item p-3 border-end-0 text-truncate border-dark"
+            data-bs-parent="index.html"><i class="bi bi-house-fill"></i> <span>Home</span></a>
+        <a href="admin-report.html" class="list-group-item p-3 border-end-0 text-truncate border-dark"
+            data-bs-parent="admin-report.html"><i class="bi bi-trophy-fill"></i> <span>Report</span></a>
+        <a href="admin-profile.html" class="list-group-item p-3 border-end-0 text-truncate border-dark"
+            data-bs-parent="admin-profile.html"><i class="bi bi-person-arms-up"></i> <span>Profilo</span></a>
+        <div class="mt-auto">
+            <a href="#" class="list-group-item p-3 border-end-0 text-truncate border-dark" data-bs-parent="#"
+                id="logoutButton">
+                <i class="bi bi-door-open-fill"></i> <span>Logout</span></a>
+        </div>
+    </div>
+    <div class="content" id="content">
+        <main class="col ps-md-2 pt-2">
+            <a href="#" id="toggleButton" data-bs-target="#sidebar" data-bs-toggle="collapse"
+                class="toggle-button border rounded-3 p-1 text-decoration-none bg-warning-emphasis border-dark"><i
+                    class="bi bi-list bi-lg py-2 p-1"></i>
+            </a>
+            <div class="page-header pt-3">
+                <h2>Admin Tool</h2>
+            </div>
+
+            <div class="container profile mt-5">
+                <div class="row">
+                    <div class="col-md-4 text-center">
+                        <div class="card">
+                            <div class="card-body">
+                                <img src="https://placehold.co/400" alt="Profile Image" class="pfp mb-3">
+                                <h3 id="name-display">Clark Kent</h3>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6 text-center mt-2">
+                        <div class="card">
+                            <div class="card-body">
+                                <p id="email-display">Email: c.kent@gmail.com</p>
+                                <p id="peso-display">Peso: 82kg</p>
+                                <p id="altezza-display">Altezza: 185cm</p>
+                                <button type="button" class="btn btn-outline-warning mt-1" data-bs-toggle="modal"
+                                    data-bs-target="#editModal"><i class="fa bi-pencil"></i> Modifica
+                                    Credenziali</button>
+                                <button type="button" class="btn btn-outline-danger mt-1" id="logoutBtn"><i
+                                        class="fa bi-box-arrow-right"></i> Logout</button>
+                                <button type="button" class="btn btn-danger mt-1"><i class="fa bi-trash"></i>
+                                    Elimina Profilo</button>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
 
-            <main class="col ps-md-2 pt-2">
-                <a href="#" data-bs-target="#sidebar" data-bs-toggle="collapse"
-                    class="border rounded-3 p-1 text-decoration-none text-muted border-dark"><img src="assets/img/logo.png" width="84px"></i></a>
-                <div class="page-header pt-3">
-                    <h2>Admin Tool</h2>
-                </div>
-
-                <div class="container profile mt-5">
-                    <div class="row">
-                        <div class="col-md-4 text-center">
-                            <div class="card">
-                                <div class="card-body">
-                                    <img src="https://placehold.co/400" alt="Profile Image" class="pfp mb-3">
-                                    <h3 id="name-display">Clark Kent</h3>
-                                </div>
-                            </div>
+            <!-- Modal -->
+            <div class="modal fade" id="editModal" tabindex="-1" data-bs-backdrop="static"
+                aria-labelledby="editModalLabel" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="editModalLabel">Modifica Credenziali</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
-                        <div class="col-md-6 text-center mt-2">
-                            <div class="card">
-                                <div class="card-body">
-                                    <p id="email-display">Email: c.kent@gmail.com</p>
-                                    <p id="peso-display">Peso: 82kg</p>
-                                    <p id="altezza-display">Altezza: 185cm</p>
-                                    <button type="button" class="btn btn-outline-warning mt-1" data-bs-toggle="modal"
-                                        data-bs-target="#editModal"><i class="fa bi-pencil"></i> Modifica
-                                        Credenziali</button>
-                                    <button type="button" class="btn btn-outline-danger mt-1" id="logoutBtn"><i
-                                            class="fa bi-box-arrow-right"></i> Logout</button>
-                                    <button type="button" class="btn btn-danger mt-1"><i class="fa bi-trash"></i>
-                                        Elimina Profilo</button>
+                        <div class="modal-body">
+                            <form id="edit-form">
+                                <div class="mb-3">
+                                    <label for="nome" class="form-label">Nome</label>
+                                    <input type="text" class="form-control" id="nome">
                                 </div>
-                            </div>
+                                <div class="mb-3">
+                                    <label for="cognome" class="form-label">Cognome</label>
+                                    <input type="text" class="form-control" id="cognome">
+                                </div>
+                                <div class="mb-3">
+                                    <label for="email" class="form-label">Email</label>
+                                    <input type="email" class="form-control" id="email">
+                                </div>
+                                <div class="mb-3">
+                                    <label for="peso" class="form-label">Peso</label>
+                                    <input type="text" class="form-control" id="peso">
+                                </div>
+                                <div class="mb-3">
+                                    <label for="altezza" class="form-label">Altezza</label>
+                                    <input type="text" class="form-control" id="altezza">
+                                </div>
+                            </form>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancella</button>
+                            <button type="button" class="btn btn-primary" id="save-changes">Salva</button>
                         </div>
                     </div>
                 </div>
+            </div>
+            <!-- End Modal -->
 
-                <!-- Modal -->
-                <div class="modal fade" id="editModal" tabindex="-1" data-bs-backdrop="static"
-                    aria-labelledby="editModalLabel" aria-hidden="true">
-                    <div class="modal-dialog modal-dialog-centered">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <h5 class="modal-title" id="editModalLabel">Modifica Credenziali</h5>
-                                <button type="button" class="btn-close" data-bs-dismiss="modal"
-                                    aria-label="Close"></button>
-                            </div>
-                            <div class="modal-body">
-                                <form id="edit-form">
-                                    <div class="mb-3">
-                                        <label for="nome" class="form-label">Nome</label>
-                                        <input type="text" class="form-control" id="nome">
-                                    </div>
-                                    <div class="mb-3">
-                                        <label for="cognome" class="form-label">Cognome</label>
-                                        <input type="text" class="form-control" id="cognome">
-                                    </div>
-                                    <div class="mb-3">
-                                        <label for="email" class="form-label">Email</label>
-                                        <input type="email" class="form-control" id="email">
-                                    </div>
-                                    <div class="mb-3">
-                                        <label for="peso" class="form-label">Peso</label>
-                                        <input type="text" class="form-control" id="peso">
-                                    </div>
-                                    <div class="mb-3">
-                                        <label for="altezza" class="form-label">Altezza</label>
-                                        <input type="text" class="form-control" id="altezza">
-                                    </div>
-                                </form>
-                            </div>
-                            <div class="modal-footer">
-                                <button type="button" class="btn btn-secondary"
-                                    data-bs-dismiss="modal">Cancella</button>
-                                <button type="button" class="btn btn-primary" id="save-changes">Salva</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <!-- End Modal -->
-
-            </main>
-        </div>
+        </main>
     </div>
 
     <script src="js/jquery-3.7.1.min.js"></script>
+    <script src="js/gsap.min.js"></script>
+    <script src="js/sidebar.js"></script>
+    <script src="js/logout.js"></script>
     <script src="js/bootstrap.bundle.min.js"></script>
-        <script src="js/admin-profile.js"></script>
+    <script src="js/admin-profile.js"></script>
     <script src="js/footer.js"></script>
 
 </body>
