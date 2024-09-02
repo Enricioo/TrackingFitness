@@ -37,8 +37,8 @@ document.addEventListener("DOMContentLoaded", function () {
             // Display dei dati con i corrispondenti elementi lato html
             document.getElementById("name-display").textContent = nome;
             document.getElementById("email-display").textContent = email;
-            document.getElementById("peso-display").textContent = peso;
-            document.getElementById("altezza-display").textContent = altezza;
+            document.getElementById("peso-display").textContent = 'Peso: '+peso+' kg';
+            document.getElementById("altezza-display").textContent = 'Altezza: '+altezza+' cm';
         })
         .catch(error => {
             console.error("Error fetching user profile:", error);

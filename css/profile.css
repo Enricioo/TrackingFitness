@@ -101,3 +101,7 @@ table.table .form-control.error {
 .bi-x {
     color: red;
 }
+
+#editModal label {
+    color: #FBAF00;
+}
