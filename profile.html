@@ -61,12 +61,12 @@
                             </div>
                         </div>
                     </div>
-                    <div class="card shadow mt-4">
+                    <!--<div class="card shadow mt-4">
                         <div class="card-header py-3">
                             <h6 class="m-0 font-weight-bold text-primary">Tabella Attività</h6>
                             <!--<button type="button" class="btn btn-info add-new" data-bs-toggle="modal"
                                 data-bs-target="#addUserModal"><i class="fa bi-plus"></i> Aggiungi</button>-->
-                        </div>
+                        <!--</div>
 
                         <div class="card-body">
                             <div class="table-responsive">
@@ -105,11 +105,11 @@
                                                         class="material-icons">&#xE872;</i></a>
                                             </td>
                                         </tr>-->
-                                    </tbody>
+                                    <!--</tbody>
                                 </table>
                             </div>
                         </div>
-                    </div>
+                    </div>-->
                 </div>
             </div>
         </main>
@@ -292,15 +292,6 @@
                     $(this).closest("tr").remove();
                 }
             });
-        });
-
-        document.getElementById('logoutBtn').addEventListener('click', function () {
-            // Clear the token from localStorage or sessionStorage
-            localStorage.removeItem('authToken'); // If the token is stored in localStorage
-            sessionStorage.removeItem('authToken'); // If the token is stored in sessionStorage
-
-            // Optionally, redirect to the login page or another page
-            window.location.href = 'login.html'; // Change 'login.html' to your login page path
         });
     </script>
 </body>
